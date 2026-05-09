@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awesome Resources — Harness Engineering</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/"><span class="icon">🏠</span> Home</a>
+      <a href="/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
+      <a href="/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
+      <a href="/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/pages/resources.html" class="active"><span class="icon">📚</span> Awesome Resources</a>
+      <a href="/pages/templates.html"><span class="icon">📋</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Applications</div>
+      <a href="/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
+      <a href="/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1>📚 Awesome Harness Engineering</h1>
+    <p>Recursos curados del <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a> list. Artículos, benchmarks, runtimes, y referencias para construir harnesses production-grade.</p>
+  </div>
+  <div class="content">
+
+    <h2>Foundations — Lecturas Esenciales</h2>
+    <p>Los artículos fundacionales que definen harness engineering como disciplina:</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>OpenAI — Harness Engineering</h3>
+        <p>Field report de OpenAI construyendo una aplicación grande con Codex usando constraints arquitectónicos, instrucciones repo-local, validación en browser, y telemetría.</p>
+        <div class="card-footer"><a href="https://openai.com/index/harness-engineering/">Leer →</a></div>
+      </div>
+      <div class="card">
+        <h3>Anthropic — Effective Harnesses</h3>
+        <p>Artículo central sobre initializer agents, feature lists, init.sh, self-verification, y handoff artifacts a través de múltiples context windows.</p>
+        <div class="card-footer"><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Leer →</a></div>
+      </div>
+      <div class="card">
+        <h3>Anthropic — Harness Design</h3>
+        <p>Follow-up enfocado en mejorar la generación de apps long-running con mejor task state y evaluator design.</p>
+        <div class="card-footer"><a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">Leer →</a></div>
+      </div>
+      <div class="card">
+        <h3>LangChain — Anatomy of a Harness</h3>
+        <p>Framing del agente como modelo + harness, con prompts, tools, middleware, orchestration, y runtime infrastructure.</p>
+        <div class="card-footer"><a href="https://blog.langchain.com/the-anatomy-of-an-agent-harness/">Leer →</a></div>
+      </div>
+      <div class="card">
+        <h3>Thoughtworks — Harness Engineering</h3>
+        <p>Framing del trabajo de harness en context engineering, architectural constraints, y "garbage collection" contra la entropía.</p>
+        <div class="card-footer"><a href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html">Leer →</a></div>
+      </div>
+      <div class="card">
+        <h3>Building Effective Agents</h3>
+        <p>Guía general de Anthropic sobre workflows, agentes, herramientas, y cuándo los sistemas estructurados superan al raw prompting.</p>
+        <div class="card-footer"><a href="https://www.anthropic.com/engineering/building-effective-agents">Leer →</a></div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Context, Memory & Working State</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Effective Context Engineering</h3>
+        <p>Anthropic — Gestionar el context window como un presupuesto de memoria de trabajo, no como un vertedero.</p>
+        <div class="card-footer"><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">→</a></div>
+      </div>
+      <div class="card">
+        <h3>Context Engineering — Manus</h3>
+        <p>Playbook detallado sobre KV-cache locality, tool masking, filesystem memory, y mantener fallos útiles en contexto.</p>
+        <div class="card-footer"><a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus">→</a></div>
+      </div>
+      <div class="card">
+        <h3>OpenHands Context Condensation</h3>
+        <p>Diseño de memoria de conversación acotada que preserva goals, progreso, archivos críticos, y tests fallidos.</p>
+        <div class="card-footer"><a href="https://openhands.dev/blog/openhands-context-condensensation-for-more-efficient-ai-agents">→</a></div>
+      </div>
+      <div class="card">
+        <h3>Writing a good CLAUDE.md</h3>
+        <p>HumanLayer — Guía práctica para crear instrucciones repo-local durables que los agentes puedan seguir repetidamente.</p>
+        <div class="card-footer"><a href="https://www.humanlayer.dev/blog/writing-a-good-claude-md">→</a></div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Constraints, Guardrails & Safe Autonomy</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Beyond Permission Prompts</h3>
+        <p>Anthropic — Reducir fricción de aprobación sin perder control mediante mejor sandboxing y policy design.</p>
+      </div>
+      <div class="card">
+        <h3>Writing Effective Tools</h3>
+        <p>Anthropic — Interfaces de herramientas que son más fáciles para los modelos llamar correcta y seguramente.</p>
+      </div>
+      <div class="card">
+        <h3>Mitigating Prompt Injection</h3>
+        <p>OpenHands — Guía práctica sobre confirmation mode, analyzers, sandboxing, y hard policies.</p>
+      </div>
+      <div class="card">
+        <h3>12 Factor Agents</h3>
+        <p>HumanLayer — Principios operativos para agentes en producción: prompts explícitos, state ownership, pause-resume limpio.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Specs, Workflow Design & Agent Files</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>AGENTS.md Format</h3>
+        <p>Formato abierto y ligero para instrucciones repo-local que le dicen a los agentes cómo trabajar dentro de un codebase.</p>
+        <div class="card-footer"><a href="https://github.com/agentsmd/agents.md">→</a></div>
+      </div>
+      <div class="card">
+        <h3>GitHub Spec Kit</h3>
+        <p>Toolkit de GitHub para spec-driven development — útil cuando quieres que los agentes ejecuten contra specs explícitas.</p>
+        <div class="card-footer"><a href="https://github.com/github/spec-kit">→</a></div>
+      </div>
+      <div class="card">
+        <h3>Spec-Driven Development</h3>
+        <p>Thoughtworks — Por qué los specs fuertes hacen que la entrega de software asistida por IA sea más confiable.</p>
+        <div class="card-footer"><a href="https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html">→</a></div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Evals & Observability</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Testing Agent Skills with Evals</h3>
+        <p>OpenAI — Guía concreta para convertir traces de agentes en evals repetibles con logs JSONL y checks deterministas.</p>
+      </div>
+      <div class="card">
+        <h3>Demystifying Evals</h3>
+        <p>Anthropic — Qué medir cuando los agentes tienen muchas trayectorias posibles hacia el éxito o fracaso.</p>
+      </div>
+      <div class="card">
+        <h3>Improving Deep Agents</h3>
+        <p>LangChain — Evidencia de que solo cambios en el harness pueden mejorar significativamente el rendimiento en benchmarks.</p>
+      </div>
+      <div class="card">
+        <h3>Trace Grading</h3>
+        <p>OpenAI — Documentación sobre grading de traces de agentes directamente, útil para tareas multi-step largas.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Benchmarks Destacados</h2>
+    <p>Benchmarks útiles para comparar calidad de harness, no solo calidad de modelo:</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>SWE-bench Verified</h3>
+        <p>Benchmark para agentes de ingeniería de software contra issues reales de GitHub. Las elecciones de harness son altamente visibles aquí.</p>
+      </div>
+      <div class="card">
+        <h3>Terminal-Bench</h3>
+        <p>Suite de benchmarks para agentes nativos de terminal — shells, filesystems, entornos de verificación pesada.</p>
+      </div>
+      <div class="card">
+        <h3>OSWorld</h3>
+        <p>Benchmark de uso real de computadora con 369 tareas en Ubuntu, Windows y macOS. Excelente para harness multimodales.</p>
+      </div>
+      <div class="card">
+        <h3>WebArena</h3>
+        <p>Entorno web autónomo para evaluar agentes en tareas realistas. Línea base reproducible para harness de browser.</p>
+      </div>
+      <div class="card">
+        <h3>Agent Arena</h3>
+        <p>Leaderboard ELO que ranking agentes, modelos, herramientas y frameworks — comparaciones de nivel de harness.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Runtimes & Reference Implementations</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>SWE-agent</h3>
+        <p>Agente de investigación maduro con harness, prompt, tools, y environment design directamente inspeccionables.</p>
+      </div>
+      <div class="card">
+        <h3>Citadel</h3>
+        <p>Harness para Claude Code y OpenAI Codex con worktrees aislados, coordinación multi-agente, y memoria persistente.</p>
+      </div>
+      <div class="card">
+        <h3>Claude Agent SDK</h3>
+        <p>SDK de Anthropic orientado a producción con sessions, tools, y soporte de orchestration.</p>
+      </div>
+      <div class="card">
+        <h3>AgentKit (Inngest)</h3>
+        <p>Toolkit TypeScript para construir agentes duraderos y workflow-aware sobre infraestructura event-driven.</p>
+      </div>
+      <div class="card">
+        <h3>skills.sh</h3>
+        <p>Marketplace comunitario para descubrir, compartir e instalar skills de agente reutilizables a través de runtimes.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <p>Lista completa con más de 80 recursos en <a href="https://github.com/walkinglabs/awesome-harness-engineering">github.com/walkinglabs/awesome-harness-engineering</a></p>
+
+  </div>
+  <footer class="footer">
+    <p>Recursos curados de <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a> — Contribuciones bienvenidas</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+</body>
+</html>

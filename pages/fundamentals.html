@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentals — Harness Engineering</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/"><span class="icon">🏠</span> Home</a>
+      <a href="/pages/fundamentals.html" class="active"><span class="icon">📖</span> Fundamentals</a>
+      <a href="/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
+      <a href="/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
+      <a href="/pages/templates.html"><span class="icon">📋</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Applications</div>
+      <a href="/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
+      <a href="/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+    </div>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="page-header">
+    <h1>📖 Harness Engineering Fundamentals</h1>
+    <p>12 lecciones del curso Learn Harness Engineering que explican por qué los agentes fallan y cómo construir sistemas confiables.</p>
+  </div>
+  <div class="content">
+
+    <h2>1. ¿Por qué los agentes capaces aún fallan?</h2>
+    <p>Los modelos de IA son cada vez más potentes, pero siguen fallando en tareas del mundo real. La razón no es el modelo — es el <strong>entorno</strong> alrededor del modelo. Un agente sin harness tiene:</p>
+    <ul>
+      <li><strong>Instrucciones ambiguas</strong> — El agente no sabe qué leer primero ni cómo priorizar</li>
+      <li><strong>Sin memoria de sesión</strong> — Cada sesión empieza desde cero</li>
+      <li><strong>Sin verificación</strong> — El agente declara victoria sin validar</li>
+      <li><strong>Scope infinito</strong> — El agente hace más de lo debido</li>
+      <li><strong>Sin ciclo de vida</strong> — No hay init, no hay handoff, no hay cleanup</li>
+    </ul>
+    <p><strong>Lección clave:</strong> Los fallos de agentes son casi siempre fallos de harness, no fallos de modelo.</p>
+
+    <div class="section-divider"></div>
+
+    <h2>2. ¿Qué es un Harness?</h2>
+    <p>Un harness es el <strong>sistema alrededor del modelo</strong> que lo hace confiable. El framework de 5 subsistemas:</p>
+    <ol>
+      <li><strong>Instructions (Recipe Shelf):</strong> AGENTS.md, CLAUDE.md — archivos que le dicen al agente cómo trabajar en este proyecto</li>
+      <li><strong>State (Prep Station):</strong> feature_list.json, progress.md — estado persistente entre sesiones</li>
+      <li><strong>Verification (Quality Check Window):</strong> Tests, type checks — evidencia de que el trabajo es correcto</li>
+      <li><strong>Scope (Task Boundaries):</strong> Una feature a la vez, definition of done — límites que evitan overreach</li>
+      <li><strong>Lifecycle (Session Management):</strong> init.sh, clean-state — bootstrap y handoff entre sesiones</li>
+    </ol>
+
+    <div class="section-divider"></div>
+
+    <h2>3. El Repositorio como System of Record</h2>
+    <p>El repo debe ser la <strong>fuente única de verdad</strong>. No documentación externa, no wikis, no conversaciones de Slack. Todo lo que el agente necesita debe estar versionado en el repo:</p>
+    <ul>
+      <li>AGENTS.md como entry point de routing</li>
+      <li>docs/ con arquitectura, diseño, y specs</li>
+      <li>feature_list.json con estado de features</li>
+      <li>init.sh con setup verificable</li>
+    </ul>
+    <p><strong>Regla de oro:</strong> Si el agente necesita saberlo, debe estar en el repo. Si no está en el repo, el agente no puede confiar en ello.</p>
+
+    <div class="section-divider"></div>
+
+    <h2>4. Por qué falla un archivo de instrucciones gigante</h2>
+    <p>Un solo AGENTS.md de 500 líneas <strong>no funciona</strong>. El agente lo ignora parcialmente porque:</p>
+    <ul>
+      <li>El contexto es limitado — el agente prioriza lo que ve al final</li>
+      <li>La información se diluye — instrucciones importantes se pierden en el ruido</li>
+      <li>No hay jerarquía — todo parece igual de importante</li>
+    </ul>
+    <p><strong>Solución: Progressive Disclosure.</strong> AGENTS.md corto (~50-100 líneas) como routing layer que apunta a docs/ específicos. El agente carga solo lo que necesita cuando lo necesita.</p>
+    <blockquote>
+      <p>AGENTS.md debe ser un mapa, no una enciclopedia.</p>
+    </blockquote>
+
+    <div class="section-divider"></div>
+
+    <h2>5. Tareas largas y continuidad</h2>
+    <p>Las tareas que cruzan múltiples sesiones pierden continuidad. El agente olvida lo que hizo, suposiciones que hizo, y decisiones que tomó. Solución:</p>
+    <ul>
+      <li><strong>Session handoff:</strong> Template que resume estado actual, progreso, blockers, y próximos pasos</li>
+      <li><strong>Progress log:</strong> feature_list.json con evidencia de cada feature completada</li>
+      <li><strong>Checklist de clean state:</strong> Antes de terminar una sesión, el agente debe dejar un camino limpio para retomar</li>
+    </ul>
+
+    <div class="section-divider"></div>
+
+    <h2>6. Inicialización como fase separada</h2>
+    <p>El startup del agente debe ser una <strong>fase explícita</strong> con init.sh:</p>
+    <ul>
+      <li>Instalar dependencias</li>
+      <li>Correr type checks</li>
+      <li>Ejecutar tests</li>
+      <li>Verificar que el build funciona</li>
+      <li>Cargar estado de features</li>
+    </ul>
+    <p>Sin init.sh, el agente empieza a codificar sobre un entorno que no ha verificado — y los bugs se acumulan.</p>
+
+    <div class="section-divider"></div>
+
+    <h2>7-12. Más lecciones clave</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>7. Overreach y Under-finish</h3>
+        <p>Los agentes o hacen demasiado (overreach) o se detienen antes de terminar (under-finish). Scope tracking y next-task templates corrigen ambos.</p>
+      </div>
+      <div class="card">
+        <h3>8. Feature Lists</h3>
+        <p>Las feature lists son el primitive fundamental del harness. feature_list.json con id, nombre, dependencias, estado, y evidencia.</p>
+      </div>
+      <div class="card">
+        <h3>9. Declarar Victoria Muy Temprano</h3>
+        <p>Los agentes declaran "done" sin verificar. Clean-state checklists y verification gates previenen esto.</p>
+      </div>
+      <div class="card">
+        <h3>10. E2E Testing</h3>
+        <p>Tests end-to-end cambian los resultados — el agente trabaja mejor cuando sabe que hay verificación automatizada.</p>
+      </div>
+      <div class="card">
+        <h3>11. Observabilidad</h3>
+        <p>La observabilidad debe estar dentro del harness, no fuera. Runtime logs, evaluator rubrics, sprint contracts.</p>
+      </div>
+      <div class="card">
+        <h3>12. Clean State</h3>
+        <p>Cada sesión debe dejar el repositorio en un estado limpio y restartable. Benchmark comparison templates miden mejora.</p>
+      </div>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>Harness Engineering Course — Basado en <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a></p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+</body>
+</html>

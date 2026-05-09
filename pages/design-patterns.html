@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Patterns — Harness Engineering</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/"><span class="icon">🏠</span> Home</a>
+      <a href="/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
+      <a href="/pages/design-patterns.html" class="active"><span class="icon">🧩</span> Design Patterns</a>
+      <a href="/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
+      <a href="/pages/templates.html"><span class="icon">📋</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Applications</div>
+      <a href="/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
+      <a href="/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+    </div>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="page-header">
+    <h1>🧩 OpenClaw Design Skills</h1>
+    <p>Patrones de diseño extraídos del harness-creator skill de OpenClaw. El framework de 5 subsistemas y 6 patrones de diseño para construir harnesses production-grade.</p>
+  </div>
+  <div class="content">
+
+    <h2>The Five-Subsystem Framework</h2>
+    <p>Todo harness se compone de cinco subsistemas. Cada uno resuelve un problema específico en la confiabilidad del agente.</p>
+
+    <div class="subsystem-grid">
+      <div class="subsystem-card">
+        <div class="subsys-header">
+          <div class="num">1</div>
+          <div><strong>Instructions</strong><br><span style="font-size:13px;color:var(--text-muted)">Recipe Shelf</span></div>
+        </div>
+        <div class="subsys-body">
+          <p><strong>Problema:</strong> El agente no sabe por dónde empezar ni qué priorizar.</p>
+          <p><strong>Solución:</strong> Un AGENTS.md corto (~50-100 líneas) como routing layer. Apunta a docs/ detallados. Progressive disclosure.</p>
+          <p><strong>Componentes:</strong> AGENTS.md, CLAUDE.md, docs/ARCHITECTURE.md, docs/DESIGN.md, docs/PLANS.md</p>
+          <p><strong>Anti-patrón:</strong> Un solo archivo de 500+ líneas que el agente ignora parcialmente.</p>
+          <div class="subsys-tags">
+            <span class="tag">AGENTS.md</span>
+            <span class="tag">progressive disclosure</span>
+            <span class="tag">routing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsystem-card">
+        <div class="subsys-header">
+          <div class="num">2</div>
+          <div><strong>State</strong><br><span style="font-size:13px;color:var(--text-muted)">Prep Station</span></div>
+        </div>
+        <div class="subsys-body">
+          <p><strong>Problema:</strong> El agente pierde estado entre sesiones — no sabe qué se ha hecho ni qué falta.</p>
+          <p><strong>Solución:</strong> feature_list.json como fuente única de verdad del progreso. Cada feature tiene id, nombre, dependencias, estado, y evidencia.</p>
+          <p><strong>Componentes:</strong> feature_list.json, progress.md, session-handoff.md</p>
+          <p><strong>Anti-patrón:</strong> Mantener estado solo en la mente del agente o en issues de GitHub no trackeados.</p>
+          <div class="subsys-tags">
+            <span class="tag">feature_list.json</span>
+            <span class="tag">progress.md</span>
+            <span class="tag">session-handoff</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsystem-card">
+        <div class="subsys-header">
+          <div class="num">3</div>
+          <div><strong>Verification</strong><br><span style="font-size:13px;color:var(--text-muted)">Quality Check Window</span></div>
+        </div>
+        <div class="subsys-body">
+          <p><strong>Problema:</strong> El agente declara "done" sin verificar que el código compile, los tests pasen, o la feature funcione.</p>
+          <p><strong>Solución:</strong> Comandos de verificación explícitos en AGENTS.md. init.sh corre verificación automática. Quality gates antes de marcar "done".</p>
+          <p><strong>Componentes:</strong> test suite, type checks, linting, build verification, e2e tests</p>
+          <p><strong>Anti-patrón:</strong> Confiar en que el agente "sabe" cuando algo está correcto.</p>
+          <div class="subsys-tags">
+            <span class="tag">testing</span>
+            <span class="tag">gates</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsystem-card">
+        <div class="subsys-header">
+          <div class="num">4</div>
+          <div><strong>Scope</strong><br><span style="font-size:13px;color:var(--text-muted)">Task Boundaries</span></div>
+        </div>
+        <div class="subsys-body">
+          <p><strong>Problema:</strong> El agente hace más de lo debido — refactoriza lo que no debe, cambia archivos no relacionados.</p>
+          <p><strong>Solución:</strong> One-feature-at-a-time policy. Definition of Done checklist. Feature dependencies documentadas.</p>
+          <p><strong>Componentes:</strong> feature dependencies, definition of done, next-task templates, scope tracker</p>
+          <p><strong>Anti-patrón:</strong> "Ya que estoy aquí, arreglo esto también" — el principal causante de regression bugs.</p>
+          <div class="subsys-tags">
+            <span class="tag">boundaries</span>
+            <span class="tag">focus</span>
+            <span class="tag">definition of done</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsystem-card">
+        <div class="subsys-header">
+          <div class="num">5</div>
+          <div><strong>Lifecycle</strong><br><span style="font-size:13px;color:var(--text-muted)">Session Management</span></div>
+        </div>
+        <div class="subsys-body">
+          <p><strong>Problema:</strong> Cada sesión empieza desde cero — no hay init, no hay handoff, no hay cleanup.</p>
+          <p><strong>Solución:</strong> init.sh para bootstrap. Clean-state checklist para terminar. Session handoff template para continuidad.</p>
+          <p><strong>Componentes:</strong> init.sh, clean-state checklist, handoff procedure, benchmark comparison</p>
+          <p><strong>Anti-patrón:</strong> Depender del agente para recordar dónde quedó la sesión anterior.</p>
+          <div class="subsys-tags">
+            <span class="tag">bootstrap</span>
+            <span class="tag">handoff</span>
+            <span class="tag">clean-state</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Design Patterns</h2>
+    <p>Seis patrones de diseño extraídos del harness-creator skill de OpenClaw. Cada uno resuelve un problema recurrente en la construcción de harnesses.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>🧠 Memory Persistence</h3>
+        <p><strong>Problema:</strong> El agente pierde preferencias, contexto, y feedback entre sesiones.</p>
+        <p><strong>Solución:</strong> Jerarquía de 4 niveles (organización > usuario > proyecto > local). Two-step save invariant: escribe contenido completo, luego apunta en índice. Índice acotado (~200 líneas), archivos temáticos bajo demanda.</p>
+        <p><strong>Golden rule:</strong> Local overrides siempre ganan.</p>
+        <div class="card-footer">→ Memoria duradera sin inflar contexto</div>
+      </div>
+
+      <div class="card">
+        <h3>📐 Context Engineering</h3>
+        <p><strong>Problema:</strong> El contexto del agente es limitado y caro — ¿qué incluir y qué omitir?</p>
+        <p><strong>Solución:</strong> 4 operaciones: Select (relevancia), Compress (resumir), Isolate (separar por tema), Write (persistir). Budget management: decide qué cabe en el contexto actual.</p>
+        <p><strong>Golden rule:</strong> El contexto es un presupuesto, no un vertedero.</p>
+        <div class="card-footer">→ La información justa a tiempo</div>
+      </div>
+
+      <div class="card">
+        <h3>🔧 Tool Registry & Safety</h3>
+        <p><strong>Problema:</strong> Herramientas poderosas pueden ser peligrosas — ¿cómo dar acceso sin perder control?</p>
+        <p><strong>Solución:</strong> Registro fail-closed (todo denegado por defecto). Permisos por llamada con concurrencia controlada. Pipeline de permisos que rastrea denegaciones y transforma modos.</p>
+        <p><strong>Golden rule:</strong> Fail-closed — todo denegado hasta explícitamente permitido.</p>
+        <div class="card-footer">→ Agentes poderosos pero seguros</div>
+      </div>
+
+      <div class="card">
+        <h3>👥 Multi-Agent Coordination</h3>
+        <p><strong>Problema:</strong> Múltiples agentes trabajando en el mismo proyecto se pisan, duplican trabajo, o producen conflictos.</p>
+        <p><strong>Solución:</strong> 3 patrones: Coordinator (un agente orquesta), Fork (agentes paralelos independientes), Swarm (agentes colaboran en misma tarea). Context sharing controlado.</p>
+        <p><strong>Golden rule:</strong> Fork children must not fork — guard recursivo preserva el invariante de un solo nivel.</p>
+        <div class="card-footer">→ Múltiples agentes sin caos</div>
+      </div>
+
+      <div class="card">
+        <h3>🔄 Lifecycle & Bootstrap</h3>
+        <p><strong>Problema:</strong> Sin un ciclo de vida definido, el agente no sabe cuándo inicializar, cuándo terminar, ni cómo manejar errores.</p>
+        <p><strong>Solución:</strong> Sistema de hooks (pre/post para cada fase). Tareas long-running con notificación. Init con orden de dependencias. Extension system con trust all-or-nothing.</p>
+        <p><strong>Golden rule:</strong> Un hook no confiable deshabilita todo el sistema de extensiones.</p>
+        <div class="card-footer">→ Bootstrap predecible, shutdown limpio</div>
+      </div>
+
+      <div class="card">
+        <h3>📊 Harness Assessment</h3>
+        <p><strong>Problema:</strong> ¿Cómo saber si un harness es bueno? ¿Dónde mejorarlo primero?</p>
+        <p><strong>Solución:</strong> Evaluación de 5 puntos por subsistema. Identificar el subsistema con puntuación más baja — ese es el bottleneck. Mejorar allí primero.</p>
+        <p><strong>Golden rule:</strong> El subsistema más débil determina la calidad del harness.</p>
+        <div class="card-footer">→ Mejora enfocada, no aleatoria</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>12 Gotchas — Trampas que debes conocer</h2>
+    <p>Estos son los modos de fallo no obvios del harness engineering. Violarlos causa bugs difíciles de diagnosticar.</p>
+
+    <div class="gotcha-list">
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#1</span> <span class="gotcha-title">Memory index caps fire silently</span></div>
+        <div class="gotcha-desc">Las entradas largas se vuelven invisibles una vez que se alcanza el límite. Mantén los hooks en una línea.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#2</span> <span class="gotcha-title">Priority ordering is counterintuitive</span></div>
+        <div class="gotcha-desc">Local vence a proyecto, proyecto vence a usuario, usuario vence a organización. Prueba el stack completo.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#3</span> <span class="gotcha-title">Extraction timing creates race window</span></div>
+        <div class="gotcha-desc">El usuario puede empezar el siguiente turno antes de que la extracción en segundo plano termine.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#4</span> <span class="gotcha-title">Derivable content doesn't belong in memory</span></div>
+        <div class="gotcha-desc">La arquitectura y los patrones de código ya están en el repo — no los dupliques en memoria.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#5</span> <span class="gotcha-title">Concurrent classification is per-call, not per-tool</span></div>
+        <div class="gotcha-desc">La misma herramienta puede ser segura para algunos inputs y peligrosa para otros.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#6</span> <span class="gotcha-title">Permission evaluation has side effects</span></div>
+        <div class="gotcha-desc">Rastrea denegaciones, transforma modos, actualiza estado — no es una operación pura.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#7</span> <span class="gotcha-title">Most async work skips "pending" state</span></div>
+        <div class="gotcha-desc">Las unidades de trabajo se registran directamente como "running", no pasan por "pending".</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#8</span> <span class="gotcha-title">Fork children must not fork</span></div>
+        <div class="gotcha-desc">Guard recursivo para preservar el invariante de un solo nivel de fork.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#9</span> <span class="gotcha-title">Context builders are memoized but manually invalidated</span></div>
+        <div class="gotcha-desc">Si no agregas invalidación, enfrentarás datos obsoletos.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#10</span> <span class="gotcha-title">Hook trust is all-or-nothing</span></div>
+        <div class="gotcha-desc">Un hook no confiable deshabilita todo el sistema de extensiones.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#11</span> <span class="gotcha-title">Eviction requires notification</span></div>
+        <div class="gotcha-desc">Una unidad de trabajo terminal solo es elegible para GC después de notificar al padre.</div>
+      </div>
+      <div class="gotcha-item">
+        <div><span class="gotcha-num">#12</span> <span class="gotcha-title">Skill listing budgets are tight</span></div>
+        <div class="gotcha-desc">El lenguaje de activación distintivo debe ir al frente — las colas se cortan.</div>
+      </div>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>Harness Engineering Course — Patrones extraídos de <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> skills/harness-creator/</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+</body>
+</html>

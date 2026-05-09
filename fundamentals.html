@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentals — Harness Engineering</title>
+  <meta name="description" content="Harness Engineering Fundamentals: why capable agents still fail, what a harness actually is, repository as system of record, progressive disclosure, session continuity, and initialization.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-logo">
+          <span class="sidebar-logo-icon">🧩</span>
+          <span>Harness Engineering</span>
+        </a>
+        <div class="sidebar-subtitle">Design Skills for Agent Systems</div>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="index.html"><span class="nav-icon">🏠</span> Home</a></li>
+          <li><a href="fundamentals.html" class="active"><span class="nav-icon">📖</span> Fundamentals</a></li>
+          <li><a href="design-patterns.html"><span class="nav-icon">🎨</span> Design Patterns</a></li>
+          <li><a href="resources.html"><span class="nav-icon">📚</span> Resources</a></li>
+          <li><a href="synapse-trader.html"><span class="nav-icon">📈</span> SynapseTrader</a></li>
+          <li><a href="xavier.html"><span class="nav-icon">🧠</span> Xavier Memory</a></li>
+          <li><a href="course.html"><span class="nav-icon">🎓</span> Full Course</a></li>
+          <li><a href="templates.html"><span class="nav-icon">📋</span> Templates</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        Built for GitHub Pages<br>Dark theme &middot; No frameworks
+      </div>
+    </aside>
+    <div class="sidebar-overlay"></div>
+    <main class="main-content">
+      <div class="topbar">
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        <span style="font-weight:600;font-size:14px;">Harness Engineering</span>
+        <div></div>
+      </div>
+      <div class="content-container">
+        <h1>Harness Engineering Fundamentals</h1>
+        <p style="font-size:1.1rem;color:var(--text-secondary);max-width:680px;">Six core lectures extracted from the <em>Learn Harness Engineering</em> course. These principles form the foundation for every design pattern and case study that follows.</p>
+
+        <!-- Lecture 01 -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">01</span><h2>Why Capable Agents Still Fail</h2></div>
+          <p>As of late 2025, the strongest coding agents on SWE-bench Verified achieve roughly 50–60%. And that's on carefully selected tasks with clear issue descriptions and existing test cases. Move to daily development — vague requirements, no existing tests, implicit business rules scattered everywhere — and that number only goes down.</p>
+          <p>Anthropic ran a controlled experiment. Same prompt ("build a 2D retro game maker"), same model (Opus 4.5). First run: bare, no support — 20 minutes, $9, the game's core features didn't work at all. Second run: full harness (planner + generator + evaluator three-agent architecture) — 6 hours, $200, the game was playable. They didn't change the model. What changed was the saddle.</p>
+          <p><strong>Where agents actually get stuck:</strong></p>
+          <ul>
+            <li><strong>Underspecified tasks.</strong> You say "add a search feature," and the agent's understanding is completely different from yours — search what? Full-text or structured? Pagination? Highlighting?</li>
+            <li><strong>Implicit conventions.</strong> Your team standardized on SQLAlchemy 2.0 syntax, but the agent writes 1.x code by default. Rules that only exist in your head and a Slack message from three months ago.</li>
+            <li><strong>Environment traps.</strong> Incomplete dev environment, missing dependencies, wrong tool versions. The agent burns precious context window on <code>pip install</code> failures instead of solving the actual task.</li>
+            <li><strong>No verification.</strong> No tests, no lint, or verification commands never communicated. The agent writes code, looks at it, decides it's fine, says "done."</li>
+            <li><strong>Context anxiety.</strong> When agents sense context is running low, they rush to finish, skip verification, and choose a simple solution over the optimal one.</li>
+          </ul>
+          <p><strong>Key terminology:</strong></p>
+          <ul>
+            <li><strong>Capability Gap:</strong> The gulf between benchmark performance and real-task performance.</li>
+            <li><strong>Harness:</strong> Everything outside the model — instructions, tools, environment, state management, verification feedback.</li>
+            <li><strong>Harness-Induced Failure:</strong> The model has enough capability, but the execution environment has structural defects.</li>
+            <li><strong>Verification Gap:</strong> The agent says "I'm done" when it's not done — the most common failure mode.</li>
+            <li><strong>Diagnostic Loop:</strong> Execute, observe failure, attribute to a specific harness layer, fix that layer, re-execute.</li>
+          </ul>
+          <blockquote>
+            <p>Core principle: <strong>When things fail, don't swap the model first — check the harness.</strong> If the same model succeeds on similar, well-structured tasks, assume it's a harness problem. It's like a car breaking down — you don't immediately suspect the engine. You check if it's out of gas first.</p>
+          </blockquote>
+        </section>
+
+        <!-- Lecture 02 -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">02</span><h2>What a Harness Actually Is</h2></div>
+          <p>Most people mean "a prompt file" when they say harness. That's not a harness. It's like opening a restaurant with nothing but ingredients — no stove, no knives, no recipes, no plating workflow. That's not a restaurant. That's a refrigerator.</p>
+          <p>A harness consists of <strong>five subsystems</strong>, each with clear responsibilities and evaluation criteria:</p>
+          <div class="card-grid" style="margin-top:20px;">
+            <div class="card">
+              <div class="card-icon indigo">📚</div>
+              <h3>1. Instructions (Recipe Shelf)</h3>
+              <p>AGENTS.md, CLAUDE.md, docs/ hierarchy. Project overview, tech stack versions, first-run commands, non-negotiable hard constraints, and links to detailed documentation.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon violet">🔧</div>
+              <h3>2. Tools (Knife Rack)</h3>
+              <p>Shell, file edit, search, test execution. Ensure the agent has sufficient tool access. Don't disable shell for "security" — if the agent can't run <code>pip install</code>, how is it supposed to work? But follow least-privilege principles.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon green">💡</div>
+              <h3>3. Environment (Stove)</h3>
+              <p>Make the environment state self-describing. Use <code>pyproject.toml</code> or <code>package.json</code> to lock dependencies, <code>.nvmrc</code> or <code>.python-version</code> for runtime versions, Docker or devcontainers for reproducibility.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon amber">📋</div>
+              <h3>4. State (Prep Station)</h3>
+              <p>Long tasks need progress tracking. Use a simple <code>PROGRESS.md</code> file recording what's done, what's in progress, what's blocked. Update before each session ends, read when the next session starts.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon red">✅</div>
+              <h3>5. Feedback (Quality Check Window)</h3>
+              <p>This is the highest-ROI subsystem. Explicitly list verification commands in AGENTS.md: tests, type checks, lint, full verification. Missing this is like cooking without ever tasting the food.</p>
+            </div>
+          </div>
+          <p style="margin-top:20px;">Use <strong>"isometric model control"</strong> to quantify each subsystem's marginal contribution: keep the model fixed, remove subsystems one at a time, measure which removal causes the biggest performance drop. That's your bottleneck — focus your effort there.</p>
+          <p><strong>A team's real story:</strong> A team used GPT-4o on a TypeScript + React app (~20,000 LOC). Stage 1 (empty kitchen): 20% success. Stage 2 (recipe shelf): 60%. Stage 3 (quality check window): 80%. Stage 4 (prep station): 80–100%. Four iterations, same model, success rate went from 20% to near 100%. That's the power of harness engineering.</p>
+        </section>
+
+        <!-- Lecture 03 -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">03</span><h2>Repository as System of Record</h2></div>
+          <p>Your team's architecture decisions are scattered across Confluence, Slack, Jira, and a few senior engineers' heads. For humans this barely works — you can ask a colleague, search chat history, dig through docs. But for an AI agent, information that's not in the repository simply does not exist.</p>
+          <p>An agent's inputs are: system prompts and task descriptions, file contents from the repository, and tool execution output. That's it. Your Slack history, Jira tickets, Confluence pages, and that architecture decision you discussed over coffee on Friday afternoon — the agent can't see any of it. It's an engineer locked inside the repository.</p>
+          <p><strong>How to test whether your map is good enough:</strong> Run a "cold-start test." Open a brand new agent session using only repo contents, and see if it can answer five basic questions:</p>
+          <ol>
+            <li><strong>What is this system?</strong> → AGENTS.md / README</li>
+            <li><strong>How is it organized?</strong> → ARCHITECTURE.md / module docs</li>
+            <li><strong>How do I run it?</strong> → Makefile / init.sh / package scripts</li>
+            <li><strong>How do I verify it?</strong> → Test, lint, and check commands</li>
+            <li><strong>Where are we now?</strong> → PROGRESS.md / feature list / git history</li>
+          </ol>
+          <p><strong>ACID principles for agent state management:</strong></p>
+          <ul>
+            <li><strong>Atomicity:</strong> Each logical operation gets one git commit. If it fails midway, <code>git stash</code> to roll back. All or nothing — no "half done."</li>
+            <li><strong>Consistency:</strong> Define "consistent state" verification predicates — all tests pass, lint reports zero errors. The agent runs verification after each operation.</li>
+            <li><strong>Isolation:</strong> When multiple agents work concurrently, design state files to avoid race conditions. Each agent uses its own progress file, or use git branches for isolation.</li>
+            <li><strong>Durability:</strong> Critical project knowledge lives in git-tracked files. Temporary state can stay in session memory, but cross-session knowledge must be persisted to files.</li>
+          </ul>
+        </section>
+
+        <!-- Lecture 04 -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">04</span><h2>Why One Giant Instruction File Fails</h2></div>
+          <p>You got serious about harness engineering and created an <code>AGENTS.md</code>. One month later it bloated to 300 lines, two months 450 lines, three months 600 lines. Then you notice the agent's performance is actually getting worse.</p>
+          <p>This is the "giant instruction file" trap. The most common vicious cycle: agent makes a mistake, you say "add a rule to prevent this," add it to AGENTS.md, it works temporarily, agent makes a different mistake, add another rule, repeat, file bloats out of control.</p>
+          <p><strong>What goes wrong specifically:</strong></p>
+          <ul>
+            <li><strong>Context budget gets eaten alive.</strong> A bloated instruction file might eat 10–20K tokens. A complex task might need to read dozens of source files, tool execution output also takes context, and conversation history accumulates.</li>
+            <li><strong>Lost in the middle.</strong> Liu et al.'s 2023 research proved that LLMs use information in the middle of long texts significantly less effectively than at the beginning or end. A critical constraint buried at line 300 of a 600-line file has a very high probability of being effectively ignored.</li>
+            <li><strong>Priority conflicts.</strong> The file mixes non-negotiable hard constraints ("never use eval()"), important design guidelines ("prefer functional style"), and specific historical lessons ("fixed a WebSocket memory leak last week"). These have completely different importance levels, but they look identical in the file.</li>
+            <li><strong>Maintenance decay.</strong> Outdated instructions rarely get deleted. The result: the file only grows, never shrinks, and signal-to-noise ratio continuously declines.</li>
+          </ul>
+          <p><strong>The solution: progressive disclosure.</strong></p>
+          <p>The entry file <code>AGENTS.md</code> stays at 50–200 lines, containing only the most frequently used items — project overview (one or two sentences), first-run commands, global hard constraints (no more than 15 non-negotiable rules), and links to topic documents.</p>
+          <p>Each topic document is 50–150 lines, organized by subject in the <code>docs/</code> directory. The agent only reads them when needed. Like packing cubes in a suitcase — underwear in one cube, toiletries in another, chargers in a third. Finding things doesn't require emptying the whole bag.</p>
+          <p><strong>Real-world result:</strong> A SaaS team's <code>AGENTS.md</code> ballooned to 600 lines. After refactoring to a routing file (80 lines) + topic documents, same task set success rate went from 45% to 72%. Security constraint compliance went from 60% to 95% — because it moved from the file middle to the routing file top.</p>
+        </section>
+
+        <!-- Lecture 05 -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">05</span><h2>Long-Running Tasks and Continuity</h2></div>
+          <p>Context windows are finite. This isn't solvable by model upgrades — even if window sizes grow to 1M tokens, complex tasks will still exhaust them. Because agents aren't just generating code; they're understanding codebases, tracking their own decision history, processing tool output, and maintaining conversation context.</p>
+          <p>A deeper problem: information the agent produces isn't uniformly important. Intermediate reasoning steps contain the "why" of decisions. The final output only contains the "what" — the code itself. Compaction strategies usually preserve the latter but lose the former. The next session sees the code but doesn't know why it's written that way.</p>
+          <p>Anthropic discovered something fascinating: when agents sense context is running low, they exhibit <strong>"premature convergence"</strong> behavior — rushing to finish current work, skipping verification steps, or choosing a simple solution over the optimal one. They call this "context anxiety."</p>
+          <p><strong>Core approach: Treat the agent like a brilliant engineer with amnesia.</strong> Before it "clocks out," it must write down critical information so the next "shift" agent can pick up quickly.</p>
+          <ul>
+            <li><strong>Progress file (PROGRESS.md):</strong> The most basic continuity artifact. Current state, completed items, in-progress items, known issues, next steps.</li>
+            <li><strong>Decision log (DECISIONS.md):</strong> Record important design decisions and reasons. "What decision, why, when."</li>
+            <li><strong>Git commits as checkpoints:</strong> Commit after completing each atomic unit of work. These are free, automatically versioned state snapshots.</li>
+            <li><strong>init.sh or harness initialization flow:</strong> Specify "clock-in" and "clock-out" routines in AGENTS.md.</li>
+          </ul>
+          <p><strong>Real-world result:</strong> An agent was tasked with implementing a blog system with user authentication — 12 feature points, estimated 5 sessions. Without the journal: only 7 of 12 completed, 3 with hidden defects. With the journal: all 12 completed and verified. Rebuild time reduced ~78%, feature completion rate from 58% to 100%, hidden defect rate from 43% down to 8%.</p>
+        </section>
+
+        <!-- Lecture 06 -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">06</span><h2>Initialization as Its Own Phase</h2></div>
+          <p>You start a new agent session and say "add a search feature." It jumps straight into coding — admirable enthusiasm. After 20 minutes it discovers the test framework isn't configured properly, spends another 10 fixing that, then the database migration script format is wrong. The search feature eventually gets added, but most time went to "figuring out how this project works" rather than writing the search feature.</p>
+          <p>Initialization and implementation have completely different optimization targets. Implementation optimizes for maximizing the quantity and quality of verified features. Initialization optimizes for maximizing the reliability and efficiency of all subsequent implementation.</p>
+          <p>When you mix them, the agent faces a multi-objective optimization problem — simultaneously building infrastructure and writing feature code. Without explicit priority setting, the agent naturally gravitates toward writing code (because that's directly visible output) while sacrificing infrastructure.</p>
+          <p><strong>Treat initialization as a dedicated phase.</strong> The first session does only initialization — no business feature code at all. Initialization produces:</p>
+          <ol>
+            <li><strong>Runnable environment.</strong> The project starts, dependencies are installed, no environment issues.</li>
+            <li><strong>Verifiable test framework.</strong> At least one example test passes. This proves the test framework itself is properly configured.</li>
+            <li><strong>Bootstrap contract document.</strong> A clear document telling subsequent sessions how to start, test, see progress, and pick up next steps.</li>
+            <li><strong>Task breakdown.</strong> Split the entire project into an ordered task list, each task with clear acceptance criteria.</li>
+            <li><strong>Git commit as checkpoint.</strong> After initialization completes, commit a clean checkpoint. All subsequent work starts from this checkpoint.</li>
+          </ol>
+          <p>Anthropic's experimental data: projects using a dedicated initialization phase showed <strong>31% higher feature completion rates</strong> in multi-session scenarios compared to mixed approaches. The key insight — time invested in the initialization phase is fully recovered in the next 3–4 sessions.</p>
+          <p><strong>Warm start strategy:</strong> Don't start from an empty directory. Use a project template to preset standard directory structure, dependency configuration, and test framework. Bake common initialization steps into the template, leaving only project-specific initialization work.</p>
+        </section>
+
+        <div class="divider"></div>
+        <div style="text-align:center;padding:24px 0 48px;">
+          <p style="margin-bottom:16px;">Ready to go deeper? Explore the 5-subsystem framework and design patterns next.</p>
+          <a href="design-patterns.html" class="btn btn-primary">Explore Design Patterns →</a>
+        </div>
+      </div>
+      <footer class="site-footer">
+        <p>Harness Engineering Course &middot; Built for GitHub Pages &middot; Pure HTML + CSS + JS</p>
+      </footer>
+    </main>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>

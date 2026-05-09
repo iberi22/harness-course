@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Templates — Harness Engineering</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/"><span class="icon">🏠</span> Home</a>
+      <a href="/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
+      <a href="/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
+      <a href="/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
+      <a href="/pages/templates.html" class="active"><span class="icon">📋</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Applications</div>
+      <a href="/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
+      <a href="/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1>📋 Templates</h1>
+    <p>Plantillas listas para copiar y pegar. Extraídas del harness-creator skill de OpenClaw / Learn Harness Engineering.</p>
+  </div>
+  <div class="content">
+
+    <h2>AGENTS.md Template</h2>
+    <p>El archivo de instrucciones principal. Máximo ~80 líneas. Routing layer que apunta a docs/ detallados.</p>
+    <pre># AGENTS.md — [Project Name]
+
+[One-sentence project purpose]
+
+## Startup Workflow
+Before writing code:
+1. Read this file
+2. Read docs/ARCHITECTURE.md
+3. Run ./init.sh
+4. Read feature_list.json (current state)
+
+## Working Rules
+- One feature at a time — no scope creep
+- Verification required before claiming done
+- Update progress before ending session
+- If unsure, check docs/ or ask
+
+## Required Artifacts
+- `feature_list.json`: Feature state tracker
+- `progress.md`: Session continuity log
+- `init.sh`: Standard startup and verification
+
+## Definition of Done
+A feature is done when:
+- [ ] Implementation complete
+- [ ] Verification passed (tests, type checks)
+- [ ] Evidence recorded in feature_list.json
+- [ ] Repository restartable from clean state
+
+## End of Session
+Before ending:
+1. Update progress.md
+2. Update feature_list.json
+3. Record blockers/risks
+4. Commit with descriptive message
+5. Leave clean restart path</pre>
+
+    <div class="section-divider"></div>
+
+    <h2>feature_list.json Template</h2>
+    <p>Single source of truth para el progreso del proyecto. Cada feature con id, dependencias, estado, y evidencia.</p>
+    <pre>{
+  "features": [
+    {
+      "id": "feat-001",
+      "name": "Feature Name",
+      "description": "Description of the feature",
+      "dependencies": [],
+      "status": "todo",
+      "evidence": ""
+    },
+    {
+      "id": "feat-002",
+      "name": "Another Feature",
+      "description": "Description",
+      "dependencies": ["feat-001"],
+      "status": "in-progress",
+      "evidence": ""
+    }
+  ]
+}
+
+/* Status lifecycle:
+   todo → in-progress → review → done
+   A feature is "done" only when evidence field is populated
+*/</pre>
+
+    <div class="section-divider"></div>
+
+    <h2>init.sh Template</h2>
+    <p>Script de inicialización que se ejecuta al inicio de cada sesión. Verifica que todo esté listo para trabajar.</p>
+    <pre>#!/bin/bash
+set -e
+
+echo "=== [init.sh] Starting initialization ==="
+START_TS=$(date +%s)
+
+echo "=== Installing dependencies ==="
+npm install  # or: cargo build, pip install -r requirements.txt, etc.
+
+echo "=== Running type checks ==="
+npm run check  # or: cargo check, mypy, tsc --noEmit, etc.
+
+echo "=== Running tests ==="
+npm test  # or: cargo test, pytest, etc.
+
+echo "=== Building application ==="
+npm run build  # or: cargo build --release, etc.
+
+echo "=== Checking feature list ==="
+if [ -f feature_list.json ]; then
+    STATUS_COUNT=$(grep -c '"status"' feature_list.json || true)
+    echo "  Feature list loaded: entries found"
+else
+    echo "  WARNING: feature_list.json not found"
+fi
+
+DURATION=$(( $(date +%s) - START_TS ))
+echo "=== [init.sh] Complete (${DURATION}s) ==="</pre>
+
+    <div class="section-divider"></div>
+
+    <h2>progress.md Template</h2>
+    <p>Log de progreso de sesión. Se actualiza al final de cada sesión para mantener continuidad.</p>
+    <pre># Session Progress Log
+
+## Current State (Last Updated: YYYY-MM-DD HH:MM)
+
+**Active Feature:** feat-001 - Feature Name
+**Status:** In Progress (XX% complete)
+
+### What's Done
+- [x] Task completed this session
+- [x] Another completed task
+
+### What's In Progress
+- Current task being worked on
+- Decision needed: option A vs option B
+
+### Blockers
+- Blocker description (waiting on decision, external dependency, etc.)
+
+### Next Session Should
+1. First task for next session
+2. Second task for next session
+3. Third task for next session</pre>
+
+    <div class="section-divider"></div>
+
+    <h2>Session Handoff Template</h2>
+    <p>Template para transferir contexto entre sesiones del agente.</p>
+    <pre># Session Handoff
+
+## Session ID: [date-uuid]
+## Completed: YYYY-MM-DD HH:MM
+
+## What Was Accomplished
+- [Brief summary of what was done]
+
+## Key Decisions
+- Decision 1: [what was decided and why]
+- Decision 2: [what was decided and why]
+
+## Files Modified
+- path/to/file.rs — [what changed]
+- path/to/file2.rs — [what changed]
+
+## Files Created
+- path/to/new-file.rs — [purpose]
+
+## Current State
+- feature_list.json status: [summary]
+- Branch: [branch-name]
+- Uncommitted changes: [yes/no]
+
+## Known Issues
+- Issue 1: [description]
+- Issue 2: [description]
+
+## Next Steps
+1. [Next action item]
+2. [Next action item]
+
+## Notes
+- [Any additional context for the next session]</pre>
+
+    <div class="section-divider"></div>
+
+    <h2>Harness Assessment Checklist</h2>
+    <p>Evalúa tu harness actual en los 5 subsistemas. Puntúa 1-5 cada uno.</p>
+
+    <h3>1. Instructions (Recipe Shelf)</h3>
+    <ul class="checklist">
+      <li>¿Existe un AGENTS.md / CLAUDE.md?</li>
+      <li>¿Tiene progressive disclosure (corto, enlaza a docs/)?</li>
+      <li>¿Define startup workflow claro?</li>
+      <li>¿Especifica qué leer antes de codificar?</li>
+      <li>¿Las reglas son ejecutables, no abstractas?</li>
+    </ul>
+
+    <h3>2. State (Prep Station)</h3>
+    <ul class="checklist">
+      <li>¿Existe un feature_list.json o equivalente?</li>
+      <li>¿Cada feature tiene id, dependencias, estado, y evidencia?</li>
+      <li>¿Hay session handoff template?</li>
+      <li>¿Se actualiza el progreso al final de cada sesión?</li>
+    </ul>
+
+    <h3>3. Verification (Quality Check)</h3>
+    <ul class="checklist">
+      <li>¿init.sh corre verificación automática?</li>
+      <li>¿Hay tests que validen el trabajo del agente?</li>
+      <li>¿Hay type checks en el pipeline?</li>
+      <li>¿El agente no puede declarar "done" sin verificar?</li>
+    </ul>
+
+    <h3>4. Scope (Task Boundaries)</h3>
+    <ul class="checklist">
+      <li>¿Hay política de una feature a la vez?</li>
+      <li>¿Están documentadas las dependencias entre features?</li>
+      <li>¿Hay Definition of Done checklist?</li>
+      <li>¿Hay next-task templates para evitar overreach?</li>
+    </ul>
+
+    <h3>5. Lifecycle (Session Management)</h3>
+    <ul class="checklist">
+      <li>¿Existe init.sh?</li>
+      <li>¿Hay clean-state checklist?</li>
+      <li>¿Hay procedimiento de handoff documentado?</li>
+      <li>¿Los benchmarks miden mejora del harness?</li>
+    </ul>
+
+    <p><strong>Puntúa 1-5 cada subsistema. El de menor puntuación es tu bottleneck. Mejora allí primero.</strong></p>
+
+  </div>
+  <footer class="footer">
+    <p>Templates extraídos de <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> skills/harness-creator/templates/</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources — Awesome Harness Engineering</title>
+  <meta name="description" content="Curated resources for harness engineering: foundations, context, constraints, specs, evals, benchmarks, and runtimes.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-logo">
+          <span class="sidebar-logo-icon">🧩</span>
+          <span>Harness Engineering</span>
+        </a>
+        <div class="sidebar-subtitle">Design Skills for Agent Systems</div>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="index.html"><span class="nav-icon">🏠</span> Home</a></li>
+          <li><a href="fundamentals.html"><span class="nav-icon">📖</span> Fundamentals</a></li>
+          <li><a href="design-patterns.html"><span class="nav-icon">🎨</span> Design Patterns</a></li>
+          <li><a href="resources.html" class="active"><span class="nav-icon">📚</span> Resources</a></li>
+          <li><a href="synapse-trader.html"><span class="nav-icon">📈</span> SynapseTrader</a></li>
+          <li><a href="xavier.html"><span class="nav-icon">🧠</span> Xavier Memory</a></li>
+          <li><a href="course.html"><span class="nav-icon">🎓</span> Full Course</a></li>
+          <li><a href="templates.html"><span class="nav-icon">📋</span> Templates</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">Built for GitHub Pages<br>Dark theme &middot; No frameworks</div>
+    </aside>
+    <div class="sidebar-overlay"></div>
+    <main class="main-content">
+      <div class="topbar">
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        <span style="font-weight:600;font-size:14px;">Harness Engineering</span>
+        <div></div>
+      </div>
+      <div class="content-container wide">
+        <h1>Awesome Harness Engineering Resources</h1>
+        <p style="font-size:1.05rem;color:var(--text-secondary);max-width:720px;">A curated list of articles, playbooks, benchmarks, specifications, and open-source projects for harness engineering. These resources make agents more dependable in real workflows, especially long-running coding and research tasks.</p>
+
+        <!-- Foundations -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">A</span><h2>Foundations</h2></div>
+          <p>These five articles form the theoretical bedrock of harness engineering. Read them in this order.</p>
+          <div class="card-grid" style="margin-top:20px;">
+            <div class="card">
+              <div class="card-icon indigo">📜</div>
+              <h3><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noopener">OpenAI: Harness Engineering</a></h3>
+              <p>OpenAI's flagship field report on building a large application with Codex using architectural constraints, repo-local instructions, browser validation, and telemetry. The million-line experiment proves harness beats model upgrades.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon violet">📜</div>
+              <h3><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener">Anthropic: Effective Harnesses for Long-Running Agents</a></h3>
+              <p>Anthropic's core article on initializer agents, feature lists, init.sh, self-verification, and handoff artifacts across many context windows. Essential for multi-session work.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon green">📜</div>
+              <h3><a href="https://www.anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noopener">Anthropic: Harness Design for Long-Running Apps</a></h3>
+              <p>Follow-up focused on improving long-running app generation with better task state and evaluator design. Covers context anxiety and premature convergence.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon blue">📜</div>
+              <h3><a href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html" target="_blank" rel="noopener">Thoughtworks: Harness Engineering</a></h3>
+              <p>Thoughtworks' framing of harness work into context engineering, architectural constraints, and "garbage collection" against entropy. Practical and grounded.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon amber">📜</div>
+              <h3><a href="https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents" target="_blank" rel="noopener">HumanLayer: Skill Issue</a></h3>
+              <p>A practical argument that weak results from coding agents are often harness problems rather than model problems. Essential mindset shift for practitioners.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Context, Memory & Working State -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">B</span><h2>Context, Memory &amp; Working State</h2></div>
+          <p>How to manage the context window as a working memory budget rather than a dumping ground.</p>
+          <div class="card-grid" style="margin-top:20px;">
+            <div class="card">
+              <div class="card-icon indigo">🧠</div>
+              <h3><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic: Effective Context Engineering</a></h3>
+              <p>Anthropic's guidance on managing the context window as a budget. Covers select, compress, isolate, and write operations with explicit cost management.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon violet">🧠</div>
+              <h3><a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" rel="noopener">Manus: Context Engineering Lessons</a></h3>
+              <p>Manus' detailed playbook on KV-cache locality, tool masking, filesystem memory, and keeping useful failures in-context. Production-grade insights.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon green">🧠</div>
+              <h3><a href="https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html" target="_blank" rel="noopener">Thoughtworks: Context Engineering for Coding Agents</a></h3>
+              <p>Guidance on shaping the task environment so coding agents stay grounded and productive. Focus on reducing context drift.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon blue">🧠</div>
+              <h3><a href="https://www.humanlayer.dev/blog/advanced-context-engineering" target="_blank" rel="noopener">HumanLayer: Advanced Context Engineering</a></h3>
+              <p>Patterns for reducing context drift and making coding sessions easier to resume. Covers progressive disclosure in practice.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon amber">🧠</div>
+              <h3><a href="https://openhands.dev/blog/openhands-context-condensensation-for-more-efficient-ai-agents" target="_blank" rel="noopener">OpenHands: Context Condensation</a></h3>
+              <p>Design for bounded conversation memory that preserves goals, progress, critical files, and failing tests while keeping long-running sessions efficient.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Constraints & Guardrails -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">C</span><h2>Constraints, Guardrails &amp; Safe Autonomy</h2></div>
+          <p>How to reduce approval friction without losing control through better sandboxing and policy design.</p>
+          <div class="card-grid" style="margin-top:20px;">
+            <div class="card">
+              <div class="card-icon indigo">🛡️</div>
+              <h3><a href="https://www.anthropic.com/engineering/claude-code-sandboxing" target="_blank" rel="noopener">Anthropic: Sandboxing Claude Code</a></h3>
+              <p>Reducing approval friction without losing control through better sandboxing and policy design. Covers permission pipelines and auto-approve boundaries.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon violet">🛡️</div>
+              <h3><a href="https://www.anthropic.com/engineering/code-execution-with-mcp" target="_blank" rel="noopener">Anthropic: Code Execution with MCP</a></h3>
+              <p>Giving agents controlled execution power through explicit, inspectable tool boundaries. MCP as a fail-closed interface.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon green">🛡️</div>
+              <h3><a href="https://www.anthropic.com/engineering/writing-tools-for-agents" target="_blank" rel="noopener">Anthropic: Writing Effective Tools</a></h3>
+              <p>Tool interfaces that are easier for models to call correctly and safely. Schema design, naming conventions, and error handling patterns.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon blue">🛡️</div>
+              <h3><a href="https://openhands.dev/blog/mitigating-prompt-injection-attacks-in-software-agents" target="_blank" rel="noopener">OpenHands: Mitigating Prompt Injection</a></h3>
+              <p>Practical guide to confirmation mode, analyzers, sandboxing, and hard policies for reducing prompt-injection risk in autonomous coding agents.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Specs & Workflow Design -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">D</span><h2>Specs, Agent Files &amp; Workflow Design</h2></div>
+          <p>Standards and principles for structuring repo-local instructions and agent workflows.</p>
+          <div class="card-grid" style="margin-top:20px;">
+            <div class="card">
+              <div class="card-icon indigo">📋</div>
+              <h3><a href="https://github.com/agentsmd/agents.md" target="_blank" rel="noopener">AGENTS.md Specification</a></h3>
+              <p>A lightweight open format for repo-local instructions that tell agents how to work inside a codebase. The emerging standard for agent entry files.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon violet">📋</div>
+              <h3><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">GitHub Spec Kit</a></h3>
+              <p>GitHub's toolkit for spec-driven development. Useful when you want agents to execute against explicit product and engineering specs.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon green">📋</div>
+              <h3><a href="https://www.humanlayer.dev/blog/12-factor-agents" target="_blank" rel="noopener">HumanLayer: 12 Factor Agents</a></h3>
+              <p>Operating principles for production agents: explicit prompts, state ownership, clean pause-resume behavior, and reproducible workflows.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon blue">📋</div>
+              <h3><a href="https://www.12factoragentops.com/" target="_blank" rel="noopener">12-Factor AgentOps</a></h3>
+              <p>An operations-oriented companion focused on context discipline, validation, and reproducible agent workflows.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Evals & Observability -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">E</span><h2>Evals &amp; Observability</h2></div>
+          <p>If you can't measure harness quality, you can't improve it. These resources show how to evaluate agent behavior systematically.</p>
+          <div class="card-grid" style="margin-top:20px;">
+            <div class="card">
+              <div class="card-icon indigo">📊</div>
+              <h3><a href="https://developers.openai.com/blog/eval-skills/" target="_blank" rel="noopener">OpenAI: Testing Agent Skills with Evals</a></h3>
+              <p>Concrete guide to turning agent traces into repeatable evals with JSONL logs and deterministic checks. The gold standard for agent evaluation.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon violet">📊</div>
+              <h3><a href="https://openhands.dev/blog/evaluating-agent-skills" target="_blank" rel="noopener">OpenHands: How to Evaluate Agent Skills</a></h3>
+              <p>Hands-on playbook for measuring whether a skill actually helps using bounded tasks, deterministic verifiers, no-skill baselines, and trace review.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon green">📊</div>
+              <h3><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">Anthropic: Demystifying Evals</a></h3>
+              <p>What to measure when agents have many possible trajectories to success or failure. Covers single-step, full-run, and multi-turn eval design.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon blue">📊</div>
+              <h3><a href="https://blog.langchain.com/improving-deep-agents-with-harness-engineering/" target="_blank" rel="noopener">LangChain: Improving Deep Agents with Harness Engineering</a></h3>
+              <p>Evidence that harness changes alone can significantly improve benchmark performance. Quantified improvements from specific harness interventions.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Benchmarks -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">F</span><h2>Benchmarks</h2></div>
+          <p>These benchmarks stress context handling, tool calling, environment control, verification logic, and runtime scaffolding — making them ideal for comparing harness quality, not just model quality.</p>
+          <table class="data-table">
+            <thead>
+              <tr><th>Benchmark</th><th>What It Stresses</th><th>Why It Matters for Harness</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="https://www.swebench.com/" target="_blank" rel="noopener">SWE-bench Verified</a></td>
+                <td>Real GitHub issues and tests</td>
+                <td>Harness choices around retrieval, patching, and validation are highly visible</td>
+              </tr>
+              <tr>
+                <td><a href="https://www.tbench.ai/" target="_blank" rel="noopener">Terminal-Bench</a></td>
+                <td>Terminal-native agents in shells and filesystems</td>
+                <td>Directly compares coding-agent harnesses in verification-heavy environments</td>
+              </tr>
+              <tr>
+                <td><a href="https://appworld.dev/" target="_blank" rel="noopener">AppWorld</a></td>
+                <td>Interactive coding agents in controllable app world</td>
+                <td>State-based and execution-based unit tests surface harness quality</td>
+              </tr>
+              <tr>
+                <td><a href="https://os-world.github.io/" target="_blank" rel="noopener">OSWorld</a></td>
+                <td>Real computer-use across Ubuntu, Windows, macOS</td>
+                <td>Tests desktop and multimodal harnesses with execution-based evaluators</td>
+              </tr>
+              <tr>
+                <td><a href="https://clawbench.net" target="_blank" rel="noopener">ClawBench</a></td>
+                <td>Search, reasoning, coding, safety, multi-turn conversation</td>
+                <td>Breadth of harness demands in a single suite</td>
+              </tr>
+              <tr>
+                <td><a href="https://www.agent-arena.com/leaderboard" target="_blank" rel="noopener">Agent Arena</a></td>
+                <td>ELO-style head-to-head agent battles</td>
+                <td>Compares harness-level choices across categories</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Runtimes & Reference Implementations -->
+        <section class="section">
+          <div class="section-title"><span class="section-number">G</span><h2>Runtimes, Harnesses &amp; Reference Implementations</h2></div>
+          <p>Open-source projects and frameworks that embody harness engineering principles.</p>
+          <div class="card-grid" style="margin-top:20px;">
+            <div class="card">
+              <div class="card-icon indigo">⚙️</div>
+              <h3><a href="https://github.com/SWE-agent/SWE-agent" target="_blank" rel="noopener">SWE-agent</a></h3>
+              <p>A mature research coding agent that makes the harness, prompt, tools, and environment design directly inspectable. Excellent reference for tool registry patterns.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon violet">⚙️</div>
+              <h3><a href="https://github.com/langchain-ai/deepagents" target="_blank" rel="noopener">deepagents (LangChain)</a></h3>
+              <p>Building deeper, longer-running agents with middleware and harness patterns. Includes multi-agent coordination examples.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon green">⚙️</div>
+              <h3><a href="https://github.com/inngest/agent-kit" target="_blank" rel="noopener">AgentKit (Inngest)</a></h3>
+              <p>TypeScript toolkit for building durable, workflow-aware agents on top of event-driven infrastructure. Lifecycle management built-in.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon blue">⚙️</div>
+              <h3><a href="https://github.com/harbor-framework/harbor" target="_blank" rel="noopener">Harbor</a></h3>
+              <p>A generalized harness for evaluating and improving agents at scale, released alongside Terminal-Bench 2.0.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon amber">⚙️</div>
+              <h3><a href="https://github.com/raphaelchristi/harness-evolver" target="_blank" rel="noopener">Harness Evolver</a></h3>
+              <p>Claude Code plugin that autonomously evolves LLM agent harnesses using multi-agent proposers, LangSmith-backed evaluation, and git worktree isolation.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon red">⚙️</div>
+              <h3><a href="https://github.com/browser-use/browser-harness" target="_blank" rel="noopener">browser-use/browser-harness</a></h3>
+              <p>A thin CDP-based browser harness that lets agents extend helper functions during execution. Useful for inspecting self-healing web-task workflows.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+        <div style="text-align:center;padding:24px 0 48px;">
+          <p style="margin-bottom:16px;">Explore the complete list at <a href="https://github.com/walkinglabs/awesome-harness-engineering" target="_blank" rel="noopener">walkinglabs/awesome-harness-engineering</a></p>
+          <a href="design-patterns.html" class="btn btn-primary">Explore Design Patterns →</a>
+        </div>
+      </div>
+      <footer class="site-footer">
+        <p>Harness Engineering Course &middot; Built for GitHub Pages &middot; Pure HTML + CSS + JS</p>
+      </footer>
+    </main>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>

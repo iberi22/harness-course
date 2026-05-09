@@ -1,0 +1,4 @@
+# GitHub Pages config
+title: Harness Engineering
+description: Design Skills for Agent Systems — Curso basado en Learn Harness Engineering y OpenClaw patterns
+remote_theme: pages-themes/primer@v0.6.0
