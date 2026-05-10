@@ -15,27 +15,26 @@
   <nav>
     <div class="nav-section">
       <div class="nav-section-title">Course</div>
-      <a href="/harness-course/"><span class="icon">🏠</span> Home</a>
-      <a href="/harness-course/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
-      <a href="/harness-course/pages/design-patterns.html" class="active"><span class="icon">🧩</span> Design Patterns</a>
-      <a href="/harness-course/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html" class="active"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
     </div>
     <div class="nav-section">
       <div class="nav-section-title">Resources</div>
-      <a href="/harness-course/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
-      <a href="/harness-course/pages/templates.html"><span class="icon">📋</span> Templates</a>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
     </div>
     <div class="nav-section">
       <div class="nav-section-title">Applications</div>
-      <a href="/harness-course/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
-      <a href="/harness-course/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+      <a href="/harness-course/pages/synapse-trader.html"><span class="nav-icon">⊡</span> SynapseTrader</a>
+      <a href="/harness-course/pages/xavier.html"><span class="nav-icon">⊕</span> Xavier Memory</a>
     </div>
   </nav>
 </aside>
-
 <main class="main">
   <div class="page-header">
-    <h1>🧩 OpenClaw Design Skills</h1>
+    <h1><span class="page-icon">◇</span> OpenClaw Design Skills</h1>
     <p>Patrones de diseño extraídos del harness-creator skill de OpenClaw. El framework de 5 subsistemas y 6 patrones de diseño para construir harnesses production-grade.</p>
   </div>
   <div class="content">
@@ -142,51 +141,51 @@
 
     <div class="card-grid">
       <div class="card">
-        <h3>🧠 Memory Persistence</h3>
+        <h3>Memory Persistence</h3>
         <p><strong>Problema:</strong> El agente pierde preferencias, contexto, y feedback entre sesiones.</p>
         <p><strong>Solución:</strong> Jerarquía de 4 niveles (organización > usuario > proyecto > local). Two-step save invariant: escribe contenido completo, luego apunta en índice. Índice acotado (~200 líneas), archivos temáticos bajo demanda.</p>
         <p><strong>Golden rule:</strong> Local overrides siempre ganan.</p>
-        <div class="card-footer">→ Memoria duradera sin inflar contexto</div>
+        <div class="card-footer">Memoria duradera sin inflar contexto</div>
       </div>
 
       <div class="card">
-        <h3>📐 Context Engineering</h3>
+        <h3>Context Engineering</h3>
         <p><strong>Problema:</strong> El contexto del agente es limitado y caro — ¿qué incluir y qué omitir?</p>
         <p><strong>Solución:</strong> 4 operaciones: Select (relevancia), Compress (resumir), Isolate (separar por tema), Write (persistir). Budget management: decide qué cabe en el contexto actual.</p>
         <p><strong>Golden rule:</strong> El contexto es un presupuesto, no un vertedero.</p>
-        <div class="card-footer">→ La información justa a tiempo</div>
+        <div class="card-footer">La información justa a tiempo</div>
       </div>
 
       <div class="card">
-        <h3>🔧 Tool Registry & Safety</h3>
+        <h3>Tool Registry & Safety</h3>
         <p><strong>Problema:</strong> Herramientas poderosas pueden ser peligrosas — ¿cómo dar acceso sin perder control?</p>
         <p><strong>Solución:</strong> Registro fail-closed (todo denegado por defecto). Permisos por llamada con concurrencia controlada. Pipeline de permisos que rastrea denegaciones y transforma modos.</p>
         <p><strong>Golden rule:</strong> Fail-closed — todo denegado hasta explícitamente permitido.</p>
-        <div class="card-footer">→ Agentes poderosos pero seguros</div>
+        <div class="card-footer">Agentes poderosos pero seguros</div>
       </div>
 
       <div class="card">
-        <h3>👥 Multi-Agent Coordination</h3>
+        <h3>Multi-Agent Coordination</h3>
         <p><strong>Problema:</strong> Múltiples agentes trabajando en el mismo proyecto se pisan, duplican trabajo, o producen conflictos.</p>
         <p><strong>Solución:</strong> 3 patrones: Coordinator (un agente orquesta), Fork (agentes paralelos independientes), Swarm (agentes colaboran en misma tarea). Context sharing controlado.</p>
         <p><strong>Golden rule:</strong> Fork children must not fork — guard recursivo preserva el invariante de un solo nivel.</p>
-        <div class="card-footer">→ Múltiples agentes sin caos</div>
+        <div class="card-footer">Múltiples agentes sin caos</div>
       </div>
 
       <div class="card">
-        <h3>🔄 Lifecycle & Bootstrap</h3>
+        <h3>Lifecycle & Bootstrap</h3>
         <p><strong>Problema:</strong> Sin un ciclo de vida definido, el agente no sabe cuándo inicializar, cuándo terminar, ni cómo manejar errores.</p>
         <p><strong>Solución:</strong> Sistema de hooks (pre/post para cada fase). Tareas long-running con notificación. Init con orden de dependencias. Extension system con trust all-or-nothing.</p>
         <p><strong>Golden rule:</strong> Un hook no confiable deshabilita todo el sistema de extensiones.</p>
-        <div class="card-footer">→ Bootstrap predecible, shutdown limpio</div>
+        <div class="card-footer">Bootstrap predecible, shutdown limpio</div>
       </div>
 
       <div class="card">
-        <h3>📊 Harness Assessment</h3>
+        <h3>Harness Assessment</h3>
         <p><strong>Problema:</strong> ¿Cómo saber si un harness es bueno? ¿Dónde mejorarlo primero?</p>
         <p><strong>Solución:</strong> Evaluación de 5 puntos por subsistema. Identificar el subsistema con puntuación más baja — ese es el bottleneck. Mejorar allí primero.</p>
         <p><strong>Golden rule:</strong> El subsistema más débil determina la calidad del harness.</p>
-        <div class="card-footer">→ Mejora enfocada, no aleatoria</div>
+        <div class="card-footer">Mejora enfocada, no aleatoria</div>
       </div>
     </div>
 
@@ -248,7 +247,7 @@
 
   </div>
   <footer class="footer">
-    <p>Harness Engineering Course — Patrones extraídos de <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> skills/harness-creator/</p>
+    <p>Harness Engineering Course — Basado en <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> y <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
   </footer>
 </main>
 <script>

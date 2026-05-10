@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Harness Engineering — Design Skills for Agent Systems</title>
-<meta name="description" content="Curso de Harness Engineering: patrones de diseño extraídos de OpenClaw, aplicados a bots de trading y sistemas de memoria.">
+<meta name="description" content="Curso de Harness Engineering: patrones de diseño extraídos de OpenClaw, aplicados a sistemas de trading autónomos y memoria de agentes.">
 <link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
 <link rel="stylesheet" href="/harness-course/css/style.css">
 </head>
@@ -15,45 +15,47 @@
 
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-brand">
-    <a href="/harness-course/"><h2>Harness Eng.</h2>
-    <div class="brand-sub">Design skills for agents</div></a>
+    <a href="/harness-course/">
+      <h2>Harness Eng.</h2>
+      <div class="brand-sub">Design skills for agents</div>
+    </a>
   </div>
   <nav>
     <div class="nav-section">
       <div class="nav-section-title">Course</div>
-      <a href="/harness-course/" class="active"><span class="icon">🏠</span> Home</a>
-      <a href="/harness-course/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
-      <a href="/harness-course/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
-      <a href="/harness-course/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+      <a href="/harness-course/" class="active"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
     </div>
     <div class="nav-section">
       <div class="nav-section-title">Resources</div>
-      <a href="/harness-course/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
-      <a href="/harness-course/pages/templates.html"><span class="icon">📋</span> Templates</a>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
     </div>
     <div class="nav-section">
       <div class="nav-section-title">Applications</div>
-      <a href="/harness-course/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
-      <a href="/harness-course/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+      <a href="/harness-course/pages/synapse-trader.html"><span class="nav-icon">⊡</span> SynapseTrader</a>
+      <a href="/harness-course/pages/xavier.html"><span class="nav-icon">⊕</span> Xavier Memory</a>
     </div>
   </nav>
 </aside>
 
 <main class="main">
   <section class="hero">
-    <h1>Harness <span>Engineering</span></h1>
+    <h1>Harness <span class="accent-word">Engineering</span></h1>
     <p>Un enfoque sistemático para diseñar el entorno alrededor de agentes de IA, extrayendo patrones de diseño de OpenClaw y aplicándolos a sistemas de trading autónomos y memoria de agentes.</p>
     <div class="hero-actions">
-      <a href="/harness-course/pages/fundamentals.html" class="btn btn-primary">📖 Empezar Curso</a>
-      <a href="/harness-course/pages/design-patterns.html" class="btn btn-secondary">🧩 Ver Patrones</a>
-      <a href="/harness-course/pages/course.html" class="btn btn-secondary">🎓 Curso Completo</a>
+      <a href="/harness-course/pages/fundamentals.html" class="btn btn-primary">Empezar Curso</a>
+      <a href="/harness-course/pages/design-patterns.html" class="btn btn-secondary">Ver Patrones</a>
+      <a href="/harness-course/pages/course.html" class="btn btn-secondary">Curso Completo</a>
     </div>
   </section>
 
   <section class="stats-row">
     <div class="stat"><div class="stat-value">12</div><div class="stat-label">Lectures</div></div>
     <div class="stat"><div class="stat-value">5</div><div class="stat-label">Subsystems</div></div>
-    <div class="stat"><div class="stat-value">6</div><div class="stat-label">Design Patterns</div></div>
+    <div class="stat"><div class="stat-value">6</div><div class="stat-label">Patterns</div></div>
     <div class="stat"><div class="stat-value">12</div><div class="stat-label">Gotchas</div></div>
     <div class="stat"><div class="stat-value">2</div><div class="stat-label">Case Studies</div></div>
   </section>
@@ -77,7 +79,7 @@
         </div>
         <div class="subsys-body">
           <p>AGENTS.md, CLAUDE.md, jerarquía de docs/ — el "recetario" que le dice al agente cómo trabajar.</p>
-          <div class="subsys-tags"><span class="tag">progressive disclosure</span><span class="tag">AGENTS.md</span></div>
+          <div><span class="tag">progressive disclosure</span> <span class="tag">AGENTS.md</span></div>
         </div>
       </div>
       <div class="subsystem-card">
@@ -87,7 +89,7 @@
         </div>
         <div class="subsys-body">
           <p>feature_list.json, progress.md, session-handoff — la "estación de preparación" que mantiene el estado.</p>
-          <div class="subsys-tags"><span class="tag">persistence</span><span class="tag">tracking</span></div>
+          <div><span class="tag">persistence</span> <span class="tag">tracking</span></div>
         </div>
       </div>
       <div class="subsystem-card">
@@ -97,7 +99,7 @@
         </div>
         <div class="subsys-body">
           <p>Tests, type checks, comandos de verificación — la "ventana de control de calidad" que valida el trabajo.</p>
-          <div class="subsys-tags"><span class="tag">testing</span><span class="tag">gates</span></div>
+          <div><span class="tag">testing</span> <span class="tag">gates</span></div>
         </div>
       </div>
       <div class="subsystem-card">
@@ -107,7 +109,7 @@
         </div>
         <div class="subsys-body">
           <p>One-feature-at-a-time, definition of done — los "límites de la tarea" que evitan el overreach.</p>
-          <div class="subsys-tags"><span class="tag">boundaries</span><span class="tag">focus</span></div>
+          <div><span class="tag">boundaries</span> <span class="tag">focus</span></div>
         </div>
       </div>
       <div class="subsystem-card">
@@ -117,7 +119,7 @@
         </div>
         <div class="subsys-body">
           <p>init.sh, clean-state checklists, handoff procedures — la "gestión de sesión" para continuidad.</p>
-          <div class="subsys-tags"><span class="tag">bootstrap</span><span class="tag">handoff</span></div>
+          <div><span class="tag">bootstrap</span> <span class="tag">handoff</span></div>
         </div>
       </div>
     </div>
@@ -126,13 +128,13 @@
 
     <h2>Aplicaciones Reales</h2>
     <div class="card-grid">
-      <a href="/harness-course/pages/synapse-trader.html" class="card" style="text-decoration:none">
-        <div class="card-icon">🤖</div>
+      <a href="/harness-course/pages/synapse-trader.html" class="card">
+        <div class="card-icon">⊡</div>
         <h3>SynapseTrader — Bot de Trading</h3>
         <p>55K LOC, 177 archivos Rust, 18 estrategias, 8 agentes Hive. Cómo aplicar los 5 subsistemas a un bot de Binance Futures.</p>
       </a>
-      <a href="/harness-course/pages/xavier.html" class="card" style="text-decoration:none">
-        <div class="card-icon">🧠</div>
+      <a href="/harness-course/pages/xavier.html" class="card">
+        <div class="card-icon">⊕</div>
         <h3>Xavier — Sistema de Memoria</h3>
         <p>Sistema de memoria central para agentes SWAL. Cómo los patrones de harness mejoran la persistencia, contexto y ciclo de vida.</p>
       </a>
@@ -143,7 +145,7 @@
     <h2>¿Por qué importa?</h2>
     <div class="compare-grid">
       <div class="compare-col without">
-        <h4>❌ Sin Harness</h4>
+        <h4>Sin Harness</h4>
         <ul>
           <li>Agente olvida preferencias entre sesiones</li>
           <li>Instrucciones gigantes que el agente ignora</li>
@@ -153,7 +155,7 @@
         </ul>
       </div>
       <div class="compare-col with">
-        <h4>✅ Con Harness</h4>
+        <h4>Con Harness</h4>
         <ul>
           <li>Memoria persistente con jerarquía de prioridad</li>
           <li>Progressive disclosure: la info justa a tiempo</li>

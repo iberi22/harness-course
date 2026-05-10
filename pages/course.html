@@ -9,31 +9,32 @@
 </head>
 <body>
 <button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
   <nav>
     <div class="nav-section">
       <div class="nav-section-title">Course</div>
-      <a href="/harness-course/"><span class="icon">🏠</span> Home</a>
-      <a href="/harness-course/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
-      <a href="/harness-course/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
-      <a href="/harness-course/pages/course.html" class="active"><span class="icon">🎓</span> Full Course</a>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html" class="active"><span class="nav-icon">▽</span> Full Course</a>
     </div>
     <div class="nav-section">
       <div class="nav-section-title">Resources</div>
-      <a href="/harness-course/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
-      <a href="/harness-course/pages/templates.html"><span class="icon">📋</span> Templates</a>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
     </div>
     <div class="nav-section">
       <div class="nav-section-title">Applications</div>
-      <a href="/harness-course/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
-      <a href="/harness-course/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+      <a href="/harness-course/pages/synapse-trader.html"><span class="nav-icon">⊡</span> SynapseTrader</a>
+      <a href="/harness-course/pages/xavier.html"><span class="nav-icon">⊕</span> Xavier Memory</a>
     </div>
   </nav>
 </aside>
 <main class="main">
   <div class="page-header">
-    <h1>🎓 Curso Completo: De Design Skills a Producción</h1>
+    <h1><span class="page-icon">▽</span> Curso Completo: De Design Skills a Producción</h1>
     <p>6 módulos que cubren desde los fundamentos de harness engineering hasta la aplicación práctica en bots de trading y sistemas de memoria.</p>
   </div>
   <div class="content">
@@ -200,18 +201,15 @@
 
     <h2>Referencias del Curso</h2>
     <div class="card-grid">
-      <a href="/harness-course/pages/design-patterns.html" class="card" style="text-decoration:none">
-        <div class="card-icon">🧩</div>
+      <a href="/harness-course/pages/design-patterns.html" class="card">
         <h3>Design Patterns</h3>
         <p>Los 6 patrones de diseño extraídos del harness-creator skill: Memory Persistence, Context Engineering, Tool Registry, Multi-Agent, Lifecycle, Assessment.</p>
       </a>
-      <a href="/harness-course/pages/fundamentals.html" class="card" style="text-decoration:none">
-        <div class="card-icon">📖</div>
+      <a href="/harness-course/pages/fundamentals.html" class="card">
         <h3>Fundamentals</h3>
         <p>Las 12 lecciones del curso Learn Harness Engineering con insights clave y aplicaciones prácticas.</p>
       </a>
-      <a href="/harness-course/pages/templates.html" class="card" style="text-decoration:none">
-        <div class="card-icon">📋</div>
+      <a href="/harness-course/pages/templates.html" class="card">
         <h3>Templates</h3>
         <p>Plantillas listas para copiar: AGENTS.md, feature_list.json, init.sh, progress.md, session-handoff.md.</p>
       </a>
@@ -219,7 +217,7 @@
 
   </div>
   <footer class="footer">
-    <p>Harness Engineering Course — 6 módulos basados en Learn Harness Engineering y OpenClaw design skills</p>
+    <p>Harness Engineering Course — Basado en <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> y <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
   </footer>
 </main>
 <script>
