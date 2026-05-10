@@ -1,32 +1,76 @@
-# Harness Engineering — Design Skills for Agent Systems
+# Harness Engineering — Curso + Evaluador CLI
 
-Un sitio web que integra el conocimiento de dos repositorios walkinglabs para crear un curso completo de harness engineering aplicado a sistemas reales:
+Curso de **Harness Engineering** para agentes de IA, con un **evaluador CLI** que escanea cualquier proyecto contra 48 checks en 6 subsistemas.
 
-- **[Learn Harness Engineering](https://github.com/walkinglabs/learn-harness-engineering)** — Curso basado en proyectos sobre cómo hacer que Codex, Claude Code, y otros agentes de IA sean más confiables
-- **[Awesome Harness Engineering](https://github.com/walkinglabs/awesome-harness-engineering)** — Lista curada de artículos, playbooks, benchmarks, y proyectos open-source
+🌐 **Sitio:** [iberi22.github.io/harness-course/](https://iberi22.github.io/harness-course/)
+🔧 **CLI:** `harness scan . --json` — escanea y puntúa tu proyecto
 
-## Contenido
+## 🚀 Quick Start
 
-- **Fundamentals** — 12 lecciones sobre por qué los agentes fallan y cómo solucionarlo
-- **Design Patterns** — Los 6 patrones de diseño del harness-creator skill de OpenClaw
-- **Full Course** — 6 módulos que cubren desde fundamentos hasta aplicación práctica
-- **Resources** — Recursos curados del Awesome list
-- **Templates** — Plantillas listas para copiar (AGENTS.md, feature_list.json, init.sh)
-- **SynapseTrader** — Aplicación a un bot de trading Rust de 55K LOC
-- **Xavier** — Aplicación a un sistema de memoria para agentes
+```bash
+# Evaluar cualquier proyecto
+harness scan ~/projects/mi-proyecto
 
-## Aplicaciones
+# JSON compacto (16KB) para agentes
+harness scan ~/projects/mi-proyecto --json
 
-### SynapseTrader
-Bot de trading autónomo para Binance Futures (Rust, 55K LOC, 18 estrategias, 8 agentes Hive). Evaluación de 5 subsistemas y roadmap de mejora.
+# Generar archivos faltantes automáticamente
+harness fix ~/projects/mi-proyecto
 
-### Xavier
-Sistema de memoria central para agentes SWAL (Rust + SQLite-Vec + Tokio). Arquitectura hexagonal con mejoras basadas en harness patterns.
+# CI mode (exit 1 si score < 50%)
+harness scan . --ci --threshold 50
+```
 
-## Sitio
+## 📦 Instalación
 
-Construido con HTML/CSS vanilla. Tema oscuro. Sidebar responsive. Sin dependencias ni frameworks.
+El CLI viene incluido en el repo. Solo necesitas:
 
-## Licencia
+```bash
+# 1. Clonar
+git clone https://github.com/iberi22/harness-course.git ~/projects/harness-course
 
-MIT — Basado en [Learn Harness Engineering](https://github.com/walkinglabs/learn-harness-engineering) (MIT) y [Awesome Harness Engineering](https://github.com/walkinglabs/awesome-harness-engineering) (CC0 1.0)
+# 2. Crear symlink (opcional)
+ln -sf ~/projects/harness-course/scripts/harness_evaluator.py ~/.local/bin/harness
+chmod +x ~/.local/bin/harness
+```
+
+## 📊 Proyectos Evaluados
+
+| Proyecto | Score | Estado |
+|---|---|---|
+| **agents-flows-recipes** | 64.6% 🟡 | Post-fix |
+| **swal-skills** | 58.3% 🟡 | Post-fix |
+| **synapse-trading** | ~50% 🟡 | Post-fix |
+| **harness-course** | 44.9% 🟡 | En mejora |
+
+## 🏗️ Arquitectura
+
+- **Sitio:** HTML/CSS/JS vanilla, diseño Linear Dark, GitHub Pages
+- **Evaluador:** Python 3 puro (stdlib), 0 dependencias externas
+- **Templates fix:** 6 templates POML para auto-generación de harness
+- **Skills index:** Catálogo unificado de 44 skills locales + 8 starred repos
+
+## 📚 Contenido
+
+- **Fundamentals** — 12 lecciones sobre por qué los agentes fallan
+- **Design Patterns** — 6 patrones de harness engineering
+- **Full Course** — 6 módulos: Instructions, State, Verification, Scope, Lifecycle, Skills
+- **Resources** — Recursos curados
+- **Templates** — Plantillas AGENTS.md, init.sh, etc.
+
+## 🛠️ Harness Evaluator
+
+48 checks en 6 subsistemas:
+
+| Subsistema | Checks | Propósito |
+|---|---|---|
+| 📋 Instructions | 8 | Briefings, reglas, roadmap |
+| 💾 State | 7 | Task tracking, memoria, persistencia |
+| ✅ Verification | 6 | Tests, CI/CD, linters |
+| 🎯 Scope | 7 | DoD, milestones, CONTRIBUTING |
+| 🔄 Lifecycle | 8 | Init, Docker, dependencias |
+| 🧠 Skills & POML | 12 | Skills, recetas POML, registry |
+
+## 📋 Licencia
+
+MIT — © 2026 Brahyan Belalcazar (ElBeRi)

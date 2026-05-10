@@ -1,0 +1,25 @@
+<poml>
+  <let name="template_id">task-md</let>
+  <let name="output">TASK.md</let>
+  <let name="description">Backlog de tareas con progreso y milestones</let>
+  <let name="triggers">["missing TASK.md", "no task tracking", "no backlog"]</let>
+  <let name="check_ids">["2.1", "4.2"]</let>
+  <let name="weight_recovery">3.0</let>
+
+  <output>
+# 📋 Task Tracking
+
+> Backlog del proyecto. Una cosa a la vez.
+
+## 🎯 Milestone Actual: ...
+
+### En Progreso
+- [ ] ...
+
+### Pendiente
+- [ ] ...
+
+### Completado
+- [x] ...
+  </output>
+</poml>

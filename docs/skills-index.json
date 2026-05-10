@@ -1,0 +1,539 @@
+{
+  "generated": "2026-05-10",
+  "total_skills": 44,
+  "projects": {
+    "swal-skills": {
+      "path": "/home/belal/projects/swal-skills/skills",
+      "count": 24,
+      "skills": [
+        {
+          "name": "astro",
+          "title": "astro",
+          "description": "# Astro Static Site Generator",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/astro/SKILL.md",
+          "size": 6877
+        },
+        {
+          "name": "codex",
+          "title": "codex",
+          "description": "# Codex CLI - SWAL Configuration",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/codex/SKILL.md",
+          "size": 660
+        },
+        {
+          "name": "coding-agent",
+          "title": "coding-agent",
+          "description": "# Coding Agent (bash-first)",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/coding-agent/SKILL.md",
+          "size": 14865
+        },
+        {
+          "name": "deploy-anywhere",
+          "title": "deploy-anywhere",
+          "description": "# Deploy Anywhere",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/deploy-anywhere/SKILL.md",
+          "size": 3362
+        },
+        {
+          "name": "frontend-agent",
+          "title": "frontend-agent",
+          "description": "# 🎨 前端开发专家 (Frontend Developer Agent)",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/frontend-agent/SKILL.md",
+          "size": 3410
+        },
+        {
+          "name": "frontend-doctor",
+          "title": "Frontend Doctor",
+          "description": "# Frontend Doctor",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/frontend-doctor/SKILL.md",
+          "size": 8676
+        },
+        {
+          "name": "gemini",
+          "title": "gemini",
+          "description": "# Gemini CLI",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/gemini/SKILL.md",
+          "size": 932
+        },
+        {
+          "name": "github",
+          "title": "github",
+          "description": "# GitHub Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/github/SKILL.md",
+          "size": 4105
+        },
+        {
+          "name": "jules",
+          "title": "jules",
+          "description": "# Jules Skill — Autonomous Coding Agent",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/jules/SKILL.md",
+          "size": 8575
+        },
+        {
+          "name": "minimax-tools",
+          "title": "minimax-tools",
+          "description": "# MiniMax Tools — MCP + Audio Transcription",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/minimax-tools/SKILL.md",
+          "size": 6302
+        },
+        {
+          "name": "nextjs",
+          "title": "NextJS",
+          "description": "## Setup",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/nextjs/SKILL.md",
+          "size": 3789
+        },
+        {
+          "name": "python",
+          "title": "python",
+          "description": "# Python Coding Guidelines",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/python/SKILL.md",
+          "size": 3885
+        },
+        {
+          "name": "qwen",
+          "title": "qwen",
+          "description": "# Qwen Coder CLI - SWAL Configuration",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/qwen/SKILL.md",
+          "size": 528
+        },
+        {
+          "name": "rust",
+          "title": "Rust",
+          "description": "## Quick Reference",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/rust/SKILL.md",
+          "size": 3692
+        },
+        {
+          "name": "skill-launcher",
+          "title": "skill-launcher",
+          "description": "# Skill Launcher",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/skill-launcher/SKILL.md",
+          "size": 4358
+        },
+        {
+          "name": "skill-provider",
+          "title": "skill-provider",
+          "description": "# SWAL Skill Provider",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/skill-provider/SKILL.md",
+          "size": 6055
+        },
+        {
+          "name": "tailwindcss",
+          "title": "Tailwind CSS",
+          "description": "## Content Configuration",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/tailwindcss/SKILL.md",
+          "size": 3690
+        },
+        {
+          "name": "vite",
+          "title": "Vite",
+          "description": "# Vite Patterns",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/vite/SKILL.md",
+          "size": 4473
+        },
+        {
+          "name": "web-design-guidelines",
+          "title": "web-design-guidelines",
+          "description": "# Web Design Guidelines",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/web-design-guidelines/SKILL.md",
+          "size": 4552
+        },
+        {
+          "name": "web-research",
+          "title": "web-research",
+          "description": "# Web Research Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/web-research/SKILL.md",
+          "size": 3080
+        },
+        {
+          "name": "worldexams-curator",
+          "title": "worldexams-curator",
+          "description": "# WorldExams Curator Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/worldexams-curator/SKILL.md",
+          "size": 1228
+        },
+        {
+          "name": "worldexams-generator",
+          "title": "worldexams-generator",
+          "description": "# WorldExams Generator Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/worldexams-generator/SKILL.md",
+          "size": 1875
+        },
+        {
+          "name": "worldexams-validator",
+          "title": "worldexams-validator",
+          "description": "# WorldExams Validator Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/worldexams-validator/SKILL.md",
+          "size": 1519
+        },
+        {
+          "name": "xavier2-context",
+          "title": "xavier2-context",
+          "description": "# Xavier2 - SWAL Context Engine 🧠",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/swal-skills/skills/xavier2-context/SKILL.md",
+          "size": 4281
+        }
+      ]
+    },
+    "agents-flows-recipes": {
+      "path": "/home/belal/projects/agents-flows-recipes/skills",
+      "count": 20,
+      "skills": [
+        {
+          "name": "astro",
+          "title": "astro",
+          "description": "# Astro Static Site Generator",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/astro/SKILL.md",
+          "size": 6820
+        },
+        {
+          "name": "codex",
+          "title": "codex",
+          "description": "# Codex CLI Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/codex/SKILL.md",
+          "size": 3121
+        },
+        {
+          "name": "frontend-agent",
+          "title": "frontend-agent",
+          "description": "# 🎨 前端开发专家 (Frontend Developer Agent)",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/frontend-agent/SKILL.md",
+          "size": 3353
+        },
+        {
+          "name": "frontend-doctor",
+          "title": "Frontend Doctor",
+          "description": "# Frontend Doctor",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/frontend-doctor/SKILL.md",
+          "size": 8629
+        },
+        {
+          "name": "gemini",
+          "title": "gemini",
+          "description": "# Gemini CLI Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/gemini/SKILL.md",
+          "size": 2445
+        },
+        {
+          "name": "github",
+          "title": "github",
+          "description": "# GitHub CLI Skill — SWAL",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/github/SKILL.md",
+          "size": 2992
+        },
+        {
+          "name": "nextjs",
+          "title": "NextJS",
+          "description": "## Setup",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/nextjs/SKILL.md",
+          "size": 3732
+        },
+        {
+          "name": "python",
+          "title": "python",
+          "description": "# Python Coding Guidelines",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/python/SKILL.md",
+          "size": 3828
+        },
+        {
+          "name": "qwen",
+          "title": "qwen",
+          "description": "# Qwen CLI Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/qwen/SKILL.md",
+          "size": 1784
+        },
+        {
+          "name": "rust",
+          "title": "Rust",
+          "description": "## Quick Reference",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/rust/SKILL.md",
+          "size": 3635
+        },
+        {
+          "name": "sales-pro",
+          "title": "sales-pro",
+          "description": "# Sales Pro - SWAL Sales Assistant",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/sales-pro/SKILL.md",
+          "size": 2435
+        },
+        {
+          "name": "skill-launcher",
+          "title": "skill-launcher",
+          "description": "# Skill Launcher",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/skill-launcher/SKILL.md",
+          "size": 4311
+        },
+        {
+          "name": "skill-provider",
+          "title": "skill-provider",
+          "description": "# SWAL Skill Provider",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/skill-provider/SKILL.md",
+          "size": 6008
+        },
+        {
+          "name": "sqlite-pro",
+          "title": "sqlite-pro",
+          "description": "# SQLite PRO",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/sqlite-pro/SKILL.md",
+          "size": 9263
+        },
+        {
+          "name": "src-generator",
+          "title": "src-generator",
+          "description": "# SKILL.md - SRC Generator",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/src-generator/SKILL.md",
+          "size": 2137
+        },
+        {
+          "name": "swal-finetune",
+          "title": "swal-finetune",
+          "description": "# SWAL Fine-Tune Skill - CEO Assistant Model",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/swal-finetune/SKILL.md",
+          "size": 6473
+        },
+        {
+          "name": "synapse",
+          "title": "synapse",
+          "description": "# SWAL Synapse Agent - Local LLM Plugin for OpenClaw",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/synapse/SKILL.md",
+          "size": 6917
+        },
+        {
+          "name": "tailwindcss",
+          "title": "Tailwind CSS",
+          "description": "## Content Configuration",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/tailwindcss/SKILL.md",
+          "size": 3614
+        },
+        {
+          "name": "vite",
+          "title": "Vite",
+          "description": "# Vite Patterns",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/vite/SKILL.md",
+          "size": 4397
+        },
+        {
+          "name": "web-research",
+          "title": "web-research",
+          "description": "# Web Research Skill",
+          "author": "",
+          "triggers": "",
+          "file": "/home/belal/projects/agents-flows-recipes/skills/web-research/SKILL.md",
+          "size": 3033
+        }
+      ]
+    }
+  },
+  "starred_repos": {
+    "mattpocock/skills": {
+      "stars": 68933,
+      "description": "Skills for Real Engineers. Straight from the .claude directory. Skill files for Claude Code / AI coding agents.",
+      "url": "https://github.com/mattpocock/skills",
+      "relevance": "Colección de skills para Claude Code. Shell scripts + markdown."
+    },
+    "forrestchang/andrej-karpathy-skills": {
+      "stars": 123458,
+      "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Karpathy's observations on LLM coding pitfalls.",
+      "url": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "relevance": "CLAUDE.md basado en Karpathy — mejora comportamiento de Claude Code. Útil como referencia."
+    },
+    "midudev/autoskills": {
+      "stars": 5343,
+      "description": "One command. Install your entire AI skill stack.",
+      "url": "https://github.com/midudev/autoskills",
+      "relevance": "Instalador automático de skills — similar al skill-provider de SWAL."
+    },
+    "Orchestra-Research/AI-Research-SKILLs": {
+      "stars": 8161,
+      "description": "Comprehensive open-source library of AI research and engineering skills. Package skills for Claude Code/Codex/Gemini.",
+      "url": "https://github.com/Orchestra-Research/AI-Research-SKILLs",
+      "relevance": "Skills de AI research — ideal para agentes de investigación."
+    },
+    "Jane-xiaoer/claude-design-principles": {
+      "stars": 40,
+      "description": "Distilled design judgment from Claude Design system prompt, packaged as a Claude Code skill.",
+      "url": "https://github.com/Jane-xiaoer/claude-design-principles",
+      "relevance": "Design principles skill — diseño de UI desde Claude."
+    },
+    "Fission-AI/OpenSpec": {
+      "stars": 46691,
+      "description": "Spec-driven development (SDD) for AI coding assistants.",
+      "url": "https://github.com/Fission-AI/OpenSpec",
+      "relevance": "DESIGN.md / spec-driven. Complementa el ecosistema de skills."
+    },
+    "thedotmack/claude-mem": {
+      "stars": 74435,
+      "description": "Persistent Context Across Sessions for Every Agent. Captures, compresses, and injects context.",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "relevance": "Memoria persistente para Claude. Concepto similar a MEMORY.md + Cortex."
+    },
+    "mksglu/context-mode": {
+      "stars": 14247,
+      "description": "Context window optimization for AI coding agents. 98% reduction in context usage.",
+      "url": "https://github.com/mksglu/context-mode",
+      "relevance": "Optimización de contexto — reduce tokens hasta 98%. El santo grial del token-saving."
+    }
+  },
+  "cross_cutting": {
+    "frameworks": {
+      "astro": {
+        "projects": [
+          "swal-skills",
+          "agents-flows-recipes"
+        ],
+        "type": "frontend"
+      },
+      "nextjs": {
+        "projects": [
+          "swal-skills",
+          "agents-flows-recipes"
+        ],
+        "type": "frontend"
+      },
+      "tailwindcss": {
+        "projects": [
+          "swal-skills",
+          "agents-flows-recipes"
+        ],
+        "type": "frontend"
+      },
+      "vite": {
+        "projects": [
+          "swal-skills",
+          "agents-flows-recipes"
+        ],
+        "type": "build"
+      },
+      "rust": {
+        "projects": [
+          "swal-skills",
+          "agents-flows-recipes"
+        ],
+        "type": "lang"
+      },
+      "python": {
+        "projects": [
+          "swal-skills",
+          "agents-flows-recipes"
+        ],
+        "type": "lang"
+      }
+    },
+    "unique_to_swal": [
+      "coding-agent",
+      "deploy-anywhere",
+      "frontend-agent",
+      "frontend-doctor",
+      "jules",
+      "minimax-tools",
+      "web-design-guidelines",
+      "worldexams-curator",
+      "worldexams-generator",
+      "worldexams-validator",
+      "xavier2-context"
+    ],
+    "unique_to_agents_flows": [
+      "sales-pro",
+      "sqlite-pro",
+      "src-generator",
+      "swal-finetune",
+      "synapse"
+    ]
+  },
+  "recommendations": [
+    "Importar skills de mattpocock/skills (68K★) — skills reales de ingeniería",
+    "Adoptar context-mode (14K★) — 98% reducción de tokens en llamadas a agente",
+    "Incorporar claude-design-principles — skills de diseño UI para agentes",
+    "Revisar AI-Research-SKILLs de Orchestra Research — skills de AI research completos",
+    "Unificar skills compartidas (astro, nextjs, tailwindcss, etc.) en un solo registry",
+    "Implementar autoskills (midudev) como CLI para instalar skills con un comando",
+    "Crear skill de context-mode adaptado para Hermes Agent / OpenClaw"
+  ]
+}

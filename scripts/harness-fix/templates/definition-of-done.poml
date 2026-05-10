@@ -1,0 +1,22 @@
+<poml>
+  <let name="template_id">definition-of-done</let>
+  <let name="output">AGENTS.md</let>
+  <let name="description">Definition of Done para incluir en AGENTS.md o CLAUDE.md</let>
+  <let name="triggers">["missing DoD", "no definition of done", "no completion criteria"]</let>
+  <let name="check_ids">["4.1"]</let>
+  <let name="weight_recovery">2.0</let>
+  <let name="append">true</let>
+
+  <output>
+## ✅ Definition of Done
+
+Una tarea se considera COMPLETADA cuando:
+
+1. **Código escrito** — implementación completa según spec
+2. **Tests pasan** — `pytest` / `cargo test` / `npm test` sin errores
+3. **Sin regresiones** — las pruebas existentes siguen pasando
+4. **Documentado** — cambios reflejados en README o docs/ si aplica
+5. **Comiteado** — `git commit` con mensaje descriptivo
+6. **Sin secrets** — ningún API key/token hardcodeado
+  </output>
+</poml>

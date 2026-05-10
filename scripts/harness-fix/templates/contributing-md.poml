@@ -1,0 +1,28 @@
+<poml>
+  <let name="template_id">contributing-md</let>
+  <let name="output">CONTRIBUTING.md</let>
+  <let name="description">Guía de contribución con alcance y normas</let>
+  <let name="triggers">["missing CONTRIBUTING.md", "no contributing guide"]</let>
+  <let name="check_ids">["4.5"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output># Contributing
+
+## Alcance
+Este proyecto acepta contribuciones que:
+- Sigan la arquitectura definida en AGENTS.md
+- Incluyan tests
+- Mantengan compatibilidad hacia atrás
+
+## Proceso
+1. Crea un issue describiendo el cambio
+2. Fork y branch: `fix/descripcion` o `feat/descripcion`
+3. Implementa con tests
+4. PR contra `main` con descripción clara
+
+## Estándares
+- Código limpio y comentado
+- Sin secrets hardcodeados
+- Una feature por PR
+  </output>
+</poml>

@@ -1,0 +1,85 @@
+name: Harness CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  harness-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Harness Evaluation
+        id: scan
+        run: |
+          python3 scripts/harness_evaluator.py scan . --ci --threshold 50 2>&1 | tee harness-output.txt
+        continue-on-error: true
+
+      - name: PR Comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const output = fs.readFileSync('harness-output.txt', 'utf8');
+            
+            // Extract score
+            const scoreMatch = output.match(/PUNTUACIÓN GLOBAL:\s*([\d.]+)%/);
+            const gradeMatch = output.match(/PUNTUACIÓN GLOBAL:.*?([🟢🟡🔠🔴]+)/);
+            const score = scoreMatch ? scoreMatch[1] : 'N/A';
+            const grade = gradeMatch ? gradeMatch[1] : '';
+            
+            // Extract subsystem scores
+            const subsections = [];
+            const sectionRegex = /([✅❌✗])\s+(\d+\.\d+)\s+([^\n]+)/g;
+            let m;
+            while ((m = sectionRegex.exec(output)) !== null) {
+              subsections.push(`${m[1]} ${m[3]}`);
+            }
+            
+            let body = `## 📊 Harness Scan Result\n\n**Score: ${score}% ${grade}**\n\n`;
+            const pass = parseFloat(score) >= 50;
+            body += pass ? '✅ **Threshold PASSED** (≥50%)' : '❌ **Threshold FAILED** (<50%)';
+            body += '\n\n### Checks\n';
+            body += '```\n' + output.slice(0, 2000) + '\n```';
+            
+            // Find or create comment
+            const {data: comments} = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(c => c.body.includes('Harness Scan Result'));
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body
+              });
+            }
+
+      - name: Check threshold
+        run: |
+          SCORE=$(grep -oP 'PUNTUACIÓN GLOBAL:\s*\K[\d.]+' harness-output.txt || echo "0")
+          if (( $(echo "$SCORE < 50" | bc -l) )); then
+            echo "❌ Harness score $SCORE% is below threshold 50%"
+            exit 1
+          fi
+          echo "✅ Harness score $SCORE% passes threshold"
