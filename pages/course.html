@@ -26,9 +26,8 @@
       <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Applications</div>
-      <a href="/harness-course/pages/synapse-trader.html"><span class="nav-icon">⊡</span> SynapseTrader</a>
-      <a href="/harness-course/pages/xavier.html"><span class="nav-icon">⊕</span> Xavier Memory</a>
+      <div class="nav-section-title">Case Study</div>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
     </div>
   </nav>
 </aside>
@@ -165,36 +164,48 @@
       <div class="module-header">
         <div class="module-num">6</div>
         <div>
-          <h3>Case Studies: Aplicación a Proyectos Reales</h3>
+          <h3>Case Study: Agent Recipes Repo</h3>
           <div class="module-topics">
-            <span class="tag">SynapseTrader</span>
-            <span class="tag">Xavier</span>
+            <span class="tag">MCP Server</span>
+            <span class="tag">LangGraph</span>
+            <span class="tag">Neo4j + ChromaDB</span>
             <span class="tag">assessment práctico</span>
           </div>
         </div>
       </div>
-      <p><strong>Objetivo:</strong> Aplicar todo lo aprendido a dos proyectos reales: un bot de trading y un sistema de memoria.</p>
-      <p><strong>Contenido:</strong></p>
+      <p><strong>Objetivo:</strong> Analizar un sistema real de mantenimiento automatizado de software como caso de estudio integral de harness engineering.</p>
+      <p><strong>Proyecto:</strong> <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener">Agent Recipes Repo</a> — Sistema open-source de mantenimiento automatizado con MCP Server, agente LangGraph, base de conocimiento híbrida (Neo4j + ChromaDB) y dashboard Streamlit. Orquestado con Docker Compose.</p>
+      <p><strong>Assessment de 5 subsistemas:</strong></p>
       <ul>
-        <li><strong>SynapseTrader:</strong> Bot de trading Rust (55K LOC, 18 estrategias, 8 agentes Hive)</li>
+        <li><strong>Instructions:</strong> AGENTS.md, CLAUDE.md, RULES.md — jerarquía de briefing para el agente de IA</li>
         <ul>
-          <li>Assessment completo de 5 subsistemas</li>
-          <li>Aplicación de Memory Persistence para lecciones de trading</li>
-          <li>Context Engineering para análisis de mercado</li>
-          <li>Tool Registry para seguridad de estrategias</li>
-          <li>Lifecycle para el daemon de trading</li>
+          <li>Progressive disclosure: PLANNING.md (visión) → TASK.md (tareas activas) → RULES.md (reglas)</li>
+          <li>Paths exactos, comandos de build/test, estructura del proyecto</li>
         </ul>
-        <li><strong>Xavier:</strong> Sistema de memoria central (Rust + SQLite-Vec)</li>
+        <li><strong>State:</strong> TASK.md como tablero vivo, PROJECT_STATUS.md para estado funcional</li>
         <ul>
-          <li>Assessment de 5 subsistemas</li>
-          <li>Namespace isolation y fail-closed</li>
-          <li>Context Engineering en retrieval</li>
-          <li>Arquitectura hexagonal completa</li>
-          <li>Multi-agent coordination</li>
+          <li>Hitos con progreso porcentual, sección "Discovered During Work"</li>
+          <li>Integración con bases de datos (Neo4j + ChromaDB) para estado persistente</li>
+        </ul>
+        <li><strong>Verification:</strong> Tests unitarios, de integración y E2E con pytest</li>
+        <ul>
+          <li>Pipeline: clonar repo → detectar dependencias → escanear vulnerabilidades → persistir</li>
+          <li>Test de conectividad a Neo4j y ChromaDB</li>
+          <li>E2E con Docker Compose real</li>
+        </ul>
+        <li><strong>Scope:</strong> Una tarea a la vez vía TASK.md con hitos claros</li>
+        <ul>
+          <li>RLHF-style: cada tarea documentada antes de implementar</li>
+          <li>Definition of done explícito en cada módulo</li>
+        </ul>
+        <li><strong>Lifecycle:</strong> Docker Compose para ciclo de vida completo</li>
+        <ul>
+          <li>4 servicios: MCP Server, Agente, Dashboard, Bases de datos</li>
+          <li>init con docker-compose up --build, cleanup con docker-compose down</li>
         </ul>
         <li>Roadmap de implementación priorizado</li>
       </ul>
-      <p><strong>Ejercicio:</strong> Aplicar el assessment a TU proyecto. Crear un roadmap de 5 fases para mejorar el harness.</p>
+      <p><strong>Ejercicio:</strong> Hacer fork del <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener">Agent Recipes Repo</a>, ejecutar el assessment de 5 subsistemas en tu propio proyecto, y crear un roadmap de mejora.</p>
     </div>
 
     <div class="section-divider"></div>
