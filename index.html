@@ -1,181 +1,181 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<base href="/harness-course/">
-<base href="/harness-course/">
-<title>Harness Engineering — Design Skills for Agent Systems</title>
-<meta name="description" content="Curso de Harness Engineering: patrones de diseño extraídos de OpenClaw, aplicados a bots de trading y sistemas de memoria.">
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-
-<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
-<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-brand">
-    <a href="/"><h2>Harness Eng.</h2>
-    <div class="brand-sub">Design skills for agents</div></a>
-  </div>
-  <nav>
-    <div class="nav-section">
-      <div class="nav-section-title">Course</div>
-      <a href="/" class="active"><span class="icon">🏠</span> Home</a>
-      <a href="/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
-      <a href="/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
-      <a href="/pages/course.html"><span class="icon">🎓</span> Full Course</a>
-    </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Resources</div>
-      <a href="/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
-      <a href="/pages/templates.html"><span class="icon">📋</span> Templates</a>
-    </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Applications</div>
-      <a href="/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
-      <a href="/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
-    </div>
-  </nav>
-</aside>
-
-<main class="main">
-  <section class="hero">
-    <h1>Harness <span>Engineering</span></h1>
-    <p>Un enfoque sistemático para diseñar el entorno alrededor de agentes de IA, extrayendo patrones de diseño de OpenClaw y aplicándolos a sistemas de trading autónomos y memoria de agentes.</p>
-    <div class="hero-actions">
-      <a href="/pages/fundamentals.html" class="btn btn-primary">📖 Empezar Curso</a>
-      <a href="/pages/design-patterns.html" class="btn btn-secondary">🧩 Ver Patrones</a>
-      <a href="/pages/course.html" class="btn btn-secondary">🎓 Curso Completo</a>
-    </div>
-  </section>
-
-  <section class="stats-row">
-    <div class="stat"><div class="stat-value">12</div><div class="stat-label">Lectures</div></div>
-    <div class="stat"><div class="stat-value">5</div><div class="stat-label">Subsystems</div></div>
-    <div class="stat"><div class="stat-value">6</div><div class="stat-label">Design Patterns</div></div>
-    <div class="stat"><div class="stat-value">12</div><div class="stat-label">Gotchas</div></div>
-    <div class="stat"><div class="stat-value">2</div><div class="stat-label">Case Studies</div></div>
-  </section>
-
-  <div class="content">
-    <h2>¿Qué es Harness Engineering?</h2>
-    <p>Harness Engineering es la disciplina de diseñar el <strong>entorno</strong> alrededor de un agente de IA para que pueda trabajar de manera confiable. No se trata de hacer el modelo más inteligente — se trata de crear un <strong>sistema cerrado de trabajo</strong> donde el agente tenga instrucciones claras, estado persistente, verificación automática, límites de alcance, y un ciclo de vida definido.</p>
-
-    <blockquote>
-      <p>"Un harness no hace al modelo más inteligente; establece un sistema de trabajo de bucle cerrado para el modelo." — Learn Harness Engineering</p>
-    </blockquote>
-
-    <h2>Los 5 Subsistemas del Harness</h2>
-    <p>Todo harness se compone de cinco subsistemas fundamentales:</p>
-
-    <div class="subsystem-grid">
-      <div class="subsystem-card">
-        <div class="subsys-header">
-          <div class="num">1</div>
-          <strong>Instructions</strong>
-        </div>
-        <div class="subsys-body">
-          <p>AGENTS.md, CLAUDE.md, jerarquía de docs/ — el "recetario" que le dice al agente cómo trabajar.</p>
-          <div class="subsys-tags"><span class="tag">progressive disclosure</span><span class="tag">AGENTS.md</span></div>
-        </div>
-      </div>
-      <div class="subsystem-card">
-        <div class="subsys-header">
-          <div class="num">2</div>
-          <strong>State</strong>
-        </div>
-        <div class="subsys-body">
-          <p>feature_list.json, progress.md, session-handoff — la "estación de preparación" que mantiene el estado.</p>
-          <div class="subsys-tags"><span class="tag">persistence</span><span class="tag">tracking</span></div>
-        </div>
-      </div>
-      <div class="subsystem-card">
-        <div class="subsys-header">
-          <div class="num">3</div>
-          <strong>Verification</strong>
-        </div>
-        <div class="subsys-body">
-          <p>Tests, type checks, comandos de verificación — la "ventana de control de calidad" que valida el trabajo.</p>
-          <div class="subsys-tags"><span class="tag">testing</span><span class="tag">gates</span></div>
-        </div>
-      </div>
-      <div class="subsystem-card">
-        <div class="subsys-header">
-          <div class="num">4</div>
-          <strong>Scope</strong>
-        </div>
-        <div class="subsys-body">
-          <p>One-feature-at-a-time, definition of done — los "límites de la tarea" que evitan el overreach.</p>
-          <div class="subsys-tags"><span class="tag">boundaries</span><span class="tag">focus</span></div>
-        </div>
-      </div>
-      <div class="subsystem-card">
-        <div class="subsys-header">
-          <div class="num">5</div>
-          <strong>Lifecycle</strong>
-        </div>
-        <div class="subsys-body">
-          <p>init.sh, clean-state checklists, handoff procedures — la "gestión de sesión" para continuidad.</p>
-          <div class="subsys-tags"><span class="tag">bootstrap</span><span class="tag">handoff</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2>Aplicaciones Reales</h2>
-    <div class="card-grid">
-      <a href="/pages/synapse-trader.html" class="card" style="text-decoration:none">
-        <div class="card-icon">🤖</div>
-        <h3>SynapseTrader — Bot de Trading</h3>
-        <p>55K LOC, 177 archivos Rust, 18 estrategias, 8 agentes Hive. Cómo aplicar los 5 subsistemas a un bot de Binance Futures.</p>
-      </a>
-      <a href="/pages/xavier.html" class="card" style="text-decoration:none">
-        <div class="card-icon">🧠</div>
-        <h3>Xavier — Sistema de Memoria</h3>
-        <p>Sistema de memoria central para agentes SWAL. Cómo los patrones de harness mejoran la persistencia, contexto y ciclo de vida.</p>
-      </a>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2>¿Por qué importa?</h2>
-    <div class="compare-grid">
-      <div class="compare-col without">
-        <h4>❌ Sin Harness</h4>
-        <ul>
-          <li>Agente olvida preferencias entre sesiones</li>
-          <li>Instrucciones gigantes que el agente ignora</li>
-          <li>Sin verificación — bugs pasan desapercibidos</li>
-          <li>Overreach: el agente cambia lo que no debe</li>
-          <li>Sesiones rotas sin continuidad</li>
-        </ul>
-      </div>
-      <div class="compare-col with">
-        <h4>✅ Con Harness</h4>
-        <ul>
-          <li>Memoria persistente con jerarquía de prioridad</li>
-          <li>Progressive disclosure: la info justa a tiempo</li>
-          <li>Verificación automática antes de "done"</li>
-          <li>Scope definido: una feature a la vez</li>
-          <li>Handoff limpio entre sesiones</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <p>Harness Engineering Course — Basado en <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> y <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
-  </footer>
-</main>
-
-<script>
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('show');
-}
-</script>
-</body>
-</html>
+     1|<!DOCTYPE html>
+     2|<html lang="es">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|     7|     8|<title>Harness Engineering — Design Skills for Agent Systems</title>
+     9|<meta name="description" content="Curso de Harness Engineering: patrones de diseño extraídos de OpenClaw, aplicados a bots de trading y sistemas de memoria.">
+    10|<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+    11|</head>
+    12|<body>
+    13|
+    14|<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+    15|<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    16|
+    17|<aside class="sidebar" id="sidebar">
+    18|  <div class="sidebar-brand">
+    19|    <a href="/harness-course/"><h2>Harness Eng.</h2>
+    20|    <div class="brand-sub">Design skills for agents</div></a>
+    21|  </div>
+    22|  <nav>
+    23|    <div class="nav-section">
+    24|      <div class="nav-section-title">Course</div>
+    25|      <a href="/harness-course/" class="active"><span class="icon">🏠</span> Home</a>
+    26|      <a href="/harness-course/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
+    27|      <a href="/harness-course/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
+    28|      <a href="/harness-course/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+    29|    </div>
+    30|    <div class="nav-section">
+    31|      <div class="nav-section-title">Resources</div>
+    32|      <a href="/harness-course/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
+    33|      <a href="/harness-course/pages/templates.html"><span class="icon">📋</span> Templates</a>
+    34|    </div>
+    35|    <div class="nav-section">
+    36|      <div class="nav-section-title">Applications</div>
+    37|      <a href="/harness-course/pages/synapse-trader.html"><span class="icon">🤖</span> SynapseTrader</a>
+    38|      <a href="/harness-course/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+    39|    </div>
+    40|  </nav>
+    41|</aside>
+    42|
+    43|<main class="main">
+    44|  <section class="hero">
+    45|    <h1>Harness <span>Engineering</span></h1>
+    46|    <p>Un enfoque sistemático para diseñar el entorno alrededor de agentes de IA, extrayendo patrones de diseño de OpenClaw y aplicándolos a sistemas de trading autónomos y memoria de agentes.</p>
+    47|    <div class="hero-actions">
+    48|      <a href="/harness-course/pages/fundamentals.html" class="btn btn-primary">📖 Empezar Curso</a>
+    49|      <a href="/harness-course/pages/design-patterns.html" class="btn btn-secondary">🧩 Ver Patrones</a>
+    50|      <a href="/harness-course/pages/course.html" class="btn btn-secondary">🎓 Curso Completo</a>
+    51|    </div>
+    52|  </section>
+    53|
+    54|  <section class="stats-row">
+    55|    <div class="stat"><div class="stat-value">12</div><div class="stat-label">Lectures</div></div>
+    56|    <div class="stat"><div class="stat-value">5</div><div class="stat-label">Subsystems</div></div>
+    57|    <div class="stat"><div class="stat-value">6</div><div class="stat-label">Design Patterns</div></div>
+    58|    <div class="stat"><div class="stat-value">12</div><div class="stat-label">Gotchas</div></div>
+    59|    <div class="stat"><div class="stat-value">2</div><div class="stat-label">Case Studies</div></div>
+    60|  </section>
+    61|
+    62|  <div class="content">
+    63|    <h2>¿Qué es Harness Engineering?</h2>
+    64|    <p>Harness Engineering es la disciplina de diseñar el <strong>entorno</strong> alrededor de un agente de IA para que pueda trabajar de manera confiable. No se trata de hacer el modelo más inteligente — se trata de crear un <strong>sistema cerrado de trabajo</strong> donde el agente tenga instrucciones claras, estado persistente, verificación automática, límites de alcance, y un ciclo de vida definido.</p>
+    65|
+    66|    <blockquote>
+    67|      <p>"Un harness no hace al modelo más inteligente; establece un sistema de trabajo de bucle cerrado para el modelo." — Learn Harness Engineering</p>
+    68|    </blockquote>
+    69|
+    70|    <h2>Los 5 Subsistemas del Harness</h2>
+    71|    <p>Todo harness se compone de cinco subsistemas fundamentales:</p>
+    72|
+    73|    <div class="subsystem-grid">
+    74|      <div class="subsystem-card">
+    75|        <div class="subsys-header">
+    76|          <div class="num">1</div>
+    77|          <strong>Instructions</strong>
+    78|        </div>
+    79|        <div class="subsys-body">
+    80|          <p>AGENTS.md, CLAUDE.md, jerarquía de docs/ — el "recetario" que le dice al agente cómo trabajar.</p>
+    81|          <div class="subsys-tags"><span class="tag">progressive disclosure</span><span class="tag">AGENTS.md</span></div>
+    82|        </div>
+    83|      </div>
+    84|      <div class="subsystem-card">
+    85|        <div class="subsys-header">
+    86|          <div class="num">2</div>
+    87|          <strong>State</strong>
+    88|        </div>
+    89|        <div class="subsys-body">
+    90|          <p>feature_list.json, progress.md, session-handoff — la "estación de preparación" que mantiene el estado.</p>
+    91|          <div class="subsys-tags"><span class="tag">persistence</span><span class="tag">tracking</span></div>
+    92|        </div>
+    93|      </div>
+    94|      <div class="subsystem-card">
+    95|        <div class="subsys-header">
+    96|          <div class="num">3</div>
+    97|          <strong>Verification</strong>
+    98|        </div>
+    99|        <div class="subsys-body">
+   100|          <p>Tests, type checks, comandos de verificación — la "ventana de control de calidad" que valida el trabajo.</p>
+   101|          <div class="subsys-tags"><span class="tag">testing</span><span class="tag">gates</span></div>
+   102|        </div>
+   103|      </div>
+   104|      <div class="subsystem-card">
+   105|        <div class="subsys-header">
+   106|          <div class="num">4</div>
+   107|          <strong>Scope</strong>
+   108|        </div>
+   109|        <div class="subsys-body">
+   110|          <p>One-feature-at-a-time, definition of done — los "límites de la tarea" que evitan el overreach.</p>
+   111|          <div class="subsys-tags"><span class="tag">boundaries</span><span class="tag">focus</span></div>
+   112|        </div>
+   113|      </div>
+   114|      <div class="subsystem-card">
+   115|        <div class="subsys-header">
+   116|          <div class="num">5</div>
+   117|          <strong>Lifecycle</strong>
+   118|        </div>
+   119|        <div class="subsys-body">
+   120|          <p>init.sh, clean-state checklists, handoff procedures — la "gestión de sesión" para continuidad.</p>
+   121|          <div class="subsys-tags"><span class="tag">bootstrap</span><span class="tag">handoff</span></div>
+   122|        </div>
+   123|      </div>
+   124|    </div>
+   125|
+   126|    <div class="section-divider"></div>
+   127|
+   128|    <h2>Aplicaciones Reales</h2>
+   129|    <div class="card-grid">
+   130|      <a href="/harness-course/pages/synapse-trader.html" class="card" style="text-decoration:none">
+   131|        <div class="card-icon">🤖</div>
+   132|        <h3>SynapseTrader — Bot de Trading</h3>
+   133|        <p>55K LOC, 177 archivos Rust, 18 estrategias, 8 agentes Hive. Cómo aplicar los 5 subsistemas a un bot de Binance Futures.</p>
+   134|      </a>
+   135|      <a href="/harness-course/pages/xavier.html" class="card" style="text-decoration:none">
+   136|        <div class="card-icon">🧠</div>
+   137|        <h3>Xavier — Sistema de Memoria</h3>
+   138|        <p>Sistema de memoria central para agentes SWAL. Cómo los patrones de harness mejoran la persistencia, contexto y ciclo de vida.</p>
+   139|      </a>
+   140|    </div>
+   141|
+   142|    <div class="section-divider"></div>
+   143|
+   144|    <h2>¿Por qué importa?</h2>
+   145|    <div class="compare-grid">
+   146|      <div class="compare-col without">
+   147|        <h4>❌ Sin Harness</h4>
+   148|        <ul>
+   149|          <li>Agente olvida preferencias entre sesiones</li>
+   150|          <li>Instrucciones gigantes que el agente ignora</li>
+   151|          <li>Sin verificación — bugs pasan desapercibidos</li>
+   152|          <li>Overreach: el agente cambia lo que no debe</li>
+   153|          <li>Sesiones rotas sin continuidad</li>
+   154|        </ul>
+   155|      </div>
+   156|      <div class="compare-col with">
+   157|        <h4>✅ Con Harness</h4>
+   158|        <ul>
+   159|          <li>Memoria persistente con jerarquía de prioridad</li>
+   160|          <li>Progressive disclosure: la info justa a tiempo</li>
+   161|          <li>Verificación automática antes de "done"</li>
+   162|          <li>Scope definido: una feature a la vez</li>
+   163|          <li>Handoff limpio entre sesiones</li>
+   164|        </ul>
+   165|      </div>
+   166|    </div>
+   167|  </div>
+   168|
+   169|  <footer class="footer">
+   170|    <p>Harness Engineering Course — Basado en <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> y <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
+   171|  </footer>
+   172|</main>
+   173|
+   174|<script>
+   175|function toggleSidebar() {
+   176|  document.getElementById('sidebar').classList.toggle('open');
+   177|  document.getElementById('overlay').classList.toggle('show');
+   178|}
+   179|</script>
+   180|</body>
+   181|</html>
+   182|

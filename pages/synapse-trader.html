@@ -1,198 +1,199 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<base href="/harness-course/">
-<title>SynapseTrader — Harness Engineering Application</title>
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-brand"><a href="/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
-  <nav>
-    <div class="nav-section">
-      <div class="nav-section-title">Course</div>
-      <a href="/"><span class="icon">🏠</span> Home</a>
-      <a href="/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
-      <a href="/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
-      <a href="/pages/course.html"><span class="icon">🎓</span> Full Course</a>
-    </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Resources</div>
-      <a href="/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
-      <a href="/pages/templates.html"><span class="icon">📋</span> Templates</a>
-    </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Applications</div>
-      <a href="/pages/synapse-trader.html" class="active"><span class="icon">🤖</span> SynapseTrader</a>
-      <a href="/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
-    </div>
-  </nav>
-</aside>
-<main class="main">
-  <div class="page-header">
-    <h1>🤖 SynapseTrader — Aplicación de Harness Engineering</h1>
-    <p>Cómo los patrones de diseño de harness se aplican a un bot de trading autónomo en Binance Futures con 55K LOC en Rust.</p>
-  </div>
-  <div class="content">
-
-    <h2>Estado Actual</h2>
-    <p>SynapseTrader es un bot de trading en Rust (~55,850 LOC, 177 archivos .rs) con:</p>
-    <ul>
-      <li><strong>8 agentes Hive</strong> — Marco de trabajo multi-agente para trading</li>
-      <li><strong>18 estrategias</strong> — EMARSI, GridTrading, DCA, LiquidSweep, MoneyFlow, etc.</li>
-      <li><strong>Provider LLM</strong> — Integración con OpenCode Go para análisis de mercado</li>
-      <li><strong>Daemon</strong> — Puerto 8989, loop continuo de trading</li>
-      <li><strong>Dashboard</strong> — 7 páginas para monitoreo</li>
-    </ul>
-
-    <p><strong>Bugs recientes corregidos (2026-05-07/08):</strong></p>
-    <ul>
-      <li>🔴 <strong>break→continue</strong> (L482,552 signal_aggregator.rs) — Symbol cap break bloqueaba 7 estrategias</li>
-      <li>🔴 <strong>pluggable_context</strong> — Sin datos de volatility/volume en el context</li>
-      <li>🔴 <strong>emit_signal threshold</strong> — Threshold 0.70 → 0.50 para detección realista</li>
-      <li>🔴 <strong>GridTrading SL/TP</strong> — Stop Loss y Take Profit estaban invertidos</li>
-      <li>🔴 <strong>PositionSizer</strong> — Margin mismatch entre paper ($28 usado vs $14 balance)</li>
-      <li>🟡 <strong>StatusCacheUpdater</strong> — Posible panic, ahora con catch</li>
-      <li>🟡 <strong>Dead code</strong> — ~350 líneas eliminadas</li>
-    </ul>
-
-    <div class="section-divider"></div>
-
-    <h2>5-Subsystem Assessment</h2>
-    <p>Evaluación del harness actual de SynapseTrader según el framework de 5 subsistemas:</p>
-
-    <div class="card-grid">
-      <div class="card">
-        <h3>📖 Instructions ⭐⭐⭐</h3>
-        <p><strong>Lo que hay:</strong> Skills synapse-trader y adaptive-strategy-control. AGENTS.md en el repo raíz.</p>
-        <p><strong>Mejora:</strong> Progressive disclosure — un AGENTS.md corto que enlace a docs/ por estrategia. Instrucciones claras sobre qué leer antes de codificar.</p>
-      </div>
-      <div class="card">
-        <h3>📊 State ⭐⭐</h3>
-        <p><strong>Lo que hay:</strong> StatusCacheUpdater con signal aggregation. feature_list informal en memoria.</p>
-        <p><strong>Mejora:</strong> feature_list.json con estado de cada estrategia (id, dependencias, status, evidencia). Progress log por estrategia.</p>
-      </div>
-      <div class="card">
-        <h3>✅ Verification ⭐⭐⭐</h3>
-        <p><strong>Lo que hay:</strong> Compilación Rust como gate. Tests unitarios por estrategia.</p>
-        <p><strong>Mejora:</strong> init.sh que compile + corra tests antes de empezar. E2E tests de paper trading como verification gate.</p>
-      </div>
-      <div class="card">
-        <h3>🎯 Scope ⭐⭐</h3>
-        <p><strong>Lo que hay:</strong> Symbol caps y strategy isolation en el aggregator. Pero el bug break→continue muestra que los límites no eran correctos.</p>
-        <p><strong>Mejora:</strong> One-feature-at-a-time policy. Definition of Done checklist para cada estrategia. Dependencias documentadas.</p>
-      </div>
-      <div class="card">
-        <h3>🔄 Lifecycle ⭐</h3>
-        <p><strong>Lo que hay:</strong> Daemon loop. No hay init.sh, no hay session handoff, no hay clean-state checklist.</p>
-        <p><strong>Mejora:</strong> init.sh para bootstrap. Clean-state checklist. Session handoff template para el daemon.</p>
-      </div>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2>Patrones de Diseño Aplicados</h2>
-
-    <h3>🧠 Memory Persistence — Aprendizajes de Estrategias</h3>
-    <p>El bot necesita recordar entre ejecuciones qué estrategias funcionaron, en qué condiciones, y qué ajustes se hicieron. Actualmente esto se hace con variables en memoria que se pierden al reiniciar.</p>
-    <p><strong>Implementación:</strong></p>
-    <ul>
-      <li>feature_list.json por estrategia: id, nombre, estado, evidencia de rendimiento</li>
-      <li>progress.md por sesión de trading: qué se probó, resultados, ajustes</li>
-      <li>Archivo de "lecciones aprendidas" por estrategia (evolucionable entre sesiones)</li>
-      <li>Two-step save: primero escribe el archivo de lección, luego actualiza el índice</li>
-    </ul>
-
-    <h3>📐 Context Engineering — Análisis de Mercado</h3>
-    <p>El bot recibe datos de mercado (OrderBookAnalysis, VWAP, volatilidad) y necesita dar contexto al LLM provider para decisiones de trading.</p>
-    <p><strong>Implementación:</strong></p>
-    <ul>
-      <li>Select: solo datos relevantes para la estrategia activa (no todo el orderbook)</li>
-      <li>Compress: resúmenes estadísticos en lugar de datos crudos</li>
-      <li>Isolate: contexto separado por par (no mezclar BTC y ETH)</li>
-      <li>Budget management: límite de tokens para el provider LLM</li>
-    </ul>
-
-    <h3>🔧 Tool Registry — Seguridad en Estrategias</h3>
-    <p>Cada estrategia tiene acceso a herramientas de trading (órdenes, stop-loss, take-profit). Algunas son peligrosas si se usan incorrectamente.</p>
-    <p><strong>Implementación:</strong></p>
-    <ul>
-      <li>Fail-closed: todo denegado hasta que la estrategia se registra explícitamente</li>
-      <li>Permisos por estrategia, no por herramienta</li>
-      <li>Pipeline de permisos: modo paper → modo real con confirmación</li>
-      <li>Log de todas las operaciones para auditoría</li>
-    </ul>
-
-    <h3>👥 Multi-Agent — Orquestación de Estrategias</h3>
-    <p>SynapseTrader ya tiene 8 agentes Hive. El patrón de coordinación puede mejorar con los patrones de OpenClaw:</p>
-    <ul>
-      <li><strong>Coordinator:</strong> Un agente principal decide qué estrategia se activa según condiciones de mercado</li>
-      <li><strong>Swarm:</strong> Múltiples estrategias evalúan el mismo par en paralelo, el aggregator decide</li>
-      <li><strong>Fork:</strong> Cada par de trading corre su propio análisis independiente</li>
-    </ul>
-
-    <h3>🔄 Lifecycle — Ciclo de Vida del Daemon</h3>
-    <p>El daemon necesita un lifecycle más robusto:</p>
-    <ul>
-      <li><strong>init.sh:</strong> Verificar conexión a Binance, cargar estado de estrategias, verificar balance</li>
-      <li><strong>Clean-state:</strong> Antes de apagar, guardar estado, cerrar posiciones abiertas, loggear resumen</li>
-      <li><strong>Handoff:</strong> Si el daemon se reinicia, debe retomar desde el último estado conocido</li>
-    </ul>
-
-    <div class="section-divider"></div>
-
-    <h2>Roadmap de Mejora</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-body">
-          <h4>Fase 1: Init y State (inmediato)</h4>
-          <p>Crear init.sh + feature_list.json + progress.md. Establecer el ciclo de vida básico del daemon.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-body">
-          <h4>Fase 2: Verification Gates (1-2 semanas)</h4>
-          <p>init.sh que corre tests y verifica compilación. E2E paper trading como verification gate antes de cada deploy.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-body">
-          <h4>Fase 3: Memory Persistence (2-3 semanas)</h4>
-          <p>feature_list.json por estrategia con evidencia de rendimiento. Archivo de lecciones aprendidas. Handoff entre sesiones del daemon.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-body">
-          <h4>Fase 4: Scope Control (3-4 semanas)</h4>
-          <p>Definition of Done por estrategia. Policy de una estrategia a la vez. Dependencias documentadas.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-body">
-          <h4>Fase 5: Multi-Agent Coordination (4-6 semanas)</h4>
-          <p>Patrones Coordinator/Swarm/Fork para los 8 agentes Hive. Mejor aislamiento de contexto entre agentes.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <footer class="footer">
-    <p>Harness Engineering Course — SynapseTrader case study</p>
-  </footer>
-</main>
-<script>
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('show');
-}
-</script>
-</body>
-</html>
+     1|<!DOCTYPE html>
+     2|<html lang="es">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>SynapseTrader — Harness Engineering Application</title>
+     7|<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+     8|</head>
+     9|<body>
+    10|<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+    11|<aside class="sidebar" id="sidebar">
+    12|  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+    13|  <nav>
+    14|    <div class="nav-section">
+    15|      <div class="nav-section-title">Course</div>
+    16|      <a href="/harness-course/"><span class="icon">🏠</span> Home</a>
+    17|      <a href="/harness-course/pages/fundamentals.html"><span class="icon">📖</span> Fundamentals</a>
+    18|      <a href="/harness-course/pages/design-patterns.html"><span class="icon">🧩</span> Design Patterns</a>
+    19|      <a href="/harness-course/pages/course.html"><span class="icon">🎓</span> Full Course</a>
+    20|    </div>
+    21|    <div class="nav-section">
+    22|      <div class="nav-section-title">Resources</div>
+    23|      <a href="/harness-course/pages/resources.html"><span class="icon">📚</span> Awesome Resources</a>
+    24|      <a href="/harness-course/pages/templates.html"><span class="icon">📋</span> Templates</a>
+    25|    </div>
+    26|    <div class="nav-section">
+    27|      <div class="nav-section-title">Applications</div>
+    28|      <a href="/harness-course/pages/synapse-trader.html" class="active"><span class="icon">🤖</span> SynapseTrader</a>
+    29|      <a href="/harness-course/pages/xavier.html"><span class="icon">🧠</span> Xavier Memory</a>
+    30|    </div>
+    31|  </nav>
+    32|</aside>
+    33|<main class="main">
+    34|  <div class="page-header">
+    35|    <h1>🤖 SynapseTrader — Aplicación de Harness Engineering</h1>
+    36|    <p>Cómo los patrones de diseño de harness se aplican a un bot de trading autónomo en Binance Futures con 55K LOC en Rust.</p>
+    37|  </div>
+    38|  <div class="content">
+    39|
+    40|    <h2>Estado Actual</h2>
+    41|    <p>SynapseTrader es un bot de trading en Rust (~55,850 LOC, 177 archivos .rs) con:</p>
+    42|    <ul>
+    43|      <li><strong>8 agentes Hive</strong> — Marco de trabajo multi-agente para trading</li>
+    44|      <li><strong>18 estrategias</strong> — EMARSI, GridTrading, DCA, LiquidSweep, MoneyFlow, etc.</li>
+    45|      <li><strong>Provider LLM</strong> — Integración con OpenCode Go para análisis de mercado</li>
+    46|      <li><strong>Daemon</strong> — Puerto 8989, loop continuo de trading</li>
+    47|      <li><strong>Dashboard</strong> — 7 páginas para monitoreo</li>
+    48|    </ul>
+    49|
+    50|    <p><strong>Bugs recientes corregidos (2026-05-07/08):</strong></p>
+    51|    <ul>
+    52|      <li>🔴 <strong>break→continue</strong> (L482,552 signal_aggregator.rs) — Symbol cap break bloqueaba 7 estrategias</li>
+    53|      <li>🔴 <strong>pluggable_context</strong> — Sin datos de volatility/volume en el context</li>
+    54|      <li>🔴 <strong>emit_signal threshold</strong> — Threshold 0.70 → 0.50 para detección realista</li>
+    55|      <li>🔴 <strong>GridTrading SL/TP</strong> — Stop Loss y Take Profit estaban invertidos</li>
+    56|      <li>🔴 <strong>PositionSizer</strong> — Margin mismatch entre paper ($28 usado vs $14 balance)</li>
+    57|      <li>🟡 <strong>StatusCacheUpdater</strong> — Posible panic, ahora con catch</li>
+    58|      <li>🟡 <strong>Dead code</strong> — ~350 líneas eliminadas</li>
+    59|    </ul>
+    60|
+    61|    <div class="section-divider"></div>
+    62|
+    63|    <h2>5-Subsystem Assessment</h2>
+    64|    <p>Evaluación del harness actual de SynapseTrader según el framework de 5 subsistemas:</p>
+    65|
+    66|    <div class="card-grid">
+    67|      <div class="card">
+    68|        <h3>📖 Instructions ⭐⭐⭐</h3>
+    69|        <p><strong>Lo que hay:</strong> Skills synapse-trader y adaptive-strategy-control. AGENTS.md en el repo raíz.</p>
+    70|        <p><strong>Mejora:</strong> Progressive disclosure — un AGENTS.md corto que enlace a docs/ por estrategia. Instrucciones claras sobre qué leer antes de codificar.</p>
+    71|      </div>
+    72|      <div class="card">
+    73|        <h3>📊 State ⭐⭐</h3>
+    74|        <p><strong>Lo que hay:</strong> StatusCacheUpdater con signal aggregation. feature_list informal en memoria.</p>
+    75|        <p><strong>Mejora:</strong> feature_list.json con estado de cada estrategia (id, dependencias, status, evidencia). Progress log por estrategia.</p>
+    76|      </div>
+    77|      <div class="card">
+    78|        <h3>✅ Verification ⭐⭐⭐</h3>
+    79|        <p><strong>Lo que hay:</strong> Compilación Rust como gate. Tests unitarios por estrategia.</p>
+    80|        <p><strong>Mejora:</strong> init.sh que compile + corra tests antes de empezar. E2E tests de paper trading como verification gate.</p>
+    81|      </div>
+    82|      <div class="card">
+    83|        <h3>🎯 Scope ⭐⭐</h3>
+    84|        <p><strong>Lo que hay:</strong> Symbol caps y strategy isolation en el aggregator. Pero el bug break→continue muestra que los límites no eran correctos.</p>
+    85|        <p><strong>Mejora:</strong> One-feature-at-a-time policy. Definition of Done checklist para cada estrategia. Dependencias documentadas.</p>
+    86|      </div>
+    87|      <div class="card">
+    88|        <h3>🔄 Lifecycle ⭐</h3>
+    89|        <p><strong>Lo que hay:</strong> Daemon loop. No hay init.sh, no hay session handoff, no hay clean-state checklist.</p>
+    90|        <p><strong>Mejora:</strong> init.sh para bootstrap. Clean-state checklist. Session handoff template para el daemon.</p>
+    91|      </div>
+    92|    </div>
+    93|
+    94|    <div class="section-divider"></div>
+    95|
+    96|    <h2>Patrones de Diseño Aplicados</h2>
+    97|
+    98|    <h3>🧠 Memory Persistence — Aprendizajes de Estrategias</h3>
+    99|    <p>El bot necesita recordar entre ejecuciones qué estrategias funcionaron, en qué condiciones, y qué ajustes se hicieron. Actualmente esto se hace con variables en memoria que se pierden al reiniciar.</p>
+   100|    <p><strong>Implementación:</strong></p>
+   101|    <ul>
+   102|      <li>feature_list.json por estrategia: id, nombre, estado, evidencia de rendimiento</li>
+   103|      <li>progress.md por sesión de trading: qué se probó, resultados, ajustes</li>
+   104|      <li>Archivo de "lecciones aprendidas" por estrategia (evolucionable entre sesiones)</li>
+   105|      <li>Two-step save: primero escribe el archivo de lección, luego actualiza el índice</li>
+   106|    </ul>
+   107|
+   108|    <h3>📐 Context Engineering — Análisis de Mercado</h3>
+   109|    <p>El bot recibe datos de mercado (OrderBookAnalysis, VWAP, volatilidad) y necesita dar contexto al LLM provider para decisiones de trading.</p>
+   110|    <p><strong>Implementación:</strong></p>
+   111|    <ul>
+   112|      <li>Select: solo datos relevantes para la estrategia activa (no todo el orderbook)</li>
+   113|      <li>Compress: resúmenes estadísticos en lugar de datos crudos</li>
+   114|      <li>Isolate: contexto separado por par (no mezclar BTC y ETH)</li>
+   115|      <li>Budget management: límite de tokens para el provider LLM</li>
+   116|    </ul>
+   117|
+   118|    <h3>🔧 Tool Registry — Seguridad en Estrategias</h3>
+   119|    <p>Cada estrategia tiene acceso a herramientas de trading (órdenes, stop-loss, take-profit). Algunas son peligrosas si se usan incorrectamente.</p>
+   120|    <p><strong>Implementación:</strong></p>
+   121|    <ul>
+   122|      <li>Fail-closed: todo denegado hasta que la estrategia se registra explícitamente</li>
+   123|      <li>Permisos por estrategia, no por herramienta</li>
+   124|      <li>Pipeline de permisos: modo paper → modo real con confirmación</li>
+   125|      <li>Log de todas las operaciones para auditoría</li>
+   126|    </ul>
+   127|
+   128|    <h3>👥 Multi-Agent — Orquestación de Estrategias</h3>
+   129|    <p>SynapseTrader ya tiene 8 agentes Hive. El patrón de coordinación puede mejorar con los patrones de OpenClaw:</p>
+   130|    <ul>
+   131|      <li><strong>Coordinator:</strong> Un agente principal decide qué estrategia se activa según condiciones de mercado</li>
+   132|      <li><strong>Swarm:</strong> Múltiples estrategias evalúan el mismo par en paralelo, el aggregator decide</li>
+   133|      <li><strong>Fork:</strong> Cada par de trading corre su propio análisis independiente</li>
+   134|    </ul>
+   135|
+   136|    <h3>🔄 Lifecycle — Ciclo de Vida del Daemon</h3>
+   137|    <p>El daemon necesita un lifecycle más robusto:</p>
+   138|    <ul>
+   139|      <li><strong>init.sh:</strong> Verificar conexión a Binance, cargar estado de estrategias, verificar balance</li>
+   140|      <li><strong>Clean-state:</strong> Antes de apagar, guardar estado, cerrar posiciones abiertas, loggear resumen</li>
+   141|      <li><strong>Handoff:</strong> Si el daemon se reinicia, debe retomar desde el último estado conocido</li>
+   142|    </ul>
+   143|
+   144|    <div class="section-divider"></div>
+   145|
+   146|    <h2>Roadmap de Mejora</h2>
+   147|    <div class="timeline">
+   148|      <div class="timeline-item">
+   149|        <div class="timeline-dot"></div>
+   150|        <div class="timeline-body">
+   151|          <h4>Fase 1: Init y State (inmediato)</h4>
+   152|          <p>Crear init.sh + feature_list.json + progress.md. Establecer el ciclo de vida básico del daemon.</p>
+   153|        </div>
+   154|      </div>
+   155|      <div class="timeline-item">
+   156|        <div class="timeline-dot"></div>
+   157|        <div class="timeline-body">
+   158|          <h4>Fase 2: Verification Gates (1-2 semanas)</h4>
+   159|          <p>init.sh que corre tests y verifica compilación. E2E paper trading como verification gate antes de cada deploy.</p>
+   160|        </div>
+   161|      </div>
+   162|      <div class="timeline-item">
+   163|        <div class="timeline-dot"></div>
+   164|        <div class="timeline-body">
+   165|          <h4>Fase 3: Memory Persistence (2-3 semanas)</h4>
+   166|          <p>feature_list.json por estrategia con evidencia de rendimiento. Archivo de lecciones aprendidas. Handoff entre sesiones del daemon.</p>
+   167|        </div>
+   168|      </div>
+   169|      <div class="timeline-item">
+   170|        <div class="timeline-dot"></div>
+   171|        <div class="timeline-body">
+   172|          <h4>Fase 4: Scope Control (3-4 semanas)</h4>
+   173|          <p>Definition of Done por estrategia. Policy de una estrategia a la vez. Dependencias documentadas.</p>
+   174|        </div>
+   175|      </div>
+   176|      <div class="timeline-item">
+   177|        <div class="timeline-dot"></div>
+   178|        <div class="timeline-body">
+   179|          <h4>Fase 5: Multi-Agent Coordination (4-6 semanas)</h4>
+   180|          <p>Patrones Coordinator/Swarm/Fork para los 8 agentes Hive. Mejor aislamiento de contexto entre agentes.</p>
+   181|        </div>
+   182|      </div>
+   183|    </div>
+   184|
+   185|  </div>
+   186|  <footer class="footer">
+   187|    <p>Harness Engineering Course — SynapseTrader case study</p>
+   188|  </footer>
+   189|</main>
+   190|<script>
+   191|function toggleSidebar() {
+   192|  document.getElementById('sidebar').classList.toggle('open');
+   193|  document.getElementById('overlay').classList.toggle('show');
+   194|}
+   195|</script>
+   196|</body>
+   197|</html>
+   198|
