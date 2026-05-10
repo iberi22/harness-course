@@ -12,6 +12,10 @@
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
   <nav>
     <div class="nav-section">
       <div class="nav-section-title">Course</div>
@@ -151,5 +155,6 @@ function toggleSidebar() {
   document.getElementById('overlay').classList.toggle('show');
 }
 </script>
+<script src="/harness-course/js/shared.js"></script>
 </body>
 </html>

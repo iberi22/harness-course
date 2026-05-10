@@ -39,10 +39,27 @@
   --radius-lg: 12px;
   --sidebar-w: 260px;
 
-  /* Typography */
+  /* Typography — Linear-inspired scale */
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-weight-regular: 400;
+  --font-weight-emphasis: 500;
+  --font-weight-strong: 600;
+
+  /* Elevation shadows */
+  --shadow-elevated: rgba(0,0,0,0.4) 0px 2px 4px;
+  --shadow-dialog: rgba(0,0,0,0) 0px 8px 2px, rgba(0,0,0,0.01) 0px 5px 2px, rgba(0,0,0,0.04) 0px 3px 2px, rgba(0,0,0,0.07) 0px 1px 1px, rgba(0,0,0,0.08) 0px 0px 1px;
+
+  /* Page transition */
+  --page-transition: 0.35s ease;
 }
+
+/* Page fade-in on load */
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.main { animation: page-fade-in var(--page-transition); }
 
 /* === Reset === */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -306,7 +323,132 @@ a.card:hover h3 { color: var(--accent-text); }
   border: 1px solid var(--border-subtle);
 }
 
-/* === Section Divider === */
+/* === Focus Visible (accessibility) === */
+:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* === Scrollspy Active Nav === */
+.sidebar nav a.active-nav {
+  background: rgba(94,106,210,0.12);
+  color: var(--accent-text);
+  position: relative;
+}
+.sidebar nav a.active-nav::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 16px;
+  background: var(--accent-text);
+  border-radius: 0 2px 2px 0;
+}
+
+/* === Code Copy Button === */
+.code-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 12px 4px;
+  margin-top: -8px;
+}
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.12s;
+}
+.copy-btn:hover { color: var(--text-secondary); background: var(--bg-hover); }
+.copy-btn.copied { color: var(--success); }
+
+/* === Module Accordion === */
+.module-collapsible { cursor: pointer; }
+.module-collapsible .module-header::after {
+  content: '▾';
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-dim);
+  transition: transform 0.2s;
+}
+.module-collapsible.collapsed .module-header::after { transform: rotate(-90deg); }
+.module-collapsible.collapsed > :not(.module-header) { display: none; }
+
+/* === Search === */
+.search-container {
+  padding: 8px 14px;
+  position: relative;
+}
+.search-container input {
+  width: 100%;
+  padding: 8px 10px 8px 28px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.12s;
+}
+.search-container input:focus { border-color: var(--accent); }
+.search-container input::placeholder { color: var(--text-dim); }
+.search-container::before {
+  content: '⌕';
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  font-size: 14px;
+  pointer-events: none;
+}
+.search-hint {
+  display: block;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-align: right;
+  margin-top: 4px;
+  padding-right: 2px;
+}
+
+/* === Keyboard Shortcut Hint === */
+.kbd-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.kbd-hint kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-family: var(--mono);
+  font-size: 9px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+
+/* === Smooth anchor scroll offset === */
+html { scroll-padding-top: 24px; }
 .section-divider { height: 1px; background: var(--border-subtle); margin: 40px 0; }
 
 /* === Compare Grid (with/without harness) === */
