@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "harness-course"
+version = "2.2.0"
+description = "🔧 Harness Engineering maturity evaluator CLI — evalúa el workspace de cualquier proyecto para agentes de IA"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Brahyan Belalcazar (ElBeRi)", email = "iberi22@users.noreply.github.com"}
+]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+
+[project.urls]
+Homepage = "https://iberi22.github.io/harness-course/"
+Repository = "https://github.com/iberi22/harness-course"
+Documentation = "https://iberi22.github.io/harness-course/"
+
+[project.scripts]
+harness = "harness.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/harness"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/harness/**",
+    "scripts/**",
+    "tests/**",
+    "pyproject.toml",
+    "README.md",
+    "install.sh",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]

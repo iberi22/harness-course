@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scope — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html" class="active"><span class="nav-icon">🎯</span> Scope</a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">🎯</span> Scope — Control de Alcance</h1>
+    <p>Cómo definir límites claros para que el agente trabaje una cosa a la vez, sin overreach ni under-finish. Definition of Done, milestones y perfiles de usuario.</p>
+  </div>
+  <div class="content">
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>Definition of Done (DoD)</h3>
+          <div class="module-topics">
+            <span class="tag">criterios de finalización</span>
+            <span class="tag">checklist</span>
+            <span class="tag">AGENTS.md</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Eliminar la ambigüedad sobre cuándo una tarea está realmente terminada.</p>
+      <p>Los agentes de IA declaran victoria demasiado temprano. Sin un DoD explícito, el agente puede decir "listo" cuando solo escribió el código pero no verificó nada. El <strong>Definition of Done</strong> es un checklist que debe cumplirse antes de marcar una tarea como completada.</p>
+      <p><strong>Estructura mínima:</strong></p>
+      <ul>
+        <li>Código escrito según spec</li>
+        <li>Tests pasan (pytest, cargo test, npm test)</li>
+        <li>Sin regresiones visuales ni funcionales</li>
+        <li>Documentado en README o docs/ si aplica</li>
+        <li>Comiteado con mensaje descriptivo</li>
+        <li>Sin secrets hardcodeados</li>
+      </ul>
+      <p><strong>Ejemplo en AGENTS.md:</strong></p>
+      <pre><code>## Definition of Done
+- [ ] Código implementado y revisado
+- [ ] Tests pasan: `python3 -m pytest`
+- [ ] Sin errores de lint: `ruff check .`
+- [ ] Documentación actualizada
+- [ ] Commit con prefijo convencional (feat:/fix:/docs:)</code></pre>
+      <p><strong>Tip:</strong> El DoD debe estar en el briefing principal (AGENTS.md o CLAUDE.md) para que el agente lo vea en cada sesión.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>Milestones y Task Tracking</h3>
+          <div class="module-topics">
+            <span class="tag">TASK.md</span>
+            <span class="tag">ROADMAP.md</span>
+            <span class="tag">hitos</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Dividir el trabajo en hitos medibles con progreso explícito.</p>
+      <p>Un agente sin hitos claros tiende a saltar entre tareas o perderse en detalles. El <strong>TASK.md</strong> es el tablero de trabajo vivo. Debe contener:</p>
+      <ul>
+        <li><strong>Milestone actual</strong> con nombre y fecha objetivo</li>
+        <li><strong>En progreso</strong> — lo que el agente está haciendo ahora</li>
+        <li><strong>Pendiente</strong> — próximas tareas priorizadas</li>
+        <li><strong>Completado</strong> — tareas cerradas con check</li>
+        <li><strong>Progreso porcentual</strong> — ej. "Fase 1: 80%"</li>
+      </ul>
+      <p><strong>Ejemplo de TASK.md:</strong></p>
+      <pre><code>## 🎯 Milestone: Fundación (Fase 1)
+
+### En Progreso
+- [ ] Contenido instructivo para cada subsistema
+
+### Pendiente
+- [ ] Integrar harness evaluador en la web
+- [ ] Test suite: HTML validation + link checker
+
+### Completado
+- [x] Estructura base del sitio
+- [x] Linear Dark design system</code></pre>
+      <p>El <strong>ROADMAP.md</strong> complementa con la visión de largo plazo: fases, objetivos estratégicos y dependencias entre hitos.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>CONTRIBUTING.md — Límites de Alcance</h3>
+          <div class="module-topics">
+            <span class="tag">contribuciones</span>
+            <span class="tag">proceso</span>
+            <span class="tag">estándares</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Definir qué tipo de cambios son aceptables y cuáles no.</p>
+      <p>El CONTRIBUTING.md no es solo para humanos: le dice al agente qué puede y qué no puede hacer. Un buen CONTRIBUTING.md incluye:</p>
+      <ul>
+        <li><strong>Alcance aceptable</strong> — tipos de contribuciones válidas</li>
+        <li><strong>Proceso</strong> — issue → branch → PR → review</li>
+        <li><strong>Estándares</strong> — HTML semántico, CSS sin !important, JS vanilla</li>
+        <li><strong>Una feature por PR</strong> — evita el scope creep</li>
+      </ul>
+      <p><strong>Ejemplo:</strong></p>
+      <pre><code>## Alcance
+Aceptamos contribuciones que:
+- Mejoren el contenido educativo del curso
+- Optimicen el evaluador (nuevos checks)
+- Mantengan compatibilidad: HTML/CSS/JS vanilla
+
+## Estándares
+- HTML semántico, accesible (aria-labels)
+- CSS utility-first + componentes, sin !important
+- JS vanilla en shared.js, sin dependencias externas
+- Sin secrets hardcodeados</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3>USER.md — Perfil del Usuario</h3>
+          <div class="module-topics">
+            <span class="tag">preferencias</span>
+            <span class="tag">contexto</span>
+            <span class="tag">estilo</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Darle al agente contexto sobre para quién trabaja.</p>
+      <p>Sin un perfil de usuario, el agente toma decisiones de diseño que pueden no alinearse con las preferencias reales. USER.md debe incluir:</p>
+      <ul>
+        <li><strong>Identidad</strong> — nombre, handle, rol</li>
+        <li><strong>Preferencias de comunicación</strong> — idioma, estilo (directo vs. analítico)</li>
+        <li><strong>Restricciones</strong> — qué NO hacer (ej. no publicar proyectos privados)</li>
+        <li><strong>Proyectos relacionados</strong> — contexto de otros repos</li>
+      </ul>
+      <p><strong>Ejemplo:</strong></p>
+      <pre><code>## Quién es
+Brahyan Belalcazar (ElBeRi) — creador de PGHEART
+
+## Preferencias
+- Idioma: español
+- Estilo: acción directa, nada de análisis extenso
+- Token-saving: información compacta
+
+## Lo que NO quiere
+- ❌ Proyectos privados en sitios públicos
+- ❌ Verbose analysis de 400K tokens</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">5</div>
+        <div>
+          <h3>Issue y PR Templates</h3>
+          <div class="module-topics">
+            <span class="tag">.github</span>
+            <span class="tag">plantillas</span>
+            <span class="tag">consistencia</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Estandarizar la forma en que se reportan bugs y proponen cambios.</p>
+      <p>Las plantillas en <code>.github/ISSUE_TEMPLATE/</code> y <code>.github/PULL_REQUEST_TEMPLATE.md</code> fuerzan al agente (y a humanos) a proporcionar la información necesaria antes de actuar.</p>
+      <p><strong>Checks del evaluador:</strong></p>
+      <ul>
+        <li>¿Existen plantillas en .github/?</li>
+        <li>¿Incluyen campos obligatorios (descripción, pasos de reproducción)?</li>
+      </ul>
+      <p><strong>Estructura recomendada:</strong></p>
+      <pre><code>.github/
+├── ISSUE_TEMPLATE/
+│   ├── bug_report.md
+│   └── feature_request.md
+└── PULL_REQUEST_TEMPLATE.md</code></pre>
+      <p><strong>Tip:</strong> Incluso en proyectos personales, las plantillas ayudan al agente a no olvidar pasos importantes.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">6</div>
+        <div>
+          <h3>Checklist del Agente — Scope</h3>
+          <div class="module-topics">
+            <span class="tag">verificación</span>
+            <span class="tag">checklist</span>
+            <span class="tag">score</span>
+          </div>
+        </div>
+      </div>
+      <p>Antes de declarar una tarea completada, el agente debe verificar:</p>
+      <ul>
+        <li><input type="checkbox"> ¿Existe un Definition of Done en AGENTS.md o RULES.md?</li>
+        <li><input type="checkbox"> ¿El TASK.md tiene milestones y progreso porcentual?</li>
+        <li><input type="checkbox"> ¿Existe CONTRIBUTING.md con alcance definido?</li>
+        <li><input type="checkbox"> ¿Existe USER.md con preferencias del usuario?</li>
+        <li><input type="checkbox"> ¿Hay plantillas en .github/ para issues y PRs?</li>
+        <li><input type="checkbox"> ¿Existe un backlog de tareas descubiertas?</li>
+        <li><input type="checkbox"> ¿El scope de esta sesión está limitado a una feature?</li>
+      </ul>
+      <p><strong>Score objetivo del subsistema Scope:</strong> ≥ 80% en <code>harness scan . --json</code></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Referencias Rápidas</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/templates.html" class="card">
+        <h3>Templates</h3>
+        <p>Plantillas listas para copiar: AGENTS.md, feature_list.json, init.sh, progress.md, session-handoff.md.</p>
+      </a>
+      <a href="/harness-course/pages/lifecycle.html" class="card">
+        <h3>Lifecycle</h3>
+        <p>Ciclo de vida completo del proyecto: init scripts, Docker, dependencias, .env, .gitignore y LICENSE.</p>
+      </a>
+      <a href="/harness-course/pages/skills.html" class="card">
+        <h3>Skills &amp; POML</h3>
+        <p>Cómo estructurar skills, validar recetas POML, y construir un catálogo de habilidades para agentes.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi)</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+</body>
+</html>

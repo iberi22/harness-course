@@ -1,0 +1,52 @@
+# POML Recipe Schema v1.0
+# Validation schema for .poml recipe files
+type: object
+required:
+  - poml
+properties:
+  poml:
+    type: object
+    required:
+      - let
+    properties:
+      let:
+        type: array
+        items:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Variable name (topology, tool_mode, providers, tools, etc.)
+            content:
+              type: string
+              description: Variable value
+          additionalProperties: false
+      stylesheet:
+        type: string
+        description: Formatting directives
+      role:
+        type: string
+        description: System prompt / agent role definition
+      task:
+        type: string
+        description: Task instructions
+      output-format:
+        type: string
+        description: Expected output structure
+      example:
+        type: string
+        description: Few-shot example
+
+# Validation rules (12 checks):
+# P001 - Must start with <poml>
+# P002 - Must end with </poml>
+# P010 - Valid topology (solo/multi/rag/tools-first)
+# P011 - Valid tool_mode
+# P012 - Non-standard provider warning
+# P013 - providers must be valid JSON
+# P020 - Missing required <let name="...">
+# P030 - Missing <role> section
+# P031 - Missing <task> section
+# P040 - Unbalanced XML tags

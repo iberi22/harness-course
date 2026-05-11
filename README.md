@@ -26,13 +26,27 @@ harness scan . --ci --threshold 50
 
 ## 📦 Instalación
 
-El CLI viene incluido en el repo. Solo necesitas:
+### Via pip (recomendado)
 
 ```bash
-# 1. Clonar
-git clone https://github.com/iberi22/harness-course.git ~/projects/harness-course
+pip install git+https://github.com/iberi22/harness-course.git
 
-# 2. Crear symlink (opcional)
+# O desde el repo clonado:
+git clone https://github.com/iberi22/harness-course.git
+cd harness-course
+pip install -e .
+```
+
+### Via curl | bash (pip-less)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/iberi22/harness-course/main/install.sh | bash
+```
+
+### Via symlink (legacy, sin pip)
+
+```bash
+git clone https://github.com/iberi22/harness-course.git ~/projects/harness-course
 ln -sf ~/projects/harness-course/scripts/harness_evaluator.py ~/.local/bin/harness
 chmod +x ~/.local/bin/harness
 ```

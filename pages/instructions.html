@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructions — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/instructions.html" class="active"><span class="nav-icon">📋</span> Instructions</a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">📋</span> Instructions — Briefing System & Progressive Disclosure</h1>
+    <p>Diseña un sistema de instrucciones que el agente realmente lea y siga. AGENTS.md, ROADMAP.md, progressive disclosure y el principio de que menos es más.</p>
+  </div>
+  <div class="content">
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>AGENTS.md como Mapa, no Enciclopedia</h3>
+          <div class="module-topics">
+            <span class="tag">identidad</span>
+            <span class="tag">stack</span>
+            <span class="tag">convenciones</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Crear un archivo de briefing que un agente pueda consumir en &lt;30 segundos y entender qué proyecto es, qué stack usa y qué convenciones debe respetar.</p>
+      <p><strong>Regla de oro:</strong> Máximo 80 líneas. Si superas las 120, el agente ignora la mitad. El AGENTS.md es un <em>mapa</em> que apunta a docs detalladas, no la fuente única de toda la información.</p>
+      <p><strong>Estructura recomendada:</strong></p>
+      <ul>
+        <li><strong>Identidad:</strong> nombre del proyecto, propósito en una línea</li>
+        <li><strong>Stack:</strong> lenguajes, frameworks, herramientas clave</li>
+        <li><strong>Convenciones:</strong> estilo de código, estructura de commits, patrones de diseño</li>
+        <li><strong>How to use:</strong> comandos esenciales (install, test, build)</li>
+        <li><strong>Definition of Done:</strong> checklist mínimo antes de considerar una tarea terminada</li>
+      </ul>
+      <p><strong>Anti-patrones:</strong></p>
+      <ul>
+        <li>❌ Instrucciones contradictorias entre AGENTS.md y los archivos de código</li>
+        <li>❌ Documentar API endpoints en AGENTS.md en lugar de docs/API.md</li>
+        <li>❌ Dejar información obsoleta sin fecha de última actualización</li>
+      </ul>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>Progressive Disclosure en docs/</h3>
+          <div class="module-topics">
+            <span class="tag">docs/</span>
+            <span class="tag">routing layer</span>
+            <span class="tag">startup workflow</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Organizar la documentación en niveles de profundidad para que el agente solo cargue lo que necesita.</p>
+      <p><strong>Jerarquía de 4 niveles:</strong></p>
+      <ul>
+        <li><strong>Nivel 1 — Visión:</strong> ROADMAP.md, ARCHITECTURE.md (qué se construye y por qué)</li>
+        <li><strong>Nivel 2 — Diseño:</strong> DESIGN.md, ADRs (cómo se construye, decisiones técnicas)</li>
+        <li><strong>Nivel 3 — Planes:</strong> PLANS.md, TASK.md, milestones (qué se está construyendo ahora)</li>
+        <li><strong>Nivel 4 — Especificaciones:</strong> product-specs/, api-specs/, detalles de implementación</li>
+      </ul>
+      <p><strong>Startup workflow del agente:</strong></p>
+      <ol>
+        <li>Leer AGENTS.md (30s)</li>
+        <li>Identificar tarea activa en TASK.md</li>
+        <li>Consultar docs/ de nivel correspondiente</li>
+        <li>Consultar ROADMAP.md solo si necesita contexto de prioridades</li>
+      </ol>
+      <p>Cada nivel apunta al siguiente con links explícitos. El agente nunca debe tener que adivinar dónde buscar.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>ROADMAP.md — Visión Compartida</h3>
+          <div class="module-topics">
+            <span class="tag">fases</span>
+            <span class="tag">hitos</span>
+            <span class="tag">priorización</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Mantener una fuente única de verdad sobre el rumbo del proyecto para evitar que el agente se desvíe hacia features futuras.</p>
+      <p><strong>Estructura:</strong></p>
+      <ul>
+        <li>Fases numeradas (Fase 1: Fundación, Fase 2: Core, Fase 3: Expansión)</li>
+        <li>Cada fase tiene hitos con fechas estimadas o porcentajes de progreso</li>
+        <li>Sección "No en scope" para ideas explícitamente descartadas</li>
+        <li>Última fecha de actualización visible</li>
+      </ul>
+      <pre><code># 🗺️ Roadmap
+
+> Visión general del proyecto, fases e hitos.
+> Última actualización: 2026-05-10
+
+## Fase 1: Fundación
+- [x] Repo inicial con harness básico
+- [x] AGENTS.md y docs/ estructurados
+- [ ] CI/CD pipeline (en progreso)
+
+## Fase 2: Core
+- [ ] Feature A: autenticación
+- [ ] Feature B: dashboard principal
+
+## Fase 3: Expansión
+- [ ] Integraciones externas
+- [ ] Optimización de rendimiento
+
+## 🚫 No en scope (v1.0)
+- Mobile app nativa
+- Soporte offline completo
+</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3>Ejemplo de Archivo Bien Hecho</h3>
+          <div class="module-topics">
+            <span class="tag">AGENTS.md</span>
+            <span class="tag">ejemplo</span>
+            <span class="tag">template</span>
+          </div>
+        </div>
+      </div>
+      <p>Este es un AGENTS.md que obtendría un score ≥90% en <code>harness scan . --json</code>:</p>
+      <pre><code># 🤖 Mi Proyecto — Agent Briefing
+
+## Identidad
+Eres un agente trabajando en **MiProyecto**, un sitio estático
+que enseña harness engineering a agentes de IA.
+
+## Stack
+- **Frontend:** HTML5, CSS3 vanilla, JavaScript vanilla
+- **Design:** Linear Dark
+- **Hosting:** GitHub Pages
+
+## Convenciones
+- **CSS:** clases Utility-first en `css/style.css`
+- **JS:** módulos en `js/shared.js` (sin framework)
+- **Commits:** `feat:`, `fix:`, `docs:`, `chore:`
+
+## How Agents Should Use This Repo
+1. `pip install -e .`
+2. `harness scan . --json` → diagnóstico
+3. `harness fix .` → generar archivos faltantes
+
+## Definition of Done
+- Código según spec
+- Sin regresiones visuales
+- Documentado en AGENTS.md si aplica
+- Comiteado con mensaje descriptivo
+</code></pre>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>🧑‍✈️ Checklist del Agente</h2>
+    <p>Antes de comenzar cualquier tarea, el agente debe verificar que el subsistema de Instructions esté completo:</p>
+    <ul class="checklist">
+      <li>AGENTS.md existe y tiene ≤120 líneas</li>
+      <li>AGENTS.md incluye Identidad, Stack, Convenciones, How to use, Definition of Done</li>
+      <li>docs/ existe con al menos un archivo de nivel 1 (ROADMAP o ARCHITECTURE)</li>
+      <li>TASK.md existe y tiene una tarea "En Progreso" definida</li>
+      <li>ROADMAP.md existe con fases y hitos claros</li>
+      <li>No hay instrucciones contradictorias entre AGENTS.md y el código</li>
+      <li>Toda la documentación tiene fecha de última actualización</li>
+      <li>El repositorio tiene un README.md con instrucciones de instalación</li>
+    </ul>
+
+    <h2>🔍 Diagnóstico Rápido</h2>
+    <p>Usa el scanner de harness para evaluar el estado de las instrucciones:</p>
+    <pre><code>harness scan . --json
+</code></pre>
+    <p>El output incluirá checks como <code>1.1 AGENTS.md exists</code>, <code>1.2 AGENTS.md has identity</code>, <code>1.3 Roadmap exists</code>, etc. Un score ≥80% indica que el subsistema de Instructions está saludable.</p>
+
+    <div class="section-divider"></div>
+
+    <h2>Relacionado</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/state.html" class="card">
+        <h3>💾 State</h3>
+        <p>Cómo mantener estado persistente entre sesiones, session handoff y tracking de progreso.</p>
+      </a>
+      <a href="/harness-course/pages/verification.html" class="card">
+        <h3>✅ Verification</h3>
+        <p>Tests, CI/CD, linters y type checking para evitar que el agente declare victoria demasiado temprano.</p>
+      </a>
+      <a href="/harness-course/pages/templates.html" class="card">
+        <h3>△ Templates</h3>
+        <p>Plantillas listas para copiar: AGENTS.md, ROADMAP.md, TASK.md y más.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi)</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+</body>
+</html>

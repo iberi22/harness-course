@@ -1,0 +1,22 @@
+<poml>
+  <let name="template_id">env-example</let>
+  <let name="output">.env.example</let>
+  <let name="description">Template de variables de entorno</let>
+  <let name="triggers">["missing .env.example", "no env template"]</let>
+  <let name="check_ids">["5.5"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output># .env.example — Variables de entorno requeridas
+# Copia este archivo a .env y completa los valores
+
+# === API Keys ===
+# API_KEY="tu-api-key"
+
+# === Configuración ===
+# DEBUG=false
+# PORT=3000
+
+# === Base de Datos ===
+# DATABASE_URL="postgres://user:pass@localhost:5432/db"
+  </output>
+</poml>

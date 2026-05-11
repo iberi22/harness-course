@@ -17,10 +17,14 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install harness CLI
+        run: |
+          pip install -e .
+
       - name: Run Harness Evaluation
         id: scan
         run: |
-          python3 scripts/harness_evaluator.py scan . --ci --threshold 50 2>&1 | tee harness-output.txt
+          harness scan . --ci --threshold 50 2>&1 | tee harness-output.txt
         continue-on-error: true
 
       - name: PR Comment

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lifecycle — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> Scope</a>
+      <a href="/harness-course/pages/lifecycle.html" class="active"><span class="nav-icon">🔄</span> Lifecycle</a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">🔄</span> Lifecycle — Ciclo de Vida</h1>
+    <p>Bootstrap, dependencias, entorno, contenedores y handoff entre sesiones. Cómo dejar el proyecto restartable después de cada sesión.</p>
+  </div>
+  <div class="content">
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>Init Scripts — Bootstrap Automático</h3>
+          <div class="module-topics">
+            <span class="tag">init.sh</span>
+            <span class="tag">setup</span>
+            <span class="tag">bootstrap</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Que cualquier agente (o humano) pueda poner el proyecto en marcha con un solo comando.</p>
+      <p>El <strong>init.sh</strong> es la primera línea de defensa contra el caos. Debe detectar el stack, instalar dependencias y verificar que todo esté listo. Un buen init.sh incluye:</p>
+      <ul>
+        <li><strong>set -e</strong> — fallar rápido si algo falla</li>
+        <li><strong>Detección de stack</strong> — package.json, Cargo.toml, requirements.txt, pyproject.toml</li>
+        <li><strong>Instalación de dependencias</strong> — npm install, cargo build, pip install</li>
+        <li><strong>Copia de .env</strong> — desde .env.example si no existe .env</li>
+        <li><strong>Verificación final</strong> — ¿el comando principal funciona?</li>
+      </ul>
+      <p><strong>Ejemplo de init.sh:</strong></p>
+      <pre><code>#!/bin/bash
+# init.sh — Bootstrap del proyecto
+set -e
+
+echo "🔧 Inicializando proyecto..."
+
+# Detectar gestor de paquetes
+if [ -f "package.json" ]; then
+    echo "📦 Instalando dependencias Node..."
+    npm install
+elif [ -f "Cargo.toml" ]; then
+    echo "🦀 Construyendo proyecto Rust..."
+    cargo build
+elif [ -f "requirements.txt" ]; then
+    echo "🐍 Instalando dependencias Python..."
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+fi
+
+# Copiar .env si no existe
+if [ -f ".env.example" ] && [ ! -f ".env" ]; then
+    cp .env.example .env
+    echo "⚠️  Creado .env desde .env.example"
+fi
+
+echo "✅ Proyecto listo"</code></pre>
+      <p><strong>Tip:</strong> Mantenlo en la raíz con permisos de ejecución: <code>chmod +x init.sh</code>.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>Docker y Contenedores</h3>
+          <div class="module-topics">
+            <span class="tag">Dockerfile</span>
+            <span class="tag">docker-compose</span>
+            <span class="tag">Containerfile</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Garantizar que el proyecto corra igual en cualquier máquina.</p>
+      <p>Un Dockerfile o docker-compose.yml elimina la frase "en mi máquina sí funciona". Para proyectos con agentes, es aún más importante porque el agente puede ejecutarse en diferentes entornos.</p>
+      <p><strong>Cuándo usar cada uno:</strong></p>
+      <ul>
+        <li><strong>Dockerfile</strong> — para una sola aplicación o servicio</li>
+        <li><strong>docker-compose.yml</strong> — para múltiples servicios (app + base de datos + agente)</li>
+        <li><strong>Containerfile</strong> — alternativa rootless con Podman</li>
+      </ul>
+      <p><strong>Checks del evaluador:</strong></p>
+      <ul>
+        <li>¿Existe Dockerfile, docker-compose.yml o Containerfile?</li>
+        <li>¿El compose define servicios con nombres claros?</li>
+      </ul>
+      <p><strong>Ejemplo docker-compose.yml:</strong></p>
+      <pre><code>version: "3.9"
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file: .env
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: mydb</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>Dependencias y Entorno</h3>
+          <div class="module-topics">
+            <span class="tag">requirements.txt</span>
+            <span class="tag">package.json</span>
+            <span class="tag">Cargo.toml</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Declarar explícitamente todo lo que el proyecto necesita para funcionar.</p>
+      <p>Sin un archivo de dependencias, el agente debe adivinar qué instalar. Los archivos más comunes:</p>
+      <ul>
+        <li><strong>Python:</strong> requirements.txt, pyproject.toml, Pipfile</li>
+        <li><strong>Node:</strong> package.json, package-lock.json</li>
+        <li><strong>Rust:</strong> Cargo.toml, Cargo.lock</li>
+        <li><strong>Go:</strong> go.mod, go.sum</li>
+        <li><strong>Ruby:</strong> Gemfile, Gemfile.lock</li>
+      </ul>
+      <p><strong>Mejores prácticas:</strong></p>
+      <ul>
+        <li>Versionar el lockfile (package-lock.json, Cargo.lock) para reproducibilidad</li>
+        <li>Usar rangos de versión conservadores en el manifest principal</li>
+        <li>Documentar dependencias de sistema (ej. libpq-dev) en README.md</li>
+      </ul>
+      <p><strong>Ejemplo pyproject.toml:</strong></p>
+      <pre><code>[project]
+name = "harness-course"
+version = "0.1.0"
+dependencies = [
+    "requests&gt;=2.28",
+    "pydantic&gt;=2.0",
+]</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3>.env, .gitignore y LICENSE</h3>
+          <div class="module-topics">
+            <span class="tag">configuración</span>
+            <span class="tag">seguridad</span>
+            <span class="tag">licencia</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Separar secretos del código, ignorar archivos irrelevantes y definir los términos legales.</p>
+      <p><strong>.env.example</strong> es el contrato de variables de entorno. Debe incluir todas las keys que el proyecto usa, con valores vacíos o de ejemplo:</p>
+      <pre><code># API Keys
+TAVILY_API_KEY=
+BRAVE_API_KEY=
+
+# Configuración
+DEBUG=false
+PORT=3000</code></pre>
+      <p><strong>.gitignore</strong> evita que secrets y archivos temporales entren al repo:</p>
+      <pre><code># OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/</code></pre>
+      <p><strong>LICENSE</strong> define cómo otros pueden usar tu código. Para proyectos open-source, MIT es simple y permisiva:</p>
+      <pre><code>MIT License
+
+Copyright (c) 2026 Brahyan Belalcazar (ElBeRi)
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software...</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">5</div>
+        <div>
+          <h3>Session Handoff y Clean State</h3>
+          <div class="module-topics">
+            <span class="tag">handoff</span>
+            <span class="tag">clean state</span>
+            <span class="tag">restartable</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Dejar el proyecto en un estado donde la próxima sesión pueda retomar sin fricción.</p>
+      <p>El <strong>session handoff</strong> es el procedimiento de cierre de sesión. Incluye:</p>
+      <ul>
+        <li><strong>Commit</strong> de todo el trabajo en progreso</li>
+        <li><strong>Actualizar</strong> TASK.md con el estado actual</li>
+        <li><strong>Documentar</strong> bloqueos o descubrimientos en MEMORY.md</li>
+        <li><strong>Limpiar</strong> archivos temporales</li>
+        <li><strong>Verificar</strong> que init.sh sigue funcionando desde cero</li>
+      </ul>
+      <p><strong>Clean State Checklist:</strong></p>
+      <ul>
+        <li>No hay archivos sin commit</li>
+        <li>No hay secrets en el diff</li>
+        <li>Los tests pasan</li>
+        <li>El proyecto se puede clonar e inicializar en otra máquina</li>
+      </ul>
+      <p><strong>Documentación del handoff:</strong> Al menos un archivo del repo debe mencionar "handoff", "clean state" o "retomar" para que el evaluador lo detecte.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">6</div>
+        <div>
+          <h3>Checklist del Agente — Lifecycle</h3>
+          <div class="module-topics">
+            <span class="tag">verificación</span>
+            <span class="tag">checklist</span>
+            <span class="tag">score</span>
+          </div>
+        </div>
+      </div>
+      <p>Antes de iniciar y antes de cerrar sesión, el agente debe verificar:</p>
+      <ul>
+        <li><input type="checkbox"> ¿Existe init.sh, setup.sh, Makefile o script de bootstrap?</li>
+        <li><input type="checkbox"> ¿Existe Dockerfile o docker-compose.yml?</li>
+        <li><input type="checkbox"> ¿El repo tiene un archivo de dependencias declarado?</li>
+        <li><input type="checkbox"> ¿Existe .env.example con todas las variables documentadas?</li>
+        <li><input type="checkbox"> ¿Existe .gitignore que excluya .env y archivos temporales?</li>
+        <li><input type="checkbox"> ¿Existe LICENSE con copyright actualizado?</li>
+        <li><input type="checkbox"> ¿Hay documentación de handoff o clean state?</li>
+        <li><input type="checkbox"> ¿El init.sh ejecuta sin errores desde un clone fresco?</li>
+      </ul>
+      <p><strong>Score objetivo del subsistema Lifecycle:</strong> ≥ 80% en <code>harness scan . --json</code></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Referencias Rápidas</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/templates.html" class="card">
+        <h3>Templates</h3>
+        <p>Plantillas listas para copiar: AGENTS.md, feature_list.json, init.sh, progress.md, session-handoff.md.</p>
+      </a>
+      <a href="/harness-course/pages/scope.html" class="card">
+        <h3>Scope</h3>
+        <p>Definition of Done, milestones, CONTRIBUTING.md y USER.md. Cómo mantener el alcance bajo control.</p>
+      </a>
+      <a href="/harness-course/pages/skills.html" class="card">
+        <h3>Skills &amp; POML</h3>
+        <p>Estructura de skills, validación de recetas POML, registry y soporte multi-modelo.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi)</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+</body>
+</html>

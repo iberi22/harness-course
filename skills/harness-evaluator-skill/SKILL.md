@@ -1,6 +1,8 @@
 ---
 name: harness-evaluator
 description: Cómo usar el Harness Evaluator CLI para escanear, diagnosticar y corregir proyectos
+version: 1.0.0
+license: MIT
 trigger: cuando un agente necesita evaluar el estado del harness de un proyecto
 ---
 

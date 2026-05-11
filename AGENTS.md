@@ -17,9 +17,10 @@ Eres un agente trabajando en **Harness Course**, un sitio estático GitHub Pages
 - **Commits:** `feat:`, `fix:`, `docs:`, `chore:` convencional
 
 ## How Agents Should Use This Repo
-1. `python3 scripts/harness_evaluator.py scan . --json` → diagnóstico
-2. `python3 scripts/harness_evaluator.py fix .` → generar archivos faltantes
-3. Re-escanear hasta score ≥ 80%
+1. `pip install -e .` (o `harness -h` si ya instalado)
+2. `harness scan . --json` → diagnóstico
+3. `harness fix .` → generar archivos faltantes
+4. Re-escanear hasta score ≥ 80%
 
 ## Definition of Done
 - Código escrito según spec

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
+      <a href="/harness-course/pages/state.html" class="active"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">💾</span> State — Persistencia y Continuidad entre Sesiones</h1>
+    <p>Mantén estado persistente entre sesiones del agente. TASK.md, MEMORY.md, session handoff, progress tracking y el patrón de Memory Persistence.</p>
+  </div>
+  <div class="content">
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>El Problema del Olvido entre Sesiones</h3>
+          <div class="module-topics">
+            <span class="tag">context window</span>
+            <span class="tag">tareas largas</span>
+            <span class="tag">continuidad</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Entender por qué los agentes "olvidan" lo que hicieron en sesiones anteriores y cómo diseñar un sistema de estado que lo mitigue.</p>
+      <p>Los agentes de IA operan dentro de una <strong>ventana de contexto</strong> finita. Cuando una tarea dura más de una sesión, el agente pierde:</p>
+      <ul>
+        <li>Qué archivos modificó y por qué</li>
+        <li>Decisiones técnicas tomadas durante la implementación</li>
+        <li>Errores encontrados y cómo se resolvieron</li>
+        <li>El progreso exacto de cada feature</li>
+      </ul>
+      <p><strong>Consecuencias:</strong> rework innecesario, inconsistencias, regresiones y demoras. Un agente sin estado persistente puede gastar el 30-40% de sus tokens redescubriendo lo que ya sabía.</p>
+      <blockquote>
+        <p>"Un agente sin estado es como un desarrollador que empieza desde cero cada mañana sin notas, sin commits descriptivos y sin tickets."</p>
+      </blockquote>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>TASK.md como Tablero Vivo</h3>
+          <div class="module-topics">
+            <span class="tag">backlog</span>
+            <span class="tag">milestones</span>
+            <span class="tag">una cosa a la vez</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Diseñar un archivo de tareas que funcione como fuente única de verdad sobre qué se está construyendo, qué viene después y qué ya está hecho.</p>
+      <p><strong>Estructura:</strong></p>
+      <ul>
+        <li><strong>Milestone Actual:</strong> ámbito de la iteración actual</li>
+        <li><strong>En Progreso:</strong> exactamente una tarea. Si hay dos, el agente multitarea y empeora.</li>
+        <li><strong>Pendiente:</strong> cola priorizada de próximas tareas</li>
+        <li><strong>Completado:</strong> historial con fechas o referencias a commits</li>
+        <li><strong>Descubiertos durante el trabajo:</strong> problemas, ideas, deuda técnica encontrada</li>
+      </ul>
+      <pre><code># 📋 Task Tracking
+
+> Última actualización: 2026-05-10
+
+## 🎯 Milestone Actual: v0.2.0 — Autenticación
+
+### En Progreso
+- [ ] Implementar OAuth2 con GitHub
+  - Branch: `feat/oauth`
+  - Notas: usar `authlib`, callback en `/auth/github`
+
+### Pendiente
+- [ ] Página de login con branding
+- [ ] Middleware de protección de rutas
+
+### Completado
+- [x] Estructura base de usuarios (commit `a1b2c3d`)
+- [x] Modelo User en base de datos (commit `e4f5g6h`)
+
+### 💡 Descubiertos durante el trabajo
+- El rate limit de GitHub requiere caché local
+- Considerar JWT en lugar de sessions para API
+</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>Session Handoff Template</h3>
+          <div class="module-topics">
+            <span class="tag">handoff</span>
+            <span class="tag">MEMORY.md</span>
+            <span class="tag">restartable</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Al final de cada sesión, dejar un resumen que permita a un agente (o a ti mismo) continuar exactamente donde se quedó.</p>
+      <p><strong>5 pasos del handoff:</strong></p>
+      <ol>
+        <li><strong>Estado actual:</strong> ¿Qué se logró? ¿Qué quedó a medias?</li>
+        <li><strong>Archivos modificados:</strong> lista con paths exactos y qué cambió en cada uno</li>
+        <li><strong>Decisiones tomadas:</strong> por qué se eligió A en lugar de B</li>
+        <li><strong>Próximo paso:</strong> instrucción explícita de cómo continuar</li>
+        <li><strong>Comandos para verificar:</strong> cómo ejecutar tests o levantar el proyecto</li>
+      </ol>
+      <pre><code># 📝 Session Handoff — 2026-05-10 22:00 UTC
+
+## Estado Actual
+- Implementado el módulo de escaneo en `src/harness/scanner.py`
+- Faltan 2 checks de verificación (checks 3.4 y 3.5)
+- Tests pasan: 18/20
+
+## Archivos Modificados
+- `src/harness/scanner.py` — lógica de escaneo recursivo
+- `tests/test_scanner.py` — tests unitarios nuevos
+- `pyproject.toml` — dependencia `pathspec` añadida
+
+## Decisiones
+- Usar `pathspec` en lugar de `fnmatch` para .gitignore matching
+  más robusto.
+
+## Próximo Paso
+- Implementar checks 3.4 (existencia de tests) y 3.5 (coverage)
+- Ejecutar: `pytest tests/test_scanner.py -v`
+
+## Verificación
+```bash
+harness scan . --json
+pytest
+```
+</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3>Progress Tracking sin Inflar el Contexto</h3>
+          <div class="module-topics">
+            <span class="tag">feature_list.json</span>
+            <span class="tag">heartbeat</span>
+            <span class="tag">estados</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Trackear el progreso de múltiples features sin necesidad de cargar párrafos de texto en el contexto del agente.</p>
+      <p>Un archivo <code>feature_list.json</code> (o YAML) es ideal porque:</p>
+      <ul>
+        <li>Es parseable por máquina y legible por humanos</li>
+        <li>Ocupa pocas líneas por feature</li>
+        <li>Puede ser consumido por scripts de CI para reportes</li>
+      </ul>
+      <pre><code>{
+  "version": "1.0",
+  "last_updated": "2026-05-10",
+  "features": [
+    {
+      "id": "auth-oauth",
+      "title": "Autenticación OAuth2",
+      "status": "in_progress",
+      "progress_percent": 65,
+      "owner": "agent",
+      "branch": "feat/oauth",
+      "blocked_by": []
+    },
+    {
+      "id": "ci-pipeline",
+      "title": "Pipeline CI/CD",
+      "status": "pending",
+      "progress_percent": 0,
+      "owner": "agent",
+      "branch": "feat/ci",
+      "blocked_by": ["auth-oauth"]
+    }
+  ]
+}
+</code></pre>
+      <p><strong>Patrón de Heartbeat:</strong> Cada 30 minutos de trabajo, el agente actualiza <code>last_updated</code> y <code>progress_percent</code>. Esto crea un "pulso" visible de actividad y permite detectar sesiones abandonadas.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>🧑‍✈️ Checklist del Agente</h2>
+    <p>Antes de finalizar una sesión, el agente debe garantizar que el estado está documentado:</p>
+    <ul class="checklist">
+      <li>TASK.md existe y tiene exactamente una tarea "En Progreso"</li>
+      <li>La tarea en progreso incluye branch y notas técnicas</li>
+      <li>Existe un archivo de handoff (MEMORY.md o session-handoff.md)</li>
+      <li>El handoff incluye: estado, archivos, decisiones, próximo paso, comandos</li>
+      <li>Todos los cambios están commiteados con mensajes descriptivos</li>
+      <li>El repo está en estado limpio (<code>git status</code> sin untracked importantes)</li>
+      <li>feature_list.json (si existe) tiene progress_percent actualizado</li>
+      <li>La sesión es restartable: otro agente puede continuar sin preguntas</li>
+    </ul>
+
+    <h2>🔍 Diagnóstico Rápido</h2>
+    <p>Evalúa tu subsistema de State:</p>
+    <pre><code>harness scan . --json
+</code></pre>
+    <p>Busca checks como <code>2.1 TASK.md exists</code>, <code>2.2 Has active task</code>, <code>4.1 Session handoff exists</code>. Si el score es &lt;60%, prioriza crear TASK.md antes de cualquier otra tarea.</p>
+
+    <div class="section-divider"></div>
+
+    <h2>Relacionado</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/instructions.html" class="card">
+        <h3>📋 Instructions</h3>
+        <p>Diseña un sistema de instrucciones con AGENTS.md, ROADMAP.md y progressive disclosure.</p>
+      </a>
+      <a href="/harness-course/pages/verification.html" class="card">
+        <h3>✅ Verification</h3>
+        <p>Tests, CI/CD, linters y type checking para garantizar calidad en cada entrega.</p>
+      </a>
+      <a href="/harness-course/pages/templates.html" class="card">
+        <h3>△ Templates</h3>
+        <p>Plantillas listas para TASK.md, feature_list.json y session-handoff.md.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi)</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+</body>
+</html>

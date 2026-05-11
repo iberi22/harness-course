@@ -1,0 +1,42 @@
+# Harness Course — Skill Registry Manifest
+# Central index of all skills and POML recipes
+version: 1.0
+updated: 2026-05-11
+
+skills:
+  - id: harness-evaluator-skill
+    name: Harness Evaluator Skill
+    description: Skill para usar el evaluador de harness (scan, fix, poml)
+    path: skills/harness-evaluator-skill/SKILL.md
+    version: 1.0.0
+    category: devops
+    tags: [harness, scanner, evaluation]
+
+  - id: course-content
+    name: Course Content
+    description: Crear y mantener contenido educativo del curso
+    path: skills/course-content/SKILL.md
+    version: 1.0.0
+    category: content
+    tags: [course, content, education]
+
+poml_recipes:
+  - id: harness-scan
+    name: Harness Scanner
+    description: Escanea proyectos con harness scan . --json
+    path: poml/harness-scan.poml
+    category: devops
+
+  - id: harness-fix
+    name: Harness Fix
+    description: Auto-corrige proyectos usando harness fix
+    path: poml/harness-fix.poml
+    category: devops
+
+categories:
+  - id: devops
+    name: DevOps
+    description: DevOps, CI/CD, and infrastructure skills
+  - id: content
+    name: Content
+    description: Educational content and course material skills

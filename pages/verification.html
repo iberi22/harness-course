@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html" class="active"><span class="nav-icon">✅</span> Verification</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">✅</span> Verification — Tests, CI/CD y Definition of Done</h1>
+    <p>Evita que el agente declare victoria demasiado temprano. Diseña verification gates con tests, linters, type checking y pipelines de CI/CD.</p>
+  </div>
+  <div class="content">
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>Por qué los Agentes Declaran Victoria Demasiado Temprano</h3>
+          <div class="module-topics">
+            <span class="tag">false positive</span>
+            <span class="tag">under-finish</span>
+            <span class="tag">overreach</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Entender los dos extremos del mal scope y cómo los verification gates los previenen.</p>
+      <p>Los agentes de IA tienden a:</p>
+      <ul>
+        <li><strong>Under-finish:</strong> Declarar una tarea "lista" cuando falta manejo de errores, validación de inputs o tests.</li>
+        <li><strong>Overreach:</strong> Implementar features futuras que no estaban en scope, rompiendo el principio de "una cosa a la vez".</li>
+      </ul>
+      <p><strong>La causa raíz:</strong> Sin gates explícitas, el agente define "listo" como "el código compila" o "la función principal funciona". Necesitamos elevar el umbral de "listo" a "pasa todos los checks automatizados".</p>
+      <div class="compare-grid">
+        <div class="compare-col without">
+          <h4>Sin Verification Gates</h4>
+          <ul>
+            <li>"Listo" = código escrito</li>
+            <li>Regresiones frecuentes</li>
+            <li>Deuda técnica invisible</li>
+            <li>El agente decide cuándo parar</li>
+          </ul>
+        </div>
+        <div class="compare-col with">
+          <h4>Con Verification Gates</h4>
+          <ul>
+            <li>"Listo" = tests + lint + build OK</li>
+            <li>Regresiones detectadas en segundos</li>
+            <li>Deuda técnica visible en CI</li>
+            <li>El harness decide cuándo parar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>Verification Gates Automatizadas</h3>
+          <div class="module-topics">
+            <span class="tag">tests</span>
+            <span class="tag">lint</span>
+            <span class="tag">type check</span>
+            <span class="tag">build</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Definir una secuencia de checks que todo código debe pasar antes de considerarse entregable.</p>
+      <p><strong>Las 4 gates esenciales:</strong></p>
+      <ul>
+        <li><strong>1. Tests:</strong> Unitarios, de integración y E2E. Mínimo: los tests existentes deben seguir pasando.</li>
+        <li><strong>2. Lint:</strong> Estilo de código consistente. Ej: <code>ruff</code> (Python), <code>eslint</code> (JS), <code>clippy</code> (Rust).</li>
+        <li><strong>3. Type Check:</strong> Verificación estática de tipos. Ej: <code>mypy</code>, <code>tsc --noEmit</code>, <code>cargo check</code>.</li>
+        <li><strong>4. Build:</strong> El proyecto compila/empaqueta sin errores. Incluye assets si aplica.</li>
+      </ul>
+      <p><strong>Gate opcional avanzada:</strong></p>
+      <ul>
+        <li><strong>5. Security scan:</strong> <code>bandit</code> (Python), <code>npm audit</code>, <code>cargo audit</code></li>
+        <li><strong>6. Coverage threshold:</strong> Mínimo 70% de cobertura para nuevos archivos</li>
+      </ul>
+      <pre><code>#!/bin/bash
+# verify.sh — Verification Gates
+set -e
+
+echo "🧪 Running tests..."
+pytest tests/ -q
+
+echo "🔍 Running linter..."
+ruff check src/
+
+echo "📋 Running type checker..."
+mypy src/
+
+echo "🛠️ Running build..."
+python -m build
+
+echo "✅ All gates passed"
+</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>Configuración de CI/CD</h3>
+          <div class="module-topics">
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">pipeline</span>
+            <span class="tag">badges</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Automatizar las verification gates para que se ejecuten en cada push y pull request.</p>
+      <p>Un pipeline de CI bien diseñado:</p>
+      <ul>
+        <li>Se ejecuta en <strong>cada push</strong> a cualquier branch</li>
+        <li>Bloquea <strong>merge</strong> si alguna gate falla</li>
+        <li>Genera <strong>reportes</strong> de cobertura y lint visibles en PRs</li>
+        <li>Es <strong>rápido</strong>: &lt;5 minutos para feedback inmediato</li>
+      </ul>
+      <pre><code>name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e ".[dev]"
+      - run: pytest tests/ --cov=src --cov-report=xml
+      - run: ruff check src/
+      - run: mypy src/
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+</code></pre>
+      <p><strong>Badges en README.md:</strong> Un agente (o un humano) puede ver el estado de salud del repo en un vistazo.</p>
+      <pre><code>[![CI](https://github.com/user/repo/actions/workflows/ci.yml/badge.svg)](https://github.com/user/repo/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/user/repo/branch/main/graph/badge.svg)](https://codecov.io/gh/user/repo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+</code></pre>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3>Definition of Done Checklist</h3>
+          <div class="module-topics">
+            <span class="tag">DoD</span>
+            <span class="tag">checklist</span>
+            <span class="tag">entregable</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Crear un checklist explícito que el agente debe completar antes de declarar una tarea terminada.</p>
+      <p>El Definition of Done elimina la ambigüedad. Si todos los items están marcados, la tarea está realmente lista.</p>
+      <p><strong>DoD mínimo recomendado:</strong></p>
+      <ul class="checklist">
+        <li>La implementación cumple con la especificación de TASK.md</li>
+        <li>Tests unitarios cubren el caso feliz y al menos 2 casos de error</li>
+        <li>Todos los tests existentes siguen pasando</li>
+        <li>El linter no reporta errores ni warnings nuevos</li>
+        <li>El type checker pasa sin errores</li>
+        <li>La documentación relevante está actualizada (AGENTS.md, docs/)</li>
+        <li>Los commits tienen mensajes descriptivos siguiendo convención</li>
+        <li>El repo está en estado limpio y restartable</li>
+        <li>Se actualizó TASK.md moviendo la tarea a "Completado"</li>
+      </ul>
+      <p><strong>Anti-patrón:</strong> Un DoD que nunca se consulta. Para que funcione, debe estar en AGENTS.md y el agente debe leerlo antes de decir "listo".</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>🧑‍✈️ Checklist del Agente</h2>
+    <p>Antes de considerar cualquier tarea terminada, verifica:</p>
+    <ul class="checklist">
+      <li>Existe un script o comando para ejecutar tests (<code>pytest</code>, <code>npm test</code>, etc.)</li>
+      <li>Existe un linter configurado y documentado</li>
+      <li>Existe un type checker configurado (si el lenguaje lo soporta)</li>
+      <li>La CI/CD pipeline ejecuta tests + lint en cada PR</li>
+      <li>El README tiene badges de CI y cobertura</li>
+      <li>El Definition of Done está documentado en AGENTS.md</li>
+      <li>La tarea actual tiene criterios de aceptación definidos en TASK.md</li>
+      <li>Ninguna verificación existente fue rota por los cambios nuevos</li>
+    </ul>
+
+    <h2>🔍 Diagnóstico Rápido</h2>
+    <p>Evalúa tu subsistema de Verification:</p>
+    <pre><code>harness scan . --json
+</code></pre>
+    <p>Busca checks como <code>3.1 Tests exist</code>, <code>3.2 CI configured</code>, <code>3.3 Linter configured</code>. Un score ≥80% significa que tienes gates sólidas que evitarán regresiones.</p>
+
+    <div class="section-divider"></div>
+
+    <h2>Relacionado</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/instructions.html" class="card">
+        <h3>📋 Instructions</h3>
+        <p>Diseña un sistema de instrucciones con AGENTS.md, ROADMAP.md y progressive disclosure.</p>
+      </a>
+      <a href="/harness-course/pages/state.html" class="card">
+        <h3>💾 State</h3>
+        <p>Mantén estado persistente entre sesiones con TASK.md, session handoff y progress tracking.</p>
+      </a>
+      <a href="/harness-course/pages/templates.html" class="card">
+        <h3>△ Templates</h3>
+        <p>Plantillas listas para verify.sh, GitHub Actions workflows y Definition of Done.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi)</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+</body>
+</html>
