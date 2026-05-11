@@ -1,0 +1,72 @@
+name: Tests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run test suite
+        id: tests
+        run: |
+          python3 tests/test_suite.py 2>&1 | tee test-output.txt
+
+      - name: Harness scan
+        id: harness
+        run: |
+          python3 scripts/harness_evaluator.py scan . --ci --threshold 50 2>&1 | tee -a test-output.txt
+        continue-on-error: true
+
+      - name: PR Comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const output = fs.readFileSync('test-output.txt', 'utf8');
+            
+            let summary = '## 🧪 Test Results\n\n';
+            
+            if (output.includes('ALL TESTS PASSED')) {
+              summary += '✅ **Tests: PASSED**\n';
+            } else {
+              summary += '❌ **Tests: FAILED**\n';
+            }
+            
+            const scoreMatch = output.match(/PUNTUACIÓN GLOBAL:\s*([\d.]+)%/);
+            const gradeMatch = output.match(/PUNTUACIÓN GLOBAL:.*?([🟢🟡🔠🔴]+)/);
+            if (scoreMatch) {
+              const pass = parseFloat(scoreMatch[1]) >= 50;
+              summary += `📊 **Harness Score: ${scoreMatch[1]}% ${gradeMatch ? gradeMatch[1] : ''}** — ${pass ? '✅' : '❌'}\n`;
+            }
+            
+            summary += '\n```\n' + output.slice(0, 1500) + '\n```';
+            
+            const {data: comments} = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const bot = comments.find(c => c.body.includes('Test Results'));
+            if (bot) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                comment_id: bot.id, body: summary
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: context.issue.number, body: summary
+              });
+            }

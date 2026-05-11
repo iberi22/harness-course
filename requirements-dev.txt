@@ -1,0 +1,12 @@
+# Development dependencies for Harness Course
+# The site itself is zero-dependency (HTML/CSS/JS vanilla)
+# These are only needed for tooling
+
+# Testing
+pytest>=7.0
+
+# HTML validation (optional, test_suite.py uses stdlib)
+# pip install html5validator
+
+# Link checking (optional)
+# pip install linkchecker

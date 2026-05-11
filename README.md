@@ -1,5 +1,8 @@
 # Harness Engineering — Curso + Evaluador CLI
 
+[![Tests](https://github.com/iberi22/harness-course/actions/workflows/test.yml/badge.svg)](https://github.com/iberi22/harness-course/actions/workflows/test.yml)
+[![Harness CI](https://github.com/iberi22/harness-course/actions/workflows/harness-ci.yml/badge.svg)](https://github.com/iberi22/harness-course/actions/workflows/harness-ci.yml)
+
 Curso de **Harness Engineering** para agentes de IA, con un **evaluador CLI** que escanea cualquier proyecto contra 48 checks en 6 subsistemas.
 
 🌐 **Sitio:** [iberi22.github.io/harness-course/](https://iberi22.github.io/harness-course/)
