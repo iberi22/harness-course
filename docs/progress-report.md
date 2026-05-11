@@ -1,6 +1,6 @@
 # 📋 Harness Engineering — Informe de Progreso
 
-> **Fecha:** 10 Mayo 2026
+> **Fecha:** 11 Mayo 2026
 > **Proyectos intervenidos:** 4
 > **Archivos generados:** ~35
 > **Objetivo:** Llevar todos los proyectos a score ≥ 50% con contenido real
@@ -13,12 +13,32 @@ Se intervinieron 4 proyectos con el **Harness Evaluator CLI** para diagnosticar,
 
 | Proyecto | Score Inicial | Score Actual | Mejora |
 |---|---|---|---|
-| **harness-course** | 6.3% 🔴 | ~45% 🟡 | +38.6% |
+| **harness-course** | 6.3% 🔴 | 82.7% 🟢 | +76.4% |
 | **agents-flows-recipes** | 46.5% 🟡 | 64.6% 🔵 | +18.1% |
-| **swal-skills** | 40.2% 🟡 | 58.3% 🟡 | +18.1% |
-| **synapse-trading** | 37.0% 🟠 | ~50% 🟡 | +13% |
+| **swal-skills** | 40.2% 🟡 | **74.0% 🔵** | **+33.8%** |
+| **synapse-trading** | 37.0% 🟠 | 81.9% 🟢 | +44.9% |
 
 Además se catalogaron ~150 repos starred de GitHub, se indexaron 44 skills locales y 8 starred, y se configuró CI/CD.
+
+### Cron Job 11-Mayo-2026: swal-skills 58.3% → 74.0% (+15.7pp)
+
+Se ejecutaron 3 subagentes en paralelo vía `delegate_task` (kimi-k2.6) para crear 12 archivos de harness:
+- SOUL.md, TOOLS.md, RULES.md → Instructions 95%
+- PROJECT_STATUS.md, MEMORY.md, HEARTBEAT.md → State 80%
+- USER.md, BOOTSTRAP.md → Scope 62.5%
+- Dockerfile → Lifecycle 95%
+
+**Proyectos locales escaneados (7):**
+
+| Proyecto | Score | Grade |
+|---|---|---|
+| harness-course | 82.7% | 🟢 EXCELENTE |
+| synapse-trading | 81.9% | 🟢 EXCELENTE |
+| swal-skills | 74.0% | 🔵 BUENO |
+| agents-flows-recipes | 64.6% | 🔵 BUENO |
+| agent-recipes-repo | 41.7% | 🟡 REGULAR |
+| learn-harness-engineering | 25.2% | 🟠 DÉBIL |
+| awesome-harness-engineering | 10.2% | 🔴 CRÍTICO |
 
 ---
 
