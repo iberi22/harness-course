@@ -50,9 +50,14 @@ class HarnessScanner:
 
     def _exists(self, *paths: str) -> Optional[Path]:
         for p in paths:
-            candidate = self.root / p
-            if candidate.exists():
-                return candidate
+            if "*" in p or "?" in p:
+                matches = list(self.root.glob(p))
+                if matches:
+                    return matches[0]
+            else:
+                candidate = self.root / p
+                if candidate.exists():
+                    return candidate
         return None
 
     def _check_file(self, check: HarnessCheck, *paths: str) -> None:
@@ -263,8 +268,8 @@ class HarnessScanner:
                           ".golangci.yml", ".flake8")
         checks.append(c)
 
-        c = HarnessCheck("3.6", "Type checking", "tsconfig.json, mypy.ini, pyrightconfig.json", 0.5)
-        for tc in ["tsconfig.json", "mypy.ini", "pyrightconfig.json", "Cargo.toml"]:
+        c = HarnessCheck("3.6", "Type checking", "tsconfig.json, jsconfig.json, mypy.ini, pyrightconfig.json", 0.5)
+        for tc in ["tsconfig.json", "jsconfig.json", "mypy.ini", "pyrightconfig.json", "Cargo.toml"]:
             if (self.root / tc).exists():
                 c.passed = True
                 c.detail = f"Encontrado: {tc}"

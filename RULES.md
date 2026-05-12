@@ -23,6 +23,18 @@
 - Search (⌘K), scrollspy, copy-code, accordion como módulos independientes
 - Cero dependencias externas — vanilla JS only
 
+## Definition of Done
+
+Para que una tarea se considere COMPLETADA, debe cumplir TODOS estos criterios de aceptación:
+
+- [ ] Código escrito según spec
+- [ ] Tests pasan (python3 tests/test_html_validation.py && python3 tests/test_integrity.py)
+- [ ] Sin regresiones visuales
+- [ ] Documentado en AGENTS.md si aplica
+- [ ] Comiteado con mensaje descriptivo (`feat:`, `fix:`, `docs:`, `chore:`)
+- [ ] Sin secrets hardcodeados
+- [ ] harness scan . --json no muestra nuevos errores
+
 ## Git
 - Commits: `feat:`, `fix:`, `docs:`, `chore:`, `style:`, `refactor:`
 - Branches: `feat/descripcion`, `fix/descripcion`
