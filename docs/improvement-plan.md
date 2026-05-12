@@ -216,7 +216,7 @@ Todos los issues cerrados en commit `0549a6f`:
 - `freqtrade/freqtrade` (50K★ Python) — trading bot
 - `Aider-AI/aider` (44K★ Python) — AI pair programming
 
-### V.2 Agente evaluador autónomo 🤖
+### V.2 Agente evaluador autónomo 🤖 ⏳ EN PROGRESO — Iniciado: 12-May-2026
 
 **Visión:** Un cron job que:
 1. Escanea todos los proyectos del usuario periódicamente
@@ -226,13 +226,14 @@ Todos los issues cerrados en commit `0549a6f`:
 
 **Implementación:**
 ```bash
-# Cron job semanal
-hermes cron create \
-  --schedule "0 9 * * 1" \
-  --prompt "Escanea todos los proyectos en ~/projects/ con harness scan . --json
-            y reporta cambios de score comparado con la semana anterior" \
-  --deliver telegram
+# Cron job diario a las 9 AM
+./scripts/evaluator-cron.sh
 ```
+
+**Documentación:** `docs/evaluator-agent.md`  
+**Scripts creados:**
+- `scripts/evaluator-cron.sh` — registro idempotente del cron job
+- `scripts/auto-evaluate.sh` — orquestador de escaneo multi-proyecto
 
 ### V.3 Multi-lenguaje 🌐
 
@@ -295,7 +296,7 @@ Fase V (Expansión)
 | 4 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟢 Alto | ✅ COMPLETADO — 6 skills importados de 4 repos externos con frontmatter mejorado |
 | 5 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | ✅ COMPLETADO — iberi22/skills creado con 74 skills unificados, POML deprecado |
 | 6 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ⏳ Pendiente |
-| 7 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ⏳ Pendiente |
+| 7 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ⏳ EN PROGRESO — 12-May-2026 |
 | 8 | **V.3 Multi-lenguaje** | V | 🔴 2 sesiones | 🟢 Medio | Alcance global | ⏳ Pendiente |
 | 9 | **V.4 Comunidad** | V | 🔴 4 sesiones | 🟢 Alto | Visión a largo plazo | ⏳ Pendiente |
 

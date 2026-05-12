@@ -1,0 +1,167 @@
+{
+  "last_updated": "2026-05-12T18:16:33-05:00",
+  "projects": {
+    "synapse-trading": {
+      "path": "/home/belal/projects/synapse-trading",
+      "latest_score": 100.0,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 100.0,
+      "delta": 0.0,
+      "status": "ok",
+      "error_msg": null
+    },
+    "zeroclaw": {
+      "path": "/home/belal/projects/zeroclaw",
+      "latest_score": 45.0,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 45.0,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 45.0% < threshold: 50%"
+    },
+    "skills": {
+      "path": "/home/belal/projects/skills",
+      "latest_score": 25.7,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 25.7,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 25.7% < threshold: 50%"
+    },
+    "swal-skills": {
+      "path": "/home/belal/projects/swal-skills",
+      "latest_score": 72.5,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 72.5,
+      "delta": 0.0,
+      "status": "ok",
+      "error_msg": null
+    },
+    "llama.cpp": {
+      "path": "/home/belal/projects/llama.cpp",
+      "latest_score": 41.3,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 41.3,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 41.3% < threshold: 50%"
+    },
+    "opencode": {
+      "path": "/home/belal/projects/opencode",
+      "latest_score": 11.9,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 11.9,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 11.9% < threshold: 50%"
+    },
+    "learn-harness-engineering": {
+      "path": "/home/belal/projects/learn-harness-engineering",
+      "latest_score": 29.4,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 29.4,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 29.4% < threshold: 50%"
+    },
+    "local-models": {
+      "path": "/home/belal/projects/local-models",
+      "latest_score": 0.0,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 0.0,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 0.0% < threshold: 50%"
+    },
+    "imported-skills": {
+      "path": "/home/belal/projects/imported-skills",
+      "latest_score": 4.6,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 4.6,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 4.6% < threshold: 50%"
+    },
+    "freqtrade": {
+      "path": "/home/belal/projects/freqtrade",
+      "latest_score": 37.6,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 37.6,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 37.6% < threshold: 50%"
+    },
+    "harness-course": {
+      "path": "/home/belal/projects/harness-course",
+      "latest_score": 100.0,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 100.0,
+      "delta": 0.0,
+      "status": "ok",
+      "error_msg": null
+    },
+    "harness-course-site": {
+      "path": "/home/belal/projects/harness-course-site",
+      "latest_score": 1.8,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 1.8,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 1.8% < threshold: 50%"
+    },
+    "aider": {
+      "path": "/home/belal/projects/aider",
+      "latest_score": 30.3,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 30.3,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 30.3% < threshold: 50%"
+    },
+    "context-mode": {
+      "path": "/home/belal/projects/context-mode",
+      "latest_score": 44.0,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 44.0,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 44.0% < threshold: 50%"
+    },
+    "browser-use": {
+      "path": "/home/belal/projects/browser-use",
+      "latest_score": 43.1,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 43.1,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 43.1% < threshold: 50%"
+    },
+    "awesome-harness-engineering": {
+      "path": "/home/belal/projects/awesome-harness-engineering",
+      "latest_score": 11.9,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 11.9,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 11.9% < threshold: 50%"
+    },
+    "agents-flows-recipes": {
+      "path": "/home/belal/projects/agents-flows-recipes",
+      "latest_score": 65.1,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 65.1,
+      "delta": 0.0,
+      "status": "ok",
+      "error_msg": null
+    },
+    "agent-recipes-repo": {
+      "path": "/home/belal/projects/agent-recipes-repo",
+      "latest_score": 48.6,
+      "latest_file": "2026-05-12T18-16-33.json",
+      "previous_score": 48.6,
+      "delta": 0.0,
+      "status": "error",
+      "error_msg": "[CI FAIL] Overall: 48.6% < threshold: 50%"
+    }
+  }
+}
