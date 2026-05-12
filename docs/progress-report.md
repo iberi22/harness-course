@@ -13,9 +13,9 @@ Se intervinieron 4 proyectos con el **Harness Evaluator CLI** para diagnosticar,
 
 | Proyecto | Score Inicial | Score Actual | Mejora |
 |---|---|---|---|
-| **harness-course** | 6.3% 🔴 | 82.7% 🟢 | +76.4% |
+| **harness-course** | 6.3% 🔴 | **100.0% 🏆** | **+93.7%** |
 | **agents-flows-recipes** | 46.5% 🟡 | 64.6% 🔵 | +18.1% |
-| **swal-skills** | 40.2% 🟡 | **74.0% 🔵** | **+33.8%** |
+| **swal-skills** | 40.2% 🟡 | 74.0% 🔵 | +33.8% |
 | **synapse-trading** | 37.0% 🟠 | 81.9% 🟢 | +44.9% |
 
 Además se catalogaron ~150 repos starred de GitHub, se indexaron 44 skills locales y 8 starred, y se configuró CI/CD.
@@ -32,7 +32,7 @@ Se ejecutaron 3 subagentes en paralelo vía `delegate_task` (kimi-k2.6) para cre
 
 | Proyecto | Score | Grade |
 |---|---|---|
-| harness-course | 82.7% | 🟢 EXCELENTE |
+| harness-course | **100.0%** | 🟢 EXCELENTE |
 | synapse-trading | 81.9% | 🟢 EXCELENTE |
 | swal-skills | 74.0% | 🔵 BUENO |
 | agents-flows-recipes | 64.6% | 🔵 BUENO |
