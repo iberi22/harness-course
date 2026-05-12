@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎮 Tutorial Interactivo — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+<style>
+/* === Tutorial-specific styles === */
+.tutorial-progress {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.tutorial-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.tutorial-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.tutorial-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.step-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+.step-check input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-surface);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.12s;
+  flex-shrink: 0;
+}
+.step-check input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.step-check input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+.step-check label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+.step-check input[type="checkbox"]:checked + label {
+  color: var(--success);
+}
+.step-check input[type="checkbox"]:checked + label span {
+  text-decoration: line-through;
+}
+details.expected-output {
+  background: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin: 16px 0 0;
+  overflow: hidden;
+}
+details.expected-output summary {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+details.expected-output summary::-webkit-details-marker { display: none; }
+details.expected-output summary::before {
+  content: "▾";
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+details.expected-output[open] summary::before {
+  transform: rotate(180deg);
+}
+details.expected-output > div {
+  padding: 0 16px 16px;
+}
+details.expected-output pre {
+  margin: 0;
+}
+.celebration {
+  display: none;
+  background: linear-gradient(135deg, rgba(94,106,210,0.12), rgba(39,166,68,0.08));
+  border: 1px solid rgba(94,106,210,0.2);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  margin: 32px 0;
+}
+.celebration.show {
+  display: block;
+  animation: page-fade-in 0.6s ease;
+}
+.celebration h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+.celebration p {
+  margin: 0;
+  color: var(--text-muted);
+}
+.cmd-table th,
+.cmd-table td {
+  font-family: var(--mono);
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> Scope</a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span> Agents Flows</a>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Interactive</div>
+      <a href="/harness-course/pages/tutorial.html" class="active"><span class="nav-icon">🎮</span> Tutorial</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">🎮</span> Tutorial Interactivo: De 45% a 80% en 10 Minutos</h1>
+    <p>Sigue estos pasos con cualquier proyecto — eleva tu harness score en una sesión.</p>
+  </div>
+  <div class="content">
+
+    <div class="tutorial-progress">
+      <div class="tutorial-progress-label">
+        <span id="progress-label">0 de 6 pasos completados</span>
+        <span id="progress-text">0%</span>
+      </div>
+      <div class="tutorial-progress-bar">
+        <div class="tutorial-progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="module module-collapsible" id="step-1">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>Diagnosticar</h3>
+          <div class="module-topics">
+            <span class="tag">CLI</span>
+            <span class="tag">Diagnóstico</span>
+            <span class="tag">JSON</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Obtener el score base de tu proyecto y entender qué subsistemas necesitan atención.</p>
+      <p>Ejecuta el scanner en la raíz de tu proyecto para obtener un diagnóstico completo en formato JSON:</p>
+      <pre><code>harness scan . --json</code></pre>
+      <details class="expected-output">
+        <summary>Expected output</summary>
+        <div>
+          <pre><code>{
+  "score": 45,
+  "grade": "NEEDS_IMPROVEMENT",
+  "subsystems": [
+    { "id": "instructions", "score": 60, "weight": 0.25 },
+    { "id": "state", "score": 40, "weight": 0.20 },
+    { "id": "verification", "score": 10, "weight": 0.20 },
+    { "id": "scope", "score": 50, "weight": 0.15 },
+    { "id": "lifecycle", "score": 55, "weight": 0.10 },
+    { "id": "skills", "score": 30, "weight": 0.10 }
+  ]
+}</code></pre>
+        </div>
+      </details>
+      <p>Revisa los scores por subsistema. Los más bajos suelen ser <strong>Verification</strong> (falta de tests) e <strong>Instructions</strong> (falta de docs estructuradas). Anota tu score base: lo compararás al final.</p>
+      <div class="step-check">
+        <input type="checkbox" id="check-step-1" data-step="step-1">
+        <label for="check-step-1"><span>Completado: obtuve mi diagnóstico JSON base</span></label>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="module module-collapsible" id="step-2">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>Generar archivos faltantes</h3>
+          <div class="module-topics">
+            <span class="tag">CLI</span>
+            <span class="tag">Stubs</span>
+            <span class="tag">Autofix</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Crear stubs automáticos para todos los archivos de harness que faltan en tu proyecto.</p>
+      <p>El comando <code>harness fix .</code> analiza tu repo y genera archivos de scaffolding con contenido mínimo viable:</p>
+      <pre><code>harness fix .</code></pre>
+      <details class="expected-output">
+        <summary>Expected output</summary>
+        <div>
+          <pre><code>✅ AGENTS.md creado
+✅ ROADMAP.md creado
+✅ TASK.md creado
+✅ docs/vision.md creado
+✅ scripts/verify.sh creado
+✅ tests/ creado
+⚠️  Revisa los stubs generados y reemplázalos con contenido real.</code></pre>
+        </div>
+      </details>
+      <p><strong>Importante:</strong> <code>harness fix .</code> <em>no</em> cubre los siguientes archivos — debes crearlos manualmente si aplican a tu proyecto:</p>
+      <ul>
+        <li><code>SOUL.md</code> — identidad y filosofía del proyecto</li>
+        <li><code>TOOLS.md</code> — stack y herramientas permitidas</li>
+        <li><code>USER.md</code> — perfil del usuario objetivo</li>
+        <li><code>MEMORY.md</code> — convenciones de memoria y estado</li>
+        <li><code>BOOTSTRAP.md</code> — instrucciones de setup inicial</li>
+        <li><code>RULES.md</code> — reglas de negocio y constraints</li>
+        <li><code>.gitignore</code> — exclusiones de version control</li>
+        <li><code>LICENSE</code> — licencia del proyecto</li>
+      </ul>
+      <div class="step-check">
+        <input type="checkbox" id="check-step-2" data-step="step-2">
+        <label for="check-step-2"><span>Completado: generé stubs y revisé archivos no cubiertos</span></label>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="module module-collapsible" id="step-3">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>Personalizar cada archivo</h3>
+          <div class="module-topics">
+            <span class="tag">Content</span>
+            <span class="tag">Docs</span>
+            <span class="tag">Identity</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Transformar los stubs genéricos en documentación viva que refleje la identidad real de tu proyecto.</p>
+      <p>Abre cada archivo generado y reescríbelo con contenido específico. No dejes placeholders. Algunos ejemplos:</p>
+      <ul>
+        <li><strong>SOUL.md:</strong> "Este proyecto es un motor de backtesting cuantitativo. Su razón de ser es permitir a traders individuales validar estrategias sin código."</li>
+        <li><strong>AGENTS.md:</strong> Define quién es el agente, qué puede hacer y qué no debe hacer nunca.</li>
+        <li><strong>ROADMAP.md:</strong> Lista milestones reales con fechas o versiones objetivo.</li>
+        <li><strong>docs/vision.md:</strong> Describe el north star del proyecto en 3 párrafos máximo.</li>
+      </ul>
+      <p><strong>Regla de oro:</strong> si un archivo tiene más del 30% de texto genérico o placeholders ("TODO", "FIXME", "[NOMBRE]"), el harness score no subirá.</p>
+      <div class="step-check">
+        <input type="checkbox" id="check-step-3" data-step="step-3">
+        <label for="check-step-3"><span>Completado: reescribí todos los stubs con contenido real</span></label>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="module module-collapsible" id="step-4">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3>Re-escanear</h3>
+          <div class="module-topics">
+            <span class="tag">CLI</span>
+            <span class="tag">Metrics</span>
+            <span class="tag">Compare</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Medir el impacto de la documentación y los stubs generados.</p>
+      <p>Vuelve a ejecutar el scanner y compara los scores:</p>
+      <pre><code>harness scan . --json</code></pre>
+      <details class="expected-output">
+        <summary>Expected output</summary>
+        <div>
+          <pre><code>{
+  "score": 62,
+  "grade": "FAIR",
+  "subsystems": [
+    { "id": "instructions", "score": 85, "weight": 0.25 },
+    { "id": "state", "score": 70, "weight": 0.20 },
+    { "id": "verification", "score": 15, "weight": 0.20 },
+    { "id": "scope", "score": 65, "weight": 0.15 },
+    { "id": "lifecycle", "score": 60, "weight": 0.10 },
+    { "id": "skills", "score": 45, "weight": 0.10 }
+  ]
+}</code></pre>
+        </div>
+      </details>
+      <p>Lo más probable es que <strong>Instructions</strong> y <strong>Scope</strong> hayan subido drásticamente. Sin embargo, <strong>Verification</strong> seguirá bajo hasta que agregues tests.</p>
+      <div class="step-check">
+        <input type="checkbox" id="check-step-4" data-step="step-4">
+        <label for="check-step-4"><span>Completado: re-escaneé y comparé scores antes/después</span></label>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="module module-collapsible" id="step-5">
+      <div class="module-header">
+        <div class="module-num">5</div>
+        <div>
+          <h3>Agregar tests</h3>
+          <div class="module-topics">
+            <span class="tag">Test</span>
+            <span class="tag">Verification</span>
+            <span class="tag">CI</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Cerrar el gap de Verification creando al menos 2 archivos de test.</p>
+      <p>Crea el directorio <code>tests/</code> y al menos 2 archivos de test con casos reales:</p>
+      <pre><code>mkdir tests
+touch tests/test_core.py
+touch tests/test_validation.py</code></pre>
+      <p>Escribe al menos un test que pase y uno que valide un error. Ejemplo mínimo:</p>
+      <pre><code># tests/test_core.py
+def test_something_real():
+    assert True  # reemplaza con una prueba real de tu dominio
+
+# tests/test_validation.py
+def test_invalid_input_raises():
+    with pytest.raises(ValueError):
+        process_input(None)
+</code></pre>
+      <p>Luego re-escanea para ver el salto en Verification:</p>
+      <pre><code>harness scan . --json</code></pre>
+      <details class="expected-output">
+        <summary>Expected output</summary>
+        <div>
+          <pre><code>{
+  "score": 78,
+  "grade": "GOOD",
+  "subsystems": [
+    { "id": "instructions", "score": 85, "weight": 0.25 },
+    { "id": "state", "score": 70, "weight": 0.20 },
+    { "id": "verification", "score": 80, "weight": 0.20 },
+    { "id": "scope", "score": 75, "weight": 0.15 },
+    { "id": "lifecycle", "score": 70, "weight": 0.10 },
+    { "id": "skills", "score": 55, "weight": 0.10 }
+  ]
+}</code></pre>
+        </div>
+      </details>
+      <p>Con solo 2 archivos de test bien escritos, el subsistema de <strong>Verification</strong> puede saltar de ~15% a ~80%.</p>
+      <div class="step-check">
+        <input type="checkbox" id="check-step-5" data-step="step-5">
+        <label for="check-step-5"><span>Completado: creé tests/ con al menos 2 archivos de test</span></label>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="module module-collapsible" id="step-6">
+      <div class="module-header">
+        <div class="module-num">6</div>
+        <div>
+          <h3>Score final</h3>
+          <div class="module-topics">
+            <span class="tag">Meta</span>
+            <span class="tag">80%</span>
+            <span class="tag">Next steps</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Objetivo:</strong> Alcanzar 80%+ de harness score y planificar mejoras continuas.</p>
+      <p>Con los 5 pasos anteriores, tu score debería estar en el rango <strong>75–85%</strong>. Si aún no llegas a 80%, revisa estos ajustes rápidos:</p>
+      <ul>
+        <li><strong>Skills:</strong> Si usas skills o recetas, asegúrate de que cada una tenga un <code>SKILL.md</code> con frontmatter.</li>
+        <li><strong>Lifecycle:</strong> Agrega un <code>scripts/init.sh</code> o <code>scripts/verify.sh</code> ejecutable.</li>
+        <li><strong>State:</strong> Crea <code>progress.md</code> o <code>session-handoff.md</code> con estado actual del proyecto.</li>
+        <li><strong>Scope:</strong> Define un <code>Definition of Done</code> explícito en <code>AGENTS.md</code> o <code>TASK.md</code>.</li>
+      </ul>
+      <p>Cuando alcances 80% o más, ejecuta una última vez:</p>
+      <pre><code>harness scan . --json | jq '.score'</code></pre>
+      <p>Y celebra. Tu proyecto ahora tiene un harness que cualquier agente puede entender y usar de manera confiable.</p>
+      <div class="step-check">
+        <input type="checkbox" id="check-step-6" data-step="step-6">
+        <label for="check-step-6"><span>Completado: alcancé 80%+ y documenté mis próximos pasos</span></label>
+      </div>
+    </div>
+
+    <!-- Celebration -->
+    <div class="celebration" id="celebration">
+      <h2>🎉 ¡Tutorial completado!</h2>
+      <p>Has elevado tu harness score de ~45% a 80%+. Tu proyecto ahora tiene documentación estructurada, tests y un entorno que cualquier agente puede navegar con confianza.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>📋 Referencia rápida de comandos</h2>
+    <table class="cmd-table">
+      <thead>
+        <tr>
+          <th>Comando</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>harness scan . --json</code></td>
+          <td>Diagnóstico completo del proyecto en JSON</td>
+        </tr>
+        <tr>
+          <td><code>harness scan . --json | jq '.score'</code></td>
+          <td>Ver solo el score total</td>
+        </tr>
+        <tr>
+          <td><code>harness scan . --json | jq '.subsystems[] | select(.id=="verification")'</code></td>
+          <td>Ver solo un subsistema específico</td>
+        </tr>
+        <tr>
+          <td><code>harness fix .</code></td>
+          <td>Generar stubs automáticos para archivos faltantes</td>
+        </tr>
+        <tr>
+          <td><code>harness -h</code></td>
+          <td>Ayuda general del CLI</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-divider"></div>
+
+    <h2>Relacionado</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/verification.html" class="card">
+        <h3>✅ Verification</h3>
+        <p>Profundiza en tests, CI/CD, linters y type checking para mantener tu score alto.</p>
+      </a>
+      <a href="/harness-course/pages/templates.html" class="card">
+        <h3>△ Templates</h3>
+        <p>Plantillas listas para copiar: AGENTS.md, verify.sh, GitHub Actions y más.</p>
+      </a>
+      <a href="/harness-course/pages/case-study.html" class="card">
+        <h3>🧠 Case Study</h3>
+        <p>Análisis real de un repo de 21 skills — lecciones aplicables a tu proyecto.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi)</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+<script>
+(function() {
+  var STORAGE_KEY = 'harness-tutorial-progress';
+  var TOTAL_STEPS = 6;
+
+  function getProgress() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveProgress(progress) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  }
+
+  function updateProgress() {
+    var progress = getProgress();
+    var completed = 0;
+    for (var i = 1; i <= TOTAL_STEPS; i++) {
+      if (progress['step-' + i]) completed++;
+    }
+    var pct = Math.round((completed / TOTAL_STEPS) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' de ' + TOTAL_STEPS + ' pasos completados';
+
+    var celebration = document.getElementById('celebration');
+    if (completed === TOTAL_STEPS) {
+      celebration.classList.add('show');
+    } else {
+      celebration.classList.remove('show');
+    }
+  }
+
+  document.querySelectorAll('.step-check input[type="checkbox"]').forEach(function(cb) {
+    var stepId = cb.dataset.step;
+    var progress = getProgress();
+    cb.checked = !!progress[stepId];
+
+    cb.addEventListener('change', function() {
+      var progress = getProgress();
+      progress[stepId] = this.checked;
+      saveProgress(progress);
+      updateProgress();
+    });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>

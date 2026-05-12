@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 Case Study: Agents-Flows-Recipes — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> Scope</a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="/harness-course/pages/case-study.html" class="active"><span class="nav-icon">🧠</span> Agents Flows</a>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Interactive</div>
+      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span> Tutorial</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">🧠</span> Case Study: Agents-Flows-Recipes</h1>
+    <p>Un repositorio de 21 skills para agentes — lecciones de un harness documentado</p>
+  </div>
+  <div class="content">
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>Visión General</h3>
+          <div class="module-topics">
+            <span class="tag">skills repo</span>
+            <span class="tag">frontmatter</span>
+            <span class="tag">registry</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Proyecto:</strong> <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener">Agents-Flows-Recipes</a> — un repositorio de 21 skills documentadas para agentes de IA.</p>
+      <p><strong>Estadísticas:</strong></p>
+      <ul>
+        <li>241 archivos en el repo</li>
+        <li>~5K líneas de código</li>
+        <li>21 skills documentadas con frontmatter YAML</li>
+        <li>_registry con manifest.yaml y skill provider</li>
+        <li>Sistema POML opcional para orquestación declarativa</li>
+      </ul>
+      <p>El proyecto es un <em>skills repo</em>: cada skill vive en su propio directorio bajo <code>skills/</code>, con un <code>SKILL.md</code> que define su identidad, descripción y trigger mediante frontmatter. Un <code>_registry/manifest.yaml</code> centraliza el catálogo y un <code>skill-provider.py</code> permite cargarlas dinámicamente.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>Análisis Harness</h3>
+          <div class="module-topics">
+            <span class="tag">score</span>
+            <span class="tag">bottleneck</span>
+            <span class="tag">subsistemas</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>Breakdown por subsistema:</strong></p>
+      <ul>
+        <li><strong>Instructions:</strong> 85%</li>
+        <li><strong>State:</strong> 80%</li>
+        <li><strong>Verification:</strong> 0% — <em>el bottleneck principal</em></li>
+        <li><strong>Scope:</strong> 62.5%</li>
+        <li><strong>Lifecycle:</strong> 70%</li>
+        <li><strong>Skills:</strong> 66.7%</li>
+      </ul>
+      <p><strong>Total:</strong> 61.5% — clasificación <span class="tag">BUENO</span></p>
+      <p>El score revela un patrón común: excelente documentación y estructura de skills, pero una ausencia total de verificación automatizada. Sin tests, CI/CD ni linters, el repo depende enteramente de revisión manual.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>Fortalezas</h3>
+          <div class="module-topics">
+            <span class="tag">frontmatter</span>
+            <span class="tag">registry</span>
+            <span class="tag">documentación</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>1. Skills con frontmatter validado en todos</strong></p>
+      <p>Cada uno de los 21 skills tiene un <code>SKILL.md</code> con frontmatter YAML que incluye <code>name</code>, <code>description</code> y <code>trigger</code>. Esto permite que cualquier agente entienda cuándo y cómo usar cada skill sin adivinar.</p>
+      <p><strong>2. Registry system con provider + manifest</strong></p>
+      <p>El <code>_registry/manifest.yaml</code> actúa como índice central. El <code>skill-provider.py</code> carga skills dinámicamente desde el manifest, evitando hardcodear rutas y permitiendo descubrimiento automático.</p>
+      <p><strong>3. Documentación extensa (131 markdown files)</strong></p>
+      <p>Con 131 archivos markdown, el repo prioriza la documentación. Cada skill, cada subsistema y cada decisión de diseño están explicados en texto plano, máxima portabilidad para cualquier agente.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3>Debilidades</h3>
+          <div class="module-topics">
+            <span class="tag">verification</span>
+            <span class="tag">lifecycle</span>
+            <span class="tag">scope</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>1. Verification 0%: sin tests, sin CI/CD, sin linter</strong></p>
+      <p>Es el gap más crítico. No hay tests unitarios, ni de integración, ni pipeline de CI/CD. No hay linter ni type checker. Cualquier cambio rompe silenciosamente hasta que alguien lo nota manualmente.</p>
+      <p><strong>2. Lifecycle mejorable: 70%</strong></p>
+      <p>Faltan hooks de lifecycle automatizados, init.sh no verifica dependencias y no hay un sistema de clean-state garantizado al final de cada sesión.</p>
+      <p><strong>3. Scope parcial: 62.5%</strong></p>
+      <p>No hay un Definition of Done explícito por feature ni un TASK.md que limite el trabajo a una sola tarea a la vez. El agente puede overreach fácilmente.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">5</div>
+        <div>
+          <h3>Lecciones para tu Proyecto</h3>
+          <div class="module-topics">
+            <span class="tag">aplicabilidad</span>
+            <span class="tag">mejora continua</span>
+            <span class="tag">harness</span>
+          </div>
+        </div>
+      </div>
+      <p><strong>1. Documenta skills con frontmatter desde el día 1</strong></p>
+      <p>El frontmatter no es overhead: es el contrato que permite que un agente descubra y use tu skill sin intervención humana. Invierte 3 líneas de YAML al crear cada skill.</p>
+      <p><strong>2. Un _registry centralizado evita skills huérfanas</strong></p>
+      <p>Sin manifest, las skills se pierden en subdirectorios. Un _registry con provider garantiza que el agente sepa qué existe y dónde encontrarlo.</p>
+      <p><strong>3. El Verification gap es el enemigo común</strong></p>
+      <p>Documentar sin verificar es como escribir un mapa sin comprobar que los caminos existen. Si solo puedes mejorar una cosa, pon tests. Un 0% en verification arrastra todo el score.</p>
+      <p><strong>4. 21 skills > 5 skills genéricos</strong></p>
+      <p>Es mejor tener 21 skills pequeñas y específicas que 5 monolitos. Las skills atómicas se componen, se versionan y se debuguean más fácilmente.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">6</div>
+        <div>
+          <h3>Checklist para el Agente</h3>
+          <div class="module-topics">
+            <span class="tag">checklist</span>
+            <span class="tag">verificación</span>
+            <span class="tag">score</span>
+          </div>
+        </div>
+      </div>
+      <p>Antes de considerar completo el análisis de este case study, verifica:</p>
+      <ul class="checklist">
+        <li>Todos los SKILL.md tienen frontmatter con name, description y trigger</li>
+        <li>_registry/manifest.yaml lista las 21 skills con paths correctos</li>
+        <li>El skill-provider carga skills sin errores desde el manifest</li>
+        <li>La documentación tiene fecha de última actualización visible</li>
+        <li>Se identificó el bottleneck principal (Verification 0%)</li>
+        <li>Se propusieron acciones concretas para cerrar cada gap</li>
+        <li>El score total del proyecto se recalcula tras cada mejora</li>
+        <li>No hay skills sin directorio propio o sin SKILL.md</li>
+      </ul>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">7</div>
+        <div>
+          <h3>Diagnóstico Rápido con Harness Scan</h3>
+          <div class="module-topics">
+            <span class="tag">harness scan</span>
+            <span class="tag">JSON</span>
+            <span class="tag">CI</span>
+          </div>
+        </div>
+      </div>
+      <p>Usa el scanner de harness para evaluar cualquier repo de skills:</p>
+      <pre><code>harness scan . --json
+</code></pre>
+      <p>Para ver solo el subsistema de verification:</p>
+      <pre><code>harness scan . --json | jq '.subsystems[] | select(.id=="verification")'
+</code></pre>
+      <p>Para generar archivos faltantes automáticamente:</p>
+      <pre><code>harness fix .
+</code></pre>
+      <p><strong>Meta:</strong> llevar el score total de 61.5% a ≥ 80%. Eso requiere principalmente cerrar el gap de verification (llevarlo de 0% a ≥ 70%) y mejorar scope a ≥ 80%.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Relacionado</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/templates.html" class="card">
+        <h3>△ Templates</h3>
+        <p>Plantillas listas para copiar: AGENTS.md, ROADMAP.md, TASK.md y más.</p>
+      </a>
+      <a href="/harness-course/pages/skills.html" class="card">
+        <h3>🧠 Skills &amp; POML</h3>
+        <p>Cómo estructurar skills, validar recetas POML y construir un catálogo reutilizable.</p>
+      </a>
+      <a href="/harness-course/pages/verification.html" class="card">
+        <h3>✅ Verification</h3>
+        <p>Tests, CI/CD, linters y type checking para evitar que el agente declare victoria demasiado temprano.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi)</p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+</body>
+</html>

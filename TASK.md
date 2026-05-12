@@ -22,10 +22,11 @@
 - [ ] Integrar harness evaluador en la web del curso
 
 ### 📌 Pendiente (Fase 2)
+- [x] Página de detalle por subsistema (6 páginas nuevas)
+- [x] Case study: agents-flows-recipes (pages/case-study.html)
+- [x] Test suite: HTML validation + link checker
+- [x] GitHub Actions CI/CD
 - [ ] Tutorial interactivo: "De 6% a 80% en 10 minutos"
-- [ ] Página de detalle por subsistema (6 páginas nuevas)
-- [ ] Test suite: HTML validation + link checker
-- [ ] GitHub Actions CI/CD
 - [ ] Skills catalog indexado
 
 ### 💡 Icebox
