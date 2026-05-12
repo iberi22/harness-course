@@ -291,9 +291,9 @@ Fase V (Expansión)
 |---|---|---|---|---|---|---|---|
 | 1 | **I.3 OpenClaw cosmetics** | I | 🟢 30 min | 🟢 Alto | Logs limpios = debugging más rápido | ⏳ Sin repo |
 | 2 | **III.2 Tutorial interactivo** | III | 🔴 3 sesiones | 🟢 Alto | Valor educativo | ⏳ EN PROGRESO |
-| 3 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟡 Medio | Contenido para el sitio | ⏳ Pendiente |
-| 4 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟡 Medio | + skills = agente más capaz | ⏳ Pendiente |
-| 5 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | Elimina duplicación | ⏳ Pendiente |
+| 3 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟢 Alto | ✅ COMPLETADO — 10 repos escaneados, leaderboard.html creado |
+| 4 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟢 Alto | ✅ COMPLETADO — 6 skills importados de 4 repos externos con frontmatter mejorado |
+| 5 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | ✅ COMPLETADO — iberi22/skills creado con 74 skills unificados, POML deprecado |
 | 6 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ⏳ Pendiente |
 | 7 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ⏳ Pendiente |
 | 8 | **V.3 Multi-lenguaje** | V | 🔴 2 sesiones | 🟢 Medio | Alcance global | ⏳ Pendiente |

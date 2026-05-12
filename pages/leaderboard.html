@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏆 Leaderboard — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+<style>
+.leaderboard-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 24px 0; }
+.leaderboard-table th {
+  text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border-subtle);
+}
+.leaderboard-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); vertical-align: middle; }
+.leaderboard-table tr:hover td { background: rgba(255,255,255,0.02); }
+.rank-num { font-size: 20px; font-weight: 700; width: 40px; }
+.rank-1 { color: #ffd700; } .rank-2 { color: #c0c0c0; } .rank-3 { color: #cd7f32; }
+.score-badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+  border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+.score-excellent { background: rgba(34,197,94,0.15); color: #22c55e; }
+.score-good { background: rgba(59,130,246,0.15); color: #3b82f6; }
+.score-regular { background: rgba(234,179,8,0.15); color: #eab308; }
+.score-weak { background: rgba(249,115,22,0.15); color: #f97316; }
+.score-critical { background: rgba(239,68,68,0.15); color: #ef4444; }
+.stars { color: var(--text-muted); font-size: 12px; }
+.bar-container { width: 120px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 10px; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+.bar-100 { background: linear-gradient(90deg, #22c55e, #16a34a); }
+.bar-80 { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+.bar-60 { background: linear-gradient(90deg, #eab308, #ca8a04); }
+.bar-40 { background: linear-gradient(90deg, #f97316, #ea580c); }
+.bar-0 { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.subsystem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 24px 0; }
+.subsystem-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 16px; }
+.subsystem-card h4 { margin: 0 0 4px; font-size: 13px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+.subsystem-card .score { font-size: 28px; font-weight: 700; }
+.subsystem-card .detail { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+</style>
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> Scope</a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+      <a href="/harness-course/pages/lifecycle.html"><span class="nav-icon">🔄</span> Lifecycle</a>
+      <a href="/harness-course/pages/skills.html"><span class="nav-icon">🧠</span> Skills</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Case Study</div>
+      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span> Agents Flows</a>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+      <a href="/harness-course/pages/leaderboard.html" class="active"><span class="nav-icon">🏆</span> Leaderboard</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Interactive</div>
+      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span> Tutorial</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">🏆</span> Harness Score Leaderboard</h1>
+    <p>Repos open-source evaluados con el escáner de Harness Engineering — actualizado: 12-May-2026</p>
+  </div>
+  <div class="content">
+
+    <div class="module">
+      <div class="module-header">
+        <div class="module-num">★</div>
+        <div>
+          <h3>Top Repos por Harness Score</h3>
+          <div class="module-topics">
+            <span class="tag">leaderboard</span>
+            <span class="tag">benchmark</span>
+            <span class="tag">open-source</span>
+          </div>
+        </div>
+      </div>
+      <p>¿Qué tan bien preparados están los proyectos open-source más populares para ser operados por agentes de IA? Usamos <strong>Harness Engineering Scanner v2</strong> para medir 6 subsistemas en repos top-starred de GitHub.</p>
+
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Proyecto</th>
+            <th>★ Estrellas</th>
+            <th>Stack</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="rank-num rank-1">🥇</span></td>
+            <td><strong>harness-course</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/harness-course</span></td>
+            <td><span class="stars">—</span></td>
+            <td>HTML/CSS/JS</td>
+            <td><span class="score-badge score-excellent">🟢 100.0%</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num rank-2">🥈</span></td>
+            <td><strong>synapse-trading</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/synapse-trading</span></td>
+            <td><span class="stars">—</span></td>
+            <td>Rust</td>
+            <td><span class="score-badge score-excellent">🟢 81.9%</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-num rank-3">🥉</span></td>
+            <td><strong>swal-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/swal-skills</span></td>
+            <td><span class="stars">—</span></td>
+            <td>Skills</td>
+            <td><span class="score-badge score-good">🔵 74.0%</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>agents-flows-recipes</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/agents-flows-recipes</span></td>
+            <td><span class="stars">—</span></td>
+            <td>POML</td>
+            <td><span class="score-badge score-regular">🟡 64.6%</span></td>
+          </tr>
+          <tr>
+            <td style="border-top: 2px solid var(--border-subtle);">5</td>
+            <td style="border-top: 2px solid var(--border-subtle);"><strong>zeroclaw</strong><br><span style="font-size:12px;color:var(--text-muted)">zeroclaw-labs/zeroclaw</span></td>
+            <td style="border-top: 2px solid var(--border-subtle);"><span class="stars">⭐ 31K</span></td>
+            <td>Rust</td>
+            <td style="border-top: 2px solid var(--border-subtle);"><span class="score-badge score-regular">🟡 45.0%</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>agent-recipes-repo</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/agent-recipes-repo</span></td>
+            <td><span class="stars">—</span></td>
+            <td>Recipes</td>
+            <td><span class="score-badge score-regular">🟡 41.7%</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>browser-use</strong><br><span style="font-size:12px;color:var(--text-muted)">browser-use/browser-use</span></td>
+            <td><span class="stars">⭐ 93K</span></td>
+            <td>Python</td>
+            <td><span class="score-badge score-regular">🟡 43.1%</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>freqtrade</strong><br><span style="font-size:12px;color:var(--text-muted)">freqtrade/freqtrade</span></td>
+            <td><span class="stars">⭐ 50K</span></td>
+            <td>Python</td>
+            <td><span class="score-badge score-weak">🟠 37.6%</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>aider</strong><br><span style="font-size:12px;color:var(--text-muted)">Aider-AI/aider</span></td>
+            <td><span class="stars">⭐ 44K</span></td>
+            <td>Python</td>
+            <td><span class="score-badge score-weak">🟠 30.3%</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>opencode</strong><br><span style="font-size:12px;color:var(--text-muted)">opencode-ai/opencode</span></td>
+            <td><span class="stars">⭐ 12K</span></td>
+            <td>Go</td>
+            <td><span class="score-badge score-critical">🔴 11.9%</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>📊 Comparativa por Subsistema</h2>
+    <p>Los 6 subsistemas evaluados muestran un patrón claro: <strong>Verification</strong> es el punto fuerte de casi todos los proyectos, mientras que <strong>Skills</strong> y <strong>State</strong> son los más descuidados.</p>
+
+    <div class="subsystem-grid">
+      <div class="subsystem-card">
+        <h4>📋 Instructions</h4>
+        <div class="score" style="color:#eab308;">∅ 28%</div>
+        <div class="detail">Promedio entre todos los repos. La mayoría tiene README pero carece de AGENTS.md, ROADMAP.md.</div>
+      </div>
+      <div class="subsystem-card">
+        <h4>💾 State</h4>
+        <div class="score" style="color:#ef4444;">∅ 13%</div>
+        <div class="detail">El peor promedio. Casi ningún repo tiene TASK.md, MEMORY.md o tracking de estado para agentes.</div>
+      </div>
+      <div class="subsystem-card">
+        <h4>✅ Verification</h4>
+        <div class="score" style="color:#22c55e;">∅ 66%</div>
+        <div class="detail">El más fuerte. Tests y CI/CD son estándar en proyectos populares. Algunos llegan a 100%.</div>
+      </div>
+      <div class="subsystem-card">
+        <h4>🎯 Scope</h4>
+        <div class="score" style="color:#f97316;">∅ 18%</div>
+        <div class="detail">Pocos proyectos tienen Definition of Done, CONTRIBUTING.md claro o USER.md.</div>
+      </div>
+      <div class="subsystem-card">
+        <h4>🔄 Lifecycle</h4>
+        <div class="score" style="color:#eab308;">∅ 45%</div>
+        <div class="detail">Docker y .gitignore son comunes. Scripts de init (Makefile, setup.sh) son raros.</div>
+      </div>
+      <div class="subsystem-card">
+        <h4>🧠 Skills</h4>
+        <div class="score" style="color:#ef4444;">∅ 10%</div>
+        <div class="detail">Casi inexistente en proyectos no-Harness. Solo harness-course y swal-skills tienen skills estructurados.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>🔍 Conclusiones</h2>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3>Nuestros proyectos lideran</h3>
+        </div>
+      </div>
+      <p>Los 4 proyectos de iberi22 dominan el top del leaderboard. <strong>harness-course (100%)</strong> y <strong>synapse-trading (81.9%)</strong> demuestran que la metodología Harness Engineering produce repositorios significativamente mejor preparados para agentes de IA que los proyectos open-source más populares.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3>Gap: State y Skills</h3>
+        </div>
+      </div>
+      <p>El promedio de <strong>State (13%)</strong> y <strong>Skills (10%)</strong> en proyectos externos revela una oportunidad enorme. Son los subsistemas que más diferencian un repo operado por humanos de uno operado por agentes. Incluso proyectos con tests y CI excelentes (aider 94% en Verification) ignoran completamente la documentación para agentes.</p>
+    </div>
+
+    <div class="module module-collapsible">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3>Escalabilidad del Scanner</h3>
+        </div>
+      </div>
+      <p>El evaluador de Harness funciona en cualquier repo — sin importar el lenguaje o stack. Esto significa que podemos escalar este leaderboard a 100+ repos y crear un ranking público donde cualquier proyecto pueda medir su "agent-readiness".</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Relacionado</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/tutorial.html" class="card">
+        <h3>🎮 Tutorial Interactivo</h3>
+        <p>Aprende a llevar tu proyecto de 45% a 80%+ en 6 pasos con el tutorial guiado.</p>
+      </a>
+      <a href="/harness-course/pages/case-study.html" class="card">
+        <h3>🧠 Case Study</h3>
+        <p>Cómo agents-flows-recipes alcanzó 61.5% — lecciones de un repo con 21 skills.</p>
+      </a>
+      <a href="/harness-course/pages/skills.html" class="card">
+        <h3>🧠 Skills &amp; POML</h3>
+        <p>La receta para tener skills estructurados que cualquier agente pueda entender.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p>© 2026 Brahyan Belalcazar (ElBeRi) — Scores generados con Harness Engineering Scanner v2</p>
+  </footer>
+</main>
+</body>
+</html>
