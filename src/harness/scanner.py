@@ -9,11 +9,6 @@ from harness.models import (
     HarnessCheck,
     Subsystem,
     SKILL_FRONTMATTER_RE,
-    POML_TOPOLOGY_RE,
-    POML_HAS_ROLE,
-    POML_HAS_TASK,
-    POML_LET_RE,
-    VALID_PROVIDERS,
 )
 
 
@@ -403,11 +398,11 @@ class HarnessScanner:
         self.subsystems.append(sub)
 
     # ═══════════════════════════════════════════════════════════════════
-    # S6: Skills & POML
+    # S6: Skills
     # ═══════════════════════════════════════════════════════════════════
 
     def _scan_skills(self) -> None:
-        sub = Subsystem("skills", "🧠 Skills & POML",
+        sub = Subsystem("skills", "🧠 Skills",
                         "El proyecto debe tener un catálogo de skills bien estructurado.")
         checks = []
 
@@ -424,27 +419,7 @@ class HarnessScanner:
             c.detail = "No existe directorio skills/"
         checks.append(c)
 
-        c = HarnessCheck("6.2", "Recetas POML", "poml/ con archivos .poml de agentes", 2.0)
-        poml_dir = self.root / "poml"
-        if poml_dir.is_dir():
-            poml_files = list(poml_dir.rglob("*.poml"))
-            c.passed = len(poml_files) > 0
-            c.files_found = [str(f.relative_to(self.root)) for f in poml_files[:5]]
-            c.detail = f"{len(poml_files)} archivo(s) .poml"
-        else:
-            c.passed = False
-            c.detail = "No existe directorio poml/"
-        checks.append(c)
-
-        c = HarnessCheck("6.3", "Manifest de skills", "_registry/manifest.yaml con catálogo central", 2.0)
-        self._check_file(c, "_registry/manifest.yaml", "_registry/manifest.yml")
-        checks.append(c)
-
-        c = HarnessCheck("6.4", "Esquema de validación", "schema/recipe.schema.yaml", 1.0)
-        self._check_file(c, "schema/recipe.schema.yaml", "schema/recipe.schema.yml")
-        checks.append(c)
-
-        c = HarnessCheck("6.5", "SKILL.md frontmatter", "Todos los SKILL.md tienen YAML frontmatter", 2.0)
+        c = HarnessCheck("6.2", "SKILL.md frontmatter", "Todos los SKILL.md tienen YAML frontmatter", 2.0)
         skill_mds = list((self.root / "skills").rglob("SKILL.md")) if (self.root / "skills").is_dir() else []
         if skill_mds:
             all_have_fm = all(self._has_valid_frontmatter(f) for f in skill_mds)
@@ -456,56 +431,26 @@ class HarnessScanner:
             c.detail = "No hay SKILL.md para validar"
         checks.append(c)
 
-        c = HarnessCheck("6.6", "POML topology", "Las recetas POML definen topology", 1.5)
-        poml_dir = self.root / "poml"
-        poml_files = list(poml_dir.rglob("*.poml")) if poml_dir.is_dir() else []
-        if poml_files:
-            all_have_topo = all(self._poml_has_topology(f) for f in poml_files)
-            c.passed = all_have_topo
-            c.files_found = [str(f.relative_to(self.root)) for f in poml_files[:3]]
-            c.detail = f"{'Todas' if all_have_topo else 'Algunas'} recetas con <topology>"
-        else:
-            c.passed = False
-            c.detail = "No hay archivos .poml"
-        checks.append(c)
-
-        c = HarnessCheck("6.7", "POML role + task", "Las recetas POML tienen <role> y <task>", 1.5)
-        if poml_files:
-            complete = sum(1 for f in poml_files if self._poml_has_role_task(f))
-            c.passed = complete == len(poml_files)
-            c.detail = f"{complete}/{len(poml_files)} recetas completas (role + task)"
-            c.files_found = [str(f.relative_to(self.root)) for f in poml_files[:3]]
-        else:
-            c.passed = False
-            c.detail = "No hay archivos .poml"
-        checks.append(c)
-
-        c = HarnessCheck("6.8", "Skill provider", "Script para cargar skills dinámicamente", 1.0)
+        c = HarnessCheck("6.3", "Skill provider", "Script para cargar skills dinámicamente", 1.0)
         self._check_file(c, "_registry/skill-provider.js", "_registry/skill-provider.py", "_registry/provider")
         checks.append(c)
 
-        c = HarnessCheck("6.9", "Multi-provider", "Recetas POML con múltiples providers (openai/gemini/qwen)", 1.0)
-        multi_count = sum(1 for f in poml_files if self._poml_is_multi_provider(f))
-        c.passed = multi_count >= 1
-        c.detail = f"{multi_count} receta(s) multi-provider" if c.passed else "No hay recetas multi-provider"
-        checks.append(c)
-
-        c = HarnessCheck("6.10", "Variedad de skills", "Skills en múltiples categorías", 0.5)
+        c = HarnessCheck("6.4", "Variedad de skills", "Al menos 5 skills en skills/", 0.5)
         if skills_dir.is_dir():
             skill_subdirs = [d.name for d in skills_dir.iterdir() if d.is_dir()]
             c.passed = len(skill_subdirs) >= 5
             c.files_found = skill_subdirs[:10]
-            c.detail = f"{len(skill_subdirs)} categorías de skills"
+            c.detail = f"{len(skill_subdirs)} skills"
         else:
             c.passed = False
             c.detail = "No hay skills/"
         checks.append(c)
 
-        c = HarnessCheck("6.11", "SKILLS_SYSTEM.md", "Documentación del sistema de skills", 0.5)
+        c = HarnessCheck("6.5", "SKILLS_SYSTEM.md", "Documentación del sistema de skills", 0.5)
         self._check_file(c, "SKILLS_SYSTEM.md", "SKILLS.md")
         checks.append(c)
 
-        c = HarnessCheck("6.12", "Skills versionados", "SKILL.md con versión y licencia en metadata", 0.5)
+        c = HarnessCheck("6.6", "Skills versionados", "SKILL.md con versión o licencia en frontmatter", 0.5)
         if skill_mds:
             versioned = sum(1 for f in skill_mds if self._skill_has_version(f))
             c.passed = versioned >= len(skill_mds) * 0.5
@@ -518,7 +463,7 @@ class HarnessScanner:
         sub.checks = checks
         self.subsystems.append(sub)
 
-    # ── Skill/POML helpers ─────────────────────────────────────────
+    # ── Skill helpers ────────────────────────────────────────────────
 
     def _has_valid_frontmatter(self, path: Path) -> bool:
         content = self._cache_read(path)
@@ -533,24 +478,6 @@ class HarnessScanner:
             return bool(re.search(r"^name:\s*\S+", m.group(1), re.MULTILINE))
         except Exception:
             return bool(re.search(r"^name:\s*\S+", m.group(1), re.MULTILINE))
-
-    def _poml_has_topology(self, path: Path) -> bool:
-        return bool(POML_TOPOLOGY_RE.search(self._cache_read(path)))
-
-    def _poml_has_role_task(self, path: Path) -> bool:
-        content = self._cache_read(path)
-        return bool(POML_HAS_ROLE.search(content)) and bool(POML_HAS_TASK.search(content))
-
-    def _poml_is_multi_provider(self, path: Path) -> bool:
-        content = self._cache_read(path)
-        for name, val in POML_LET_RE.findall(content):
-            if name == "providers":
-                try:
-                    prov = json.loads(val.strip())
-                    return isinstance(prov, dict) and len(prov) >= 2
-                except json.JSONDecodeError:
-                    return False
-        return False
 
     def _skill_has_version(self, path: Path) -> bool:
         content = self._cache_read(path)

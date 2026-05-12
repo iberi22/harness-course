@@ -5,20 +5,9 @@ from typing import Optional
 import re
 
 # ── Constants ──────────────────────────────────────────────────────────
-VERSION = "2.2.0"
+VERSION = "2.3.0"
 
 SKILL_FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---", re.DOTALL)
-POML_TOPOLOGY_RE = re.compile(r'<let\s+name="topology">(.*?)</let>')
-POML_HAS_ROLE = re.compile(r"<role>")
-POML_HAS_TASK = re.compile(r"<task>")
-POML_HAS_OUTPUT = re.compile(r"<output-format>")
-POML_TAG_RE = re.compile(r"<(/?)(\w+)>")
-POML_LET_RE = re.compile(r'<let\s+name="(\w+)">(.*?)</let>', re.DOTALL)
-
-VALID_TOPOLOGIES = {"solo", "multi", "rag", "tools-first"}
-VALID_TOOL_MODES = {"auto", "required", "none"}
-VALID_PROVIDERS = {"openai", "gemini", "qwen", "anthropic", "deepseek"}
-REQUIRED_LET_NAMES = {"topology", "providers", "tools", "bench_id"}
 
 
 # ── Data Classes ───────────────────────────────────────────────────────
@@ -67,15 +56,6 @@ class Subsystem:
         ok = sum(1 for c in self.checks if c.passed)
         total = len(self.checks)
         return f"{ok}/{total} checks — {self.percentage}%"
-
-
-@dataclass
-class POMLIssue:
-    file: str
-    line: int
-    severity: str  # error, warning, info
-    message: str
-    code: str
 
 
 # ── Grade helper ───────────────────────────────────────────────────────

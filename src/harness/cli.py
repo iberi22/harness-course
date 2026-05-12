@@ -15,119 +15,7 @@ except (ImportError, TypeError):
 
 from harness.models import VERSION, score_to_grade
 from harness.scanner import HarnessScanner
-from harness.poml import POMLValidator
 from harness.report import build_json_report, generate_llm_prompt, print_report
-
-
-# ── CLI: POML subcommand renderers ────────────────────────────────────
-
-def cmd_poml_validate(args: argparse.Namespace) -> None:
-    validator = POMLValidator(args.path, schema_path=getattr(args, "schema", None))
-    issues = validator.validate()
-
-    if not validator.poml_files:
-        print(f"  ⚠️  No se encontraron archivos .poml en {args.path}")
-        return
-
-    errors = [i for i in issues if i.severity == "error"]
-    warnings = [i for i in issues if i.severity == "warning"]
-    infos = [i for i in issues if i.severity == "info"]
-
-    print()
-    print(f"  📋 POML Validate — {len(validator.poml_files)} archivos")
-    print(f"     {len(errors)} errores, {len(warnings)} warnings, {len(infos)} informativos")
-    print()
-
-    if args.json:
-        print(json.dumps({
-            "total_files": len(validator.poml_files),
-            "errors": [asdict(i) for i in errors],
-            "warnings": [asdict(i) for i in warnings],
-            "infos": [asdict(i) for i in infos],
-        }, indent=2, ensure_ascii=False))
-        return
-
-    for issue_list, label in [(errors, "ERROR"), (warnings, "WARN"), (infos, "INFO")]:
-        if not issue_list:
-            continue
-        for i in issue_list:
-            print(f"  [{label}] {i.code} — {i.file}:{i.line}")
-            print(f"         {i.message}")
-        print()
-
-
-def cmd_poml_lint(args: argparse.Namespace) -> None:
-    validator = POMLValidator(args.path)
-    issues = validator.lint()
-
-    if not validator.poml_files:
-        print(f"  ⚠️  No se encontraron archivos .poml en {args.path}")
-        return
-
-    warnings = [i for i in issues if i.severity == "warning"]
-    infos = [i for i in issues if i.severity == "info"]
-
-    print()
-    print(f"  🔍 POML Lint — {len(validator.poml_files)} archivos")
-    print(f"     {len(warnings)} warnings, {len(infos)} sugerencias")
-    print()
-
-    if args.json:
-        print(json.dumps({
-            "total_files": len(validator.poml_files),
-            "warnings": [asdict(i) for i in warnings],
-            "infos": [asdict(i) for i in infos],
-        }, indent=2, ensure_ascii=False))
-        return
-
-    for label, issue_list in [("WARN", warnings), ("INFO", infos)]:
-        if not issue_list:
-            continue
-        for i in issue_list:
-            print(f"  [{label}] {i.code} — {i.file}:{i.line}")
-            print(f"         {i.message}")
-        print()
-
-    if not warnings and not infos:
-        print("  ✅ Sin issues de lint. Recetas limpias.")
-        print()
-
-
-def cmd_poml_coverage(args: argparse.Namespace) -> None:
-    validator = POMLValidator(args.path)
-    stats = validator.coverage()
-
-    if stats.get("total", 0) == 0:
-        print(f'{{"error":"{stats.get("message","No hay archivos .poml")}"}}' if args.json else f"  ⚠️  {stats.get('message', 'No hay archivos .poml')}")
-        return
-
-    if args.json:
-        print(json.dumps(stats, indent=2, ensure_ascii=False))
-        return
-
-    print()
-    print(f"  📊 POML Coverage — {stats['total']} archivos .poml")
-    print()
-
-    if args.json:
-        print(json.dumps(stats, indent=2, ensure_ascii=False))
-        return
-
-    print(f"  Categorías: {len(stats['by_category'])}")
-    for cat, count in stats["by_category"].items():
-        bar = "█" * count
-        print(f"    {cat}: {bar} ({count})")
-    print()
-
-    s = stats["sections"]
-    print(f"  Secciones:")
-    print(f"    <role>         {s['with_role']:>3}/{stats['total']} ({stats['pct_with_role']:>5.1f}%)")
-    print(f"    <task>         {s['with_task']:>3}/{stats['total']} ({stats['pct_with_task']:>5.1f}%)")
-    print(f"    <output-format> {s['with_output']:>3}/{stats['total']} ({stats['pct_with_output']:>5.1f}%)")
-    print(f"    Completas      {s['with_all_sections']:>3}/{stats['total']} ({stats['pct_complete']:>5.1f}%)")
-    print(f"    Con topology   {stats['pct_with_topology']}%")
-    print(f"    Multi-provider {stats['multi_provider_recipes']} recetas")
-    print()
 
 
 # ── CLI: Fix command ───────────────────────────────────────────────────
@@ -245,6 +133,33 @@ def cmd_scan(args: argparse.Namespace) -> None:
         sys.exit(1)
 
 
+# ── CLI: Audit command ──────────────────────────────────────────────────
+
+def cmd_audit(args: argparse.Namespace) -> None:
+    """Run the Harness Context Auditor."""
+    import subprocess
+    auditor_script = Path(__file__).resolve().parent.parent.parent / "scripts" / "harness_auditor.py"
+    if not auditor_script.exists():
+        print(f"[ERROR] Auditor script not found at {auditor_script}", file=sys.stderr)
+        sys.exit(1)
+
+    cmd = [sys.executable, str(auditor_script)]
+    if args.prompt:
+        cmd += ["--prompt", args.prompt]
+    elif args.self or args.path == "--self":
+        cmd += ["--self"]
+    elif args.path and args.path != "--self":
+        cmd += ["--path", args.path]
+    else:
+        cmd += ["--self"]
+
+    if args.json:
+        cmd += ["--json"]
+
+    result = subprocess.run(cmd)
+    sys.exit(result.returncode)
+
+
 # ── CLI Entry Point ───────────────────────────────────────────────────
 
 def main():
@@ -266,34 +181,23 @@ def main():
     scan_p.add_argument("--threshold", type=int, default=50, help="Threshold mínimo para CI")
     scan_p.set_defaults(func=cmd_scan)
 
-    # ── poml validate ──────────────────────────────────────────────
-    pv = subparsers.add_parser("poml", help="Comandos para recetas POML")
-    pv_sub = pv.add_subparsers(dest="poml_command", help="Subcomando POML")
-
-    pv_validate = pv_sub.add_parser("validate", help="Valida recetas POML contra schema")
-    pv_validate.add_argument("path", help="Ruta al proyecto con archivos .poml")
-    pv_validate.add_argument("--schema", help="Ruta al recipe.schema.yaml")
-    pv_validate.add_argument("--json", action="store_true", help="Salida JSON")
-    pv_validate.set_defaults(func=cmd_poml_validate)
-
-    pv_lint = pv_sub.add_parser("lint", help="Analiza calidad de recetas POML")
-    pv_lint.add_argument("path", help="Ruta al proyecto con archivos .poml")
-    pv_lint.add_argument("--json", action="store_true", help="Salida JSON")
-    pv_lint.set_defaults(func=cmd_poml_lint)
-
-    pv_coverage = pv_sub.add_parser("coverage", help="Estadísticas de cobertura POML")
-    pv_coverage.add_argument("path", help="Ruta al proyecto con archivos .poml")
-    pv_coverage.add_argument("--json", action="store_true", help="Salida JSON")
-    pv_coverage.set_defaults(func=cmd_poml_coverage)
-
     # ── fix ─────────────────────────────────────────────────────────
-    fix_p = subparsers.add_parser("fix", help="Genera archivos faltantes del harness desde templates POML")
+    fix_p = subparsers.add_parser("fix", help="Genera archivos faltantes del harness desde templates")
     fix_p.add_argument("path", help="Ruta al proyecto a reparar")
     fix_p.add_argument("--templates", default=_TEMPLATES_DIR,
-                       help="Directorio con templates POML")
+                       help="Directorio con templates")
     fix_p.add_argument("--dry-run", action="store_true", help="Mostrar qué generaría sin escribir")
     fix_p.add_argument("--all", action="store_true", help="Generar todos los archivos faltantes")
     fix_p.set_defaults(func=cmd_fix)
+
+    # ── audit ────────────────────────────────────────────────────────
+    audit_p = subparsers.add_parser("audit", help="Audita seguridad del harness — inyección, contexto, postura")
+    audit_p.add_argument("path", nargs="?", default="--self",
+                         help="Ruta al proyecto o --self para auto-auditar")
+    audit_p.add_argument("--self", action="store_true", help="Auto-auditar el harness actual")
+    audit_p.add_argument("--prompt", help="Analizar texto como system prompt")
+    audit_p.add_argument("--json", action="store_true", help="Salida JSON")
+    audit_p.set_defaults(func=cmd_audit)
 
     # ── Backwards compat: if no subcommand, treat first arg as path ─
     args = parser.parse_args()
