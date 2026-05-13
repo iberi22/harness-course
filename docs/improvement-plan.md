@@ -235,14 +235,22 @@ Todos los issues cerrados en commit `0549a6f`:
 - `scripts/evaluator-cron.sh` — registro idempotente del cron job
 - `scripts/auto-evaluate.sh` — orquestador de escaneo multi-proyecto
 
-### V.3 Multi-lenguaje 🌐
+### V.3 Multi-lenguaje 🌐 ✅ COMPLETADO — 13-May-2026
 
-**Estado actual:** Solo español
-**Mejora:**
-1. README en inglés
-2. Páginas del curso con toggle ES/EN
-3. Comentarios en código en inglés (convención)
-4. AGENTS.md bilingüe
+**Estado actual:** ✅ COMPLETADO
+
+**Implementado:**
+1. **README en inglés** — README.md ahora bilingüe (EN + ES) con badges al inicio
+2. **Páginas del curso con toggle ES/EN** — Sistema i18n completo:
+   - `js/i18n.js`: Traductor zero-dependency con diccionario EN/ES
+   - Toggle ES|EN en sidebar de todas las 15 páginas HTML
+   - data-i18n attributes en toda la navegación, hero, stats, contenido y footer
+   - localStorage para persistencia de preferencia de idioma
+   - CSS toggle styles integrados en el sistema Linear Dark
+3. **Comentarios en código en inglés** — Python docstrings, comments en scripts y CSS convertidos a inglés
+4. **AGENTS.md bilingüe** — Briefing completo en EN + ES
+
+**Criterio de éxito:** ✅ Cumplido — cualquier página del curso puede switchear entre EN y ES. Código fuente con comentarios en inglés (convención universal).
 
 ### V.4 Comunidad de harnesses
 
@@ -289,15 +297,15 @@ Fase V (Expansión)
 ## Priorización recomendada
 
 | # | Item | Fase | Esfuerzo | Impacto | Por qué ahora | Estado |
-|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|
 | 1 | **I.3 OpenClaw cosmetics** | I | 🟢 30 min | 🟢 Alto | Logs limpios = debugging más rápido | ⏳ Sin repo |
-| 2 | **III.2 Tutorial interactivo** | III | 🔴 3 sesiones | 🟢 Alto | Valor educativo | ⏳ EN PROGRESO |
+| 2 | **III.2 Tutorial interactivo** | III | 🔴 3 sesiones | 🟢 Alto | Valor educativo | ✅ COMPLETADO — 12-May-2026 |
 | 3 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟢 Alto | ✅ COMPLETADO — 10 repos escaneados, leaderboard.html creado |
 | 4 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟢 Alto | ✅ COMPLETADO — 6 skills importados de 4 repos externos con frontmatter mejorado |
 | 5 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | ✅ COMPLETADO — iberi22/skills creado con 74 skills unificados, POML deprecado |
 | 6 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ✅ COMPLETADO — 13-May-2026 |
-| 7 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ⏳ EN PROGRESO — 12-May-2026 |
-| 8 | **V.3 Multi-lenguaje** | V | 🔴 2 sesiones | 🟢 Medio | Alcance global | ⏳ Pendiente |
+| 7 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ✅ COMPLETADO — 12-May-2026 |
+| 8 | **V.3 Multi-lenguaje** | V | 🟡 1 sesión | 🟢 Medio | Alcance global | ✅ COMPLETADO — 13-May-2026 |
 | 9 | **V.4 Comunidad** | V | 🔴 4 sesiones | 🟢 Alto | Visión a largo plazo | ⏳ Pendiente |
 
 ---
