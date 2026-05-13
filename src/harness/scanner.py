@@ -13,7 +13,7 @@ from harness.models import (
 
 
 class HarnessScanner:
-    """Escanea un proyecto y evalúa los 6 subsistemas del harness."""
+    """Scans a project and evaluates the 6 harness subsystems."""
 
     def __init__(self, root: str):
         self.root = Path(root).resolve()

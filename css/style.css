@@ -586,3 +586,43 @@ tbody tr:last-child td { border-bottom: none; }
   table { font-size: 13px; }
   thead th, tbody td { padding: 6px 8px; }
 }
+
+/* === Language Toggle === */
+.lang-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-top: 10px;
+}
+
+.lang-toggle button {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding: 4px 8px;
+  transition: all 0.12s ease;
+}
+
+.lang-toggle button:hover {
+  color: var(--text-primary);
+}
+
+.lang-toggle button.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.lang-toggle button.active:hover {
+  background: var(--accent-hover);
+}

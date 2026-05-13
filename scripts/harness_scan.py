@@ -26,16 +26,16 @@ from typing import Optional
 
 
 # ──────────────────────────────────────────────────────────
-# DEFINICIONES — Los checks se basan en los 5 subsistemas
+# DEFINITIONS — Checks are based on the 5 subsystems
 # ──────────────────────────────────────────────────────────
 
 @dataclass
 class HarnessCheck:
-    """Un check individual dentro de un subsistema."""
+    """An individual check within a subsystem."""
     id: str
     name: str
     description: str
-    weight: float = 1.0  # peso relativo dentro del subsistema
+    weight: float = 1.0  # relative weight within the subsystem
     passed: bool = False
     detail: str = ""
     files_found: list[str] = field(default_factory=list)
@@ -88,7 +88,7 @@ class HarnessScanner:
         self.subsystems: list[Subsystem] = []
 
     def scan(self) -> list[Subsystem]:
-        """Ejecuta todos los checks y devuelve los subsistemas evaluados."""
+        """Run all checks and return the evaluated subsystems."""
         self.subsystems = []
 
         self._scan_instructions()
@@ -102,7 +102,7 @@ class HarnessScanner:
     # ── File helpers ──────────────────────────────────────
 
     def _find(self, glob_pattern: str, max_depth: int = 5) -> list[Path]:
-        """Busca archivos por glob, relativo a root."""
+        """Search for files by glob, relative to root."""
         matches = []
         for depth in range(1, max_depth + 1):
             # Build pattern for specific depth
@@ -122,7 +122,7 @@ class HarnessScanner:
         return sorted(unique)
 
     def _find_files(self, patterns: list[str]) -> list[Path]:
-        """Busca archivos por lista de patrones."""
+        """Search for files by list of patterns."""
         found = []
         for pat in patterns:
             # Search recursively
@@ -131,7 +131,7 @@ class HarnessScanner:
         return sorted(found)
 
     def _file_exists(self, *paths: str) -> Optional[Path]:
-        """Retorna el path si existe, None si no."""
+        """Return the path if it exists, None if not."""
         for p in paths:
             candidate = self.root / p
             if candidate.exists():
@@ -139,7 +139,7 @@ class HarnessScanner:
         return None
 
     def _check_file(self, check: HarnessCheck, *paths: str) -> None:
-        """Verifica si al menos uno de los paths existe."""
+        """Check if at least one of the paths exists."""
         found = self._file_exists(*paths)
         check.passed = found is not None
         if found:
@@ -149,7 +149,7 @@ class HarnessScanner:
             check.detail = f"No encontrado: {', '.join(paths)}"
 
     def _check_content(self, check: HarnessCheck, pattern: str, *paths: str) -> None:
-        """Verifica si un archivo existe Y contiene cierto patrón."""
+        """Check if a file exists AND contains a certain pattern."""
         found = self._file_exists(*paths)
         if not found:
             check.passed = False

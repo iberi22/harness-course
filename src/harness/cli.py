@@ -22,7 +22,7 @@ from harness.project_detector import ProjectDetector, ProjectType
 # ── CLI: Fix command ───────────────────────────────────────────────────
 
 def cmd_fix(args: argparse.Namespace) -> None:
-    """Genera archivos faltantes del harness desde templates POML."""
+    """Generate missing harness files from POML templates."""
     templates_dir = Path(args.templates)
 
     if not templates_dir.is_dir():
@@ -30,7 +30,7 @@ def cmd_fix(args: argparse.Namespace) -> None:
         sys.exit(1)
 
     def _load_templates(tmpl_dir: Path) -> dict:
-        """Carga templates POML de un directorio y retorna dict indexado por nombre de salida."""
+        """Load POML templates from a directory and return a dict indexed by output name."""
         loaded: dict = {}
         for tf in sorted(tmpl_dir.glob("*.poml")):
             content = tf.read_text(encoding="utf-8")

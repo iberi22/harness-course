@@ -17,42 +17,46 @@
   <div class="sidebar-brand">
     <a href="/harness-course/">
       <h2>Harness Eng.</h2>
-      <div class="brand-sub">Design skills for agents</div>
+      <div class="brand-sub" data-i18n="brand.sub">Design skills for agents</div>
     </a>
+    <div class="lang-toggle">
+      <button type="button" data-lang="es" onclick="setLanguage('es')" aria-label="Cambiar a Español">ES</button>
+      <button type="button" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
+    </div>
   </div>
   <div class="search-container">
-    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <input id="nav-search" type="text" placeholder="Filter nav..." data-i18n-placeholder="search.placeholder" aria-label="Search navigation">
     <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
   </div>
   <nav>
     <div class="nav-section">
-      <div class="nav-section-title">Course</div>
-      <a href="/harness-course/" class="active"><span class="nav-icon">⌂</span> Home</a>
-      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
-      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
-      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+      <div class="nav-section-title" data-i18n="nav.course">Course</div>
+      <a href="/harness-course/" class="active"><span class="nav-icon">⌂</span> <span data-i18n="nav.home">Home</span></a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> <span data-i18n="nav.fundamentals">Fundamentals</span></a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> <span data-i18n="nav.design_patterns">Design Patterns</span></a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> <span data-i18n="nav.full_course">Full Course</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Subsistemas</div>
-      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> Scope</a>
-      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
-      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
-      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+      <div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> <span data-i18n="nav.scope">Scope</span></a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> <span data-i18n="nav.instructions">Instructions</span></a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> <span data-i18n="nav.state">State</span></a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> <span data-i18n="nav.verification">Verification</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Resources</div>
-      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
-      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+      <div class="nav-section-title" data-i18n="nav.resources">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> <span data-i18n="nav.resources">Resources</span></a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> <span data-i18n="nav.templates">Templates</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Case Study</div>
-      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span> Agents Flows</a>
-      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
-      <a href="/harness-course/pages/leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a>
+      <div class="nav-section-title" data-i18n="nav.case_study">Case Study</div>
+      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span> <span data-i18n="nav.agents_flows">Agents Flows</span></a>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> <span data-i18n="nav.agent_recipes">Agent Recipes</span></a>
+      <a href="/harness-course/pages/leaderboard.html"><span class="nav-icon">🏆</span> <span data-i18n="nav.leaderboard">Leaderboard</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Interactive</div>
-      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span> Tutorial</a>
+      <div class="nav-section-title" data-i18n="nav.interactive">Interactive</div>
+      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span> <span data-i18n="nav.tutorial">Tutorial</span></a>
     </div>
   </nav>
 </aside>
@@ -60,32 +64,32 @@
 <main class="main">
   <section class="hero">
     <h1>Harness <span class="accent-word">Engineering</span></h1>
-    <p>Un enfoque sistemático para diseñar el entorno alrededor de agentes de IA, extrayendo patrones de diseño de OpenClaw y aplicándolos a sistemas de trading autónomos y memoria de agentes.</p>
+    <p data-i18n="hero.description">Un enfoque sistemático para diseñar el entorno alrededor de agentes de IA, extrayendo patrones de diseño de OpenClaw y aplicándolos a sistemas de trading autónomos y memoria de agentes.</p>
     <div class="hero-actions">
-      <a href="/harness-course/pages/fundamentals.html" class="btn btn-primary">Empezar Curso</a>
-      <a href="/harness-course/pages/design-patterns.html" class="btn btn-secondary">Ver Patrones</a>
-      <a href="/harness-course/pages/course.html" class="btn btn-secondary">Curso Completo</a>
+      <a href="/harness-course/pages/fundamentals.html" class="btn btn-primary" data-i18n="hero.start_course">Empezar Curso</a>
+      <a href="/harness-course/pages/design-patterns.html" class="btn btn-secondary" data-i18n="hero.view_patterns">Ver Patrones</a>
+      <a href="/harness-course/pages/course.html" class="btn btn-secondary" data-i18n="hero.full_course">Curso Completo</a>
     </div>
   </section>
 
   <section class="stats-row">
-    <div class="stat"><div class="stat-value">12</div><div class="stat-label">Lectures</div></div>
-    <div class="stat"><div class="stat-value">5</div><div class="stat-label">Subsystems</div></div>
-    <div class="stat"><div class="stat-value">6</div><div class="stat-label">Patterns</div></div>
-    <div class="stat"><div class="stat-value">12</div><div class="stat-label">Gotchas</div></div>
-    <div class="stat"><div class="stat-value">2</div><div class="stat-label">Case Studies</div></div>
+    <div class="stat"><div class="stat-value">12</div><div class="stat-label" data-i18n="stats.lectures">Lectures</div></div>
+    <div class="stat"><div class="stat-value">5</div><div class="stat-label" data-i18n="stats.subsystems">Subsystems</div></div>
+    <div class="stat"><div class="stat-value">6</div><div class="stat-label" data-i18n="stats.patterns">Patterns</div></div>
+    <div class="stat"><div class="stat-value">12</div><div class="stat-label" data-i18n="stats.gotchas">Gotchas</div></div>
+    <div class="stat"><div class="stat-value">2</div><div class="stat-label" data-i18n="stats.case_studies">Case Studies</div></div>
   </section>
 
   <div class="content">
-    <h2>¿Qué es Harness Engineering?</h2>
-    <p>Harness Engineering es la disciplina de diseñar el <strong>entorno</strong> alrededor de un agente de IA para que pueda trabajar de manera confiable. No se trata de hacer el modelo más inteligente — se trata de crear un <strong>sistema cerrado de trabajo</strong> donde el agente tenga instrucciones claras, estado persistente, verificación automática, límites de alcance, y un ciclo de vida definido.</p>
+    <h2 data-i18n="content.what_is">¿Qué es Harness Engineering?</h2>
+    <p data-i18n="content.what_body">Harness Engineering es la disciplina de diseñar el entorno alrededor de un agente de IA para que pueda trabajar de manera confiable. No se trata de hacer el modelo más inteligente — se trata de crear un sistema cerrado de trabajo donde el agente tenga instrucciones claras, estado persistente, verificación automática, límites de alcance, y un ciclo de vida definido.</p>
 
     <blockquote>
       <p>"Un harness no hace al modelo más inteligente; establece un sistema de trabajo de bucle cerrado para el modelo." — Learn Harness Engineering</p>
     </blockquote>
 
-    <h2>Los 5 Subsistemas del Harness</h2>
-    <p>Todo harness se compone de cinco subsistemas fundamentales:</p>
+    <h2 data-i18n="content.subsystems_title">Los 5 Subsistemas del Harness</h2>
+    <p data-i18n="content.subsystems_body">Todo harness se compone de cinco subsistemas fundamentales:</p>
 
     <div class="subsystem-grid">
       <div class="subsystem-card">
@@ -94,7 +98,7 @@
           <strong>Instructions</strong>
         </div>
         <div class="subsys-body">
-          <p>AGENTS.md, CLAUDE.md, jerarquía de docs/ — el "recetario" que le dice al agente cómo trabajar.</p>
+          <p data-i18n="content.subsys.instructions">AGENTS.md, CLAUDE.md, jerarquía de docs/ — el "recetario" que le dice al agente cómo trabajar.</p>
           <div><span class="tag">progressive disclosure</span> <span class="tag">AGENTS.md</span></div>
         </div>
       </div>
@@ -104,7 +108,7 @@
           <strong>State</strong>
         </div>
         <div class="subsys-body">
-          <p>feature_list.json, progress.md, session-handoff — la "estación de preparación" que mantiene el estado.</p>
+          <p data-i18n="content.subsys.state">feature_list.json, progress.md, session-handoff — la "estación de preparación" que mantiene el estado.</p>
           <div><span class="tag">persistence</span> <span class="tag">tracking</span></div>
         </div>
       </div>
@@ -114,7 +118,7 @@
           <strong>Verification</strong>
         </div>
         <div class="subsys-body">
-          <p>Tests, type checks, comandos de verificación — la "ventana de control de calidad" que valida el trabajo.</p>
+          <p data-i18n="content.subsys.verification">Tests, type checks, comandos de verificación — la "ventana de control de calidad" que valida el trabajo.</p>
           <div><span class="tag">testing</span> <span class="tag">gates</span></div>
         </div>
       </div>
@@ -124,7 +128,7 @@
           <strong>Scope</strong>
         </div>
         <div class="subsys-body">
-          <p>One-feature-at-a-time, definition of done — los "límites de la tarea" que evitan el overreach.</p>
+          <p data-i18n="content.subsys.scope">One-feature-at-a-time, definition of done — los "límites de la tarea" que evitan el overreach.</p>
           <div><span class="tag">boundaries</span> <span class="tag">focus</span></div>
         </div>
       </div>
@@ -134,7 +138,7 @@
           <strong>Lifecycle</strong>
         </div>
         <div class="subsys-body">
-          <p>init.sh, clean-state checklists, handoff procedures — la "gestión de sesión" para continuidad.</p>
+          <p data-i18n="content.subsys.lifecycle">init.sh, clean-state checklists, handoff procedures — la "gestión de sesión" para continuidad.</p>
           <div><span class="tag">bootstrap</span> <span class="tag">handoff</span></div>
         </div>
       </div>
@@ -142,44 +146,44 @@
 
     <div class="section-divider"></div>
 
-    <h2>Caso de Estudio</h2>
+    <h2 data-i18n="content.case_study">Caso de Estudio</h2>
     <div class="card-grid">
       <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener" class="card">
         <div class="card-icon">◇</div>
         <h3>Agent Recipes Repo</h3>
-        <p>Sistema inteligente de mantenimiento automatizado de software. MCP Server, IA agente, base de conocimiento híbrida (Neo4j + ChromaDB), dashboard Streamlit — todo orquestado con Docker. Un ejemplo completo de harness engineering aplicado.</p>
+        <p data-i18n="content.case_desc">Sistema inteligente de mantenimiento automatizado de software. MCP Server, IA agente, base de conocimiento híbrida (Neo4j + ChromaDB), dashboard Streamlit — todo orquestado con Docker. Un ejemplo completo de harness engineering aplicado.</p>
       </a>
     </div>
 
     <div class="section-divider"></div>
 
-    <h2>¿Por qué importa?</h2>
+    <h2 data-i18n="content.why">¿Por qué importa?</h2>
     <div class="compare-grid">
       <div class="compare-col without">
-        <h4>Sin Harness</h4>
+        <h4 data-i18n="content.without">Sin Harness</h4>
         <ul>
-          <li>Agente olvida preferencias entre sesiones</li>
-          <li>Instrucciones gigantes que el agente ignora</li>
-          <li>Sin verificación — bugs pasan desapercibidos</li>
-          <li>Overreach: el agente cambia lo que no debe</li>
-          <li>Sesiones rotas sin continuidad</li>
+          <li data-i18n="content.without.1">Agente olvida preferencias entre sesiones</li>
+          <li data-i18n="content.without.2">Instrucciones gigantes que el agente ignora</li>
+          <li data-i18n="content.without.3">Sin verificación — bugs pasan desapercibidos</li>
+          <li data-i18n="content.without.4">Overreach: el agente cambia lo que no debe</li>
+          <li data-i18n="content.without.5">Sesiones rotas sin continuidad</li>
         </ul>
       </div>
       <div class="compare-col with">
-        <h4>Con Harness</h4>
+        <h4 data-i18n="content.with">Con Harness</h4>
         <ul>
-          <li>Memoria persistente con jerarquía de prioridad</li>
-          <li>Progressive disclosure: la info justa a tiempo</li>
-          <li>Verificación automática antes de "done"</li>
-          <li>Scope definido: una feature a la vez</li>
-          <li>Handoff limpio entre sesiones</li>
+          <li data-i18n="content.with.1">Memoria persistente con jerarquía de prioridad</li>
+          <li data-i18n="content.with.2">Progressive disclosure: la info justa a tiempo</li>
+          <li data-i18n="content.with.3">Verificación automática antes de "done"</li>
+          <li data-i18n="content.with.4">Scope definido: una feature a la vez</li>
+          <li data-i18n="content.with.5">Handoff limpio entre sesiones</li>
         </ul>
       </div>
     </div>
   </div>
 
   <footer class="footer">
-    <p>Harness Engineering Course — Basado en <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> y <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
+    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
   </footer>
 </main>
 
@@ -190,5 +194,6 @@ function toggleSidebar() {
 }
 </script>
 <script src="/harness-course/js/shared.js"></script>
+<script src="/harness-course/js/i18n.js"></script>
 </body>
 </html>

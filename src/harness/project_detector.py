@@ -1,7 +1,7 @@
-"""Detector de tipos de proyecto basado en archivos existentes.
+"""Project type detector based on existing files.
 
-Este módulo analiza la estructura de archivos de un directorio raíz
-para determinar el tipo de proyecto y sugerir plantillas recomendadas.
+This module analyzes the file structure of a root directory
+to determine the project type and suggest recommended templates.
 """
 
 from __future__ import annotations
@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 class ProjectType(Enum):
-    """Tipos de proyecto soportados por el detector."""
+    """Project types supported by the detector."""
 
     STATIC_SITE = auto()
     RUST_PROJECT = auto()
@@ -22,25 +22,25 @@ class ProjectType(Enum):
 
 
 class ProjectDetector:
-    """Detecta el tipo de proyecto inspeccionando archivos y directorios."""
+    """Detects the project type by inspecting files and directories."""
 
     # ------------------------------------------------------------------ #
-    # Constantes de evidencia
+    # Evidence constants
     # ------------------------------------------------------------------ #
     _TRADING_SUBDIRS = {"strategy", "exchange", "trader"}
 
     # ------------------------------------------------------------------ #
-    # Detección
+    # Detection
     # ------------------------------------------------------------------ #
     def detect(self, root_path: str) -> tuple[ProjectType, dict[str, list[str]]]:
-        """Detecta el tipo de proyecto a partir de la ruta raíz.
+        """Detects the project type from the root path.
 
         Args:
-            root_path: Ruta del directorio raíz del proyecto.
+            root_path: Path to the project's root directory.
 
         Returns:
-            Tupla con el tipo de proyecto detectado y un diccionario
-            de evidencias que lista los archivos y directorios encontrados.
+            Tuple with the detected project type and a dictionary
+            of evidence listing the found files and directories.
         """
         root = Path(root_path).resolve()
         evidence: dict[str, list[str]] = {
@@ -51,7 +51,7 @@ class ProjectDetector:
         if not root.exists() or not root.is_dir():
             return ProjectType.UNKNOWN, evidence
 
-        # Recolectar archivos y directorios top-level
+        # Collect top-level files and directories
         top_level_files = {f.name for f in root.iterdir() if f.is_file()}
         top_level_dirs = {d.name for d in root.iterdir() if d.is_dir()}
 
@@ -69,17 +69,17 @@ class ProjectDetector:
 
         # --- NODE_PROJECT ---
         if "package.json" in top_level_files:
-            # NODE se chequea antes que RUST para darle prioridad si coincide
+            # NODE is checked before RUST to give it priority if it matches
             return ProjectType.NODE_PROJECT, evidence
 
         # --- PYTHON_PROJECT ---
         if any(f in top_level_files for f in ("setup.py", "pyproject.toml", "requirements.txt")):
             return ProjectType.PYTHON_PROJECT, evidence
 
-        # --- RUST_PROJECT (top-level o subdirectorio) ---
+        # --- RUST_PROJECT (top-level or subdirectory) ---
         has_cargo_toml = "Cargo.toml" in top_level_files
         if not has_cargo_toml:
-            # Buscar en subdirectorios top-level
+            # Search in top-level subdirectories
             for d in top_level_dirs:
                 cargo = root / d / "Cargo.toml"
                 if cargo.is_file():
@@ -95,20 +95,20 @@ class ProjectDetector:
                 return ProjectType.TRADING_BOT, evidence
             return ProjectType.RUST_PROJECT, evidence
 
-        # Por defecto
+        # Default
         return ProjectType.UNKNOWN, evidence
 
     # ------------------------------------------------------------------ #
-    # Recomendaciones
+    # Recommendations
     # ------------------------------------------------------------------ #
     def get_recommended_templates(self, project_type: ProjectType) -> list[str]:
-        """Retorna la lista de plantillas recomendadas según el tipo de proyecto.
+        """Returns the list of recommended templates based on the project type.
 
         Args:
-            project_type: Tipo de proyecto detectado.
+            project_type: Detected project type.
 
         Returns:
-            Lista de nombres de archivos/plantillas sugeridos.
+            List of suggested file/template names.
         """
         base = [
             "AGENTS.md",
@@ -154,17 +154,17 @@ class ProjectDetector:
         return base.copy()
 
     # ------------------------------------------------------------------ #
-    # Utilidades
+    # Utilities
     # ------------------------------------------------------------------ #
     @staticmethod
     def get_project_type_name(project_type: ProjectType) -> str:
-        """Retorna un nombre legible para el tipo de proyecto.
+        """Returns a readable name for the project type.
 
         Args:
-            project_type: Tipo de proyecto.
+            project_type: Project type.
 
         Returns:
-            Cadena descriptiva del tipo.
+            Descriptive string of the type.
         """
         mapping = {
             ProjectType.STATIC_SITE: "Sitio estático",

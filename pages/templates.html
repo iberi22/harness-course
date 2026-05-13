@@ -11,40 +11,49 @@
 <button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-brand"><a href="/harness-course/"><h2>Harness Eng.</h2><div class="brand-sub">Design skills for agents</div></a></div>
+  <div class="sidebar-brand">
+    <a href="/harness-course/">
+      <h2>Harness Eng.</h2>
+      <div class="brand-sub" data-i18n="brand.sub">Design skills for agents</div>
+    </a>
+    <div class="lang-toggle">
+      <button type="button" data-lang="es" onclick="setLanguage('es')" aria-label="Cambiar a Español">ES</button>
+      <button type="button" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
+    </div>
+  </div>
   <div class="search-container">
-    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <input id="nav-search" type="text" placeholder="Filter nav..." data-i18n-placeholder="search.placeholder" aria-label="Search navigation">
     <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
   </div>
   <nav>
     <div class="nav-section">
-      <div class="nav-section-title">Course</div>
-      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
-      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
-      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
-      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+      <div class="nav-section-title" data-i18n="nav.course">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span><span data-i18n="nav.home">Home</span></a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span><span data-i18n="nav.fundamentals">Fundamentals</span></a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span><span data-i18n="nav.design_patterns">Design Patterns</span></a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span><span data-i18n="nav.full_course">Full Course</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Subsistemas</div>
-      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> Scope</a>
-      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> Instructions</a>
-      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> State</a>
-      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> Verification</a>
+      <div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span><span data-i18n="nav.scope">Scope</span></a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span><span data-i18n="nav.instructions">Instructions</span></a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span><span data-i18n="nav.state">State</span></a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span><span data-i18n="nav.verification">Verification</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Resources</div>
-      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
-      <a href="/harness-course/pages/templates.html" class="active"><span class="nav-icon">△</span> Templates</a>
+      <div class="nav-section-title" data-i18n="nav.resources">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span><span data-i18n="nav.resources">Resources</span></a>
+      <a href="/harness-course/pages/templates.html" class="active"><span class="nav-icon">△</span><span data-i18n="nav.templates">Templates</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Case Study</div>
-      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span> Agents Flows</a>
-      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
-      <a href="/harness-course/pages/leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a>
+      <div class="nav-section-title" data-i18n="nav.case_study">Case Study</div>
+      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span><span data-i18n="nav.agents_flows">Agents Flows</span></a>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span><span data-i18n="nav.agent_recipes">Agent Recipes</span></a>
+      <a href="/harness-course/pages/leaderboard.html"><span class="nav-icon">🏆</span><span data-i18n="nav.leaderboard">Leaderboard</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Interactive</div>
-      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span> Tutorial</a>
+      <div class="nav-section-title" data-i18n="nav.interactive">Interactive</div>
+      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span><span data-i18n="nav.tutorial">Tutorial</span></a>
     </div>
   </nav>
 </aside>
@@ -278,5 +287,6 @@ echo "=== [init.sh] Complete (${DURATION}s) ==="</pre>
 </main>
 <script>function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}</script>
 <script src="/harness-course/js/shared.js"></script>
+<script src="/harness-course/js/i18n.js"></script>
 </body>
 </html>
