@@ -1,0 +1,30 @@
+<poml>
+  <let name="template_id">eslintrc</let>
+  <let name="output">.eslintrc.json</let>
+  <let name="description">Configuración básica de ESLint para proyectos Node.js</let>
+  <let name="triggers">["no linter", "no eslint"]</let>
+  <let name="check_ids">["3.5"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>{
+  "env": {
+    "node": true,
+    "es2022": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "eqeqeq": "error",
+    "curly": "error"
+  }
+}
+  </output>
+</poml>

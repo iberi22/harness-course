@@ -1,0 +1,11 @@
+<poml>
+  <let name="template_id">nvmrc</let>
+  <let name="output">.nvmrc</let>
+  <let name="description">Versión LTS de Node.js</let>
+  <let name="triggers">["no nvmrc", "no node version"]</let>
+  <let name="check_ids">["5.4"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>lts/*
+  </output>
+</poml>

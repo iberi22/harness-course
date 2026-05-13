@@ -1,0 +1,22 @@
+<poml>
+  <let name="template_id">npmrc</let>
+  <let name="output">.npmrc</let>
+  <let name="description">Configuración básica de npm con save-exact</let>
+  <let name="triggers">["no npmrc", "no node config"]</let>
+  <let name="check_ids">["5.4"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output># .npmrc — Node/npm configuration
+save-exact=true
+engine-strict=true
+
+# Usar el registry oficial de npm
+registry=https://registry.npmjs.org/
+
+# No crear package-lock si no es necesario (opcional, descomenta si aplica)
+# package-lock=false
+
+# Preferir versiones exactas para reproducibilidad
+save-prefix=""
+  </output>
+</poml>

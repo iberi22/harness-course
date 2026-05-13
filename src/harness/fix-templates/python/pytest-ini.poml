@@ -1,0 +1,25 @@
+<poml>
+  <let name="template_id">pytest-ini</let>
+  <let name="output">pytest.ini</let>
+  <let name="description">Configuración básica de pytest</let>
+  <let name="triggers">["missing pytest config", "no test config"]</let>
+  <let name="check_ids">["3.2"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>[pytest]
+minversion = 7.0
+testpaths = tests
+python_files = test_*.py
+python_classes = Test*
+python_functions = test_*
+addopts =
+    -ra
+    -q
+    --strict-markers
+    --tb=short
+markers =
+    slow: marks tests as slow (deselect with '-m "not slow"')
+    integration: marks tests as integration tests
+    unit: marks tests as unit tests
+  </output>
+</poml>

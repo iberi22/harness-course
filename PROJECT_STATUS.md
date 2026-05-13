@@ -20,6 +20,22 @@
 - [ ] Tests (HTML validation, link checker)
 - [ ] CI/CD pipeline
 
+## Milestones completados
+
+### IV.3 Project Type Auto-Detection (13-May-2026)
+
+**Descripción:** Implementación de auto-detección de tipo de proyecto para el comando `harness fix`.
+
+**Archivos creados:**
+- `src/harness/project_detector.py` — clase `ProjectDetector` con método `detect()` que infiere el tipo de proyecto (Rust, Python, Node, Trading) a partir de archivos presentes en el repo.
+- `src/harness/fix-templates/{rust,python,node,trading}/*.poml` — 14 templates POML específicos por tipo de proyecto.
+
+**Funcionalidad:**
+- Nuevo flag CLI: `harness fix . --auto`
+- Selección automática del template set adecuado según el proyecto detectado.
+
+**Estado:** ✅ Completado
+
 ## Riesgos
 - El contenido educativo es la parte más cara de producir (requiere LLM)
 - El evaluador necesita testeo en más proyectos para validar checks

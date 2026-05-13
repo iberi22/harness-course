@@ -1,0 +1,58 @@
+<poml>
+  <let name="template_id">health-check</let>
+  <let name="output">scripts/health-check.sh</let>
+  <let name="description">Script que verifica que el proceso del bot de trading esté vivo</let>
+  <let name="triggers">["no health check"]</let>
+  <let name="check_ids">["3.4"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>#!/bin/bash
+# health-check.sh — Verifica que el proceso del bot esté vivo
+set -euo pipefail
+
+BOT_NAME="${BOT_NAME:-trading_bot}"
+PIDFILE="${PIDFILE:-/tmp/${BOT_NAME}.pid}"
+ALERT_WEBHOOK="${ALERT_WEBHOOK:-}"
+
+HEALTH_STATUS="unhealthy"
+
+# 1. Verificar PID file
+if [ ! -f "$PIDFILE" ]; then
+    echo "ERROR: PID file no encontrado: $PIDFILE"
+    exit 1
+fi
+
+PID=$(cat "$PIDFILE")
+
+# 2. Verificar que el proceso existe
+if ! kill -0 "$PID" 2>/dev/null; then
+    echo "ERROR: Proceso no encontrado (PID: $PID)"
+    exit 1
+fi
+
+# 3. Verificar uso de CPU/memoria (opcional)
+CPU_THRESHOLD="${CPU_THRESHOLD:-95}"
+MEM_THRESHOLD="${MEM_THRESHOLD:-90}"
+
+CPU_USAGE=$(ps -p "$PID" -o %cpu= | tr -d ' ' || echo "0")
+MEM_USAGE=$(ps -p "$PID" -o %mem= | tr -d ' ' || echo "0")
+
+if awk "BEGIN {exit !($CPU_USAGE > $CPU_THRESHOLD)}"; then
+    echo "WARNING: CPU alta ($CPU_USAGE% > $CPU_THRESHOLD%)"
+fi
+
+if awk "BEGIN {exit !($MEM_USAGE > $MEM_THRESHOLD)}"; then
+    echo "WARNING: Memoria alta ($MEM_USAGE% > $MEM_THRESHOLD%)"
+fi
+
+HEALTH_STATUS="healthy"
+echo "OK: $BOT_NAME saludable (PID: $PID, CPU: ${CPU_USAGE}%, MEM: ${MEM_USAGE}%)"
+
+# 4. Enviar alerta si hay webhook configurado y estado no es healthy
+if [ "$HEALTH_STATUS" != "healthy" ] && [ -n "$ALERT_WEBHOOK" ]; then
+    curl -s -X POST "$ALERT_WEBHOOK" \
+        -H "Content-Type: application/json" \
+        -d "{\"text\":\"⚠️ Health check failed for $BOT_NAME\"}" > /dev/null || true
+fi
+  </output>
+</poml>

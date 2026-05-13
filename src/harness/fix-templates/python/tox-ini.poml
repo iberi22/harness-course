@@ -1,0 +1,35 @@
+<poml>
+  <let name="template_id">tox-ini</let>
+  <let name="output">tox.ini</let>
+  <let name="description">Configuración de tox para matriz de tests en múltiples versiones de Python</let>
+  <let name="triggers">["no tox", "no test matrix"]</let>
+  <let name="check_ids">["3.2"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>[tox]
+envlist = py39, py310, py311, py312
+
+[testenv]
+deps =
+    pytest
+    pytest-cov
+commands =
+    pytest {posargs}
+
+[testenv:lint]
+deps =
+    ruff
+    black
+    mypy
+commands =
+    ruff check .
+    black --check .
+    mypy .
+
+[testenv:type]
+deps =
+    mypy
+commands =
+    mypy .
+  </output>
+</poml>

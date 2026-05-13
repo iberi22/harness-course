@@ -1,0 +1,18 @@
+<poml>
+  <let name="template_id">prettierrc</let>
+  <let name="output">.prettierrc</let>
+  <let name="description">Configuración básica de Prettier</let>
+  <let name="triggers">["no formatter", "no prettier"]</let>
+  <let name="check_ids">["3.5"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "endOfLine": "lf"
+}
+  </output>
+</poml>

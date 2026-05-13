@@ -178,20 +178,20 @@ Todos los issues cerrados en commit `0549a6f`:
 
 **Criterio de éxito:** Skills index unificado con ≥60 skills totales.
 
-### IV.3 POML template generator mejorado 🏗️
+### IV.3 POML template generator mejorado 🏗️ ✅ COMPLETADO — 13-May-2026
 
-**Estado actual:** 6 templates POML en `scripts/harness-fix/templates/`
-**Mejora:** Auto-detección del tipo de proyecto
+**Estado actual:** ✅ COMPLETADO — 13-May-2026
 
-| Tipo de proyecto | Templates a generar |
-|---|---|
-| Static site (HTML/CSS/JS) | AGENTS.md, ROADMAP.md, .gitignore, LICENSE |
-| Rust project (Cargo.toml) | + Dockerfile, Makefile, rust-toolchain.toml |
-| Python project | + pyproject.toml, pytest.ini, .venv |
-| Node project | + package.json, .npmrc, .nvmrc |
-| Trading bot | + .env.example con Binance keys, restart script |
+**Implementado:**
+- `src/harness/project_detector.py` — `ProjectDetector` con método `detect()` que identifica el tipo de proyecto (Rust, Python, Node, Trading) analizando archivos presentes (e.g., `Cargo.toml`, `requirements.txt`, `package.json`, indicadores de trading).
+- 14 nuevos templates POML en `src/harness/fix-templates/` organizados por tipo:
+  - `rust/` — 4 templates (AGENTS.md, ROADMAP.md, Dockerfile, Makefile)
+  - `python/` — 3 templates (AGENTS.md, ROADMAP.md, pyproject.toml)
+  - `node/` — 3 templates (AGENTS.md, ROADMAP.md, package.json)
+  - `trading/` — 4 templates (AGENTS.md, ROADMAP.md, .env.example, restart script)
+- Nuevo flag CLI: `harness fix . --auto` que usa el detector para seleccionar automáticamente el template set adecuado.
 
-**Criterio de éxito:** `harness fix . --auto` genera contenido específico del tipo de proyecto.
+**Criterio de éxito:** ✅ `harness fix . --auto` genera contenido específico del tipo de proyecto.
 
 ---
 
@@ -295,7 +295,7 @@ Fase V (Expansión)
 | 3 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟢 Alto | ✅ COMPLETADO — 10 repos escaneados, leaderboard.html creado |
 | 4 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟢 Alto | ✅ COMPLETADO — 6 skills importados de 4 repos externos con frontmatter mejorado |
 | 5 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | ✅ COMPLETADO — iberi22/skills creado con 74 skills unificados, POML deprecado |
-| 6 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ⏳ Pendiente |
+| 6 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ✅ COMPLETADO — 13-May-2026 |
 | 7 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ⏳ EN PROGRESO — 12-May-2026 |
 | 8 | **V.3 Multi-lenguaje** | V | 🔴 2 sesiones | 🟢 Medio | Alcance global | ⏳ Pendiente |
 | 9 | **V.4 Comunidad** | V | 🔴 4 sesiones | 🟢 Alto | Visión a largo plazo | ⏳ Pendiente |

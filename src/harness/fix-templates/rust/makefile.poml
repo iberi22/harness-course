@@ -1,0 +1,51 @@
+<poml>
+  <let name="template_id">makefile</let>
+  <let name="output">Makefile</let>
+  <let name="description">Makefile para build de Rust con detección automática de bin vs lib</let>
+  <let name="triggers">["missing Makefile", "no makefile", "no build script"]</let>
+  <let name="check_ids">["5.1"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output># Makefile — Rust project
+# Detecta automáticamente bin vs lib
+
+CARGO := cargo
+CRATE_TYPE := $(shell grep -E '^\[lib\]' Cargo.toml >/dev/null 2>&1 && echo lib || echo bin)
+
+.PHONY: all build test clean run debug release fmt check
+
+all: build
+
+build:
+	$(CARGO) build
+
+debug:
+	$(CARGO) build
+
+release:
+	$(CARGO) build --release
+
+test:
+	$(CARGO) test --all-features
+
+clean:
+	$(CARGO) clean
+	rm -rf target/
+
+run:
+ifeq ($(CRATE_TYPE),bin)
+	$(CARGO) run
+else
+	@echo "ℹ️  Este crate es una librería (lib), no tiene target run"
+endif
+
+fmt:
+	$(CARGO) fmt
+
+check:
+	$(CARGO) check
+	$(CARGO) clippy -- -D warnings
+
+lint: fmt check
+  </output>
+</poml>

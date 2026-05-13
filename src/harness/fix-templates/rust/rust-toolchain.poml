@@ -1,0 +1,14 @@
+<poml>
+  <let name="template_id">rust-toolchain</let>
+  <let name="output">rust-toolchain.toml</let>
+  <let name="description">Rust toolchain configuration (stable)</let>
+  <let name="triggers">["missing rust-toolchain", "no toolchain config"]</let>
+  <let name="check_ids">["5.4"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>[toolchain]
+channel = "stable"
+components = ["rustfmt", "clippy"]
+profile = "default"
+  </output>
+</poml>

@@ -1,0 +1,46 @@
+<poml>
+  <let name="template_id">env-trading</let>
+  <let name="output">.env.example</let>
+  <let name="description">.env.example extendido para bots de trading con API keys y configuración de riesgo</let>
+  <let name="triggers">["no env example"]</let>
+  <let name="check_ids">["5.5"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output># .env.example — Variables de entorno para el bot de trading
+# Copia este archivo a .env y completa los valores
+
+# === Exchange API Keys ===
+# Binance
+BINANCE_API_KEY="tu-binance-api-key"
+BINANCE_API_SECRET="tu-binance-api-secret"
+
+# Bybit (opcional)
+BYBIT_API_KEY="tu-bybit-api-key"
+BYBIT_API_SECRET="tu-bybit-api-secret"
+
+# === Configuración de Trading ===
+# Máximo número de posiciones abiertas simultáneas
+MAX_POSITIONS=3
+
+# Umbral de confianza mínima para ejecutar una señal (0.0 - 1.0)
+CONFIDENCE_THRESHOLD=0.75
+
+# Capital máximo por trade (porcentaje del balance)
+RISK_PER_TRADE=2.0
+
+# Leverage máximo permitido
+MAX_LEVERAGE=5
+
+# === Modo de Operación ===
+# sandbox = paper trading, live = trading real
+MODE=sandbox
+
+# === Notificaciones ===
+# Webhook para alertas (Discord/Slack/Telegram opcional)
+ALERT_WEBHOOK_URL=""
+
+# === Base de Datos ===
+# URL de conexión para persistencia de trades
+DATABASE_URL="sqlite:///trades.db"
+  </output>
+</poml>

@@ -1,0 +1,48 @@
+<poml>
+  <let name="template_id">restart-sh</let>
+  <let name="output">restart.sh</let>
+  <let name="description">Script de restart para bot de trading: mata proceso, limpia y reinicia</let>
+  <let name="triggers">["no restart", "no daemon"]</let>
+  <let name="check_ids">["5.1"]</let>
+  <let name="weight_recovery">1.0</let>
+
+  <output>#!/bin/bash
+# restart.sh — Reinicio seguro del bot de trading
+set -euo pipefail
+
+BOT_NAME="${BOT_NAME:-trading_bot}"
+PIDFILE="${PIDFILE:-/tmp/${BOT_NAME}.pid}"
+LOG_DIR="${LOG_DIR:-./logs}"
+
+echo "🔄 Reiniciando ${BOT_NAME}..."
+
+# 1. Detener proceso existente
+if [ -f "$PIDFILE" ]; then
+    PID=$(cat "$PIDFILE")
+    if kill -0 "$PID" 2>/dev/null; then
+        echo "💥 Matando proceso existente (PID: $PID)..."
+        kill -TERM "$PID" || true
+        sleep 2
+        if kill -0 "$PID" 2>/dev/null; then
+            kill -KILL "$PID" || true
+        fi
+    fi
+    rm -f "$PIDFILE"
+fi
+
+# 2. Limpiar logs antiguos (mantener últimos 7 días)
+if [ -d "$LOG_DIR" ]; then
+    echo "🧼 Limpiando logs antiguos..."
+    find "$LOG_DIR" -name "*.log" -mtime +7 -delete 2>/dev/null || true
+fi
+
+# 3. Reiniciar
+mkdir -p "$LOG_DIR"
+echo "▶️  Iniciando ${BOT_NAME}..."
+nohup python3 -m "$BOT_NAME" > "$LOG_DIR/${BOT_NAME}_$(date +%Y%m%d_%H%M%S).log" 2>&1 &
+NEW_PID=$!
+echo "$NEW_PID" > "$PIDFILE"
+
+echo "✅ ${BOT_NAME} reiniciado (PID: $NEW_PID)"
+  </output>
+</poml>

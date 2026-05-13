@@ -16,6 +16,7 @@ except (ImportError, TypeError):
 from harness.models import VERSION, score_to_grade
 from harness.scanner import HarnessScanner
 from harness.report import build_json_report, generate_llm_prompt, print_report
+from harness.project_detector import ProjectDetector, ProjectType
 
 
 # ── CLI: Fix command ───────────────────────────────────────────────────
@@ -28,32 +29,59 @@ def cmd_fix(args: argparse.Namespace) -> None:
         print(f"[ERROR] Directorio de templates no encontrado: {templates_dir}", file=sys.stderr)
         sys.exit(1)
 
-    # Load templates
-    tmpl_files = sorted(templates_dir.glob("*.poml"))
-    if not tmpl_files:
+    def _load_templates(tmpl_dir: Path) -> dict:
+        """Carga templates POML de un directorio y retorna dict indexado por nombre de salida."""
+        loaded: dict = {}
+        for tf in sorted(tmpl_dir.glob("*.poml")):
+            content = tf.read_text(encoding="utf-8")
+            m = re.search(r'<let\s+name="output">(.*?)</let>', content)
+            if m:
+                out_file = m.group(1).strip()
+                out_m = re.search(r'<output>(.*?)</output>', content, re.DOTALL)
+                if out_m:
+                    ids_m = re.search(r'<let\s+name="check_ids">\[(.*?)\]</let>', content)
+                    check_ids = [x.strip().strip('"') for x in ids_m.group(1).split(",")] if ids_m else []
+                    trig_m = re.search(r'<let\s+name="triggers">\[(.*?)\]</let>', content)
+                    triggers = [x.strip().strip('"') for x in trig_m.group(1).split(",")] if trig_m else []
+                    loaded[out_file] = {
+                        "content": out_m.group(1).strip(),
+                        "check_ids": check_ids,
+                        "triggers": triggers,
+                    }
+        return loaded
+
+    # Load generic templates
+    templates = _load_templates(templates_dir)
+    if not templates:
         print(f"[ERROR] No hay templates POML en {templates_dir}", file=sys.stderr)
         sys.exit(1)
 
-    # Index templates by output file name and their check associations
-    templates = {}
-    for tf in tmpl_files:
-        content = tf.read_text(encoding="utf-8")
-        m = re.search(r'<let\s+name="output">(.*?)</let>', content)
-        if m:
-            out_file = m.group(1).strip()
-            out_m = re.search(r'<output>(.*?)</output>', content, re.DOTALL)
-            if out_m:
-                # Extract check_ids or use fallback matching
-                ids_m = re.search(r'<let\s+name="check_ids">\[(.*?)\]</let>', content)
-                check_ids = [x.strip().strip('"') for x in ids_m.group(1).split(",")] if ids_m else []
-                # Extract trigger keywords
-                trig_m = re.search(r'<let\s+name="triggers">\[(.*?)\]</let>', content)
-                triggers = [x.strip().strip('"') for x in trig_m.group(1).split(",")] if trig_m else []
-                templates[out_file] = {
-                    "content": out_m.group(1).strip(),
-                    "check_ids": check_ids,
-                    "triggers": triggers,
-                }
+    # Auto-detect project type and load specific templates
+    detected_name = None
+    recommended: list[str] = []
+    if getattr(args, "auto", False):
+        try:
+            detector = ProjectDetector()
+            project_type, _evidence = detector.detect(args.path)
+            detected_name = detector.get_project_type_name(project_type)
+            print(f"  📋 Tipo detectado: {detected_name}")
+
+            type_map = {
+                ProjectType.RUST_PROJECT: "rust",
+                ProjectType.PYTHON_PROJECT: "python",
+                ProjectType.NODE_PROJECT: "node",
+                ProjectType.TRADING_BOT: "trading",
+            }
+            type_key = type_map.get(project_type)
+            if type_key:
+                specific_dir = templates_dir / type_key
+                if specific_dir.is_dir():
+                    extra = _load_templates(specific_dir)
+                    templates.update(extra)
+
+            recommended = detector.get_recommended_templates(project_type)
+        except Exception:
+            pass
 
     # Scan project
     try:
@@ -106,6 +134,10 @@ def cmd_fix(args: argparse.Namespace) -> None:
         print(f"\n  📋 {generated} archivo(s) listos para generar. Usa --all para escribirlos.")
     else:
         print(f"\n  ✅ {generated} archivo(s) generados. Vuelve a escanear para ver el nuevo score.")
+
+    if getattr(args, "auto", False) and detected_name and recommended:
+        print(f"\n  💡 Recomendación: para este tipo ({detected_name}), considera crear: {', '.join(recommended)}")
+
     print()
 
 
@@ -186,6 +218,7 @@ def main():
     fix_p.add_argument("path", help="Ruta al proyecto a reparar")
     fix_p.add_argument("--templates", default=_TEMPLATES_DIR,
                        help="Directorio con templates")
+    fix_p.add_argument("--auto", action="store_true", help="Auto-detectar tipo de proyecto y usar templates específicos")
     fix_p.add_argument("--dry-run", action="store_true", help="Mostrar qué generaría sin escribir")
     fix_p.add_argument("--all", action="store_true", help="Generar todos los archivos faltantes")
     fix_p.set_defaults(func=cmd_fix)
