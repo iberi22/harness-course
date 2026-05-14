@@ -95,15 +95,15 @@ Todos los issues cerrados en commit `0549a6f`:
 
 ---
 
-## Fase III: Contenido educativo 📚
+## Fase III: Contenido educativo 📚 — ✅ COMPLETADA
 
 > **Duración estimada:** 3-4 sesiones
 > **Impacto:** Alto esfuerzo / Alto valor (el curso como tal)
 
-### III.1 Páginas de detalle por subsistema
+### III.1 Páginas de detalle por subsistema ✅
 
-**Estado actual:** 5 páginas genéricas (course, fundamentals, design-patterns, resources, templates)
-**Objetivo:** 6 páginas nuevas — una por subsistema del harness
+**Estado:** ✅ COMPLETADO — 13-May-2026
+**Nota:** Las 6 páginas fueron creadas como parte de V.3 multi-language. Cada una incluye contenido educativo completo con módulos colapsables, ejemplos, anti-patrones y checklists.
 
 | Página | Subsistema | Contenido |
 |---|---|---|
@@ -114,14 +114,11 @@ Todos los issues cerrados en commit `0549a6f`:
 | `/pages/lifecycle.html` | 🔄 Lifecycle | Init scripts, Docker, dependencias, .env |
 | `/pages/skills.html` | 🧠 Skills & POML | SKILL.md, recetas POML, registry, providers |
 
-**Cada página debe incluir:**
-- Checklist de lo que un agente debe verificar
-- Ejemplo de archivo bien hecho
-- Enlace al evaluador (`harness scan . --json`)
+**Mejora adicional (14-May-2026):** Sidebar navigation corregida en las 6 páginas — ahora todas muestran los 6 subsistemas completos en la navegación lateral (antes cada página solo mostraba 3-4).
 
-### III.2 Tutorial interactivo: "De 45% a 80% en 10 minutos"
+### III.2 Tutorial interactivo: "De 45% a 80% en 10 minutos" ✅
 
-**Estado:** ⏳ EN PROGRESO — Iniciado: 12-May-2026
+**Estado:** ✅ COMPLETADO — 12-May-2026 (commit 35abe1d)
 
 **Formato:** Página web con pasos interactivos (JS)
 **Contenido:**
@@ -297,16 +294,18 @@ Fase V (Expansión)
 ## Priorización recomendada
 
 | # | Item | Fase | Esfuerzo | Impacto | Por qué ahora | Estado |
-|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|
 | 1 | **I.3 OpenClaw cosmetics** | I | 🟢 30 min | 🟢 Alto | Logs limpios = debugging más rápido | ⏳ Sin repo |
-| 2 | **III.2 Tutorial interactivo** | III | 🔴 3 sesiones | 🟢 Alto | Valor educativo | ✅ COMPLETADO — 12-May-2026 |
-| 3 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟢 Alto | ✅ COMPLETADO — 10 repos escaneados, leaderboard.html creado |
-| 4 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟢 Alto | ✅ COMPLETADO — 6 skills importados de 4 repos externos con frontmatter mejorado |
-| 5 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | ✅ COMPLETADO — iberi22/skills creado con 74 skills unificados, POML deprecado |
-| 6 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ✅ COMPLETADO — 13-May-2026 |
-| 7 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ✅ COMPLETADO — 12-May-2026 |
-| 8 | **V.3 Multi-lenguaje** | V | 🟡 1 sesión | 🟢 Medio | Alcance global | ✅ COMPLETADO — 13-May-2026 |
-| 9 | **V.4 Comunidad** | V | 🔴 4 sesiones | 🟢 Alto | Visión a largo plazo | ⏳ Pendiente |
+| 2 | **III.1 Páginas detalle subsistema** | III | 🟡 1 sesión | 🟢 Alto | Contenido educativo | ✅ COMPLETADO — 13-May-2026 |
+| 3 | **III.2 Tutorial interactivo** | III | 🔴 3 sesiones | 🟢 Alto | Valor educativo | ✅ COMPLETADO — 12-May-2026 |
+| 4 | **III.1b Sidebar navigation fix** | III | 🟢 15 min | 🟡 Medio | Consistencia UX | ✅ COMPLETADO — 14-May-2026 |
+| 5 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟢 Alto | ✅ COMPLETADO — 10 repos escaneados, leaderboard.html creado |
+| 6 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟢 Alto | ✅ COMPLETADO — 6 skills importados de 4 repos externos con frontmatter mejorado |
+| 7 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | ✅ COMPLETADO — iberi22/skills creado con 74 skills unificados, POML deprecado |
+| 8 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ✅ COMPLETADO — 13-May-2026 |
+| 9 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ✅ COMPLETADO — 12-May-2026 |
+| 10 | **V.3 Multi-lenguaje** | V | 🟡 1 sesión | 🟢 Medio | Alcance global | ✅ COMPLETADO — 13-May-2026 |
+| 11 | **V.4 Comunidad** | V | 🔴 4 sesiones | 🟢 Alto | Visión a largo plazo | ⏳ Pendiente |
 
 ---
 
