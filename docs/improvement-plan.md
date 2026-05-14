@@ -114,7 +114,9 @@ Todos los issues cerrados en commit `0549a6f`:
 | `/pages/lifecycle.html` | 🔄 Lifecycle | Init scripts, Docker, dependencias, .env |
 | `/pages/skills.html` | 🧠 Skills & POML | SKILL.md, recetas POML, registry, providers |
 
-**Mejora adicional (14-May-2026):** Sidebar navigation corregida en las 6 páginas — ahora todas muestran los 6 subsistemas completos en la navegación lateral (antes cada página solo mostraba 3-4).
+**Mejora adicional #1 (14-May-2026):** Sidebar navigation corregida en 7 páginas (instructions, leaderboard, lifecycle, scope, skills, state, verification) — ahora muestran los 6 subsistemas completos.
+
+**Mejora adicional #2 (14-May-2026):** Sidebar navigation completada en las 8 páginas restantes (index, case-study, course, design-patterns, fundamentals, resources, templates, tutorial). Ahora las 15 páginas del sitio tienen navegación lateral completa y consistente con los 14 enlaces.
 
 ### III.2 Tutorial interactivo: "De 45% a 80% en 10 minutos" ✅
 
