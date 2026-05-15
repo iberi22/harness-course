@@ -87,6 +87,10 @@
       <a href="/harness-course/pages/leaderboard.html" class="active"><span class="nav-icon">🏆</span><span data-i18n="nav.leaderboard">Leaderboard</span></a>
     </div>
     <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.community">Community</div>
+      <a href="/harness-course/pages/community.html"><span class="nav-icon">🌐</span><span data-i18n="nav.community">Community</span></a>
+    </div>
+    <div class="nav-section">
       <div class="nav-section-title" data-i18n="nav.interactive">Interactive</div>
       <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span><span data-i18n="nav.tutorial">Tutorial</span></a>
     </div>
@@ -215,6 +219,28 @@
             <td>Markdown</td>
             <td><span class="score-badge score-critical">🔴 11.9%</span></td>
           </tr>
+          <!-- === NEW ENTRIES (14-16) added 15-May-2026 === -->
+          <tr>
+            <td style="border-top: 2px solid var(--border-subtle);">14</td>
+            <td style="border-top: 2px solid var(--border-subtle);"><strong>llama.cpp</strong><br><span style="font-size:12px;color:var(--text-muted)">ggerganov/llama.cpp</span></td>
+            <td style="border-top: 2px solid var(--border-subtle);"><span class="stars">⭐ 100K</span></td>
+            <td>C/C++</td>
+            <td style="border-top: 2px solid var(--border-subtle);"><span class="score-badge score-regular">🟡 41.3%</span></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><strong>skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/skills</span></td>
+            <td><span class="stars">—</span></td>
+            <td>Skills</td>
+            <td><span class="score-badge score-weak">🟠 25.7%</span></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><strong>imported-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/imported-skills</span></td>
+            <td><span class="stars">—</span></td>
+            <td>Skills</td>
+            <td><span class="score-badge score-critical">🔴 4.6%</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -227,33 +253,33 @@
     <div class="subsystem-grid">
       <div class="subsystem-card">
         <h4>📋 Instructions</h4>
-        <div class="score" style="color:#eab308;">∅ 40%</div>
-        <div class="detail">Promedio entre todos los repos. Los proyectos Harness (55-100%) elevan el promedio; los externos suelen tener solo README.</div>
+        <div class="score" style="color:#eab308;">∅ 38%</div>
+        <div class="detail">Promedio entre todos los repos. Los proyectos Harness (55-100%) elevan el promedio; los externos suelen tener solo README. Los nuevos repos (llama.cpp, skills, imported-skills) bajan ligeramente el promedio general.</div>
       </div>
       <div class="subsystem-card">
         <h4>💾 State</h4>
-        <div class="score" style="color:#ef4444;">∅ 30%</div>
-        <div class="detail">Sube gracias a repos Harness (47-100%). Externos casi no tienen TASK.md, MEMORY.md o tracking para agentes.</div>
+        <div class="score" style="color:#ef4444;">∅ 26%</div>
+        <div class="detail">Sube gracias a repos Harness (47-100%). Externos casi no tienen TASK.md, MEMORY.md o tracking para agentes. Los nuevos repos aportan poco en este subsistema.</div>
       </div>
       <div class="subsystem-card">
         <h4>✅ Verification</h4>
-        <div class="score" style="color:#22c55e;">∅ 60%</div>
-        <div class="detail">Sigue siendo el más fuerte. Tests y CI/CD son estándar. Varios repos alcanzan 88-100%.</div>
+        <div class="score" style="color:#22c55e;">∅ 55%</div>
+        <div class="detail">Sigue siendo el más fuerte. Tests y CI/CD son estándar. Varios repos alcanzan 88-100%. La incorporación de llama.cpp (100% Verification) ayuda, pero skills e imported-skills sin tests bajan el promedio.</div>
       </div>
       <div class="subsystem-card">
         <h4>🎯 Scope</h4>
-        <div class="score" style="color:#eab308;">∅ 40%</div>
-        <div class="detail">Proyectos Harness con DoD y milestones marcan la diferencia. Externos rara vez tienen Definition of Done o USER.md.</div>
+        <div class="score" style="color:#eab308;">∅ 35%</div>
+        <div class="detail">Proyectos Harness con DoD y milestones marcan la diferencia. Externos rara vez tienen Definition of Done o USER.md. Los nuevos repos aportan muy poco aquí, reduciendo el promedio.</div>
       </div>
       <div class="subsystem-card">
         <h4>🔄 Lifecycle</h4>
-        <div class="score" style="color:#eab308;">∅ 48%</div>
-        <div class="detail">Docker, .gitignore y dependencias son comunes. Scripts de init y .env.example siguen siendo raros.</div>
+        <div class="score" style="color:#eab308;">∅ 44%</div>
+        <div class="detail">Docker, .gitignore y dependencias son comunes. Scripts de init y .env.example siguen siendo raros. Los nuevos repos (especialmente llama.cpp con 50%) moderan el promedio.</div>
       </div>
       <div class="subsystem-card">
         <h4>🧠 Skills</h4>
-        <div class="score" style="color:#eab308;">∅ 54%</div>
-        <div class="detail">Proyectos Harness (100%) + context-mode y LHE (73%) elevan el promedio. Externos sin skills.</div>
+        <div class="score" style="color:#eab308;">∅ 48%</div>
+        <div class="detail">Proyectos Harness (100%) + context-mode y LHE (73%) elevan el promedio. Externos sin skills. El repo skills de iberi22 (73.3%) ayuda, pero llama.cpp e imported-skills sin skills bajan el promedio general.</div>
       </div>
     </div>
 
@@ -265,20 +291,20 @@
       <div class="module-header">
         <div class="module-num">1</div>
         <div>
-          <h3>Nuestros proyectos lideran</h3>
+          <h3>Proyectos de iberi22 dominan el top</h3>
         </div>
       </div>
-      <p>Los 4 proyectos de iberi22 dominan el top del leaderboard. <strong>harness-course (100%)</strong> y <strong>synapse-trading (81.9%)</strong> demuestran que la metodología Harness Engineering produce repositorios significativamente mejor preparados para agentes de IA que los proyectos open-source más populares.</p>
+      <p>Los 6 proyectos de iberi22 dominan el top del leaderboard. <strong>harness-course (100%)</strong> y <strong>synapse-trading (81.9%)</strong> demuestran que la metodología Harness Engineering produce repositorios significativamente mejor preparados para agentes de IA que los proyectos open-source más populares. Las nuevas incorporaciones — <strong>skills</strong> (25.7%) e <strong>imported-skills</strong> (4.6%) — muestran el contraste entre repos con skills estructurados y los que carecen de ellos.</p>
     </div>
 
     <div class="module module-collapsible">
       <div class="module-header">
         <div class="module-num">2</div>
         <div>
-          <h3>Gap: State y Skills</h3>
+          <h3>Gap: State, Skills y la cola del leaderboard</h3>
         </div>
       </div>
-      <p>El promedio de <strong>State (30%)</strong> y <strong>Skills (54%)</strong> sube por los proyectos Harness, pero en proyectos externos siguen siendo los más descuidados. Son los subsistemas que más diferencian un repo operado por humanos de uno operado por agentes. Incluso proyectos con tests y CI excelentes (aider 94% en Verification) ignoran completamente la documentación para agentes.</p>
+      <p>El promedio de <strong>State (26%)</strong> y <strong>Skills (48%)</strong> sube por los proyectos Harness, pero en proyectos externos siguen siendo los más descuidados. Son los subsistemas que más diferencian un repo operado por humanos de uno operado por agentes. Incluso proyectos con tests y CI excelentes (aider 94% en Verification) ignoran completamente la documentación para agentes. Los nuevos repos en la cola — <strong>llama.cpp (41.3%)</strong>, <strong>skills (25.7%)</strong> e <strong>imported-skills (4.6%)</strong> — amplían el rango y muestran que incluso repos muy populares pueden tener carencias importantes en subsistemas clave.</p>
     </div>
 
     <div class="module module-collapsible">
@@ -288,7 +314,7 @@
           <h3>Escalabilidad del Scanner</h3>
         </div>
       </div>
-      <p>El evaluador de Harness funciona en cualquier repo — sin importar el lenguaje o stack. Esto significa que podemos escalar este leaderboard a 100+ repos y crear un ranking público donde cualquier proyecto pueda medir su "agent-readiness".</p>
+      <p>El evaluador de Harness funciona en cualquier repo — sin importar el lenguaje o stack. Esto significa que podemos escalar este leaderboard a 100+ repos y crear un ranking público donde cualquier proyecto pueda medir su &quot;agent-readiness&quot;. Con la incorporación de <strong>llama.cpp</strong> (C/C++, 100K ⭐) y los repos de skills en Poml, el leaderboard ahora cubre un espectro más amplio de tecnologías y casos de uso.</p>
     </div>
 
     <div class="section-divider"></div>

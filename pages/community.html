@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌐 Community — Harness Engineering</title>
+<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+<link rel="stylesheet" href="/harness-course/css/style.css">
+<style>
+.community-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 24px 0; }
+.community-table th {
+  text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border-subtle);
+}
+.community-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); vertical-align: middle; }
+.community-table tr:hover td { background: rgba(255,255,255,0.02); }
+.status-pending { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; background: rgba(234,179,8,0.15); color: #eab308; }
+.status-verified { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; background: rgba(34,197,94,0.15); color: #22c55e; }
+.status-pending-review { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; background: rgba(59,130,246,0.15); color: #3b82f6; }
+.step-list { list-style: none; padding: 0; margin: 16px 0; }
+.step-list li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-subtle); }
+.step-list li:last-child { border-bottom: none; }
+.step-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; background: rgba(255,255,255,0.06); color: var(--text-muted); }
+.step-content { flex: 1; }
+.step-content code { background: rgba(255,255,255,0.06); padding: 2px 8px; border-radius: 4px; font-size: 13px; color: var(--accent); }
+.benefits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+.benefit-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 20px; }
+.benefit-card h4 { margin: 0 0 8px; font-size: 15px; }
+.benefit-card p { margin: 0; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.github-submit-area { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 32px; text-align: center; margin: 24px 0; }
+.github-submit-area h3 { margin: 0 0 12px; }
+.github-submit-area p { color: var(--text-muted); font-size: 14px; margin: 0 0 20px; }
+.submit-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: var(--radius); font-size: 14px; font-weight: 600; background: var(--accent); color: #fff; text-decoration: none; transition: opacity 0.2s; }
+.submit-btn:hover { opacity: 0.85; }
+.community-note { font-size: 12px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+</style>
+</head>
+<body>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="/harness-course/">
+      <h2>Harness Eng.</h2>
+      <div class="brand-sub" data-i18n="brand.sub">Design skills for agents</div>
+    </a>
+    <div class="lang-toggle">
+      <button type="button" data-lang="es" onclick="setLanguage('es')" aria-label="Cambiar a Español">ES</button>
+      <button type="button" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
+    </div>
+  </div>
+  <div class="search-container">
+    <input id="nav-search" type="text" placeholder="Filter nav..." data-i18n-placeholder="search.placeholder" aria-label="Search navigation">
+    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.course">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span><span data-i18n="nav.home">Home</span></a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span><span data-i18n="nav.fundamentals">Fundamentals</span></a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span><span data-i18n="nav.design_patterns">Design Patterns</span></a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span><span data-i18n="nav.full_course">Full Course</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span><span data-i18n="nav.scope">Scope</span></a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span><span data-i18n="nav.instructions">Instructions</span></a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span><span data-i18n="nav.state">State</span></a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span><span data-i18n="nav.verification">Verification</span></a>
+      <a href="/harness-course/pages/lifecycle.html"><span class="nav-icon">🔄</span><span data-i18n="nav.lifecycle">Lifecycle</span></a>
+      <a href="/harness-course/pages/skills.html"><span class="nav-icon">🧠</span> <span data-i18n="nav.skills_poml">Skills</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.resources">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span><span data-i18n="nav.resources">Resources</span></a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span><span data-i18n="nav.templates">Templates</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.case_study">Case Study</div>
+      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span><span data-i18n="nav.agents_flows">Agents Flows</span></a>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span><span data-i18n="nav.agent_recipes">Agent Recipes</span></a>
+      <a href="/harness-course/pages/leaderboard.html"><span class="nav-icon">🏆</span><span data-i18n="nav.leaderboard">Leaderboard</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.interactive">Interactive</div>
+      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span><span data-i18n="nav.tutorial">Tutorial</span></a>
+      <a href="/harness-course/pages/community.html" class="active"><span class="nav-icon">🌐</span><span data-i18n="nav.community">Community</span></a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="page-header">
+    <h1><span class="page-icon">🌐</span> <span data-i18n="community.title">Community Harness Scores</span></h1>
+    <p><span data-i18n="community.description">A community-driven harness score submission system. Submit your project, get it scanned, and compare your agent-readiness with the community.</span></p>
+  </div>
+  <div class="content">
+
+    <!-- Module 1: Vision -->
+    <div class="module">
+      <div class="module-header">
+        <div class="module-num">1</div>
+        <div>
+          <h3 data-i18n="community.vision_title">Vision</h3>
+          <div class="module-topics">
+            <span class="tag" data-i18n="community.tag_vision">vision</span>
+            <span class="tag" data-i18n="community.tag_open">open-registry</span>
+            <span class="tag" data-i18n="community.tag_community">community</span>
+          </div>
+        </div>
+      </div>
+      <p data-i18n="community.vision_body">We envision a public registry where any developer or team can submit their project's Harness Score via GitHub issues. Once submitted, the score is reviewed, verified, and listed so the community can benchmark against each other. This transparent, open-source approach helps raise the bar for agent-readiness across the entire ecosystem. The <strong>official leaderboard</strong> showcases top-tier curated repos, while the <strong>community leaderboard</strong> welcomes contributions from anyone who wants to measure and improve their project.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Module 2: How to Submit -->
+    <div class="module">
+      <div class="module-header">
+        <div class="module-num">2</div>
+        <div>
+          <h3 data-i18n="community.submit_title">How to Submit</h3>
+          <div class="module-topics">
+            <span class="tag" data-i18n="community.tag_guide">guide</span>
+            <span class="tag" data-i18n="community.tag_steps">steps</span>
+          </div>
+        </div>
+      </div>
+      <p data-i18n="community.submit_intro">Follow these simple steps to get your project listed in the community leaderboard:</p>
+      <ol class="step-list">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-content">
+            <strong data-i18n="community.step1_title">Scan your project</strong>
+            <p data-i18n="community.step1_desc">Run <code>harness scan . --json</code> in your project root to generate a complete Harness Score report with subsystem breakdowns.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-content">
+            <strong data-i18n="community.step2_title">Open a GitHub issue</strong>
+            <p data-i18n="community.step2_desc">Go to <a href="https://github.com/iberi22/harness-course/issues" target="_blank" rel="noopener">github.com/iberi22/harness-course/issues</a> and create a new issue using the <strong>"Submit Score"</strong> template.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-content">
+            <strong data-i18n="community.step3_title">Paste your results</strong>
+            <p data-i18n="community.step3_desc">Include the full JSON output from the scan along with your repository URL. Our maintainers will verify the score and add it to the community list.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-content">
+            <strong data-i18n="community.step4_title">Get listed</strong>
+            <p data-i18n="community.step4_desc">Once approved, your project appears in the community leaderboard below. You can resubmit anytime your score improves!</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Module 3: Community Scores -->
+    <div class="module">
+      <div class="module-header">
+        <div class="module-num">3</div>
+        <div>
+          <h3 data-i18n="community.scores_title">Community Scores</h3>
+          <div class="module-topics">
+            <span class="tag" data-i18n="community.tag_table">table</span>
+            <span class="tag" data-i18n="community.tag_submissions">submissions</span>
+          </div>
+        </div>
+      </div>
+      <p data-i18n="community.scores_desc">Below are community-submitted projects. The <strong>official leaderboard</strong> remains the primary benchmark; this table is a growing collection of community-driven scores. Submit yours today!</p>
+
+      <table class="community-table">
+        <thead>
+          <tr>
+            <th data-i18n="community.table_project">Project</th>
+            <th data-i18n="community.table_score">Score</th>
+            <th data-i18n="community.table_date">Date Submitted</th>
+            <th data-i18n="community.table_status">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>my-awesome-agent-project</strong><br><span style="font-size:12px;color:var(--text-muted)">community-user/my-awesome-agent-project</span></td>
+            <td><span class="score-badge score-good">🔵 76.3%</span></td>
+            <td style="color:var(--text-muted);font-size:13px;">14-May-2026</td>
+            <td><span class="status-verified">✅ Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>agent-toolkit</strong><br><span style="font-size:12px;color:var(--text-muted)">devrel/agent-toolkit</span></td>
+            <td><span class="score-badge score-regular">🟡 58.1%</span></td>
+            <td style="color:var(--text-muted);font-size:13px;">12-May-2026</td>
+            <td><span class="status-verified">✅ Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>harness-integration-demo</strong><br><span style="font-size:12px;color:var(--text-muted)">contributor/harness-integration-demo</span></td>
+            <td><span class="score-badge score-weak">🟠 34.5%</span></td>
+            <td style="color:var(--text-muted);font-size:13px;">10-May-2026</td>
+            <td><span class="status-pending-review">🔵 Pending Review</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="community-note" data-i18n="community.table_note">Scores are verified by maintainers. The official leaderboard at /leaderboard contains curated top-tier projects.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Module 4: Benefits -->
+    <div class="module">
+      <div class="module-header">
+        <div class="module-num">4</div>
+        <div>
+          <h3 data-i18n="community.benefits_title">Benefits of Participating</h3>
+          <div class="module-topics">
+            <span class="tag" data-i18n="community.tag_benefits">benefits</span>
+            <span class="tag" data-i18n="community.tag_why">why</span>
+          </div>
+        </div>
+      </div>
+      <p data-i18n="community.benefits_intro">Why should you submit your project to the community registry? Here's what you gain:</p>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h4>🏆 <span data-i18n="community.benefit1_title">Bragging Rights</span></h4>
+          <p data-i18n="community.benefit1_desc">Show the world your project's agent-readiness score. A high Harness Score is a badge of quality that sets your project apart.</p>
+        </div>
+        <div class="benefit-card">
+          <h4>🔍 <span data-i18n="community.benefit2_title">Discoverability</span></h4>
+          <p data-i18n="community.benefit2_desc">Get listed alongside other agent-ready projects. Developers and agents looking for well-structured repos will find yours.</p>
+        </div>
+        <div class="benefit-card">
+          <h4>📈 <span data-i18n="community.benefit3_title">Improve Agent-Readiness</span></h4>
+          <p data-i18n="community.benefit3_desc">The process of running the scanner and addressing its recommendations directly improves your project's ability to be operated by AI agents.</p>
+        </div>
+        <div class="benefit-card">
+          <h4>🌍 <span data-i18n="community.benefit4_title">Contribute to Standards</span></h4>
+          <p data-i18n="community.benefit4_desc">Help build open-source agent engineering standards. The more projects in the registry, the better we can define what "agent-ready" means.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Module 5: GitHub Integration -->
+    <div class="module">
+      <div class="module-header">
+        <div class="module-num">5</div>
+        <div>
+          <h3 data-i18n="community.github_title">GitHub Integration</h3>
+          <div class="module-topics">
+            <span class="tag" data-i18n="community.tag_github">github</span>
+            <span class="tag" data-i18n="community.tag_submit">submit</span>
+          </div>
+        </div>
+      </div>
+      <p data-i18n="community.github_body">Ready to submit your project? Click the button below to create a new issue with our pre-filled score submission template. Fill in your details and a maintainer will review your submission.</p>
+
+      <div class="github-submit-area">
+        <h3 data-i18n="community.submit_heading">Submit Your Project</h3>
+        <p data-i18n="community.submit_prompt">Use the issue template to submit your Harness Score JSON and repository details.</p>
+        <a href="https://github.com/iberi22/harness-course/issues/new?template=score-submission.md" target="_blank" rel="noopener" class="submit-btn">
+          <span data-i18n="community.submit_button">📤 Submit Score</span>
+        </a>
+        <p class="community-note" data-i18n="community.github_note">Make sure your repository is public so our maintainers can verify the scan results.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 data-i18n="community.related_title">Related Resources</h2>
+    <div class="card-grid">
+      <a href="/harness-course/pages/leaderboard.html" class="card">
+        <h3 data-i18n="community.related_leaderboard_title">🏆 Official Leaderboard</h3>
+        <p data-i18n="community.related_leaderboard_desc">View the top-ranked projects curated by the Harness Engineering team.</p>
+      </a>
+      <a href="/harness-course/pages/tutorial.html" class="card">
+        <h3 data-i18n="community.related_tutorial_title">🎮 Interactive Tutorial</h3>
+        <p data-i18n="community.related_tutorial_desc">Learn how to take your project from 45% to 80%+ with a guided tutorial.</p>
+      </a>
+      <a href="/harness-course/pages/case-study.html" class="card">
+        <h3 data-i18n="community.related_casestudy_title">🧠 Case Study</h3>
+        <p data-i18n="community.related_casestudy_desc">How agents-flows-recipes achieved a high Harness Score — lessons learned.</p>
+      </a>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
+  </footer>
+</main>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
+<script src="/harness-course/js/shared.js"></script>
+<script src="/harness-course/js/i18n.js"></script>
+</body>
+</html>
