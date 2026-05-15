@@ -42,9 +42,9 @@ Todos los issues cerrados en commit `0549a6f`:
 - ✅ restart-daemon.sh apunta a release/ no debug/
 - ✅ 5 skills creados (operator, analyst, risk-manager, execution-engine, orchestrator)
 
-### I.3 OpenClaw — setMyCommands cosmetics 🧹 ⏳
+### I.3 OpenClaw — setMyCommands cosmetics 🧹 ✅
 
-**Estado:** Pendiente — requiere acceso al repositorio OpenClaw
+**Estado:** ✅ COMPLETADO — Fix ya existía en commit `fca9dae1` (25-Abr-2026). La truncación de comandos a 100 ya estaba implementada; el plan lo marcaba pendiente por falta de acceso al repo.
 
 ---
 
@@ -297,11 +297,11 @@ Fase V (Expansión)
 
 | # | Item | Fase | Esfuerzo | Impacto | Por qué ahora | Estado |
 |---|---|---|---|---|---|---|
-| 1 | **I.3 OpenClaw cosmetics** | I | 🟢 30 min | 🟢 Alto | Logs limpios = debugging más rápido | ⏳ Sin repo |
+| 1 | **I.3 OpenClaw cosmetics** | I | 🟢 30 min | 🟢 Alto | Logs limpios = debugging más rápido | ✅ COMPLETADO — fix ya existía desde 25-Abr |
 | 2 | **III.1 Páginas detalle subsistema** | III | 🟡 1 sesión | 🟢 Alto | Contenido educativo | ✅ COMPLETADO — 13-May-2026 |
 | 3 | **III.2 Tutorial interactivo** | III | 🔴 3 sesiones | 🟢 Alto | Valor educativo | ✅ COMPLETADO — 12-May-2026 |
 | 4 | **III.1b Sidebar navigation fix** | III | 🟢 15 min | 🟡 Medio | Consistencia UX | ✅ COMPLETADO — 14-May-2026 |
-| 5 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟢 Alto | ✅ COMPLETADO — 10 repos escaneados, leaderboard.html creado |
+| 5 | **V.1 Starred scanner + leaderboard** | V | 🟡 1 sesión | 🟢 Alto | ✅ COMPLETADO — 13 repos escaneados, leaderboard.html creado y expandido |
 | 6 | **IV.2 Importar skills externas** | IV | 🟡 2 sesiones | 🟢 Alto | ✅ COMPLETADO — 6 skills importados de 4 repos externos con frontmatter mejorado |
 | 7 | **IV.1 Registry unificado** | IV | 🔴 2 sesiones | 🟢 Alto | ✅ COMPLETADO — iberi22/skills creado con 74 skills unificados, POML deprecado |
 | 8 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ✅ COMPLETADO — 13-May-2026 |
@@ -332,13 +332,20 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 | 1 | **Footer i18n incompleto** — 12 páginas del sitio con footers sin data-i18n attributes | 🟡 HIGH | footers estandarizados con data-i18n en las 12 páginas restantes vía 3 subagentes paralelos. |
 | 2 | **Leaderboard fecha desactualizada** — Mostraba "12-May-2026" | 🟢 LOW | Actualizado a "15-May-2026" |
 
-**Estado del plan:** Todos los items accionables están completos. I.3 (OpenClaw cosmetics) bloqueado por falta de acceso al repo. V.4 (Comunidad) es visión a largo plazo (4 sesiones).
+### Hallazgos y Correcciones — Sesión 3 (12:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **I.3 OpenClaw cosmetics** — La truncación de comandos a 100 ya estaba implementada en commit `fca9dae1` (25-Abr-2026). El plan lo marcaba pendiente por falta de acceso al repo, pero el fix ya existía. | 🟢 DONE | Marcado como completado en el plan |
+| 2 | **Aider score verificado** — Re-escan confirmó 30.3% 🟠 (correcto en leaderboard). La discrepancia con 44.3% en el README del scanner es dato desactualizado del README, no del leaderboard. | 🟢 DONE | No se necesita cambio |
+| 3 | **V.1 Extended — Leaderboard expandido** — 3 nuevos repos escaneados y agregados: context-mode (44.0%), learn-harness-engineering (29.4%), awesome-harness-engineering (11.9%). La tabla pasó de 10 a 13 repos. Promedios de subsistemas recalculados, conclusiones actualizadas. | 🟡 MEJORA | Leaderboard reordenado, promedios actualizados |
+
+**Estado del plan:** I.3 ahora marcado como completado. V.1 Extended completado. Próximos items pendientes: V.4 (Comunidad) — visión a largo plazo.
 
 ### Próxima Sesión Sugerida
-- Desbloquear I.3 si hay acceso al repo OpenClaw
 - Iniciar V.4 (comunidad de harnesses) — crear página community.html + formulario de envío de scores
-- O: escanear más starred repos para el leaderboard (V.1 extendido)
-- Verificar si aider score (actualmente 30.3%) necesita re-escan — el README del scanner muestra 44.3%
+- O: escanear más repos para el leaderboard (llama.cpp, xavier-memory-engine) para llegar a 15+ repos
+- Revisar si el README del scanner necesita actualizar la cifra de aider (30.3% actual, no 44.3%)
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
