@@ -75,6 +75,10 @@
       // Footer
       'footer.text': 'Harness Engineering Course — Basado en',
       'footer.and': 'y',
+
+      // 404
+      '404.subtitle': 'Página no encontrada.',
+      '404.back_home': 'Volver al inicio',
     },
     en: {
       // Sidebar
@@ -145,6 +149,10 @@
       // Footer
       'footer.text': 'Harness Engineering Course — Based on',
       'footer.and': 'and',
+
+      // 404
+      '404.subtitle': 'Page not found.',
+      '404.back_home': 'Back to Home',
     }
   };
 

@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page Not Found — Harness Engineering</title>
+<meta name="description" content="Página no encontrada — Harness Engineering Course">
 <link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
-<link rel="stylesheet" href="/harness-course/css/style.css">
+  <link rel="stylesheet" href="/harness-course/css/style.css">
 </head>
 <body>
 
@@ -16,29 +17,48 @@
   <div class="sidebar-brand">
     <a href="/harness-course/">
       <h2>Harness Eng.</h2>
-      <div class="brand-sub">Design skills for agents</div>
+      <div class="brand-sub" data-i18n="brand.sub">Design skills for agents</div>
     </a>
+    <div class="lang-toggle">
+      <button type="button" data-lang="es" onclick="setLanguage('es')" aria-label="Cambiar a Español">ES</button>
+      <button type="button" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
+    </div>
   </div>
   <div class="search-container">
-    <input id="nav-search" type="text" placeholder="Filter nav..." aria-label="Search navigation">
+    <input id="nav-search" type="text" placeholder="Filter nav..." data-i18n-placeholder="search.placeholder" aria-label="Search navigation">
     <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
   </div>
   <nav>
     <div class="nav-section">
-      <div class="nav-section-title">Course</div>
-      <a href="/harness-course/"><span class="nav-icon">⌂</span> Home</a>
-      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> Fundamentals</a>
-      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> Design Patterns</a>
-      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> Full Course</a>
+      <div class="nav-section-title" data-i18n="nav.course">Course</div>
+      <a href="/harness-course/"><span class="nav-icon">⌂</span> <span data-i18n="nav.home">Home</span></a>
+      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span> <span data-i18n="nav.fundamentals">Fundamentals</span></a>
+      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span> <span data-i18n="nav.design_patterns">Design Patterns</span></a>
+      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span> <span data-i18n="nav.full_course">Full Course</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Resources</div>
-      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> Resources</a>
-      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> Templates</a>
+      <div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
+      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span> <span data-i18n="nav.scope">Scope</span></a>
+      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span> <span data-i18n="nav.instructions">Instructions</span></a>
+      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span> <span data-i18n="nav.state">State</span></a>
+      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span> <span data-i18n="nav.verification">Verification</span></a>
+      <a href="/harness-course/pages/lifecycle.html"><span class="nav-icon">🔄</span><span data-i18n="nav.lifecycle">Lifecycle</span></a>
+      <a href="/harness-course/pages/skills.html"><span class="nav-icon">🧠</span> <span data-i18n="nav.skills_poml">Skills</span></a>
     </div>
     <div class="nav-section">
-      <div class="nav-section-title">Case Study</div>
-      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> Agent Recipes</a>
+      <div class="nav-section-title" data-i18n="nav.resources">Resources</div>
+      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span> <span data-i18n="nav.resources">Resources</span></a>
+      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span> <span data-i18n="nav.templates">Templates</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.case_study">Case Study</div>
+      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span> <span data-i18n="nav.agents_flows">Agents Flows</span></a>
+      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span> <span data-i18n="nav.agent_recipes">Agent Recipes</span></a>
+      <a href="/harness-course/pages/leaderboard.html"><span class="nav-icon">🏆</span> <span data-i18n="nav.leaderboard">Leaderboard</span></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.interactive">Interactive</div>
+      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span> <span data-i18n="nav.tutorial">Tutorial</span></a>
     </div>
   </nav>
 </aside>
@@ -46,14 +66,14 @@
 <main class="main">
   <div class="content" style="text-align:center; padding-top:80px;">
     <h1 style="font-size:80px; margin-bottom:0;">404</h1>
-    <p>Página no encontrada.</p>
+    <p data-i18n="404.subtitle">Página no encontrada.</p>
     <div class="hero-actions">
-      <a href="/harness-course/" class="btn btn-primary">🏠 Volver al inicio</a>
+      <a href="/harness-course/" class="btn btn-primary" data-i18n="404.back_home">Volver al inicio</a>
     </div>
   </div>
 
   <footer class="footer">
-    <p>Harness Engineering Course — Basado en <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> y <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
+    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
   </footer>
 </main>
 
@@ -63,7 +83,7 @@ function toggleSidebar() {
   document.getElementById('overlay').classList.toggle('show');
 }
 </script>
-
 <script src="/harness-course/js/shared.js"></script>
+<script src="/harness-course/js/i18n.js"></script>
 </body>
 </html>

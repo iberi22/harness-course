@@ -26,13 +26,15 @@
     <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
   </div>
   <nav>
-    <div class="nav-section"><div class="nav-section-title" data-i18n="nav.course">Course</div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.course">Course</div>
       <a href="/harness-course/"><span class="nav-icon">⌂</span><span data-i18n="nav.home">Home</span></a>
       <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span><span data-i18n="nav.fundamentals">Fundamentals</span></a>
       <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span><span data-i18n="nav.design_patterns">Design Patterns</span></a>
       <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span><span data-i18n="nav.full_course">Full Course</span></a>
     </div>
-    <div class="nav-section"><div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
       <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span><span data-i18n="nav.scope">Scope</span></a>
       <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span><span data-i18n="nav.instructions">Instructions</span></a>
       <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span><span data-i18n="nav.state">State</span></a>
@@ -40,7 +42,8 @@
       <a href="/harness-course/pages/lifecycle.html"><span class="nav-icon">🔄</span><span data-i18n="nav.lifecycle">Lifecycle</span></a>
       <a href="/harness-course/pages/skills.html"><span class="nav-icon">🧠</span> <span data-i18n="nav.skills_poml">Skills</span></a>
     </div>
-    <div class="nav-section"><div class="nav-section-title" data-i18n="nav.resources">Resources</div>
+    <div class="nav-section">
+      <div class="nav-section-title" data-i18n="nav.resources">Resources</div>
       <a href="/harness-course/pages/resources.html" class="active"><span class="nav-icon">□</span><span data-i18n="nav.resources">Resources</span></a>
       <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span><span data-i18n="nav.templates">Templates</span></a>
     </div>
@@ -248,10 +251,15 @@
 
   </div>
   <footer class="footer">
-    <p>Recursos curados de <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a> — Contribuciones bienvenidas</p>
+    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
   </footer>
 </main>
-<script>function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}</script>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+</script>
 <script src="/harness-course/js/shared.js"></script>
 <script src="/harness-course/js/i18n.js"></script>
 </body>

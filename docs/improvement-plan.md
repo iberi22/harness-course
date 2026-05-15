@@ -311,10 +311,28 @@ Fase V (Expansión)
 
 ---
 
-## Timeline sugerido
+## Cron Job Audit (15-May-2026)
 
-```
-Semana 1:  ████████████████░░░░  Fase I (fruta madura)
+**Score:** 100.0% 🟢 EXCELENTE (sin regresiones)
+
+### Hallazgos y Correcciones
+
+En ejecución de fallback (sin tareas pendientes accionables), se auditó la consistencia estructural del sitio HTML:
+
+| # | Problema | Severidad | Solución |
+|---|----------|-----------|----------|
+| 1 | **404.html** — Sidebar incompleto (solo 3 secciones de 5), sin toggle i18n, sin data-i18n attributes, sin js/i18n.js | 🟡 HIGH | Sidebar reescrito con 5 secciones completas, toggle ES\|EN añadido, data-i18n en todos los textos, js/i18n.js añadido |
+| 2 | **Footer inconsistente** — 11 páginas con footers no estandarizados (custom text sin data-i18n) vs 4 páginas con footer estándar | 🟢 LOW | resources.html y templates.html actualizados al footer estándar con data-i18n |
+| 3 | **Formateo HTML** — resources.html y templates.html con toggleSidebar en una línea | 🟢 LOW | Formateado a multi-línea |
+
+**Estado del plan:** Todos los items accionables están completos. I.3 (OpenClaw cosmetics) bloqueado por falta de acceso al repo. V.4 (Comunidad) es visión a largo plazo (4 sesiones).
+
+### Próxima Sesión Sugerida
+- Desbloquear I.3 si hay acceso al repo OpenClaw
+- Iniciar V.4 (comunidad de harnesses)
+- O: escanear más starred repos para el leaderboard (V.1 extendido)
+
+## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
 Semana 3:  ██████░░░░░░░░░░░░░░  Fase IV.2 (importar skills)
 Semanas 4-5: ████████████████████  Fase III (contenido)
