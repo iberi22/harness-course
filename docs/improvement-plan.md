@@ -315,7 +315,7 @@ Fase V (Expansión)
 
 **Score:** 100.0% 🟢 EXCELENTE (sin regresiones)
 
-### Hallazgos y Correcciones
+### Hallazgos y Correcciones — Sesión 1 (06:00 AM)
 
 En ejecución de fallback (sin tareas pendientes accionables), se auditó la consistencia estructural del sitio HTML:
 
@@ -325,12 +325,20 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 | 2 | **Footer inconsistente** — 11 páginas con footers no estandarizados (custom text sin data-i18n) vs 4 páginas con footer estándar | 🟢 LOW | resources.html y templates.html actualizados al footer estándar con data-i18n |
 | 3 | **Formateo HTML** — resources.html y templates.html con toggleSidebar en una línea | 🟢 LOW | Formateado a multi-línea |
 
+### Hallazgos y Correcciones — Sesión 2 (06:00 AM)
+
+| # | Problema | Severidad | Solución |
+|---|----------|-----------|----------|
+| 1 | **Footer i18n incompleto** — 12 páginas del sitio con footers sin data-i18n attributes | 🟡 HIGH | footers estandarizados con data-i18n en las 12 páginas restantes vía 3 subagentes paralelos. |
+| 2 | **Leaderboard fecha desactualizada** — Mostraba "12-May-2026" | 🟢 LOW | Actualizado a "15-May-2026" |
+
 **Estado del plan:** Todos los items accionables están completos. I.3 (OpenClaw cosmetics) bloqueado por falta de acceso al repo. V.4 (Comunidad) es visión a largo plazo (4 sesiones).
 
 ### Próxima Sesión Sugerida
 - Desbloquear I.3 si hay acceso al repo OpenClaw
-- Iniciar V.4 (comunidad de harnesses)
+- Iniciar V.4 (comunidad de harnesses) — crear página community.html + formulario de envío de scores
 - O: escanear más starred repos para el leaderboard (V.1 extendido)
+- Verificar si aider score (actualmente 30.3%) necesita re-escan — el README del scanner muestra 44.3%
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
