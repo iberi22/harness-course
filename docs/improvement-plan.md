@@ -307,7 +307,7 @@ Fase V (Expansión)
 | 8 | **IV.3 POML templates mejorados** | IV | 🟡 1 sesión | 🟡 Medio | Fix más inteligente | ✅ COMPLETADO — 13-May-2026 |
 | 9 | **V.2 Agente evaluador autónomo** | V | 🔴 2 sesiones | 🟢 Alto | Automatización total | ✅ COMPLETADO — 12-May-2026 |
 | 10 | **V.3 Multi-lenguaje** | V | 🟡 1 sesión | 🟢 Medio | Alcance global | ✅ COMPLETADO — 13-May-2026 |
-| 11 | **V.4 Comunidad** | V | 🔴 4 sesiones | 🟢 Alto | Visión a largo plazo | ⏳ Pendiente |
+| 11 | **V.4 Comunidad** | V | 🔴 4 sesiones | 🟢 Alto | Visión a largo plazo | ✅ Sesión 1 — página community.html creada + leaderboard expandido a 16 repos |
 
 ---
 
@@ -340,12 +340,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 | 2 | **Aider score verificado** — Re-escan confirmó 30.3% 🟠 (correcto en leaderboard). La discrepancia con 44.3% en el README del scanner es dato desactualizado del README, no del leaderboard. | 🟢 DONE | No se necesita cambio |
 | 3 | **V.1 Extended — Leaderboard expandido** — 3 nuevos repos escaneados y agregados: context-mode (44.0%), learn-harness-engineering (29.4%), awesome-harness-engineering (11.9%). La tabla pasó de 10 a 13 repos. Promedios de subsistemas recalculados, conclusiones actualizadas. | 🟡 MEJORA | Leaderboard reordenado, promedios actualizados |
 
-**Estado del plan:** I.3 ahora marcado como completado. V.1 Extended completado. Próximos items pendientes: V.4 (Comunidad) — visión a largo plazo.
+### Hallazgos y Correcciones — Sesión 4 (06:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **V.4 Comunidad — Página community.html** | 🟡 MEJORA | Creada página community.html (303 líneas) con visión del registry público, instrucciones de submission (4 pasos: scan → issue → paste → listed), tabla de community scores, beneficios (4-card grid), botón de submit vía GitHub Issues. Diseño Linear Dark consistente con leaderboard.html. |
+| 2 | **Sidebar — Enlace a Community añadido** | 🟡 MEJORA | Añadido enlace 🌐 Community a la sección Interactive del sidebar en las 17 páginas HTML del sitio (index.html + 404.html + 15 pages/). Traducciones EN/ES añadidas a i18n.js (`nav.community`). |
+| 3 | **Leaderboard expandido a 16 repos** | 🟢 MEJORA | Añadidos: llama.cpp (41.3% 🟡, 100K★ C/C++), iberi22/skills (25.7% 🟠 Skills), iberi22/imported-skills (4.6% 🔴 CRÍTICO). Promedios de subsistemas recalculados. Separador visual entre original 13 y nuevos 3. |
+
+**Estado del plan:** V.4 Sesión 1 completada. Leaderboard ahora con 16 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
 ### Próxima Sesión Sugerida
-- Iniciar V.4 (comunidad de harnesses) — crear página community.html + formulario de envío de scores
-- O: escanear más repos para el leaderboard (llama.cpp, xavier-memory-engine) para llegar a 15+ repos
-- Revisar si el README del scanner necesita actualizar la cifra de aider (30.3% actual, no 44.3%)
+- Crear template de GitHub Issue para score submission (`.github/ISSUE_TEMPLATE/score-submission.md`)
+- Escanear más repos: zeroclaw (re-scan), xavier-memory-engine
+- Pulir community page con contenido más rico (testimonios, FAQ)
+- Revisar y actualizar el score de aider en el skill `harness-assessment-scanner` (44.3% → 30.3%)
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
