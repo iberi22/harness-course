@@ -361,6 +361,15 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.4 Sesión 2 completada. Leaderboard ahora con 18 repos. Página community.html con FAQ. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 6 (24-May-2026 12:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **Sidebar inconsistente** — `leaderboard.html` tenía una sección "Community" separada (correcta), pero las otras 16 páginas del sitio (index.html, 404.html, 14 pages/*.html) tenían el enlace Community dentro de la sección "Interactive" | 🟡 HIGH | Enlace Community extraído de Interactive en las 16 páginas y colocado en su propia sección nav (Community), consistente con leaderboard.html. +48 líneas netas, sin regresiones. |
+| 2 | **Peligro: patch con fuzzy matching** — El primer intento usó un old_string demasiado genérico que matcheó la sección Resources en vez de Interactive, eliminando recursos de 16 páginas. Corregido usando old_string más específico (incluyendo `</nav>` para unicidad). | 🟢 DONE | Se recuperó con `git checkout` y se rehizo con patrón específico. Lección aprendida: siempre incluir contexto único en old_string. |
+
+**Estado del plan:** V.4 Sesión 3 (sidebar fix). Score del proyecto: 100.0% 🟢 (sin regresiones). Sidebar unificado en las 17 páginas del sitio.
+
 ### Próxima Sesión Sugerida
 - Create test suite for harness-course-site and local-models to improve their scores
 - Polish community page with testimonials section
