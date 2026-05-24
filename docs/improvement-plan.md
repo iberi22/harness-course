@@ -348,13 +348,23 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 | 2 | **Sidebar — Enlace a Community añadido** | 🟡 MEJORA | Añadido enlace 🌐 Community a la sección Interactive del sidebar en las 17 páginas HTML del sitio (index.html + 404.html + 15 pages/). Traducciones EN/ES añadidas a i18n.js (`nav.community`). |
 | 3 | **Leaderboard expandido a 16 repos** | 🟢 MEJORA | Añadidos: llama.cpp (41.3% 🟡, 100K★ C/C++), iberi22/skills (25.7% 🟠 Skills), iberi22/imported-skills (4.6% 🔴 CRÍTICO). Promedios de subsistemas recalculados. Separador visual entre original 13 y nuevos 3. |
 
-**Estado del plan:** V.4 Sesión 1 completada. Leaderboard ahora con 16 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+|**Estado del plan:** V.4 Sesión 1 completada. Leaderboard ahora con 16 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
+### Hallazgos y Correcciones — Sesión 5 (24-May-2026)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **score-submission.md template** — GitHub Issue template for community score submissions was missing (referenced by community.html but file didn't exist) | 🟡 MEJORA | Created `.github/ISSUE_TEMPLATE/score-submission.md` with bilingual EN/ES guided form |
+| 2 | **FAQ section added to community.html** — Community page lacked FAQ section | 🟡 MEJORA | Added collapsible FAQ module with 5 questions + i18n keys in ES/EN |
+| 3 | **Leaderboard expanded to 18 repos** — Added harness-course-site (1.8% 🔴) and local-models (0.0% 🔴) | 🟢 MEJORA | Leaderboard updated with separator, date updated to 24-May-2026, conclusions adjusted |
+| 4 | **zeroclaw re-scan** — Score confirmed at 45.0% 🟡 (unchanged from prior scan) | 🟢 DONE | No change needed — leaderboard data current |
+
+**Estado del plan:** V.4 Sesión 2 completada. Leaderboard ahora con 18 repos. Página community.html con FAQ. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
 ### Próxima Sesión Sugerida
-- Crear template de GitHub Issue para score submission (`.github/ISSUE_TEMPLATE/score-submission.md`)
-- Escanear más repos: zeroclaw (re-scan), xavier-memory-engine
-- Pulir community page con contenido más rico (testimonios, FAQ)
-- Revisar y actualizar el score de aider en el skill `harness-assessment-scanner` (44.3% → 30.3%)
+- Create test suite for harness-course-site and local-models to improve their scores
+- Polish community page with testimonials section
+- Scan more starred repos from the catalog
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
