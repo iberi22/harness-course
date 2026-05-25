@@ -392,10 +392,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos. Leaderboard ahora con 21 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 9 (25-May-2026 06:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **github/awesome-copilot (32K★ Python)** — Escaneado: 34.9% 🟠 DÉBIL. Skills subsystem impresionante (73.3%, 360 SKILL.md con frontmatter válido), pero Verification 11.1% (sin tests, sin linter) y State 10.0% (sin task tracking ni memoria). Tiene AGENTS.md completo con estructura de proyecto. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #13 con 34.9%. |
+| 2 | **langchain-ai/langgraph (31K★ Python)** — Escaneado: 23.9% 🟠 DÉBIL. Verification 33.3% (121 tests, CI/CD) y Lifecycle 40.0% (Makefile, .gitignore, LICENSE). Pero State 10.0% y Skills 0.0%. Tiene AGENTS.md con instrucciones de monorepo. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #18 con 23.9%. |
+| 3 | **dzhng/deep-research (18K★ TypeScript)** — Escaneado: 14.7% 🔴 CRÍTICO. Lifecycle 50.0% (Docker, .env.example, .gitignore, LICENSE) es el único punto fuerte. Scope 0.0% (sin DoD, milestones, templates, ni ningún check de Scope). State 15.0%, Skills 0.0%. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #19 con 14.7%. |
+| 4 | **Leaderboard expandido a 24 repos** — 3 nuevos repos añadidos: awesome-copilot (34.9%), langgraph (23.9%), deep-research (14.7%). Promedios recalculados: Inst 44%, State 26%, Verif 47%, Scope 27%, Lifecycle 45%, Skills 33%. Conclusiones actualizadas con menciones a los nuevos repos. | 🟢 MEJORA | Leaderboard actualizado con 24 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados. Leaderboard ahora con 24 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Scan more starred repos from the catalog (e.g., additional top repos from 150-starred catalog)
-- Create test suite for harness-course-site and local-models to improve their scores
-- Polish community page with testimonials section
+- Scan more starred repos from the catalog (e.g., VoltAgent/awesome-design-md 74K★, thedotmack/claude-mem 74K★, or Fission-AI/OpenSpec 46K★)
+- Re-scan existing leaderboard repos for score drift (e.g., swal-skills, agents-flows-recipes, zeroclaw)
+- Polish community page with testimonials section or submission workflow improvements
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)

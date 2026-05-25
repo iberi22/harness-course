@@ -1,0 +1,513 @@
+{
+  "version": "2.3.0",
+  "overall": {
+    "score": 100.0,
+    "grade": "🟢 EXCELENTE"
+  },
+  "subsystems": [
+    {
+      "id": "instructions",
+      "name": "📋 Instructions",
+      "description": "El agente necesita instrucciones claras sobre qué hacer y en qué orden.",
+      "percentage": 100.0,
+      "passed": true,
+      "summary": "8/8 checks — 100.0%",
+      "checks": [
+        {
+          "id": "1.1",
+          "name": "Briefing principal",
+          "passed": true,
+          "weight": 3.0,
+          "detail": "Encontrado: AGENTS.md",
+          "files_found": [
+            "AGENTS.md"
+          ]
+        },
+        {
+          "id": "1.2",
+          "name": "Progressive disclosure",
+          "passed": true,
+          "weight": 1.5,
+          "detail": "27 archivo(s) en docs/",
+          "files_found": [
+            "docs/DIVERGENCE_STRATEGY.md",
+            "docs/API_BUDGET_OPTIMIZATION.md",
+            "docs/API.md",
+            "docs/MULTI_STRATEGY_PAPER.md",
+            "docs/STRATEGY_RESEARCH.md"
+          ]
+        },
+        {
+          "id": "1.3",
+          "name": "Plan/roadmap",
+          "passed": true,
+          "weight": 1.5,
+          "detail": "Encontrado: ROADMAP.md",
+          "files_found": [
+            "ROADMAP.md"
+          ]
+        },
+        {
+          "id": "1.4",
+          "name": "Rules de codificación",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: RULES.md",
+          "files_found": [
+            "RULES.md"
+          ]
+        },
+        {
+          "id": "1.5",
+          "name": "README.md",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "README.md contiene patrón",
+          "files_found": [
+            "README.md"
+          ]
+        },
+        {
+          "id": "1.6",
+          "name": "Briefings específicos",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "1 archivo(s) de briefing",
+          "files_found": [
+            "BRIEF.md"
+          ]
+        },
+        {
+          "id": "1.7",
+          "name": "SOUL.md (identidad)",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: SOUL.md",
+          "files_found": [
+            "SOUL.md"
+          ]
+        },
+        {
+          "id": "1.8",
+          "name": "TOOLS.md",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: TOOLS.md",
+          "files_found": [
+            "TOOLS.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "name": "💾 State",
+      "description": "El agente necesita persistencia: saber qué está hecho y qué sigue.",
+      "percentage": 100.0,
+      "passed": true,
+      "summary": "7/7 checks — 100.0%",
+      "checks": [
+        {
+          "id": "2.1",
+          "name": "Task tracking",
+          "passed": true,
+          "weight": 3.0,
+          "detail": "docs/TASK.md contiene patrón",
+          "files_found": [
+            "docs/TASK.md"
+          ]
+        },
+        {
+          "id": "2.2",
+          "name": "Estado funcional",
+          "passed": true,
+          "weight": 1.5,
+          "detail": "Encontrado: PROJECT_STATUS.md",
+          "files_found": [
+            "PROJECT_STATUS.md"
+          ]
+        },
+        {
+          "id": "2.3",
+          "name": "Memoria a largo plazo",
+          "passed": true,
+          "weight": 2.0,
+          "detail": "Encontrado: MEMORY.md",
+          "files_found": [
+            "MEMORY.md"
+          ]
+        },
+        {
+          "id": "2.4",
+          "name": "Diario de sesiones",
+          "passed": true,
+          "weight": 1.5,
+          "detail": "1 archivo(s) en memory/",
+          "files_found": [
+            "memory/ESTRATEGIA-trading-log-2026-04-10.md"
+          ]
+        },
+        {
+          "id": "2.5",
+          "name": "Historial git",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Repositorio git inicializado",
+          "files_found": []
+        },
+        {
+          "id": "2.6",
+          "name": "Persistencia externa",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "4 archivo(s) de persistencia",
+          "files_found": [
+            "backend/data/trading.db",
+            "backend/src/application/services/executor/data/trading.db",
+            "docker-compose.yml"
+          ]
+        },
+        {
+          "id": "2.7",
+          "name": "Heartbeat system",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: HEARTBEAT.md",
+          "files_found": [
+            "HEARTBEAT.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "verification",
+      "name": "✅ Verification",
+      "description": "El agente debe poder verificar su trabajo automáticamente.",
+      "percentage": 100.0,
+      "passed": true,
+      "summary": "6/6 checks — 100.0%",
+      "checks": [
+        {
+          "id": "3.1",
+          "name": "Directorio de tests",
+          "passed": true,
+          "weight": 3.0,
+          "detail": "tests/ (3 archivos)",
+          "files_found": [
+            "tests"
+          ]
+        },
+        {
+          "id": "3.2",
+          "name": "Configuración de tests",
+          "passed": true,
+          "weight": 1.5,
+          "detail": "Encontrado: Cargo.toml",
+          "files_found": [
+            "Cargo.toml"
+          ]
+        },
+        {
+          "id": "3.3",
+          "name": "Tests implementados",
+          "passed": true,
+          "weight": 2.0,
+          "detail": "317 archivo(s) de test",
+          "files_found": [
+            "backend/src/application/services/strategies/tests.rs",
+            "backend/src/backtest.rs",
+            "backend/src/bin/test_telegram_alert.rs",
+            "backend/src/framework/tests.rs",
+            "backend/src/infrastructure/web/tests.rs"
+          ]
+        },
+        {
+          "id": "3.4",
+          "name": "CI/CD pipeline",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: .github/workflows",
+          "files_found": [
+            ".github/workflows"
+          ]
+        },
+        {
+          "id": "3.5",
+          "name": "Linter configurado",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: clippy.toml",
+          "files_found": [
+            "clippy.toml"
+          ]
+        },
+        {
+          "id": "3.6",
+          "name": "Type checking",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: Cargo.toml",
+          "files_found": [
+            "Cargo.toml"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "name": "🎯 Scope",
+      "description": "El agente debe trabajar una cosa a la vez, sin overreach.",
+      "percentage": 100.0,
+      "passed": true,
+      "summary": "7/7 checks — 100.0%",
+      "checks": [
+        {
+          "id": "4.1",
+          "name": "Definition of Done",
+          "passed": true,
+          "weight": 2.0,
+          "detail": "RULES.md contiene patrón",
+          "files_found": [
+            "RULES.md"
+          ]
+        },
+        {
+          "id": "4.2",
+          "name": "Milestones",
+          "passed": true,
+          "weight": 2.0,
+          "detail": "TASK.md con hitos y progreso",
+          "files_found": [
+            "docs/TASK.md"
+          ]
+        },
+        {
+          "id": "4.3",
+          "name": "Issue/PR templates",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "4 plantilla(s)",
+          "files_found": [
+            ".github/ISSUE_TEMPLATE/pump_detector_week3_production.md",
+            ".github/ISSUE_TEMPLATE/pump_detector_week1_monitoring.md",
+            ".github/ISSUE_TEMPLATE/jules-task.md",
+            ".github/ISSUE_TEMPLATE/pump_detector_week2_optimization.md"
+          ]
+        },
+        {
+          "id": "4.4",
+          "name": "Backlog",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Backlog encontrado",
+          "files_found": [
+            "BOOTSTRAP.md"
+          ]
+        },
+        {
+          "id": "4.5",
+          "name": "CONTRIBUTING.md",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: CONTRIBUTING.md",
+          "files_found": [
+            "CONTRIBUTING.md"
+          ]
+        },
+        {
+          "id": "4.6",
+          "name": "USER.md",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: USER.md",
+          "files_found": [
+            "USER.md"
+          ]
+        },
+        {
+          "id": "4.7",
+          "name": "BOOTSTRAP.md",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: BOOTSTRAP.md",
+          "files_found": [
+            "BOOTSTRAP.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "name": "🔄 Lifecycle",
+      "description": "El agente debe tener un ciclo de vida: init, trabajo, cleanup.",
+      "percentage": 100.0,
+      "passed": true,
+      "summary": "8/8 checks — 100.0%",
+      "checks": [
+        {
+          "id": "5.1",
+          "name": "Script de init",
+          "passed": true,
+          "weight": 3.0,
+          "detail": "Encontrado: init.sh",
+          "files_found": [
+            "init.sh"
+          ]
+        },
+        {
+          "id": "5.2",
+          "name": "Docker/Contenedor",
+          "passed": true,
+          "weight": 2.0,
+          "detail": "Encontrado: Dockerfile",
+          "files_found": [
+            "Dockerfile"
+          ]
+        },
+        {
+          "id": "5.3",
+          "name": "Session handoff",
+          "passed": true,
+          "weight": 1.5,
+          "detail": "Handoff documentado",
+          "files_found": [
+            "skills/synapse-trader-orchestrator/SKILL.md"
+          ]
+        },
+        {
+          "id": "5.4",
+          "name": "Dependencias",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: Cargo.toml",
+          "files_found": [
+            "Cargo.toml"
+          ]
+        },
+        {
+          "id": "5.5",
+          "name": "Config de entorno",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: .env.example",
+          "files_found": [
+            ".env.example"
+          ]
+        },
+        {
+          "id": "5.6",
+          "name": ".gitignore",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: .gitignore",
+          "files_found": [
+            ".gitignore"
+          ]
+        },
+        {
+          "id": "5.7",
+          "name": "Licencia",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: LICENSE",
+          "files_found": [
+            "LICENSE"
+          ]
+        },
+        {
+          "id": "5.8",
+          "name": ".env actual",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: .env",
+          "files_found": [
+            ".env"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "skills",
+      "name": "🧠 Skills",
+      "description": "El proyecto debe tener un catálogo de skills bien estructurado.",
+      "percentage": 100.0,
+      "passed": true,
+      "summary": "6/6 checks — 100.0%",
+      "checks": [
+        {
+          "id": "6.1",
+          "name": "Directorio skills/",
+          "passed": true,
+          "weight": 3.0,
+          "detail": "5 SKILL.md en 5 subdirectorios",
+          "files_found": [
+            "skills/synapse-trader-execution-engine",
+            "skills/synapse-trader-analyst",
+            "skills/synapse-trader-risk-manager",
+            "skills/synapse-trader-orchestrator",
+            "skills/synapse-trader-operator"
+          ]
+        },
+        {
+          "id": "6.2",
+          "name": "SKILL.md frontmatter",
+          "passed": true,
+          "weight": 2.0,
+          "detail": "Todos los 5 SKILL.md con frontmatter",
+          "files_found": [
+            "skills/synapse-trader-execution-engine/SKILL.md",
+            "skills/synapse-trader-analyst/SKILL.md",
+            "skills/synapse-trader-risk-manager/SKILL.md",
+            "skills/synapse-trader-orchestrator/SKILL.md",
+            "skills/synapse-trader-operator/SKILL.md"
+          ]
+        },
+        {
+          "id": "6.3",
+          "name": "Skill provider",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: _registry/skill-provider.py",
+          "files_found": [
+            "_registry/skill-provider.py"
+          ]
+        },
+        {
+          "id": "6.4",
+          "name": "Variedad de skills",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "5 skills",
+          "files_found": [
+            "synapse-trader-execution-engine",
+            "synapse-trader-analyst",
+            "synapse-trader-risk-manager",
+            "synapse-trader-orchestrator",
+            "synapse-trader-operator"
+          ]
+        },
+        {
+          "id": "6.5",
+          "name": "SKILLS_SYSTEM.md",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: SKILLS_SYSTEM.md",
+          "files_found": [
+            "SKILLS_SYSTEM.md"
+          ]
+        },
+        {
+          "id": "6.6",
+          "name": "Skills versionados",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "5/5 skills versionados",
+          "files_found": []
+        }
+      ]
+    }
+  ],
+  "recommendations": {
+    "llm_prompt": "# Harness Evaluation Report — LLM Recommendations\n\nOverall Score: 100.0%\n\n## Subsystem Scores\n\n- 📋 Instructions: 100.0% (8/8 checks — 100.0%)\n- 💾 State: 100.0% (7/7 checks — 100.0%)\n- ✅ Verification: 100.0% (6/6 checks — 100.0%)\n- 🎯 Scope: 100.0% (7/7 checks — 100.0%)\n- 🔄 Lifecycle: 100.0% (8/8 checks — 100.0%)\n- 🧠 Skills: 100.0% (6/6 checks — 100.0%)\n\n## Failed Checks (Needs Attention)\n\n\n## Your Task\nEres un experto en Harness Engineering para agentes de IA. Basado en los resultados del scan:\n\n1. **Prioriza** las 3-5 acciones más impactantes\n2. **Recomienda** pasos concretos y accionables\n3. **Sugiere** qué skills o archivos crear primero\n4. **Identifica** riesgos si no se abordan\n\nResponde en español, concreto, sin rodeos.\n"
+  }
+}
