@@ -370,10 +370,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.4 Sesión 3 (sidebar fix). Score del proyecto: 100.0% 🟢 (sin regresiones). Sidebar unificado en las 17 páginas del sitio.
 
+### Hallazgos y Correcciones — Sesión 7 (25-May-2026 06:00 AM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **synapse-trading score actualizado** — Re-scan mostró 100.0% 🟢 (+18.1pp desde 81.9%). Commit `3e671b4` mejoró Dockerfile SKILLS path y commit `202f190` añadió Telegram bot commands y risk tuning. | 🟡 MEJORA | Leaderboard actualizado: synapse-trading 81.9% → 100.0%, rank #2 retenido. |
+| 2 | **agent-recipes-repo score mejorado** — Re-scan mostró 48.6% 🟡 (+6.9pp desde 41.7%). Commit `eec5e54` de readiness assessment: AGENTS.md autocontenido, CLAUDE.md, badges, bash scripts. | 🟡 MEJORA | Leaderboard actualizado: 41.7% → 48.6%. Reordenado de rank #8 → #5 (ahora sobre zeroclaw 45.0%). |
+| 3 | **swal-skills score bajó 1.5pp** — De 74.0% → 72.5% por cambios en skills directory (skills marcados como private). | 🟢 DONE | Leaderboard actualizado: 74.0% → 72.5%. Rank #3 retenido. |
+| 4 | **Subsystem averages recalibrados** — Tras re-scan de 18 repos: Instructions 38%→46%, State 26%→30%, Verification 55%→50%, Scope 35%→30%, Skills 48%→36%. | 🟡 MEJORA | Averages actualizados en sección 📊 Comparativa por Subsistema. |
+
+**Estado del plan:** V.5 Re-scan y leaderboard refresh. Leaderboard actualizado con datos frescos de 18 repos, reordenado, promedios recalculados. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
+- Scan more starred repos from the catalog (e.g., additional top repos from 150-starred catalog)
 - Create test suite for harness-course-site and local-models to improve their scores
 - Polish community page with testimonials section
-- Scan more starred repos from the catalog
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
