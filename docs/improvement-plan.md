@@ -381,6 +381,17 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Re-scan y leaderboard refresh. Leaderboard actualizado con datos frescos de 18 repos, reordenado, promedios recalculados. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 8 (25-May-2026 12:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **mattpocock/skills escaneado** — 68K★ Shell, repo de skills para agentes. Score: 27.5% 🟠. Skills subsystem 73.3% (28 SKILL.md con frontmatter válido) pero Verification 0.0% y State 10.0%. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #15 con 27.5%. |
+| 2 | **hummingbot/hummingbot escaneado** — 18K★ Python, popular trading bot. Score: 36.7% 🟠. Excelente Verification 94.4% (757 tests, CI/CD, linter) pero Instructions 10.0% y Skills 0.0%. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #12 con 36.7%. |
+| 3 | **OpenHands/OpenHands escaneado** — 73K★ Python, AI-driven development platform. Score: 41.3% 🟡 REGULAR. Verification 83.3% (323 tests, CI/CD) pero Skills 0.0% y State 15.0%. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #10 con 41.3% (tie con llama.cpp). |
+| 4 | **Leaderboard expandido a 21 repos** — 3 nuevos repos añadidos en orden correcto. Promedios recalculados: Inst 45%, State 28%, Verif 51%, Scope 29%, Lifecycle 45%, Skills 34%. Conclusiones actualizadas. | 🟢 MEJORA | Leaderboard actualizado, commit `d518716`. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos. Leaderboard ahora con 21 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
 - Scan more starred repos from the catalog (e.g., additional top repos from 150-starred catalog)
 - Create test suite for harness-course-site and local-models to improve their scores
