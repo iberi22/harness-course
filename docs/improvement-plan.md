@@ -403,10 +403,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados. Leaderboard ahora con 24 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 10 (26-May-2026 12:00 AM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **VoltAgent/awesome-design-md (74K★ DESIGN)** — Escaneado: 9.2% 🔴 CRÍTICO. Solo README.md, CONTRIBUTING.md, .gitignore y LICENSE pasan. Verification 0.0% (sin tests ni CI/CD), Skills 0.0%. Es un repo de DESIGN.md files — no esperado tener harness completo, pero sorprende que no tenga ni AGENTS.md. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #24 con 9.2%. |
+| 2 | **thedotmack/claude-mem (74K★ TypeScript)** — Escaneado: 37.6% 🟠 DÉBIL. Verification 72.2% (155 tests, CI/CD, tsconfig) es el punto más fuerte. Instructions 55% (CLAUDE.md completo + docs/ extenso). Lifecycle 55% (Docker, deps). Skills 0% (sin skills/). | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #11 (empate con freqtrade) con 37.6%. |
+| 3 | **earendil-works/pi (47K★ TypeScript)** — Escaneado: 26.6% 🟠 DÉBIL. Tiene AGENTS.md completo de 10K+ chars con reglas extensas (Instructions 40%). 251 tests encontrados pero no hay test directory (Verification 38.9%). Skills 0%. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #18 con 26.6%. |
+| 4 | **Leaderboard expandido a 27 repos** — 3 nuevos repos añadidos: claude-mem (37.6%, #11), pi (26.6%, #18), awesome-design-md (9.2%, #24). Promedios recalculados: Inst 43%, State 25%, Verif 46%, Scope 27%, Lifecycle 44%, Skills 29%. Conclusiones actualizadas con menciones a los nuevos repos. | 🟢 MEJORA | Leaderboard actualizado con 27 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos. Leaderboard ahora con 27 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Scan more starred repos from the catalog (e.g., VoltAgent/awesome-design-md 74K★, thedotmack/claude-mem 74K★, or Fission-AI/OpenSpec 46K★)
-- Re-scan existing leaderboard repos for score drift (e.g., swal-skills, agents-flows-recipes, zeroclaw)
-- Polish community page with testimonials section or submission workflow improvements
+- Scan more starred repos from the catalog (e.g., Fosowl/agenticSeek 26K★, camel-ai/camel 16K★, or nanobrowser/nanobrowser 12K★)
+- Re-scan existing leaderboard repos for score drift — especially swal-skills (72.5%), agents-flows-recipes (64.6%), and zeroclaw (45.0%)
+- Consider removing non-cloned repos from leaderboard HTML that don't have local clones (e.g., harness-course-site, local-models) to keep the leaderboard verifiable
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
