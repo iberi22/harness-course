@@ -414,10 +414,22 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos. Leaderboard ahora con 27 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 11 (26-May-2026 06:00 AM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **Fosowl/agenticSeek (26K★ Python)** — Escaneado: 30.3% 🟠 DÉBIL. Verification 72.2% es decente (tests), pero Instructions 25%, State 15% y Skills 0%. Proyecto "Fully Local Manus AI" sin harness de agente. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #16 (tie con aider) con 30.3%. |
+| 2 | **camel-ai/camel (16K★ Python)** — Escaneado: 39.4% 🟠 DÉBIL. Verification 83.3% (278 tests, CI/CD) y Lifecycle 75% son puntos fuertes. Pero Instructions 25% y Skills 0%. Framework multi-agente popular sin AGENTS.md ni skills/. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #11 con 39.4%. |
+| 3 | **nanobrowser/nanobrowser (12K★ TypeScript)** — Escaneado: 20.2% 🔴 CRÍTICO. Tiene AGENTS.md completo (11K chars, Instructions 40%) pero Verification 11.1% (solo 1 test), State 10% y Skills 0%. Chrome extension multi-agente. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #23 con 20.2%. |
+| 4 | **Leaderboard expandido a 30 repos** — 3 nuevos repos añadidos: camel (39.4%, #11), agenticSeek (30.3%, #16), nanobrowser (20.2%, #23). Promedios recalculados: Inst 42%, State 24%, Verif 47%, Scope 27%, Lifecycle 45%, Skills 26%. Conclusiones actualizadas con menciones a los nuevos repos. | 🟢 MEJORA | Leaderboard actualizado con 30 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos. Leaderboard ahora con 30 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Scan more starred repos from the catalog (e.g., Fosowl/agenticSeek 26K★, camel-ai/camel 16K★, or nanobrowser/nanobrowser 12K★)
+- Scan more starred repos from the catalog (e.g., goose 44K★, GitNexus 37K★, or genai_agents 21K★)
 - Re-scan existing leaderboard repos for score drift — especially swal-skills (72.5%), agents-flows-recipes (64.6%), and zeroclaw (45.0%)
-- Consider removing non-cloned repos from leaderboard HTML that don't have local clones (e.g., harness-course-site, local-models) to keep the leaderboard verifiable
+- Consider re-scanning repos that may have improved since last scan (awesome-copilot at 34.9% — may have added more docs)
+- Skills gap (26% average, 36/30 repos at 0%) remains the biggest universal weakness
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
