@@ -425,11 +425,22 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos. Leaderboard ahora con 30 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 12 (07-Jul-2026)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **Re-scan score drift** — swal-skills (72.5%, estable), zeroclaw (45.0%, estable) y aider (30.3%, estable) sin cambios. agents-flows-recipes subió ligeramente de 64.6% a 65.1% (+0.5pp) por posible mejora en session handoff. | 🟢 DONE | scores actualizados en leaderboard |
+| 2 | **goose escaneado** — aaif-goose/goose (50.8K⭐ Rust). Score: 35.8% 🟠 DÉBIL. Verification 66.7% (76 tests, CI/CD, clippy) es decente, pero Skills 0% y State 15%. Instrucciones 40% (solo AGENTS.md + README.md). | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como #15 con 35.8%. |
+| 3 | **Leaderboard expandido a 31 repos** — goose añadido entre hummingbot (36.7%) y awesome-copilot (34.9%). Promedios recalculados: Inst 42%, State 24%, Verif 48% (+1pp), Scope 27%, Lifecycle 45%, Skills 25% (-1pp). Conclusiones actualizadas con menciones a goose. | 🟢 MEJORA | Leaderboard actualizado con 31 repos, promedios y conclusiones actualizados. Fecha: 07-Jul-2026. |
+
+**Estado del plan:** V.5 Expansión — 1 nuevo repo escaneado + 4 re-scans. Leaderboard ahora con 31 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Scan more starred repos from the catalog (e.g., goose 44K★, GitNexus 37K★, or genai_agents 21K★)
-- Re-scan existing leaderboard repos for score drift — especially swal-skills (72.5%), agents-flows-recipes (64.6%), and zeroclaw (45.0%)
-- Consider re-scanning repos that may have improved since last scan (awesome-copilot at 34.9% — may have added more docs)
-- Skills gap (26% average, 36/30 repos at 0%) remains the biggest universal weakness
+- Scan more starred repos (GitNexus 37K★ TypeScript, genai_agents 21K★ Jupyter)
+- Re-scan older leaderboard repos for drift (browser-use 43.1%, context-mode 44.0%, llama.cpp 41.3%)
+- goose at 35.8% has good Verification (66.7%) but could be a candidate for harness improvement challenge
+
+---
 
 ## Timeline sugerido
 Semana 2:  ████████████████░░░░  Fase II (infraestructura)
