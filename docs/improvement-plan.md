@@ -435,10 +435,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 1 nuevo repo escaneado + 4 re-scans. Leaderboard ahora con 31 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 13 (08-Jul-2026)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **Re-scan score drift** — browser-use (43.1%, estable), context-mode (44.0%, estable) y llama.cpp (41.3%, estable) sin cambios desde hace ~2 meses. Ningún score drift detectado en los 3 repos más antiguos. | 🟢 DONE | Re-scans confirmados, scores estables |
+| 2 | **gitnexus escaneado** — abhigyanpatwari/GitNexus (44K⭐ TypeScript). Score: 34.9% 🟠 DÉBIL. Lifecycle 65% (Docker, handoff, deps) y Instructions 50% (AGENTS.md + .cursorrules) son decentes. Skills 0% y State 15%. Destaca con 720 tests. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank 16 (tie 34.9%). |
+| 3 | **genai-agents escaneado** — NirDiamant/GenAI_Agents (21K⭐ Python/Jupyter). Score: 10.1% 🔴 CRÍTICO. Solo README.md, git history y LICENSE pasan. Verification 0% y Skills 0%. Es un repo educativo de tutoriales, no diseñado para agentes. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank 26. |
+| 4 | **Leaderboard expandido a 33 repos** — 2 nuevos repos añadidos: gitnexus (34.9%, rank 16) y genai-agents (10.1%, rank 26). Promedios recalculados: Inst 42%→41%, State 24%→24%, Verif 48%→46%, Scope 27%→27%, Lifecycle 45%→45%, Skills 25%→24%. Conclusiones actualizadas con menciones a los nuevos repos. | 🟢 MEJORA | Leaderboard actualizado con 33 repos, promedios y conclusiones actualizados. Fecha: 08-Jul-2026. |
+
+**Estado del plan:** V.5 Expansión — 2 nuevos repos escaneados (gitnexus + genai-agents). Leaderboard ahora con 33 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Scan more starred repos (GitNexus 37K★ TypeScript, genai_agents 21K★ Jupyter)
-- Re-scan older leaderboard repos for drift (browser-use 43.1%, context-mode 44.0%, llama.cpp 41.3%)
-- goose at 35.8% has good Verification (66.7%) but could be a candidate for harness improvement challenge
+- Re-scan older leaderboard repos: agent-recipes-repo (48.6%), swal-skills (72.5%), freqtrade (37.6%) — were scanned ≥2 months ago
+- Scan more starred repos: tensorflow/tensorflow (189K★ Python), microsoft/vscode (166K★ TypeScript), llvm/llvm-project (33K★ C++)
+- Consider adding a "quick stats" section to leaderboard: average score, median, top-percentile breakdown
 
 ---
 
