@@ -409,125 +409,118 @@
    409|            <td><span class="score-badge score-critical">🔴 1.8%</span></td>
    410|          </tr>
    411|          <tr>
-   412|            <td>41</td>
-   413|            <td><strong>?</strong><br><span style="font-size:12px;color:var(--text-muted)"></span></td>
+   412|            <td>42</td>
+   413|            <td><strong>local-models</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/local-models</span></td>
    414|            <td><span class="stars">—</span></td>
-   415|            <td>?</td>
+   415|            <td>Python/CSV</td>
    416|            <td><span class="score-badge score-critical">🔴 0.0%</span></td>
    417|          </tr>
-   418|          <tr>
-   419|            <td>42</td>
-   420|            <td><strong>local-models</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/local-models</span></td>
-   421|            <td><span class="stars">—</span></td>
-   422|            <td>Python/CSV</td>
-   423|            <td><span class="score-badge score-critical">🔴 0.0%</span></td>
-   424|          </tr>
-   425|</tbody>
-   426|      </table>
-   427|    </div>
-   428|
-   429|    <div class="section-divider"></div>
-   430|
-   431|    <h2>📊 Comparativa por Subsistema</h2>
-   432|    <p>Los 6 subsistemas evaluados muestran un patrón claro: <strong>Verification</strong> es el punto fuerte de casi todos los proyectos, mientras que <strong>Skills</strong> y <strong>State</strong> son los más descuidados.</p>
-   433|
-   434|    <div class="subsystem-grid">
-   435|      <div class="subsystem-card">
-   436|        <h4>📋 Instructions</h4>
-   437|        <div class="score" style="color:#eab308;">∅ 39%</div>
-   438|        <div class="detail">Promedio entre todos los repos. Los proyectos Harness (55-100%) elevan el promedio; los externos suelen tener solo README. open-swe (40%, AGENTS.md + README.md) y AI-Trader (25%, solo docs/) se suman sin roadmap ni RULES.md. UI-TARS (10%, solo README.md) baja aún más el promedio. Instructions baja de 40% a 39%.</div>
-   439|      </div>
-   440|      <div class="subsystem-card">
-   441|        <h4>💾 State</h4>
-   442|        <div class="score" style="color:#ef4444;">∅ 21%</div>
-   443|        <div class="detail">Sube gracias a repos Harness (47-100%). Externos casi no tienen TASK.md, MEMORY.md o tracking para agentes. Los 3 nuevos — open-swe (10%), AI-Trader (10%) y UI-TARS (10%) — confirman el patrón sin task tracking ni memoria. State baja de 22% a 21%.</div>
-   444|      </div>
-   445|      <div class="subsystem-card">
-   446|        <h4>✅ Verification</h4>
-   447|        <div class="score" style="color:#22c55e;">∅ 48%</div>
-   448|        <div class="detail">Sigue siendo el más fuerte. Tests y CI/CD son estándar. open-swe (83.3%, 141 tests + CI/CD + Makefile) contribuye con buena infraestructura Python. AI-Trader (27.8%, 21 tests sin directorio) y UI-TARS (33.3%, 2 tests + CI/CD) divergen. Verification se mantiene en 48%.</div>
-   449|      </div>
-   450|      <div class="subsystem-card">
-   451|        <h4>🎯 Scope</h4>
-   452|        <div class="score" style="color:#eab308;">∅ 24%</div>
-   453|        <div class="detail">Proyectos Harness con DoD y milestones marcan la diferencia. open-swe (0%, sin templates ni DoD) y AI-Trader (6.2%, solo backlog) tienen Scope casi nulo. UI-TARS (0%) sin Scope. Scope baja de 26% a 24%.</div>
-   454|      </div>
-   455|      <div class="subsystem-card">
-   456|        <h4>🔄 Lifecycle</h4>
-   457|        <div class="score" style="color:#eab308;">∅ 45%</div>
-   458|        <div class="detail">Docker, .gitignore y dependencias son comunes. open-swe (70%, Docker + Makefile + deps) contribuye bien. AI-Trader (25%, solo deps + .gitignore) y UI-TARS (5%, solo LICENSE) se suman. Lifecycle baja de 46% a 45%.</div>
-   459|      </div>
-   460|      <div class="subsystem-card">
-   461|        <h4>🧠 Skills</h4>
-   462|        <div class="score" style="color:#ef4444;">∅ 22%</div>
-   463|        <div class="detail">AI-Trader (73.3%, 6 skills con frontmatter) es la excepción — los otros dos nuevos tienen 0% en Skills. open-swe (0%) y UI-TARS (0%) confirman el patrón: Skills sigue siendo el gap más universal, con 46/41 repos teniendo 0% en Skills. Skills se mantiene en 22%.</div>
-   464|      </div>
-   465|    </div>
-   466|
-   467|    <div class="section-divider"></div>
-   468|
-   469|    <h2>🔍 Conclusiones</h2>
-   470|
-   471|    <div class="module module-collapsible">
-   472|      <div class="module-header">
-   473|        <div class="module-num">1</div>
-   474|        <div>
-   475|          <h3>Proyectos de iberi22 dominan el top</h3>
-   476|        </div>
-   477|      </div>
-   478|      <p>Los 8 proyectos de iberi22 dominan el top del leaderboard. <strong>harness-course (100%)</strong> y <strong>synapse-trading (100.0%)</strong> demuestran que la metodología Harness Engineering produce repositorios significativamente mejor preparados para agentes de IA que los proyectos open-source más populares. <strong>DeepTutor</strong> (40.4%, 23K⭐, Python) es el nuevo ingreso más fuerte, con Verification 83.3% (293 tests + CI/CD). <strong>anomalyco/opencode</strong> (27.5%, 157K⭐, TypeScript) es el repo con más estrellas del leaderboard — 671 tests pero Skills 0%. <strong>crush</strong> (22.0%, 24K⭐, Go) se une al grupo de agentic coding tools sin Skills. El leaderboard ahora abarca 41 repos y un espectro más amplio de stacks: TypeScript (anomalyco/opencode), Go (crush), Python y más.</p>
-   479|    </div>
-   480|
-   481|    <div class="module module-collapsible">
-   482|      <div class="module-header">
-   483|        <div class="module-num">2</div>
-   484|        <div>
-   485|          <h3>Gap: State, Skills y la cola del leaderboard</h3>
-   486|        </div>
-   487|      </div>
-   488|      <p>El promedio de <strong>State (21%)</strong> y <strong>Skills (22%)</strong> sigue siendo el talón de Aquiles. Los 3 nuevos — open-swe, AI-Trader y UI-TARS — todos tienen State 10% o menos. <strong>AI-Trader (26.6%, 20K⭐)</strong> es la excepción con Skills 73.3% (6 skills), pero State 10% y Scope 6.2%. <strong>open-swe (35.8%)</strong> tiene Verification 83.3% pero Skills 0% y Scope 0%. Esto confirma que la carencia de Skills y State son los gaps más universales — ahora 46/41 repos tienen Skills 0%.</p>
-   489|    </div>
-   490|
-   491|    <div class="module module-collapsible">
-   492|      <div class="module-header">
-   493|        <div class="module-num">3</div>
-   494|        <div>
-   495|          <h3>Escalabilidad del Scanner</h3>
-   496|        </div>
-   497|      </div>
-   498|      <p>El evaluador de Harness funciona en cualquier repo — sin importar el lenguaje o stack. Esto significa que podemos escalar este leaderboard a 100+ repos y crear un ranking público donde cualquier proyecto pueda medir su &quot;agent-readiness&quot;. Con 41 repos escaneados — incluyendo <strong>anomalyco/opencode</strong> (TypeScript, 157K⭐), <strong>DeepTutor</strong> (Python, 23K⭐), <strong>crush</strong> (Go, 24K⭐), <strong>open-swe</strong> (Python, 10K⭐), <strong>AI-Trader</strong> (Python, 20K⭐), <strong>UI-TARS</strong> (Python, 11K⭐), <strong>goose</strong> (Rust, 50K⭐) y <strong>gitnexus</strong> (TypeScript, 44K⭐) — el leaderboard cubre un espectro amplio de stacks: TypeScript, Python, Rust, Go, Jupyter, C/C++, Shell y más. El scanner funciona consistentemente en todos ellos sin importar el stack.</p>
-   499|    </div>
-   500|
-   501|    <div class="section-divider"></div>
-   502|
-   503|    <h2>Relacionado</h2>
-   504|    <div class="card-grid">
-   505|      <a href="/harness-course/pages/tutorial.html" class="card">
-   506|        <h3>🎮 Tutorial Interactivo</h3>
-   507|        <p>Aprende a llevar tu proyecto de 45% a 80%+ en 6 pasos con el tutorial guiado.</p>
-   508|      </a>
-   509|      <a href="/harness-course/pages/case-study.html" class="card">
-   510|        <h3>🧠 Case Study</h3>
-   511|        <p>Cómo agents-flows-recipes alcanzó 61.5% — lecciones de un repo con 21 skills.</p>
-   512|      </a>
-   513|      <a href="/harness-course/pages/skills.html" class="card">
-   514|        <h3>🧠 Skills &amp; POML</h3>
-   515|        <p>La receta para tener skills estructurados que cualquier agente pueda entender.</p>
-   516|      </a>
-   517|    </div>
-   518|
-   519|  </div>
-   520|  <footer class="footer">
-   521|    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
-   522|  </footer>
-   523|</main>
-   524|<script>
-   525|function toggleSidebar() {
-   526|  document.getElementById('sidebar').classList.toggle('open');
-   527|  document.getElementById('overlay').classList.toggle('show');
-   528|}
-   529|</script>
-   530|<script src="/harness-course/js/shared.js"></script>
-   531|<script src="/harness-course/js/i18n.js"></script>
-   532|</body>
-   533|</html>
+   418|</tbody>
+   419|      </table>
+   420|    </div>
+   421|
+   422|    <div class="section-divider"></div>
+   423|
+   424|    <h2>📊 Comparativa por Subsistema</h2>
+   425|    <p>Los 6 subsistemas evaluados muestran un patrón claro: <strong>Verification</strong> es el punto fuerte de casi todos los proyectos, mientras que <strong>Skills</strong> y <strong>State</strong> son los más descuidados.</p>
+   426|
+   427|    <div class="subsystem-grid">
+   428|      <div class="subsystem-card">
+   429|        <h4>📋 Instructions</h4>
+   430|        <div class="score" style="color:#eab308;">∅ 39%</div>
+   431|        <div class="detail">Promedio entre todos los repos. Los proyectos Harness (55-100%) elevan el promedio; los externos suelen tener solo README. open-swe (40%, AGENTS.md + README.md) y AI-Trader (25%, solo docs/) se suman sin roadmap ni RULES.md. UI-TARS (10%, solo README.md) baja aún más el promedio. Instructions baja de 40% a 39%.</div>
+   432|      </div>
+   433|      <div class="subsystem-card">
+   434|        <h4>💾 State</h4>
+   435|        <div class="score" style="color:#ef4444;">∅ 21%</div>
+   436|        <div class="detail">Sube gracias a repos Harness (47-100%). Externos casi no tienen TASK.md, MEMORY.md o tracking para agentes. Los 3 nuevos — open-swe (10%), AI-Trader (10%) y UI-TARS (10%) — confirman el patrón sin task tracking ni memoria. State baja de 22% a 21%.</div>
+   437|      </div>
+   438|      <div class="subsystem-card">
+   439|        <h4>✅ Verification</h4>
+   440|        <div class="score" style="color:#22c55e;">∅ 48%</div>
+   441|        <div class="detail">Sigue siendo el más fuerte. Tests y CI/CD son estándar. open-swe (83.3%, 141 tests + CI/CD + Makefile) contribuye con buena infraestructura Python. AI-Trader (27.8%, 21 tests sin directorio) y UI-TARS (33.3%, 2 tests + CI/CD) divergen. Verification se mantiene en 48%.</div>
+   442|      </div>
+   443|      <div class="subsystem-card">
+   444|        <h4>🎯 Scope</h4>
+   445|        <div class="score" style="color:#eab308;">∅ 24%</div>
+   446|        <div class="detail">Proyectos Harness con DoD y milestones marcan la diferencia. open-swe (0%, sin templates ni DoD) y AI-Trader (6.2%, solo backlog) tienen Scope casi nulo. UI-TARS (0%) sin Scope. Scope baja de 26% a 24%.</div>
+   447|      </div>
+   448|      <div class="subsystem-card">
+   449|        <h4>🔄 Lifecycle</h4>
+   450|        <div class="score" style="color:#eab308;">∅ 45%</div>
+   451|        <div class="detail">Docker, .gitignore y dependencias son comunes. open-swe (70%, Docker + Makefile + deps) contribuye bien. AI-Trader (25%, solo deps + .gitignore) y UI-TARS (5%, solo LICENSE) se suman. Lifecycle baja de 46% a 45%.</div>
+   452|      </div>
+   453|      <div class="subsystem-card">
+   454|        <h4>🧠 Skills</h4>
+   455|        <div class="score" style="color:#ef4444;">∅ 22%</div>
+   456|        <div class="detail">AI-Trader (73.3%, 6 skills con frontmatter) es la excepción — los otros dos nuevos tienen 0% en Skills. open-swe (0%) y UI-TARS (0%) confirman el patrón: Skills sigue siendo el gap más universal, con 46/41 repos teniendo 0% en Skills. Skills se mantiene en 22%.</div>
+   457|      </div>
+   458|    </div>
+   459|
+   460|    <div class="section-divider"></div>
+   461|
+   462|    <h2>🔍 Conclusiones</h2>
+   463|
+   464|    <div class="module module-collapsible">
+   465|      <div class="module-header">
+   466|        <div class="module-num">1</div>
+   467|        <div>
+   468|          <h3>Proyectos de iberi22 dominan el top</h3>
+   469|        </div>
+   470|      </div>
+   471|      <p>Los 8 proyectos de iberi22 dominan el top del leaderboard. <strong>harness-course (100%)</strong> y <strong>synapse-trading (100.0%)</strong> demuestran que la metodología Harness Engineering produce repositorios significativamente mejor preparados para agentes de IA que los proyectos open-source más populares. <strong>DeepTutor</strong> (40.4%, 23K⭐, Python) es el nuevo ingreso más fuerte, con Verification 83.3% (293 tests + CI/CD). <strong>anomalyco/opencode</strong> (27.5%, 157K⭐, TypeScript) es el repo con más estrellas del leaderboard — 671 tests pero Skills 0%. <strong>crush</strong> (22.0%, 24K⭐, Go) se une al grupo de agentic coding tools sin Skills. El leaderboard ahora abarca 41 repos y un espectro más amplio de stacks: TypeScript (anomalyco/opencode), Go (crush), Python y más.</p>
+   472|    </div>
+   473|
+   474|    <div class="module module-collapsible">
+   475|      <div class="module-header">
+   476|        <div class="module-num">2</div>
+   477|        <div>
+   478|          <h3>Gap: State, Skills y la cola del leaderboard</h3>
+   479|        </div>
+   480|      </div>
+   481|      <p>El promedio de <strong>State (21%)</strong> y <strong>Skills (22%)</strong> sigue siendo el talón de Aquiles. Los 3 nuevos — open-swe, AI-Trader y UI-TARS — todos tienen State 10% o menos. <strong>AI-Trader (26.6%, 20K⭐)</strong> es la excepción con Skills 73.3% (6 skills), pero State 10% y Scope 6.2%. <strong>open-swe (35.8%)</strong> tiene Verification 83.3% pero Skills 0% y Scope 0%. Esto confirma que la carencia de Skills y State son los gaps más universales — ahora 46/41 repos tienen Skills 0%.</p>
+   482|    </div>
+   483|
+   484|    <div class="module module-collapsible">
+   485|      <div class="module-header">
+   486|        <div class="module-num">3</div>
+   487|        <div>
+   488|          <h3>Escalabilidad del Scanner</h3>
+   489|        </div>
+   490|      </div>
+   491|      <p>El evaluador de Harness funciona en cualquier repo — sin importar el lenguaje o stack. Esto significa que podemos escalar este leaderboard a 100+ repos y crear un ranking público donde cualquier proyecto pueda medir su &quot;agent-readiness&quot;. Con 41 repos escaneados — incluyendo <strong>anomalyco/opencode</strong> (TypeScript, 157K⭐), <strong>DeepTutor</strong> (Python, 23K⭐), <strong>crush</strong> (Go, 24K⭐), <strong>open-swe</strong> (Python, 10K⭐), <strong>AI-Trader</strong> (Python, 20K⭐), <strong>UI-TARS</strong> (Python, 11K⭐), <strong>goose</strong> (Rust, 50K⭐) y <strong>gitnexus</strong> (TypeScript, 44K⭐) — el leaderboard cubre un espectro amplio de stacks: TypeScript, Python, Rust, Go, Jupyter, C/C++, Shell y más. El scanner funciona consistentemente en todos ellos sin importar el stack.</p>
+   492|    </div>
+   493|
+   494|    <div class="section-divider"></div>
+   495|
+   496|    <h2>Relacionado</h2>
+   497|    <div class="card-grid">
+   498|      <a href="/harness-course/pages/tutorial.html" class="card">
+   499|        <h3>🎮 Tutorial Interactivo</h3>
+   500|        <p>Aprende a llevar tu proyecto de 45% a 80%+ en 6 pasos con el tutorial guiado.</p>
+   501|      </a>
+   502|      <a href="/harness-course/pages/case-study.html" class="card">
+   503|        <h3>🧠 Case Study</h3>
+   504|        <p>Cómo agents-flows-recipes alcanzó 61.5% — lecciones de un repo con 21 skills.</p>
+   505|      </a>
+   506|      <a href="/harness-course/pages/skills.html" class="card">
+   507|        <h3>🧠 Skills &amp; POML</h3>
+   508|        <p>La receta para tener skills estructurados que cualquier agente pueda entender.</p>
+   509|      </a>
+   510|    </div>
+   511|
+   512|  </div>
+   513|  <footer class="footer">
+   514|    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
+   515|  </footer>
+   516|</main>
+   517|<script>
+   518|function toggleSidebar() {
+   519|  document.getElementById('sidebar').classList.toggle('open');
+   520|  document.getElementById('overlay').classList.toggle('show');
+   521|}
+   522|</script>
+   523|<script src="/harness-course/js/shared.js"></script>
+   524|<script src="/harness-course/js/i18n.js"></script>
+   525|</body>
+   526|</html>
