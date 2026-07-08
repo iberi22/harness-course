@@ -457,9 +457,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 2 nuevos repos escaneados (graphiti + local-deep-researcher). Leaderboard ahora con 35 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 15 (08-Jul-2026 12:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **Re-scan score drift — 11 repos del batch May 25-26** — Todos estables sin cambios tras 43-44 días. hummingbot (36.7%), awesome-copilot (34.9%), zeroclaw (45.0%), langgraph (23.9%), deep-research (14.7%), claude-mem (37.6%), pi (26.6%), awesome-design-md (9.2%), agenticSeek (30.3%), camel (39.4%), nanobrowser (20.2%). Todos con scores idénticos a su baseline de May 2026. | 🟢 DONE | Re-scans confirmados via 3 subagentes paralelos. Scores estables, leaderboard sin cambios para estos repos. |
+| 2 | **DeepTutor escaneado** — HKUDS/DeepTutor (23K⭐ Python). Score: 40.4% 🟡 REGULAR. Verification 83.3% (293 tests + CI/CD) y Lifecycle 65% (Docker + deps) son los puntos fuertes. Skills 0% y State 15% son los gaps. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #12 (entre OpenHands 41.3% y camel 39.4%). |
+| 3 | **anomalyco/opencode escaneado** — anomalyco/opencode (157K⭐ TypeScript). Score: 27.5% 🟠 DÉBIL. 671 tests, AGENTS.md completo, pero Skills 0% y State 10%. No confundir con opencode-ai/opencode (12K⭐ Go, 11.9%) ya en leaderboard. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #23 (entre mattpocock-skills 27.5% y pi 26.6%). |
+| 4 | **crush escaneado** — charmbracelet/crush (24K⭐ Go). Score: 22.0% 🟠 DÉBIL. AGENTS.md + docs/ existentes pero Scope 0%, Skills 0% y State 10%. Sin tests encontrados. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #26 (entre langgraph 23.9% y nanobrowser 20.2%). |
+| 5 | **Leaderboard expandido a 38 repos** — 3 nuevos repos añadidos: DeepTutor (40.4%, rank #12), anomalyco/opencode (27.5%, rank #23), crush (22.0%, rank #26). Promedios recalculados: Inst 40%→40%, State 23%→22%, Verif 47%→48%, Scope 26%→26%, Lifecycle 46%→46%, Skills 24%→22%. Conclusiones actualizadas con menciones a los nuevos repos. Fecha: 08-Jul-2026. | 🟢 MEJORA | Leaderboard actualizado con 38 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados (DeepTutor + anomalyco/opencode + crush). Leaderboard ahora con 38 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Re-scan ecosystem repos for score drift: agents-flows-recipes (65.1%), zeroclaw (45.0%), context-mode (44.0%) — scanned ≥6 weeks ago
-- Scan more starred repos: HKUDS/DeepTutor (23K★ Python), getzep/graphiti ya escaneado, considerar getzep/elysia, anomalyco/opencode (157K★ TypeScript)
+- Re-scan aging ecosystem repos: OpenHands (73K★), aider (44K★), freqtrade (50K★) — scanned ≥6 weeks ago
+- Scan more starred repos: HKUDS/AI-Trader (15K★ Python), bytedance/UI-TARS (10K★ Python), langchain-ai/open-swe (9K★ Python)
 - Consider adding a "quick stats" section to leaderboard: average score, median, top-percentile breakdown
 
 ---
