@@ -469,9 +469,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados (DeepTutor + anomalyco/opencode + crush). Leaderboard ahora con 38 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 16 (08-Jul-2026 06:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **OpenHands re-scan** — All-Hands-AI/OpenHands (80K⭐ Python). Score: 41.3% 🟡 REGULAR, sin drift desde baseline de 25-May (44 días). Verification 83.3% (361 tests) y Lifecycle 70% siguen siendo puntos fuertes. Skills 0% sin cambios. | 🟢 DONE | Re-scan confirmado, score estable, sin cambios en leaderboard. |
+| 2 | **open-swe escaneado** — langchain-ai/open-swe (10K⭐ Python). Score: 35.8% 🟠 DÉBIL. Verification 83.3% (141 tests + CI/CD + Makefile) y Lifecycle 70% son puntos fuertes. Scope 0% y Skills 0% son los gaps. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #18 (tie con goose, 35.8%). |
+| 3 | **AI-Trader escaneado** — HKUDS/AI-Trader (20K⭐ Python). Score: 26.6% 🟠 DÉBIL. Skills 73.3% es el punto más alto — 6 skills con frontmatter válido. Scope 6.2% y State 10% son los gaps más profundos. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #27 (tie con pi, 26.6%). |
+| 4 | **UI-TARS escaneado** — bytedance/UI-TARS (11K⭐ Python). Score: 10.1% 🔴 CRÍTICO. Solo 5 checks pasados de 42. Sin AGENTS.md, sin skills/, sin Docker, sin Scope. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #36 (tie con genai-agents, 10.1%). |
+| 5 | **Leaderboard expandido a 41 repos** — 3 nuevos repos añadidos: open-swe (35.8%, rank #18), AI-Trader (26.6%, rank #27), UI-TARS (10.1%, rank #36). Promedios recalculados: Inst 40%→39%, State 22%→21%, Verif 48%→48%, Scope 26%→24%, Lifecycle 46%→45%, Skills 22%→22%. AI-Trader se destaca: único repo no-Harness con Skills > 0% (73.3%) entre los nuevos. Conclusiones actualizadas con menciones a los nuevos repos. Fecha: 08-Jul-2026. | 🟢 MEJORA | Leaderboard actualizado con 41 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados (open-swe + AI-Trader + UI-TARS). OpenHands re-scan confirmado sin drift. Leaderboard ahora con 41 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Re-scan aging ecosystem repos: OpenHands (73K★), aider (44K★), freqtrade (50K★) — scanned ≥6 weeks ago
-- Scan more starred repos: HKUDS/AI-Trader (15K★ Python), bytedance/UI-TARS (10K★ Python), langchain-ai/open-swe (9K★ Python)
+- Re-scan aging ecosystem repos: OpenHands (80K★) — ya re-scaneado en esta sesión, sin drift. Considerar re-scan de repos más antiguos: zeroclaw (31K★, 45.0%, 44 días), OpenCode (12K★ Go, 11.9%, 44 días)
+- Scan more starred repos from catalog: Alibaba-NLP/DeepResearch (18K★ Python), google-gemini/gemini-fullstack-langgraph-quickstart (18K★ Jupyter), alibaba/page-agent (17K★ TypeScript), camel-ai (16K★ Python) — todos del catálogo de 62 starred agent-frameworks repos
 - Consider adding a "quick stats" section to leaderboard: average score, median, top-percentile breakdown
 
 ---
