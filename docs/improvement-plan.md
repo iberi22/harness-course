@@ -446,9 +446,20 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 2 nuevos repos escaneados (gitnexus + genai-agents). Leaderboard ahora con 33 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 14 (08-Jul-2026)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **Re-scan score drift** — agent-recipes-repo (48.6%, estable), swal-skills (72.5%, estable), freqtrade (37.6%, estable). Los 3 repos más antiguos sin cambios tras 7+ semanas. | 🟢 DONE | Re-scans confirmados, scores estables, leaderboard sin cambios |
+| 2 | **graphiti escaneado** — getzep/graphiti (25K⭐ Python). Score: 42.2% 🟡 REGULAR. Verification 83.3% (53 tests + CI/CD) es el punto fuerte. Skills 0% y State 15% son los gaps. Lifecycle 80% con Docker + Makefile + pyproject.toml. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #9 (42.2%, entre browser-use y llama.cpp). |
+| 3 | **local-deep-researcher escaneado** — langchain-ai/local-deep-researcher (9.1K⭐ Python). Score: 16.5% 🔴 CRÍTICO. Lifecycle 45% (Docker, pyproject, .env.example, LICENSE) es lo único decente. Scope 0%, Skills 0%, Instructions 10%. Proyecto de investigación local, no diseñado para agentes. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #27 (entre deep-research y nanobrowser). |
+| 4 | **Leaderboard expandido a 35 repos** — 2 nuevos repos añadidos: graphiti (42.2%, rank #9) y local-deep-researcher (16.5%, rank #27). Promedios recalculados: Inst 41%→40%, State 24%→23%, Verif 46%→47%, Scope 27%→26%, Lifecycle 45%→46%, Skills 25%→24%. Conclusiones actualizadas con menciones a los nuevos repos. Fecha: 08-Jul-2026. | 🟢 MEJORA | Leaderboard actualizado con 35 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 2 nuevos repos escaneados (graphiti + local-deep-researcher). Leaderboard ahora con 35 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Re-scan older leaderboard repos: agent-recipes-repo (48.6%), swal-skills (72.5%), freqtrade (37.6%) — were scanned ≥2 months ago
-- Scan more starred repos: tensorflow/tensorflow (189K★ Python), microsoft/vscode (166K★ TypeScript), llvm/llvm-project (33K★ C++)
+- Re-scan ecosystem repos for score drift: agents-flows-recipes (65.1%), zeroclaw (45.0%), context-mode (44.0%) — scanned ≥6 weeks ago
+- Scan more starred repos: HKUDS/DeepTutor (23K★ Python), getzep/graphiti ya escaneado, considerar getzep/elysia, anomalyco/opencode (157K★ TypeScript)
 - Consider adding a "quick stats" section to leaderboard: average score, median, top-percentile breakdown
 
 ---

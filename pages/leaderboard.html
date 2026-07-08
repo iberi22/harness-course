@@ -1,470 +1,484 @@
-    1|<!DOCTYPE html>
-    2|<html lang="es">
-    3|<head>
-    4|<meta charset="UTF-8">
-    5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    6|<title>🏆 Leaderboard — Harness Engineering</title>
-    7|<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
-    8|<link rel="stylesheet" href="/harness-course/css/style.css">
-    9|<style>
-   10|.leaderboard-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 24px 0; }
-   11|.leaderboard-table th {
-   12|  text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase;
-   13|  letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border-subtle);
-   14|}
-   15|.leaderboard-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); vertical-align: middle; }
-   16|.leaderboard-table tr:hover td { background: rgba(255,255,255,0.02); }
-   17|.rank-num { font-size: 20px; font-weight: 700; width: 40px; }
-   18|.rank-1 { color: #ffd700; } .rank-2 { color: #c0c0c0; } .rank-3 { color: #cd7f32; }
-   19|.score-badge {
-   20|  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
-   21|  border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap;
-   22|}
-   23|.score-excellent { background: rgba(34,197,94,0.15); color: #22c55e; }
-   24|.score-good { background: rgba(59,130,246,0.15); color: #3b82f6; }
-   25|.score-regular { background: rgba(234,179,8,0.15); color: #eab308; }
-   26|.score-weak { background: rgba(249,115,22,0.15); color: #f97316; }
-   27|.score-critical { background: rgba(239,68,68,0.15); color: #ef4444; }
-   28|.stars { color: var(--text-muted); font-size: 12px; }
-   29|.bar-container { width: 120px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 10px; }
-   30|.bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
-   31|.bar-100 { background: linear-gradient(90deg, #22c55e, #16a34a); }
-   32|.bar-80 { background: linear-gradient(90deg, #3b82f6, #2563eb); }
-   33|.bar-60 { background: linear-gradient(90deg, #eab308, #ca8a04); }
-   34|.bar-40 { background: linear-gradient(90deg, #f97316, #ea580c); }
-   35|.bar-0 { background: linear-gradient(90deg, #ef4444, #dc2626); }
-   36|.subsystem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 24px 0; }
-   37|.subsystem-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 16px; }
-   38|.subsystem-card h4 { margin: 0 0 4px; font-size: 13px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
-   39|.subsystem-card .score { font-size: 28px; font-weight: 700; }
-   40|.subsystem-card .detail { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-   41|</style>
-   42|</head>
-   43|<body>
-   44|<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
-   45|<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-   46|<aside class="sidebar" id="sidebar">
-   47|  <div class="sidebar-brand">
-   48|    <a href="/harness-course/">
-   49|      <h2>Harness Eng.</h2>
-   50|      <div class="brand-sub" data-i18n="brand.sub">Design skills for agents</div>
-   51|    </a>
-   52|    <div class="lang-toggle">
-   53|      <button type="button" data-lang="es" onclick="setLanguage('es')" aria-label="Cambiar a Español">ES</button>
-   54|      <button type="button" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
-   55|    </div>
-   56|  </div>
-   57|  <div class="search-container">
-   58|    <input id="nav-search" type="text" placeholder="Filter nav..." data-i18n-placeholder="search.placeholder" aria-label="Search navigation">
-   59|    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
-   60|  </div>
-   61|  <nav>
-   62|    <div class="nav-section">
-   63|      <div class="nav-section-title" data-i18n="nav.course">Course</div>
-   64|      <a href="/harness-course/"><span class="nav-icon">⌂</span><span data-i18n="nav.home">Home</span></a>
-   65|      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span><span data-i18n="nav.fundamentals">Fundamentals</span></a>
-   66|      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span><span data-i18n="nav.design_patterns">Design Patterns</span></a>
-   67|      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span><span data-i18n="nav.full_course">Full Course</span></a>
-   68|    </div>
-   69|    <div class="nav-section">
-   70|      <div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
-   71|      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span><span data-i18n="nav.scope">Scope</span></a>
-   72|      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span><span data-i18n="nav.instructions">Instructions</span></a>
-   73|      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span><span data-i18n="nav.state">State</span></a>
-   74|      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span><span data-i18n="nav.verification">Verification</span></a>
-   75|      <a href="/harness-course/pages/lifecycle.html"><span class="nav-icon">🔄</span><span data-i18n="nav.lifecycle">Lifecycle</span></a>
-   76|      <a href="/harness-course/pages/skills.html"><span class="nav-icon">🧠</span> <span data-i18n="nav.skills_poml">Skills</span></a>
-   77|    </div>
-   78|    <div class="nav-section">
-   79|      <div class="nav-section-title" data-i18n="nav.resources">Resources</div>
-   80|      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span><span data-i18n="nav.resources">Resources</span></a>
-   81|      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span><span data-i18n="nav.templates">Templates</span></a>
-   82|    </div>
-   83|    <div class="nav-section">
-   84|      <div class="nav-section-title" data-i18n="nav.case_study">Case Study</div>
-   85|      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span><span data-i18n="nav.agents_flows">Agents Flows</span></a>
-   86|      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span><span data-i18n="nav.agent_recipes">Agent Recipes</span></a>
-   87|      <a href="/harness-course/pages/leaderboard.html" class="active"><span class="nav-icon">🏆</span><span data-i18n="nav.leaderboard">Leaderboard</span></a>
-   88|    </div>
-   89|    <div class="nav-section">
-   90|      <div class="nav-section-title" data-i18n="nav.community">Community</div>
-   91|      <a href="/harness-course/pages/community.html"><span class="nav-icon">🌐</span><span data-i18n="nav.community">Community</span></a>
-   92|    </div>
-   93|    <div class="nav-section">
-   94|      <div class="nav-section-title" data-i18n="nav.interactive">Interactive</div>
-   95|      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span><span data-i18n="nav.tutorial">Tutorial</span></a>
-   96|    </div>
-   97|  </nav>
-   98|</aside>
-   99|<main class="main">
-  100|  <div class="page-header">
-  101|    <h1><span class="page-icon">🏆</span> Harness Score Leaderboard</h1>
-  102|    <p>Repos open-source evaluados con el escáner de Harness Engineering — actualizado: 08-Jul-2026</p>
-  103|  </div>
-  104|  <div class="content">
-  105|
-  106|    <div class="module">
-  107|      <div class="module-header">
-  108|        <div class="module-num">★</div>
-  109|        <div>
-  110|          <h3>Top Repos por Harness Score</h3>
-  111|          <div class="module-topics">
-  112|            <span class="tag">leaderboard</span>
-  113|            <span class="tag">benchmark</span>
-  114|            <span class="tag">open-source</span>
-  115|          </div>
-  116|        </div>
-  117|      </div>
-  118|      <p>¿Qué tan bien preparados están los proyectos open-source más populares para ser operados por agentes de IA? Usamos <strong>Harness Engineering Scanner v2</strong> para medir 6 subsistemas en repos top-starred de GitHub.</p>
-  119|
-  120|      <table class="leaderboard-table">
-  121|        <thead>
-  122|          <tr>
-  123|            <th>#</th>
-  124|            <th>Proyecto</th>
-  125|            <th>★ Estrellas</th>
-  126|            <th>Stack</th>
-  127|            <th>Score</th>
-  128|          </tr>
-  129|        </thead>
-  130|        <tbody>
-  131|          <tr>
-  132|            <td>🥇</td>
-  133|            <td><strong>harness-course</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/harness-course</span></td>
-  134|            <td><span class="stars">—</span></td>
-  135|            <td>HTML/CSS/JS</td>
-  136|            <td><span class="score-badge score-excellent">🟢 100.0%</span></td>
-  137|          </tr>
-  138|          <tr>
-  139|            <td>🥈</td>
-  140|            <td><strong>synapse-trading</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/synapse-trading</span></td>
-  141|            <td><span class="stars">—</span></td>
-  142|            <td>Rust</td>
-  143|            <td><span class="score-badge score-excellent">🟢 100.0%</span></td>
-  144|          </tr>
-  145|          <tr>
-  146|            <td>🥉</td>
-  147|            <td><strong>swal-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/swal-skills</span></td>
-  148|            <td><span class="stars">—</span></td>
-  149|            <td>Skills</td>
-  150|            <td><span class="score-badge score-good">🔵 72.5%</span></td>
-  151|          </tr>
-  152|          <tr>
-  153|            <td>4</td>
-  154|            <td><strong>agents-flows-recipes</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/agents-flows-recipes</span></td>
-  155|            <td><span class="stars">—</span></td>
-  156|            <td>POML</td>
-  157|            <td><span class="score-badge score-regular">🟡 65.1%</span></td>
-  158|          </tr>
-  159|          <tr>
-  160|            <td>5</td>
-  161|            <td><strong>agent-recipes-repo</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/agent-recipes-repo</span></td>
-  162|            <td><span class="stars">—</span></td>
-  163|            <td>Recipes</td>
-  164|            <td><span class="score-badge score-good">🔵 48.6%</span></td>
-  165|          </tr>
-  166|          <tr>
-  167|            <td>6</td>
-  168|            <td><strong>zeroclaw</strong><br><span style="font-size:12px;color:var(--text-muted)">zeroclaw-labs/zeroclaw</span></td>
-  169|            <td><span class="stars">⭐ 31K</span></td>
-  170|            <td>Rust</td>
-  171|            <td><span class="score-badge score-regular">🟡 45.0%</span></td>
-  172|          </tr>
-  173|          <tr>
-  174|            <td>7</td>
-  175|            <td><strong>context-mode</strong><br><span style="font-size:12px;color:var(--text-muted)">mksglu/context-mode</span></td>
-  176|            <td><span class="stars">⭐ 14K</span></td>
-  177|            <td>TypeScript</td>
-  178|            <td><span class="score-badge score-regular">🟡 44.0%</span></td>
-  179|          </tr>
-  180|          <tr>
-  181|            <td>8</td>
-  182|            <td><strong>browser-use</strong><br><span style="font-size:12px;color:var(--text-muted)">browser-use/browser-use</span></td>
-  183|            <td><span class="stars">⭐ 93K</span></td>
-  184|            <td>Python</td>
-  185|            <td><span class="score-badge score-regular">🟡 43.1%</span></td>
-  186|          </tr>
-  187|          <tr>
-  188|            <td>9</td>
-  189|            <td><strong>llama.cpp</strong><br><span style="font-size:12px;color:var(--text-muted)">ggerganov/llama.cpp</span></td>
-  190|            <td><span class="stars">⭐ 100K</span></td>
-  191|            <td>C/C++</td>
-  192|            <td><span class="score-badge score-regular">🟡 41.3%</span></td>
-  193|          </tr>
-  194|          <tr>
-  195|            <td>9</td>
-  196|            <td><strong>OpenHands</strong><br><span style="font-size:12px;color:var(--text-muted)">OpenHands/OpenHands</span></td>
-  197|            <td><span class="stars">⭐ 73K</span></td>
-  198|            <td>Python</td>
-  199|            <td><span class="score-badge score-regular">🟡 41.3%</span></td>
-  200|          </tr>
-  201|          <tr>
-  202|            <td>11</td>
-  203|            <td><strong>camel</strong><br><span style="font-size:12px;color:var(--text-muted)">camel-ai/camel</span></td>
-  204|            <td><span class="stars">⭐ 16K</span></td>
-  205|            <td>Python</td>
-  206|            <td><span class="score-badge score-weak">🟠 39.4%</span></td>
-  207|          </tr>
-  208|          <tr>
-  209|            <td>12</td>
-  210|            <td><strong>freqtrade</strong><br><span style="font-size:12px;color:var(--text-muted)">freqtrade/freqtrade</span></td>
-  211|            <td><span class="stars">⭐ 50K</span></td>
-  212|            <td>Python</td>
-  213|            <td><span class="score-badge score-weak">🟠 37.6%</span></td>
-  214|          </tr>
-  215|          <tr>
-  216|            <td>12</td>
-  217|            <td><strong>claude-mem</strong><br><span style="font-size:12px;color:var(--text-muted)">thedotmack/claude-mem</span></td>
-  218|            <td><span class="stars">⭐ 74K</span></td>
-  219|            <td>TypeScript</td>
-  220|            <td><span class="score-badge score-weak">🟠 37.6%</span></td>
-  221|          </tr>
-  222|          <tr>
-  223|            <td>14</td>
-  224|            <td><strong>hummingbot</strong><br><span style="font-size:12px;color:var(--text-muted)">hummingbot/hummingbot</span></td>
-  225|            <td><span class="stars">⭐ 18K</span></td>
-  226|            <td>Python</td>
-  227|            <td><span class="score-badge score-weak">🟠 36.7%</span></td>
-  228|          </tr>
-  229|          <tr>
-  230|            <td>15</td>
-  231|            <td><strong>goose</strong><br><span style="font-size:12px;color:var(--text-muted)">aaif-goose/goose</span></td>
-  232|            <td><span class="stars">⭐ 50K</span></td>
-  233|            <td>Rust</td>
-  234|            <td><span class="score-badge score-weak">🟠 35.8%</span></td>
-  235|          </tr>
-  236|          <tr>
-  237|            <td>16</td>
-  238|            <td><strong>awesome-copilot</strong><br><span style="font-size:12px;color:var(--text-muted)">github/awesome-copilot</span></td>
-  239|            <td><span class="stars">⭐ 32K</span></td>
-  240|            <td>Python</td>
-  241|            <td><span class="score-badge score-weak">🟠 34.9%</span></td>
-  242|          </tr>
-  243|          <tr>
-  244|            <td>16</td>
-  245|            <td><strong>gitnexus</strong><br><span style="font-size:12px;color:var(--text-muted)">abhigyanpatwari/GitNexus</span></td>
-  246|            <td><span class="stars">⭐ 44K</span></td>
-  247|            <td>TypeScript</td>
-  248|            <td><span class="score-badge score-weak">🟠 34.9%</span></td>
-  249|          </tr>
-  250|          <tr>
-  251|            <td>16</td>
-  252|            <td><strong>aider</strong><br><span style="font-size:12px;color:var(--text-muted)">Aider-AI/aider</span></td>
-  253|            <td><span class="stars">⭐ 44K</span></td>
-  254|            <td>Python</td>
-  255|            <td><span class="score-badge score-weak">🟠 30.3%</span></td>
-  256|          </tr>
-  257|          <tr>
-  258|            <td>16</td>
-  259|            <td><strong>agenticSeek</strong><br><span style="font-size:12px;color:var(--text-muted)">Fosowl/agenticSeek</span></td>
-  260|            <td><span class="stars">⭐ 26K</span></td>
-  261|            <td>Python</td>
-  262|            <td><span class="score-badge score-weak">🟠 30.3%</span></td>
-  263|          </tr>
-  264|          <tr>
-  265|            <td>18</td>
-  266|            <td><strong>learn-harness-engineering</strong><br><span style="font-size:12px;color:var(--text-muted)">walkinglabs/learn-harness-engineering</span></td>
-  267|            <td><span class="stars">—</span></td>
-  268|            <td>TypeScript</td>
-  269|            <td><span class="score-badge score-weak">🟠 29.4%</span></td>
-  270|          </tr>
-  271|          <tr>
-  272|            <td>19</td>
-  273|            <td><strong>mattpocock-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">mattpocock/skills</span></td>
-  274|            <td><span class="stars">⭐ 68K</span></td>
-  275|            <td>Shell</td>
-  276|            <td><span class="score-badge score-weak">🟠 27.5%</span></td>
-  277|          </tr>
-  278|          <tr>
-  279|            <td>20</td>
-  280|            <td><strong>pi</strong><br><span style="font-size:12px;color:var(--text-muted)">earendil-works/pi</span></td>
-  281|            <td><span class="stars">⭐ 47K</span></td>
-  282|            <td>TypeScript</td>
-  283|            <td><span class="score-badge score-weak">🟠 26.6%</span></td>
-  284|          </tr>
-  285|          <tr>
-  286|            <td>21</td>
-  287|            <td><strong>skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/skills</span></td>
-  288|            <td><span class="stars">—</span></td>
-  289|            <td>Skills</td>
-  290|            <td><span class="score-badge score-weak">🟠 25.7%</span></td>
-  291|          </tr>
-  292|          <tr>
-  293|            <td>22</td>
-  294|            <td><strong>langgraph</strong><br><span style="font-size:12px;color:var(--text-muted)">langchain-ai/langgraph</span></td>
-  295|            <td><span class="stars">⭐ 31K</span></td>
-  296|            <td>Python</td>
-  297|            <td><span class="score-badge score-critical">🔴 23.9%</span></td>
-  298|          </tr>
-  299|          <tr>
-  300|            <td>23</td>
-  301|            <td><strong>nanobrowser</strong><br><span style="font-size:12px;color:var(--text-muted)">nanobrowser/nanobrowser</span></td>
-  302|            <td><span class="stars">⭐ 12K</span></td>
-  303|            <td>TypeScript</td>
-  304|            <td><span class="score-badge score-critical">🔴 20.2%</span></td>
-  305|          </tr>
-  306|          <tr>
-  307|            <td>24</td>
-  308|            <td><strong>deep-research</strong><br><span style="font-size:12px;color:var(--text-muted)">dzhng/deep-research</span></td>
-  309|            <td><span class="stars">⭐ 18K</span></td>
-  310|            <td>TypeScript</td>
-  311|            <td><span class="score-badge score-critical">🔴 14.7%</span></td>
-  312|          </tr>
-  313|          <tr>
-  314|            <td>25</td>
-  315|            <td><strong>opencode</strong><br><span style="font-size:12px;color:var(--text-muted)">opencode-ai/opencode</span></td>
-  316|            <td><span class="stars">⭐ 12K</span></td>
-  317|            <td>Go</td>
-  318|            <td><span class="score-badge score-critical">🔴 11.9%</span></td>
-  319|          </tr>
-  320|          <tr>
-  321|            <td>25</td>
-  322|            <td><strong>awesome-harness-engineering</strong><br><span style="font-size:12px;color:var(--text-muted)">walkinglabs/awesome-harness-engineering</span></td>
-  323|            <td><span class="stars">—</span></td>
-  324|            <td>Markdown</td>
-  325|            <td><span class="score-badge score-critical">🔴 11.9%</span></td>
-  326|          </tr>
-  327|          <tr>
-  328|            <td>26</td>
-  329|            <td><strong>genai-agents</strong><br><span style="font-size:12px;color:var(--text-muted)">NirDiamant/GenAI_Agents</span></td>
-  330|            <td><span class="stars">⭐ 21K</span></td>
-  331|            <td>Python/Jupyter</td>
-  332|            <td><span class="score-badge score-critical">🔴 10.1%</span></td>
-  333|          </tr>
-  334|          <tr>
-  335|            <td>28</td>
-  336|            <td><strong>awesome-design-md</strong><br><span style="font-size:12px;color:var(--text-muted)">VoltAgent/awesome-design-md</span></td>
-  337|            <td><span class="stars">⭐ 74K</span></td>
-  338|            <td>DESIGN</td>
-  339|            <td><span class="score-badge score-critical">🔴 9.2%</span></td>
-  340|          </tr>
-  341|          <tr>
-  342|            <td>29</td>
-  343|            <td><strong>imported-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/imported-skills</span></td>
-  344|            <td><span class="stars">—</span></td>
-  345|            <td>Skills</td>
-  346|            <td><span class="score-badge score-critical">🔴 4.6%</span></td>
-  347|          </tr>
-  348|          <tr>
-  349|            <td>30</td>
-  350|            <td><strong>harness-course-site</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/harness-course-site</span></td>
-  351|            <td><span class="stars">—</span></td>
-  352|            <td>HTML/CSS/JS</td>
-  353|            <td><span class="score-badge score-critical">🔴 1.8%</span></td>
-  354|          </tr>
-  355|          <tr>
-  356|            <td>31</td>
-  357|            <td><strong>local-models</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/local-models</span></td>
-  358|            <td><span class="stars">—</span></td>
-  359|            <td>Python/CSV</td>
-  360|            <td><span class="score-badge score-critical">🔴 0.0%</span></td>
-  361|          </tr>
-  362|        </tbody>
-  363|      </table>
-  364|    </div>
-  365|
-  366|    <div class="section-divider"></div>
-  367|
-  368|    <h2>📊 Comparativa por Subsistema</h2>
-  369|    <p>Los 6 subsistemas evaluados muestran un patrón claro: <strong>Verification</strong> es el punto fuerte de casi todos los proyectos, mientras que <strong>Skills</strong> y <strong>State</strong> son los más descuidados.</p>
-  370|
-  371|    <div class="subsystem-grid">
-  372|      <div class="subsystem-card">
-        <h4>📋 Instructions</h4>
-        <div class="score" style="color:#eab308;">∅ 41%</div>
-        <div class="detail">Promedio entre todos los repos. Los proyectos Harness (55-100%) elevan el promedio; los externos suelen tener solo README. awesome-copilot (55%) y mattpocock-skills (60%) ayudan, pero camel (25%), agenticSeek (25%) y nanobrowser (40%) moderan el promedio. goose (40% con AGENTS.md + README.md) se suma al grupo sin docs/ ni roadmap. gitnexus (50%) ayuda pero genai-agents (10%) baja el promedio. Instructions baja de 42% a 41%.</div>
-  376|      </div>
-  377|      <div class="subsystem-card">
-        <h4>💾 State</h4>
-        <div class="score" style="color:#ef4444;">∅ 24%</div>
-        <div class="detail">Sube gracias a repos Harness (47-100%). Externos casi no tienen TASK.md, MEMORY.md o tracking para agentes. goose (15%) apenas tiene git history y persistencia, sin TASK.md ni MEMORY.md como los demás externos. State se mantiene en 24%.</div>
-  381|      </div>
-  382|      <div class="subsystem-card">
-        <h4>✅ Verification</h4>
-        <div class="score" style="color:#22c55e;">∅ 46%</div>
-        <div class="detail">Sigue siendo el más fuerte. Tests y CI/CD son estándar. camel (83.3%, 278 tests) y agenticSeek (72.2%) refuerzan Verification. goose (66.7%, 76 tests + CI/CD + clippy) contribuye con buena infraestructura Rust. gitnexus (44.4%, 720 tests + CI) contribuye pero genai-agents (0%) sin tests arrastra. Verification baja de 48% a 46%.</div>
-  386|      </div>
-  387|      <div class="subsystem-card">
-        <h4>🎯 Scope</h4>
-        <div class="score" style="color:#eab308;">∅ 27%</div>
-        <div class="detail">Proyectos Harness con DoD y milestones marcan la diferencia. camel (31.2%, issue templates + CONTRIBUTING.md) y nanobrowser (25%, 4 issue templates) contribuyen al Scope promedio. goose (31.2%, issue templates + CONTRIBUTING.md + backlog) tiene un Scope decente para proyecto externo. Scope se mantiene en 27%.</div>
-  391|      </div>
-  392|      <div class="subsystem-card">
-        <h4>🔄 Lifecycle</h4>
-        <div class="score" style="color:#eab308;">∅ 45%</div>
-        <div class="detail">Docker, .gitignore y dependencias son comunes. goose (55%, Docker + .gitignore + LICENSE + Cargo.toml) se suma al grupo con buen Lifecycle para Rust. Lifecycle se mantiene en 45%.</div>
-      </div>
-      <div class="subsystem-card">
-        <h4>🧠 Skills</h4>
-        <div class="score" style="color:#ef4444;">∅ 25%</div>
-        <div class="detail">awesome-copilot (73.3%) y mattpocock-skills (73.3%) son los únicos con Skills decente entre los externos. goose (0%) no tiene skills/, arrastrando el promedio de 26% a 25%. Skills sigue siendo el gap más universal: 39/33 repos tienen 0% en Skills.</div>
-  401|      </div>
-  402|    </div>
-  403|
-  404|    <div class="section-divider"></div>
-  405|
-  406|    <h2>🔍 Conclusiones</h2>
-  407|
-  408|    <div class="module module-collapsible">
-  409|      <div class="module-header">
-  410|        <div class="module-num">1</div>
-  411|        <div>
-  412|          <h3>Proyectos de iberi22 dominan el top</h3>
-  413|        </div>
-  414|      </div>
-  415|      <p>Los 8 proyectos de iberi22 dominan el top del leaderboard. <strong>harness-course (100%)</strong> y <strong>synapse-trading (100.0%)</strong> demuestran que la metodología Harness Engineering produce repositorios significativamente mejor preparados para agentes de IA que los proyectos open-source más populares. <strong>gitnexus</strong> (34.9%, 44K⭐, TypeScript) y <strong>genai-agents</strong> (10.1%, 21K⭐, Python/Jupyter) son los nuevos ingresos. gitnexus destaca con 720 tests pero Skills 0%. goose (35.8%, 50K⭐) mantiene su posición. El leaderboard ahora abarca 33 repos y un espectro más amplio de stacks: Rust (goose), Python, TypeScript y más.</p>
-  416|    </div>
-  417|
-  418|    <div class="module module-collapsible">
-  419|      <div class="module-header">
-  420|        <div class="module-num">2</div>
-  421|        <div>
-  422|          <h3>Gap: State, Skills y la cola del leaderboard</h3>
-  423|        </div>
-  424|      </div>
-  425|      <p>El promedio de <strong>State (24%)</strong> y <strong>Skills (25%)</strong> sigue siendo el talón de Aquiles. goose (State 15%, Skills 0%) confirma el patrón: frameworks populares de agentes tienen Verification sólida pero ignoran completamente los subsistemas de agente. <strong>goose (35.8%, Verification 66.7%)</strong> tiene 76 tests, CI/CD y clippy, pero Skills 0% y sin TASK.md ni MEMORY.md. Esto confirma que la carencia de Skills es el gap más universal — 39/33 repos tienen 0% en Skills.</p>
-  426|    </div>
-  427|
-  428|    <div class="module module-collapsible">
-  429|      <div class="module-header">
-  430|        <div class="module-num">3</div>
-  431|        <div>
-  432|          <h3>Escalabilidad del Scanner</h3>
-  433|        </div>
-  434|      </div>
-  435|      <p>El evaluador de Harness funciona en cualquier repo — sin importar el lenguaje o stack. Esto significa que podemos escalar este leaderboard a 100+ repos y crear un ranking público donde cualquier proyecto pueda medir su &quot;agent-readiness&quot;. Con 33 repos escaneados — incluyendo <strong>gitnexus</strong> (TypeScript, 44K⭐), <strong>genai-agents</strong> (Python/Jupyter, 21K⭐), <strong>goose</strong> (Rust, 50K⭐), <strong>camel</strong> (Python, 16K⭐) y <strong>agenticSeek</strong> (Python, 26K⭐) — el leaderboard cubre un espectro amplio de stacks: TypeScript, Python, Rust, Go, Jupyter, C/C++, Shell y más. El scanner funciona consistentemente en todos ellos sin importar el stack.</p>
-  436|    </div>
-  437|
-  438|    <div class="section-divider"></div>
-  439|
-  440|    <h2>Relacionado</h2>
-  441|    <div class="card-grid">
-  442|      <a href="/harness-course/pages/tutorial.html" class="card">
-  443|        <h3>🎮 Tutorial Interactivo</h3>
-  444|        <p>Aprende a llevar tu proyecto de 45% a 80%+ en 6 pasos con el tutorial guiado.</p>
-  445|      </a>
-  446|      <a href="/harness-course/pages/case-study.html" class="card">
-  447|        <h3>🧠 Case Study</h3>
-  448|        <p>Cómo agents-flows-recipes alcanzó 61.5% — lecciones de un repo con 21 skills.</p>
-  449|      </a>
-  450|      <a href="/harness-course/pages/skills.html" class="card">
-  451|        <h3>🧠 Skills &amp; POML</h3>
-  452|        <p>La receta para tener skills estructurados que cualquier agente pueda entender.</p>
-  453|      </a>
-  454|    </div>
-  455|
-  456|  </div>
-  457|  <footer class="footer">
-  458|    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
-  459|  </footer>
-  460|</main>
-  461|<script>
-  462|function toggleSidebar() {
-  463|  document.getElementById('sidebar').classList.toggle('open');
-  464|  document.getElementById('overlay').classList.toggle('show');
-  465|}
-  466|</script>
-  467|<script src="/harness-course/js/shared.js"></script>
-  468|<script src="/harness-course/js/i18n.js"></script>
-  469|</body>
-  470|</html>
+     1|<!DOCTYPE html>
+     2|<html lang="es">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>🏆 Leaderboard — Harness Engineering</title>
+     7|<link rel="icon" type="image/svg+xml" href="/harness-course/favicon.svg">
+     8|<link rel="stylesheet" href="/harness-course/css/style.css">
+     9|<style>
+     10|.leaderboard-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 24px 0; }
+     11|.leaderboard-table th {
+     12|  text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase;
+     13|  letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border-subtle);
+     14|}
+     15|.leaderboard-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); vertical-align: middle; }
+     16|.leaderboard-table tr:hover td { background: rgba(255,255,255,0.02); }
+     17|.rank-num { font-size: 20px; font-weight: 700; width: 40px; }
+     18|.rank-1 { color: #ffd700; } .rank-2 { color: #c0c0c0; } .rank-3 { color: #cd7f32; }
+     19|.score-badge {
+     20|  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+     21|  border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap;
+     22|}
+     23|.score-excellent { background: rgba(34,197,94,0.15); color: #22c55e; }
+     24|.score-good { background: rgba(59,130,246,0.15); color: #3b82f6; }
+     25|.score-regular { background: rgba(234,179,8,0.15); color: #eab308; }
+     26|.score-weak { background: rgba(249,115,22,0.15); color: #f97316; }
+     27|.score-critical { background: rgba(239,68,68,0.15); color: #ef4444; }
+     28|.stars { color: var(--text-muted); font-size: 12px; }
+     29|.bar-container { width: 120px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 10px; }
+     30|.bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+     31|.bar-100 { background: linear-gradient(90deg, #22c55e, #16a34a); }
+     32|.bar-80 { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+     33|.bar-60 { background: linear-gradient(90deg, #eab308, #ca8a04); }
+     34|.bar-40 { background: linear-gradient(90deg, #f97316, #ea580c); }
+     35|.bar-0 { background: linear-gradient(90deg, #ef4444, #dc2626); }
+     36|.subsystem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 24px 0; }
+     37|.subsystem-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 16px; }
+     38|.subsystem-card h4 { margin: 0 0 4px; font-size: 13px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+     39|.subsystem-card .score { font-size: 28px; font-weight: 700; }
+     40|.subsystem-card .detail { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+     41|</style>
+     42|</head>
+     43|<body>
+     44|<button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+     45|<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+     46|<aside class="sidebar" id="sidebar">
+     47|  <div class="sidebar-brand">
+     48|    <a href="/harness-course/">
+     49|      <h2>Harness Eng.</h2>
+     50|      <div class="brand-sub" data-i18n="brand.sub">Design skills for agents</div>
+     51|    </a>
+     52|    <div class="lang-toggle">
+     53|      <button type="button" data-lang="es" onclick="setLanguage('es')" aria-label="Cambiar a Español">ES</button>
+     54|      <button type="button" data-lang="en" onclick="setLanguage('en')" aria-label="Switch to English">EN</button>
+     55|    </div>
+     56|  </div>
+     57|  <div class="search-container">
+     58|    <input id="nav-search" type="text" placeholder="Filter nav..." data-i18n-placeholder="search.placeholder" aria-label="Search navigation">
+     59|    <span class="search-hint"><span class="kbd-hint"><kbd>⌘</kbd> <kbd>K</kbd></span></span>
+     60|  </div>
+     61|  <nav>
+     62|    <div class="nav-section">
+     63|      <div class="nav-section-title" data-i18n="nav.course">Course</div>
+     64|      <a href="/harness-course/"><span class="nav-icon">⌂</span><span data-i18n="nav.home">Home</span></a>
+     65|      <a href="/harness-course/pages/fundamentals.html"><span class="nav-icon">◎</span><span data-i18n="nav.fundamentals">Fundamentals</span></a>
+     66|      <a href="/harness-course/pages/design-patterns.html"><span class="nav-icon">◇</span><span data-i18n="nav.design_patterns">Design Patterns</span></a>
+     67|      <a href="/harness-course/pages/course.html"><span class="nav-icon">▽</span><span data-i18n="nav.full_course">Full Course</span></a>
+     68|    </div>
+     69|    <div class="nav-section">
+     70|      <div class="nav-section-title" data-i18n="nav.subsystems">Subsistemas</div>
+     71|      <a href="/harness-course/pages/scope.html"><span class="nav-icon">🎯</span><span data-i18n="nav.scope">Scope</span></a>
+     72|      <a href="/harness-course/pages/instructions.html"><span class="nav-icon">📋</span><span data-i18n="nav.instructions">Instructions</span></a>
+     73|      <a href="/harness-course/pages/state.html"><span class="nav-icon">💾</span><span data-i18n="nav.state">State</span></a>
+     74|      <a href="/harness-course/pages/verification.html"><span class="nav-icon">✅</span><span data-i18n="nav.verification">Verification</span></a>
+     75|      <a href="/harness-course/pages/lifecycle.html"><span class="nav-icon">🔄</span><span data-i18n="nav.lifecycle">Lifecycle</span></a>
+     76|      <a href="/harness-course/pages/skills.html"><span class="nav-icon">🧠</span> <span data-i18n="nav.skills_poml">Skills</span></a>
+     77|    </div>
+     78|    <div class="nav-section">
+     79|      <div class="nav-section-title" data-i18n="nav.resources">Resources</div>
+     80|      <a href="/harness-course/pages/resources.html"><span class="nav-icon">□</span><span data-i18n="nav.resources">Resources</span></a>
+     81|      <a href="/harness-course/pages/templates.html"><span class="nav-icon">△</span><span data-i18n="nav.templates">Templates</span></a>
+     82|    </div>
+     83|    <div class="nav-section">
+     84|      <div class="nav-section-title" data-i18n="nav.case_study">Case Study</div>
+     85|      <a href="/harness-course/pages/case-study.html"><span class="nav-icon">🧠</span><span data-i18n="nav.agents_flows">Agents Flows</span></a>
+     86|      <a href="https://github.com/iberi22/agent-recipes-repo" target="_blank" rel="noopener"><span class="nav-icon">◇</span><span data-i18n="nav.agent_recipes">Agent Recipes</span></a>
+     87|      <a href="/harness-course/pages/leaderboard.html" class="active"><span class="nav-icon">🏆</span><span data-i18n="nav.leaderboard">Leaderboard</span></a>
+     88|    </div>
+     89|    <div class="nav-section">
+     90|      <div class="nav-section-title" data-i18n="nav.community">Community</div>
+     91|      <a href="/harness-course/pages/community.html"><span class="nav-icon">🌐</span><span data-i18n="nav.community">Community</span></a>
+     92|    </div>
+     93|    <div class="nav-section">
+     94|      <div class="nav-section-title" data-i18n="nav.interactive">Interactive</div>
+     95|      <a href="/harness-course/pages/tutorial.html"><span class="nav-icon">🎮</span><span data-i18n="nav.tutorial">Tutorial</span></a>
+     96|    </div>
+     97|  </nav>
+     98|</aside>
+     99|<main class="main">
+     100|  <div class="page-header">
+     101|    <h1><span class="page-icon">🏆</span> Harness Score Leaderboard</h1>
+     102|    <p>Repos open-source evaluados con el escáner de Harness Engineering — actualizado: 08-Jul-2026</p>
+     103|  </div>
+     104|  <div class="content">
+     105|
+     106|    <div class="module">
+     107|      <div class="module-header">
+     108|        <div class="module-num">★</div>
+     109|        <div>
+     110|          <h3>Top Repos por Harness Score</h3>
+     111|          <div class="module-topics">
+     112|            <span class="tag">leaderboard</span>
+     113|            <span class="tag">benchmark</span>
+     114|            <span class="tag">open-source</span>
+     115|          </div>
+     116|        </div>
+     117|      </div>
+     118|      <p>¿Qué tan bien preparados están los proyectos open-source más populares para ser operados por agentes de IA? Usamos <strong>Harness Engineering Scanner v2</strong> para medir 6 subsistemas en repos top-starred de GitHub.</p>
+     119|
+     120|      <table class="leaderboard-table">
+     121|        <thead>
+     122|          <tr>
+     123|            <th>#</th>
+     124|            <th>Proyecto</th>
+     125|            <th>★ Estrellas</th>
+     126|            <th>Stack</th>
+     127|            <th>Score</th>
+     128|          </tr>
+     129|        </thead>
+     130|        <tbody>
+     131|          <tr>
+     132|            <td>🥇</td>
+     133|            <td><strong>harness-course</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/harness-course</span></td>
+     134|            <td><span class="stars">—</span></td>
+     135|            <td>HTML/CSS/JS</td>
+     136|            <td><span class="score-badge score-excellent">🟢 100.0%</span></td>
+     137|          </tr>
+     138|          <tr>
+     139|            <td>🥈</td>
+     140|            <td><strong>synapse-trading</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/synapse-trading</span></td>
+     141|            <td><span class="stars">—</span></td>
+     142|            <td>Rust</td>
+     143|            <td><span class="score-badge score-excellent">🟢 100.0%</span></td>
+     144|          </tr>
+     145|          <tr>
+     146|            <td>🥉</td>
+     147|            <td><strong>swal-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/swal-skills</span></td>
+     148|            <td><span class="stars">—</span></td>
+     149|            <td>Skills</td>
+     150|            <td><span class="score-badge score-good">🔵 72.5%</span></td>
+     151|          </tr>
+     152|          <tr>
+     153|            <td>4</td>
+     154|            <td><strong>agents-flows-recipes</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/agents-flows-recipes</span></td>
+     155|            <td><span class="stars">—</span></td>
+     156|            <td>POML</td>
+     157|            <td><span class="score-badge score-regular">🟡 65.1%</span></td>
+     158|          </tr>
+     159|          <tr>
+     160|            <td>5</td>
+     161|            <td><strong>agent-recipes-repo</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/agent-recipes-repo</span></td>
+     162|            <td><span class="stars">—</span></td>
+     163|            <td>Recipes</td>
+     164|            <td><span class="score-badge score-good">🔵 48.6%</span></td>
+     165|          </tr>
+     166|          <tr>
+     167|            <td>6</td>
+     168|            <td><strong>zeroclaw</strong><br><span style="font-size:12px;color:var(--text-muted)">zeroclaw-labs/zeroclaw</span></td>
+     169|            <td><span class="stars">⭐ 31K</span></td>
+     170|            <td>Rust</td>
+     171|            <td><span class="score-badge score-regular">🟡 45.0%</span></td>
+     172|          </tr>
+     173|          <tr>
+     174|            <td>7</td>
+     175|            <td><strong>context-mode</strong><br><span style="font-size:12px;color:var(--text-muted)">mksglu/context-mode</span></td>
+     176|            <td><span class="stars">⭐ 14K</span></td>
+     177|            <td>TypeScript</td>
+     178|            <td><span class="score-badge score-regular">🟡 44.0%</span></td>
+     179|          </tr>
+     180|          <tr>
+     181|            <td>8</td>
+     182|            <td><strong>browser-use</strong><br><span style="font-size:12px;color:var(--text-muted)">browser-use/browser-use</span></td>
+     183|            <td><span class="stars">⭐ 93K</span></td>
+     184|            <td>Python</td>
+     185|            <td><span class="score-badge score-regular">🟡 43.1%</span></td>
+     186|          </tr>
+     187|          <tr>
+     188|            <td>9</td>
+     189|            <td><strong>graphiti</strong><br><span style="font-size:12px;color:var(--text-muted)">getzep/graphiti</span></td>
+     190|            <td><span class="stars">⭐ 25K</span></td>
+     191|            <td>Python</td>
+     192|            <td><span class="score-badge score-regular">🟡 42.2%</span></td>
+     193|          </tr>
+     194|          <tr>
+     195|            <td>10</td>
+     196|            <td><strong>llama.cpp</strong><br><span style="font-size:12px;color:var(--text-muted)">ggerganov/llama.cpp</span></td>
+     197|            <td><span class="stars">⭐ 100K</span></td>
+     198|            <td>C/C++</td>
+     199|            <td><span class="score-badge score-regular">🟡 41.3%</span></td>
+     200|          </tr>
+     201|          <tr>
+     202|            <td>11</td>
+     203|            <td><strong>OpenHands</strong><br><span style="font-size:12px;color:var(--text-muted)">OpenHands/OpenHands</span></td>
+     204|            <td><span class="stars">⭐ 73K</span></td>
+     205|            <td>Python</td>
+     206|            <td><span class="score-badge score-regular">🟡 41.3%</span></td>
+     207|          </tr>
+     208|          <tr>
+     209|            <td>12</td>
+     210|            <td><strong>camel</strong><br><span style="font-size:12px;color:var(--text-muted)">camel-ai/camel</span></td>
+     211|            <td><span class="stars">⭐ 16K</span></td>
+     212|            <td>Python</td>
+     213|            <td><span class="score-badge score-weak">🟠 39.4%</span></td>
+     214|          </tr>
+     215|          <tr>
+     216|            <td>13</td>
+     217|            <td><strong>freqtrade</strong><br><span style="font-size:12px;color:var(--text-muted)">freqtrade/freqtrade</span></td>
+     218|            <td><span class="stars">⭐ 50K</span></td>
+     219|            <td>Python</td>
+     220|            <td><span class="score-badge score-weak">🟠 37.6%</span></td>
+     221|          </tr>
+     222|          <tr>
+     223|            <td>14</td>
+     224|            <td><strong>claude-mem</strong><br><span style="font-size:12px;color:var(--text-muted)">thedotmack/claude-mem</span></td>
+     225|            <td><span class="stars">⭐ 74K</span></td>
+     226|            <td>TypeScript</td>
+     227|            <td><span class="score-badge score-weak">🟠 37.6%</span></td>
+     228|          </tr>
+     229|          <tr>
+     230|            <td>15</td>
+     231|            <td><strong>hummingbot</strong><br><span style="font-size:12px;color:var(--text-muted)">hummingbot/hummingbot</span></td>
+     232|            <td><span class="stars">⭐ 18K</span></td>
+     233|            <td>Python</td>
+     234|            <td><span class="score-badge score-weak">🟠 36.7%</span></td>
+     235|          </tr>
+     236|          <tr>
+     237|            <td>16</td>
+     238|            <td><strong>goose</strong><br><span style="font-size:12px;color:var(--text-muted)">aaif-goose/goose</span></td>
+     239|            <td><span class="stars">⭐ 50K</span></td>
+     240|            <td>Rust</td>
+     241|            <td><span class="score-badge score-weak">🟠 35.8%</span></td>
+     242|          </tr>
+     243|          <tr>
+     244|            <td>17</td>
+     245|            <td><strong>awesome-copilot</strong><br><span style="font-size:12px;color:var(--text-muted)">github/awesome-copilot</span></td>
+     246|            <td><span class="stars">⭐ 32K</span></td>
+     247|            <td>Python</td>
+     248|            <td><span class="score-badge score-weak">🟠 34.9%</span></td>
+     249|          </tr>
+     250|          <tr>
+     251|            <td>18</td>
+     252|            <td><strong>gitnexus</strong><br><span style="font-size:12px;color:var(--text-muted)">abhigyanpatwari/GitNexus</span></td>
+     253|            <td><span class="stars">⭐ 44K</span></td>
+     254|            <td>TypeScript</td>
+     255|            <td><span class="score-badge score-weak">🟠 34.9%</span></td>
+     256|          </tr>
+     257|          <tr>
+     258|            <td>19</td>
+     259|            <td><strong>aider</strong><br><span style="font-size:12px;color:var(--text-muted)">Aider-AI/aider</span></td>
+     260|            <td><span class="stars">⭐ 44K</span></td>
+     261|            <td>Python</td>
+     262|            <td><span class="score-badge score-weak">🟠 30.3%</span></td>
+     263|          </tr>
+     264|          <tr>
+     265|            <td>20</td>
+     266|            <td><strong>agenticSeek</strong><br><span style="font-size:12px;color:var(--text-muted)">Fosowl/agenticSeek</span></td>
+     267|            <td><span class="stars">⭐ 26K</span></td>
+     268|            <td>Python</td>
+     269|            <td><span class="score-badge score-weak">🟠 30.3%</span></td>
+     270|          </tr>
+     271|          <tr>
+     272|            <td>21</td>
+     273|            <td><strong>learn-harness-engineering</strong><br><span style="font-size:12px;color:var(--text-muted)">walkinglabs/learn-harness-engineering</span></td>
+     274|            <td><span class="stars">—</span></td>
+     275|            <td>TypeScript</td>
+     276|            <td><span class="score-badge score-weak">🟠 29.4%</span></td>
+     277|          </tr>
+     278|          <tr>
+     279|            <td>22</td>
+     280|            <td><strong>mattpocock-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">mattpocock/skills</span></td>
+     281|            <td><span class="stars">⭐ 68K</span></td>
+     282|            <td>Shell</td>
+     283|            <td><span class="score-badge score-weak">🟠 27.5%</span></td>
+     284|          </tr>
+     285|          <tr>
+     286|            <td>23</td>
+     287|            <td><strong>pi</strong><br><span style="font-size:12px;color:var(--text-muted)">earendil-works/pi</span></td>
+     288|            <td><span class="stars">⭐ 47K</span></td>
+     289|            <td>TypeScript</td>
+     290|            <td><span class="score-badge score-weak">🟠 26.6%</span></td>
+     291|          </tr>
+     292|          <tr>
+     293|            <td>24</td>
+     294|            <td><strong>skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/skills</span></td>
+     295|            <td><span class="stars">—</span></td>
+     296|            <td>Skills</td>
+     297|            <td><span class="score-badge score-weak">🟠 25.7%</span></td>
+     298|          </tr>
+     299|          <tr>
+     300|            <td>25</td>
+     301|            <td><strong>langgraph</strong><br><span style="font-size:12px;color:var(--text-muted)">langchain-ai/langgraph</span></td>
+     302|            <td><span class="stars">⭐ 31K</span></td>
+     303|            <td>Python</td>
+     304|            <td><span class="score-badge score-critical">🔴 23.9%</span></td>
+     305|          </tr>
+     306|          <tr>
+     307|            <td>26</td>
+     308|            <td><strong>nanobrowser</strong><br><span style="font-size:12px;color:var(--text-muted)">nanobrowser/nanobrowser</span></td>
+     309|            <td><span class="stars">⭐ 12K</span></td>
+     310|            <td>TypeScript</td>
+     311|            <td><span class="score-badge score-critical">🔴 20.2%</span></td>
+     312|          </tr>
+     313|          <tr>
+     314|            <td>27</td>
+     315|            <td><strong>local-deep-researcher</strong><br><span style="font-size:12px;color:var(--text-muted)">langchain-ai/local-deep-researcher</span></td>
+     316|            <td><span class="stars">⭐ 9K</span></td>
+     317|            <td>Python</td>
+     318|            <td><span class="score-badge score-critical">🔴 16.5%</span></td>
+     319|          </tr>
+     320|          <tr>
+     321|            <td>28</td>
+     322|            <td><strong>deep-research</strong><br><span style="font-size:12px;color:var(--text-muted)">dzhng/deep-research</span></td>
+     323|            <td><span class="stars">⭐ 18K</span></td>
+     324|            <td>TypeScript</td>
+     325|            <td><span class="score-badge score-critical">🔴 14.7%</span></td>
+     326|          </tr>
+     327|          <tr>
+     328|            <td>29</td>
+     329|            <td><strong>opencode</strong><br><span style="font-size:12px;color:var(--text-muted)">opencode-ai/opencode</span></td>
+     330|            <td><span class="stars">⭐ 12K</span></td>
+     331|            <td>Go</td>
+     332|            <td><span class="score-badge score-critical">🔴 11.9%</span></td>
+     333|          </tr>
+     334|          <tr>
+     335|            <td>30</td>
+     336|            <td><strong>awesome-harness-engineering</strong><br><span style="font-size:12px;color:var(--text-muted)">walkinglabs/awesome-harness-engineering</span></td>
+     337|            <td><span class="stars">—</span></td>
+     338|            <td>Markdown</td>
+     339|            <td><span class="score-badge score-critical">🔴 11.9%</span></td>
+     340|          </tr>
+     341|          <tr>
+     342|            <td>31</td>
+     343|            <td><strong>genai-agents</strong><br><span style="font-size:12px;color:var(--text-muted)">NirDiamant/GenAI_Agents</span></td>
+     344|            <td><span class="stars">⭐ 21K</span></td>
+     345|            <td>Python/Jupyter</td>
+     346|            <td><span class="score-badge score-critical">🔴 10.1%</span></td>
+     347|          </tr>
+     348|          <tr>
+     349|            <td>32</td>
+     350|            <td><strong>awesome-design-md</strong><br><span style="font-size:12px;color:var(--text-muted)">VoltAgent/awesome-design-md</span></td>
+     351|            <td><span class="stars">⭐ 74K</span></td>
+     352|            <td>DESIGN</td>
+     353|            <td><span class="score-badge score-critical">🔴 9.2%</span></td>
+     354|          </tr>
+     355|          <tr>
+     356|            <td>33</td>
+     357|            <td><strong>imported-skills</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/imported-skills</span></td>
+     358|            <td><span class="stars">—</span></td>
+     359|            <td>Skills</td>
+     360|            <td><span class="score-badge score-critical">🔴 4.6%</span></td>
+     361|          </tr>
+     362|          <tr>
+     363|            <td>34</td>
+     364|            <td><strong>harness-course-site</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/harness-course-site</span></td>
+     365|            <td><span class="stars">—</span></td>
+     366|            <td>HTML/CSS/JS</td>
+     367|            <td><span class="score-badge score-critical">🔴 1.8%</span></td>
+     368|          </tr>
+     369|          <tr>
+     370|            <td>35</td>
+     371|            <td><strong>local-models</strong><br><span style="font-size:12px;color:var(--text-muted)">iberi22/local-models</span></td>
+     372|            <td><span class="stars">—</span></td>
+     373|            <td>Python/CSV</td>
+     374|            <td><span class="score-badge score-critical">🔴 0.0%</span></td>
+     375|          </tr>
+     376|        </tbody>
+     377|      </table>
+     378|    </div>
+     379|
+     380|    <div class="section-divider"></div>
+     381|
+     382|    <h2>📊 Comparativa por Subsistema</h2>
+     383|    <p>Los 6 subsistemas evaluados muestran un patrón claro: <strong>Verification</strong> es el punto fuerte de casi todos los proyectos, mientras que <strong>Skills</strong> y <strong>State</strong> son los más descuidados.</p>
+     384|
+     385|    <div class="subsystem-grid">
+     386|      <div class="subsystem-card">
+     387|        <h4>📋 Instructions</h4>
+     388|        <div class="score" style="color:#eab308;">∅ 40%</div>
+     389|        <div class="detail">Promedio entre todos los repos. Los proyectos Harness (55-100%) elevan el promedio; los externos suelen tener solo README. awesome-copilot (55%) y mattpocock-skills (60%) ayudan, pero camel (25%), agenticSeek (25%) y nanobrowser (40%) moderan el promedio. goose (40% con AGENTS.md + README.md) se suma al grupo sin docs/ ni roadmap. gitnexus (50%) ayuda pero genai-agents (10%) baja el promedio. graphiti (40%) y local-deep-researcher (10%) añaden peso al promedio. Instructions baja de 41% a 40%.</div>
+     390|      </div>
+     391|      <div class="subsystem-card">
+     392|        <h4>💾 State</h4>
+     393|        <div class="score" style="color:#ef4444;">∅ 23%</div>
+     394|        <div class="detail">Sube gracias a repos Harness (47-100%). Externos casi no tienen TASK.md, MEMORY.md o tracking para agentes. goose (15%) apenas tiene git history y persistencia, sin TASK.md ni MEMORY.md como los demás externos. graphiti (15%) y local-deep-researcher (10%) confirman el patrón. State baja de 24% a 23%.</div>
+     395|      </div>
+     396|      <div class="subsystem-card">
+     397|        <h4>✅ Verification</h4>
+     398|        <div class="score" style="color:#22c55e;">∅ 47%</div>
+     399|        <div class="detail">Sigue siendo el más fuerte. Tests y CI/CD son estándar. camel (83.3%, 278 tests) y agenticSeek (72.2%) refuerzan Verification. goose (66.7%, 76 tests + CI/CD + clippy) contribuye con buena infraestructura Rust. gitnexus (44.4%, 720 tests + CI) contribuye pero genai-agents (0%) sin tests arrastra. graphiti (83.3%, 53 tests + CI/CD) y local-deep-researcher (27.8%, solo setup.cfg) divergen — graphiti refuerza, local-dr arrastra. Verification sube de 46% a 47%.</div>
+     400|      </div>
+     401|      <div class="subsystem-card">
+     402|        <h4>🎯 Scope</h4>
+     403|        <div class="score" style="color:#eab308;">∅ 26%</div>
+     404|        <div class="detail">Proyectos Harness con DoD y milestones marcan la diferencia. camel (31.2%, issue templates + CONTRIBUTING.md) y nanobrowser (25%, 4 issue templates) contribuyen al Scope promedio. goose (31.2%, issue templates + CONTRIBUTING.md + backlog) tiene un Scope decente para proyecto externo. graphiti (25%) y local-deep-researcher (0%) arrastran. Scope baja de 27% a 26%.</div>
+     405|      </div>
+     406|      <div class="subsystem-card">
+     407|        <h4>🔄 Lifecycle</h4>
+     408|        <div class="score" style="color:#eab308;">∅ 46%</div>
+     409|        <div class="detail">Docker, .gitignore y dependencias son comunes. goose (55%, Docker + .gitignore + LICENSE + Cargo.toml) se suma al grupo con buen Lifecycle para Rust. graphiti (80%, Docker + Makefile + pyproject) y local-deep-researcher (45%, Docker + deps) refuerzan. Lifecycle sube de 45% a 46%.</div>
+     410|      </div>
+     411|      <div class="subsystem-card">
+     412|        <h4>🧠 Skills</h4>
+     413|        <div class="score" style="color:#ef4444;">∅ 24%</div>
+     414|        <div class="detail">awesome-copilot (73.3%) y mattpocock-skills (73.3%) son los únicos con Skills decente entre los externos. goose (0%) no tiene skills/, arrastrando el promedio de 26% a 25%. graphiti (0%) y local-deep-researcher (0%) confirman: Skills sigue siendo el gap más universal. Skills baja de 25% a 24%. 41/35 repos tienen 0% en Skills.</div>
+     415|      </div>
+     416|    </div>
+     417|
+     418|    <div class="section-divider"></div>
+     419|
+     420|    <h2>🔍 Conclusiones</h2>
+     421|
+     422|    <div class="module module-collapsible">
+     423|      <div class="module-header">
+     424|        <div class="module-num">1</div>
+     425|        <div>
+     426|          <h3>Proyectos de iberi22 dominan el top</h3>
+     427|        </div>
+     428|      </div>
+     429|      <p>Los 8 proyectos de iberi22 dominan el top del leaderboard. <strong>harness-course (100%)</strong> y <strong>synapse-trading (100.0%)</strong> demuestran que la metodología Harness Engineering produce repositorios significativamente mejor preparados para agentes de IA que los proyectos open-source más populares. <strong>gitnexus</strong> (34.9%, 44K⭐, TypeScript) y <strong>genai-agents</strong> (10.1%, 21K⭐, Python/Jupyter) son los nuevos ingresos. gitnexus destaca con 720 tests pero Skills 0%. goose (35.8%, 50K⭐) mantiene su posición. graphiti (42.2%, 25K⭐, Python) y local-deep-researcher (16.5%, 9.1K⭐, Python) son los nuevos ingresos. graphiti destaca con Verification 83.3% (53 tests + CI/CD) mientras que local-deep-researcher apenas alcanza 16.5% con Skills 0% y Scope 0%. El leaderboard ahora abarca 35 repos y un espectro más amplio de stacks: Rust (goose), Python, TypeScript y más.</p>
+     430|    </div>
+     431|
+     432|    <div class="module module-collapsible">
+     433|      <div class="module-header">
+     434|        <div class="module-num">2</div>
+     435|        <div>
+     436|          <h3>Gap: State, Skills y la cola del leaderboard</h3>
+     437|        </div>
+     438|      </div>
+     439|      <p>El promedio de <strong>State (24%)</strong> y <strong>Skills (25%)</strong> sigue siendo el talón de Aquiles. goose (State 15%, Skills 0%) confirma el patrón: frameworks populares de agentes tienen Verification sólida pero ignoran completamente los subsistemas de agente. <strong>goose (35.8%, Verification 66.7%)</strong> tiene 76 tests, CI/CD y clippy, pero Skills 0% y sin TASK.md ni MEMORY.md. Esto confirma que la carencia de Skills es el gap más universal — 41/35 repos tienen 0% en Skills.</p>
+     440|    </div>
+     441|
+     442|    <div class="module module-collapsible">
+     443|      <div class="module-header">
+     444|        <div class="module-num">3</div>
+     445|        <div>
+     446|          <h3>Escalabilidad del Scanner</h3>
+     447|        </div>
+     448|      </div>
+     449|      <p>El evaluador de Harness funciona en cualquier repo — sin importar el lenguaje o stack. Esto significa que podemos escalar este leaderboard a 100+ repos y crear un ranking público donde cualquier proyecto pueda medir su &quot;agent-readiness&quot;. Con 35 repos escaneados — incluyendo <strong>gitnexus</strong> (TypeScript, 44K⭐), <strong>genai-agents</strong> (Python/Jupyter, 21K⭐), <strong>goose</strong> (Rust, 50K⭐), <strong>camel</strong> (Python, 16K⭐) y <strong>agenticSeek</strong> (Python, 26K⭐) — el leaderboard cubre un espectro amplio de stacks: TypeScript, Python, Rust, Go, Jupyter, C/C++, Shell y más. El scanner funciona consistentemente en todos ellos sin importar el stack.</p>
+     450|    </div>
+     451|
+     452|    <div class="section-divider"></div>
+     453|
+     454|    <h2>Relacionado</h2>
+     455|    <div class="card-grid">
+     456|      <a href="/harness-course/pages/tutorial.html" class="card">
+     457|        <h3>🎮 Tutorial Interactivo</h3>
+     458|        <p>Aprende a llevar tu proyecto de 45% a 80%+ en 6 pasos con el tutorial guiado.</p>
+     459|      </a>
+     460|      <a href="/harness-course/pages/case-study.html" class="card">
+     461|        <h3>🧠 Case Study</h3>
+     462|        <p>Cómo agents-flows-recipes alcanzó 61.5% — lecciones de un repo con 21 skills.</p>
+     463|      </a>
+     464|      <a href="/harness-course/pages/skills.html" class="card">
+     465|        <h3>🧠 Skills &amp; POML</h3>
+     466|        <p>La receta para tener skills estructurados que cualquier agente pueda entender.</p>
+     467|      </a>
+     468|    </div>
+     469|
+     470|  </div>
+     471|  <footer class="footer">
+     472|    <p><span data-i18n="footer.text">Harness Engineering Course — Basado en</span> <a href="https://github.com/walkinglabs/learn-harness-engineering">Learn Harness Engineering</a> <span data-i18n="footer.and">y</span> <a href="https://github.com/walkinglabs/awesome-harness-engineering">Awesome Harness Engineering</a></p>
+     473|  </footer>
+     474|</main>
+     475|<script>
+     476|function toggleSidebar() {
+     477|  document.getElementById('sidebar').classList.toggle('open');
+     478|  document.getElementById('overlay').classList.toggle('show');
+     479|}
+     480|</script>
+     481|<script src="/harness-course/js/shared.js"></script>
+     482|<script src="/harness-course/js/i18n.js"></script>
+     483|</body>
+     484|</html>
