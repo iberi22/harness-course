@@ -492,8 +492,19 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos (kilocode, DeepResearch, 12-factor-agents). Leaderboard ahora con 44 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 18 (09-Jul-2026 12:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **openfang escaneado** — RightNow-AI/openfang (18K⭐ Rust). Score: 37.6% 🟠 DÉBIL. Lifecycle 60% (Docker + Makefile + .gitignore + LICENSE) y Verification 55.6% (tests + CI/CD) son los puntos fuertes. Skills 0% y State 15% son los gaps. Instrucciones 55% (solo AGENTS.md + README.md). | 🟡 MEJORA | Clonado + escaneado vía delegate_task. Añadido al leaderboard como rank #16 con 37.6%. |
+| 2 | **page-agent escaneado** — alibaba/page-agent (25K⭐ TypeScript). Score: 24.8% 🟠 DÉBIL. Instructions 55% (AGENTS.md + README + docs/) pasa, pero Skills 0% y State 10%. Lifecycle 20% (sin Docker, sin init). | 🟡 MEJORA | Clonado + escaneado vía delegate_task. Añadido al leaderboard como rank #31 con 24.8%. |
+| 3 | **gemini-fullstack-langgraph-quickstart escaneado** — google-gemini/gemini-fullstack-langgraph-quickstart (18K⭐ Jupyter). Score: 15.6% 🔴 CRÍTICO. Lifecycle 60% (Docker + deps) es lo único decente. Verification 0%, Scope 0%, Skills 0%. Proyecto tutorial de LangGraph + Gemini. | 🟡 MEJORA | Clonado + escaneado vía delegate_task. Añadido al leaderboard como rank #37 con 15.6%. |
+| 4 | **Leaderboard expandido a 47 repos** — 3 nuevos repos añadidos: openfang (37.6%, rank #16), page-agent (24.8%, rank #31), gemini-fullstack-langgraph-quickstart (15.6%, rank #37). Promedios recalculados: Inst 38%→38%, State 20%→20%, Verif 46%→45%, Scope 23%→23%, Lifecycle 44%→44%, Skills 20%→19%. Conclusiones actualizadas con menciones a los nuevos repos. | 🟢 MEJORA | Leaderboard actualizado con 47 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos (openfang, page-agent, gemini-fullstack-langgraph-quickstart). Leaderboard ahora con 47 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Scan more starred repos from catalog: Kilo-Org/kilocode (19K★, ya escaneado), google-gemini/gemini-fullstack-langgraph-quickstart (18K★ Jupyter), alibaba/page-agent (17K★ TypeScript), RightNow-AI/openfang (17K★ Rust), topoteretes/cognee (17K★ Python)
+- Scan more starred repos from catalog: topoteretes/cognee (17K★ Python), otros del catálogo de starred repos
 - Consider adding a "quick stats" section to leaderboard: average score, median, top-percentile breakdown
 
 ---
