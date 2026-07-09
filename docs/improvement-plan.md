@@ -479,11 +479,21 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 | 4 | **UI-TARS escaneado** — bytedance/UI-TARS (11K⭐ Python). Score: 10.1% 🔴 CRÍTICO. Solo 5 checks pasados de 42. Sin AGENTS.md, sin skills/, sin Docker, sin Scope. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #36 (tie con genai-agents, 10.1%). |
 | 5 | **Leaderboard expandido a 41 repos** — 3 nuevos repos añadidos: open-swe (35.8%, rank #18), AI-Trader (26.6%, rank #27), UI-TARS (10.1%, rank #36). Promedios recalculados: Inst 40%→39%, State 22%→21%, Verif 48%→48%, Scope 26%→24%, Lifecycle 46%→45%, Skills 22%→22%. AI-Trader se destaca: único repo no-Harness con Skills > 0% (73.3%) entre los nuevos. Conclusiones actualizadas con menciones a los nuevos repos. Fecha: 08-Jul-2026. | 🟢 MEJORA | Leaderboard actualizado con 41 repos, promedios y conclusiones actualizados. |
 
-**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados (open-swe + AI-Trader + UI-TARS). OpenHands re-scan confirmado sin drift. Leaderboard ahora con 41 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+|**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados (open-swe + AI-Trader + UI-TARS). OpenHands re-scan confirmado sin drift. Leaderboard ahora con 41 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
+### Hallazgos y Correcciones — Sesión 17 (09-Jul-2026)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **kilocode escaneado** — Kilo-Org/kilocode (19K⭐ TypeScript). Score: 26.6% 🟠 DÉBIL. Monorepo con 1056 tests pero sin directorio de tests raíz (Verification 38.9%). AGENTS.md completo de 17K chars (Instructions 40%). Skills 0% y State 10%. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #27 (tie 26.6%). |
+| 2 | **DeepResearch escaneado** — Alibaba-NLP/DeepResearch (18K⭐ Python). Score: 10.1% 🔴 CRÍTICO. Solo Lifecycle 30% (deps, .env.example, .gitignore, LICENSE) pasa decentemente. Verification 0%, Scope 0%, Skills 0%. Proyecto de deep research agent. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #39 (tie 10.1%). |
+| 3 | **12-factor-agents escaneado** — humanlayer/12-factor-agents (19K⭐ TypeScript). Score: 20.2% 🟠 DÉBIL. CLAUDE.md con sistema de personas (Instructions 40%). Lifecycle 40% (Makefile, .gitignore, LICENSE). Skills 0% y Scope 0%. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #32 (tie 20.2%). |
+| 4 | **Leaderboard expandido a 44 repos** — 3 nuevos repos añadidos: kilocode (26.6%, #27), 12-factor-agents (20.2%, #32), deepresearch (10.1%, #39). Promedios recalculados: Inst 39%→38%, State 21%→20%, Verif 48%→46%, Scope 24%→23%, Lifecycle 45%→44%, Skills 22%→20%. Conclusiones actualizadas con menciones a los nuevos repos. Fecha: 09-Jul-2026. | 🟢 MEJORA | Leaderboard actualizado con 44 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos (kilocode, DeepResearch, 12-factor-agents). Leaderboard ahora con 44 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
 ### Próxima Sesión Sugerida
-- Re-scan aging ecosystem repos: OpenHands (80K★) — ya re-scaneado en esta sesión, sin drift. Considerar re-scan de repos más antiguos: zeroclaw (31K★, 45.0%, 44 días), OpenCode (12K★ Go, 11.9%, 44 días)
-- Scan more starred repos from catalog: Alibaba-NLP/DeepResearch (18K★ Python), google-gemini/gemini-fullstack-langgraph-quickstart (18K★ Jupyter), alibaba/page-agent (17K★ TypeScript), camel-ai (16K★ Python) — todos del catálogo de 62 starred agent-frameworks repos
+- Scan more starred repos from catalog: Kilo-Org/kilocode (19K★, ya escaneado), google-gemini/gemini-fullstack-langgraph-quickstart (18K★ Jupyter), alibaba/page-agent (17K★ TypeScript), RightNow-AI/openfang (17K★ Rust), topoteretes/cognee (17K★ Python)
 - Consider adding a "quick stats" section to leaderboard: average score, median, top-percentile breakdown
 
 ---
