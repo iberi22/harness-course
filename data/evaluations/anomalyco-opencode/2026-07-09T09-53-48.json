@@ -1,0 +1,440 @@
+{
+  "version": "2.3.0",
+  "overall": {
+    "score": 27.5,
+    "grade": "🟠 DÉBIL"
+  },
+  "subsystems": [
+    {
+      "id": "instructions",
+      "name": "📋 Instructions",
+      "description": "El agente necesita instrucciones claras sobre qué hacer y en qué orden.",
+      "percentage": 45.0,
+      "passed": false,
+      "summary": "3/8 checks — 45.0%",
+      "checks": [
+        {
+          "id": "1.1",
+          "name": "Briefing principal",
+          "passed": true,
+          "weight": 3.0,
+          "detail": "Encontrado: AGENTS.md",
+          "files_found": [
+            "AGENTS.md"
+          ]
+        },
+        {
+          "id": "1.2",
+          "name": "Progressive disclosure",
+          "passed": false,
+          "weight": 1.5,
+          "detail": "No existe directorio docs/",
+          "files_found": []
+        },
+        {
+          "id": "1.3",
+          "name": "Plan/roadmap",
+          "passed": false,
+          "weight": 1.5,
+          "detail": "No encontrado: PLANNING.md, ROADMAP.md, docs/PLANNING.md",
+          "files_found": []
+        },
+        {
+          "id": "1.4",
+          "name": "Rules de codificación",
+          "passed": false,
+          "weight": 1.0,
+          "detail": "No encontrado: RULES.md, CONVENTIONS.md, .cursorrules",
+          "files_found": []
+        },
+        {
+          "id": "1.5",
+          "name": "README.md",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "README.md contiene patrón",
+          "files_found": [
+            "README.md"
+          ]
+        },
+        {
+          "id": "1.6",
+          "name": "Briefings específicos",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "1 archivo(s) de briefing",
+          "files_found": [
+            "CONTEXT.md"
+          ]
+        },
+        {
+          "id": "1.7",
+          "name": "SOUL.md (identidad)",
+          "passed": false,
+          "weight": 1.0,
+          "detail": "No encontrado: SOUL.md, IDENTITY.md",
+          "files_found": []
+        },
+        {
+          "id": "1.8",
+          "name": "TOOLS.md",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "No encontrado: TOOLS.md",
+          "files_found": []
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "name": "💾 State",
+      "description": "El agente necesita persistencia: saber qué está hecho y qué sigue.",
+      "percentage": 10.0,
+      "passed": false,
+      "summary": "1/7 checks — 10.0%",
+      "checks": [
+        {
+          "id": "2.1",
+          "name": "Task tracking",
+          "passed": false,
+          "weight": 3.0,
+          "detail": "No encontrado: TASK.md, docs/TASK.md, TODO.md",
+          "files_found": []
+        },
+        {
+          "id": "2.2",
+          "name": "Estado funcional",
+          "passed": false,
+          "weight": 1.5,
+          "detail": "No encontrado: PROJECT_STATUS.md, STATUS.md, docs/STATUS.md",
+          "files_found": []
+        },
+        {
+          "id": "2.3",
+          "name": "Memoria a largo plazo",
+          "passed": false,
+          "weight": 2.0,
+          "detail": "No encontrado: MEMORY.md",
+          "files_found": []
+        },
+        {
+          "id": "2.4",
+          "name": "Diario de sesiones",
+          "passed": false,
+          "weight": 1.5,
+          "detail": "No existe directorio memory/",
+          "files_found": []
+        },
+        {
+          "id": "2.5",
+          "name": "Historial git",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Repositorio git inicializado",
+          "files_found": []
+        },
+        {
+          "id": "2.6",
+          "name": "Persistencia externa",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "0 archivo(s) de persistencia",
+          "files_found": []
+        },
+        {
+          "id": "2.7",
+          "name": "Heartbeat system",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "No encontrado: HEARTBEAT.md",
+          "files_found": []
+        }
+      ]
+    },
+    {
+      "id": "verification",
+      "name": "✅ Verification",
+      "description": "El agente debe poder verificar su trabajo automáticamente.",
+      "percentage": 38.9,
+      "passed": false,
+      "summary": "3/6 checks — 38.9%",
+      "checks": [
+        {
+          "id": "3.1",
+          "name": "Directorio de tests",
+          "passed": false,
+          "weight": 3.0,
+          "detail": "No se encontró directorio de tests",
+          "files_found": []
+        },
+        {
+          "id": "3.2",
+          "name": "Configuración de tests",
+          "passed": false,
+          "weight": 1.5,
+          "detail": "No encontrado: pytest.ini, pyproject.toml, vitest.config.ts, vitest.config.js, jest.config.ts, jest.config.js, Cargo.toml, go.mod",
+          "files_found": []
+        },
+        {
+          "id": "3.3",
+          "name": "Tests implementados",
+          "passed": true,
+          "weight": 2.0,
+          "detail": "671 archivo(s) de test",
+          "files_found": [
+            "packages/app/e2e/performance/timeline/first-navigation-benchmark.spec.ts",
+            "packages/app/e2e/performance/timeline/home-tab-navigation-benchmark.spec.ts",
+            "packages/app/e2e/performance/timeline/review-pane-scaling-benchmark.spec.ts",
+            "packages/app/e2e/performance/timeline/session-parent-hydration-benchmark.spec.ts",
+            "packages/app/e2e/performance/timeline/session-tab-flash.spec.ts"
+          ]
+        },
+        {
+          "id": "3.4",
+          "name": "CI/CD pipeline",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: .github/workflows",
+          "files_found": [
+            ".github/workflows"
+          ]
+        },
+        {
+          "id": "3.5",
+          "name": "Linter configurado",
+          "passed": false,
+          "weight": 1.0,
+          "detail": "No encontrado: .eslintrc*, .prettierrc*, .ruff.toml, clippy.toml, .golangci.yml, .flake8",
+          "files_found": []
+        },
+        {
+          "id": "3.6",
+          "name": "Type checking",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: tsconfig.json",
+          "files_found": [
+            "tsconfig.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "name": "🎯 Scope",
+      "description": "El agente debe trabajar una cosa a la vez, sin overreach.",
+      "percentage": 31.2,
+      "passed": false,
+      "summary": "3/7 checks — 31.2%",
+      "checks": [
+        {
+          "id": "4.1",
+          "name": "Definition of Done",
+          "passed": false,
+          "weight": 2.0,
+          "detail": "CONTRIBUTING.md no contiene patrón",
+          "files_found": []
+        },
+        {
+          "id": "4.2",
+          "name": "Milestones",
+          "passed": false,
+          "weight": 2.0,
+          "detail": "No hay TASK.md",
+          "files_found": []
+        },
+        {
+          "id": "4.3",
+          "name": "Issue/PR templates",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "3 plantilla(s)",
+          "files_found": [
+            ".github/ISSUE_TEMPLATE/bug-report.yml",
+            ".github/ISSUE_TEMPLATE/feature-request.yml",
+            ".github/ISSUE_TEMPLATE/config.yml"
+          ]
+        },
+        {
+          "id": "4.4",
+          "name": "Backlog",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Backlog encontrado",
+          "files_found": [
+            "packages/codemode/codemode.md"
+          ]
+        },
+        {
+          "id": "4.5",
+          "name": "CONTRIBUTING.md",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: CONTRIBUTING.md",
+          "files_found": [
+            "CONTRIBUTING.md"
+          ]
+        },
+        {
+          "id": "4.6",
+          "name": "USER.md",
+          "passed": false,
+          "weight": 1.0,
+          "detail": "No encontrado: USER.md",
+          "files_found": []
+        },
+        {
+          "id": "4.7",
+          "name": "BOOTSTRAP.md",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "No encontrado: BOOTSTRAP.md",
+          "files_found": []
+        }
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "name": "🔄 Lifecycle",
+      "description": "El agente debe tener un ciclo de vida: init, trabajo, cleanup.",
+      "percentage": 35.0,
+      "passed": false,
+      "summary": "4/8 checks — 35.0%",
+      "checks": [
+        {
+          "id": "5.1",
+          "name": "Script de init",
+          "passed": false,
+          "weight": 3.0,
+          "detail": "No encontrado: init.sh, setup.sh, bootstrap.sh, init.ps1, Makefile, bootstrap",
+          "files_found": []
+        },
+        {
+          "id": "5.2",
+          "name": "Docker/Contenedor",
+          "passed": false,
+          "weight": 2.0,
+          "detail": "No encontrado: Dockerfile, docker-compose.yml, docker-compose.yaml, Containerfile",
+          "files_found": []
+        },
+        {
+          "id": "5.3",
+          "name": "Session handoff",
+          "passed": true,
+          "weight": 1.5,
+          "detail": "Handoff documentado",
+          "files_found": [
+            "packages/opencode/src/session/llm/AGENTS.md"
+          ]
+        },
+        {
+          "id": "5.4",
+          "name": "Dependencias",
+          "passed": true,
+          "weight": 1.0,
+          "detail": "Encontrado: package.json",
+          "files_found": [
+            "package.json"
+          ]
+        },
+        {
+          "id": "5.5",
+          "name": "Config de entorno",
+          "passed": false,
+          "weight": 1.0,
+          "detail": "No encontrado: .env.example, .env.template, .env.sample",
+          "files_found": []
+        },
+        {
+          "id": "5.6",
+          "name": ".gitignore",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: .gitignore",
+          "files_found": [
+            ".gitignore"
+          ]
+        },
+        {
+          "id": "5.7",
+          "name": "Licencia",
+          "passed": true,
+          "weight": 0.5,
+          "detail": "Encontrado: LICENSE",
+          "files_found": [
+            "LICENSE"
+          ]
+        },
+        {
+          "id": "5.8",
+          "name": ".env actual",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "No encontrado: .env",
+          "files_found": []
+        }
+      ]
+    },
+    {
+      "id": "skills",
+      "name": "🧠 Skills",
+      "description": "El proyecto debe tener un catálogo de skills bien estructurado.",
+      "percentage": 0.0,
+      "passed": false,
+      "summary": "0/6 checks — 0.0%",
+      "checks": [
+        {
+          "id": "6.1",
+          "name": "Directorio skills/",
+          "passed": false,
+          "weight": 3.0,
+          "detail": "No existe directorio skills/",
+          "files_found": []
+        },
+        {
+          "id": "6.2",
+          "name": "SKILL.md frontmatter",
+          "passed": false,
+          "weight": 2.0,
+          "detail": "No hay SKILL.md para validar",
+          "files_found": []
+        },
+        {
+          "id": "6.3",
+          "name": "Skill provider",
+          "passed": false,
+          "weight": 1.0,
+          "detail": "No encontrado: _registry/skill-provider.js, _registry/skill-provider.py, _registry/provider",
+          "files_found": []
+        },
+        {
+          "id": "6.4",
+          "name": "Variedad de skills",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "No hay skills/",
+          "files_found": []
+        },
+        {
+          "id": "6.5",
+          "name": "SKILLS_SYSTEM.md",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "No encontrado: SKILLS_SYSTEM.md, SKILLS.md",
+          "files_found": []
+        },
+        {
+          "id": "6.6",
+          "name": "Skills versionados",
+          "passed": false,
+          "weight": 0.5,
+          "detail": "No hay skills",
+          "files_found": []
+        }
+      ]
+    }
+  ],
+  "recommendations": {
+    "llm_prompt": "# Harness Evaluation Report — LLM Recommendations\n\nOverall Score: 27.5%\n\n## Subsystem Scores\n\n- 📋 Instructions: 45.0% (3/8 checks — 45.0%)\n- 💾 State: 10.0% (1/7 checks — 10.0%)\n- ✅ Verification: 38.9% (3/6 checks — 38.9%)\n- 🎯 Scope: 31.2% (3/7 checks — 31.2%)\n- 🔄 Lifecycle: 35.0% (4/8 checks — 35.0%)\n- 🧠 Skills: 0.0% (0/6 checks — 0.0%)\n\n## Failed Checks (Needs Attention)\n\n### 📋 Instructions\n\n- [1.2] Progressive disclosure: No existe directorio docs/\n- [1.3] Plan/roadmap: No encontrado: PLANNING.md, ROADMAP.md, docs/PLANNING.md\n- [1.4] Rules de codificación: No encontrado: RULES.md, CONVENTIONS.md, .cursorrules\n- [1.7] SOUL.md (identidad): No encontrado: SOUL.md, IDENTITY.md\n- [1.8] TOOLS.md: No encontrado: TOOLS.md\n### 💾 State\n\n- [2.1] Task tracking: No encontrado: TASK.md, docs/TASK.md, TODO.md\n- [2.2] Estado funcional: No encontrado: PROJECT_STATUS.md, STATUS.md, docs/STATUS.md\n- [2.3] Memoria a largo plazo: No encontrado: MEMORY.md\n- [2.4] Diario de sesiones: No existe directorio memory/\n- [2.6] Persistencia externa: 0 archivo(s) de persistencia\n- [2.7] Heartbeat system: No encontrado: HEARTBEAT.md\n### ✅ Verification\n\n- [3.1] Directorio de tests: No se encontró directorio de tests\n- [3.2] Configuración de tests: No encontrado: pytest.ini, pyproject.toml, vitest.config.ts, vitest.config.js, jest.config.ts, jest.config.js, Cargo.toml, go.mod\n- [3.5] Linter configurado: No encontrado: .eslintrc*, .prettierrc*, .ruff.toml, clippy.toml, .golangci.yml, .flake8\n### 🎯 Scope\n\n- [4.1] Definition of Done: CONTRIBUTING.md no contiene patrón\n- [4.2] Milestones: No hay TASK.md\n- [4.6] USER.md: No encontrado: USER.md\n- [4.7] BOOTSTRAP.md: No encontrado: BOOTSTRAP.md\n### 🔄 Lifecycle\n\n- [5.1] Script de init: No encontrado: init.sh, setup.sh, bootstrap.sh, init.ps1, Makefile, bootstrap\n- [5.2] Docker/Contenedor: No encontrado: Dockerfile, docker-compose.yml, docker-compose.yaml, Containerfile\n- [5.5] Config de entorno: No encontrado: .env.example, .env.template, .env.sample\n- [5.8] .env actual: No encontrado: .env\n### 🧠 Skills\n\n- [6.1] Directorio skills/: No existe directorio skills/\n- [6.2] SKILL.md frontmatter: No hay SKILL.md para validar\n- [6.3] Skill provider: No encontrado: _registry/skill-provider.js, _registry/skill-provider.py, _registry/provider\n- [6.4] Variedad de skills: No hay skills/\n- [6.5] SKILLS_SYSTEM.md: No encontrado: SKILLS_SYSTEM.md, SKILLS.md\n- [6.6] Skills versionados: No hay skills\n\n## Your Task\nEres un experto en Harness Engineering para agentes de IA. Basado en los resultados del scan:\n\n1. **Prioriza** las 3-5 acciones más impactantes\n2. **Recomienda** pasos concretos y accionables\n3. **Sugiere** qué skills o archivos crear primero\n4. **Identifica** riesgos si no se abordan\n\nResponde en español, concreto, sin rodeos.\n"
+  }
+}
