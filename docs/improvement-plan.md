@@ -503,8 +503,19 @@ En ejecución de fallback (sin tareas pendientes accionables), se auditó la con
 
 **Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos (openfang, page-agent, gemini-fullstack-langgraph-quickstart). Leaderboard ahora con 47 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
 
+### Hallazgos y Correcciones — Sesión 19 (09-Jul-2026 06:00 PM)
+
+| # | Descubrimiento | Severidad | Acción Tomada |
+|---|---------------|-----------|--------------|
+| 1 | **skyvern escaneado** — Skyvern-AI/skyvern (21K★ Python). Score: 52.3% 🟡 REGULAR. Verification 100% (768 tests + CI/CD) y Skills 66.7% son los puntos fuertes. Scope 12.5% y State 15% son los gaps. Es el repo externo con mejor score en esta tanda. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #5 con 52.3%. |
+| 2 | **hyperframes escaneado** — heygen-com/hyperframes (16K★ TypeScript). Score: 40.4% 🟡 REGULAR. Skills 73.3% (20 skills con frontmatter válido) es el punto más alto. State 10% y Verification 33.3% (566 tests sin test dir) son los gaps. Monorepo con bun+oxlint. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #14 con 40.4%. |
+| 3 | **cognee escaneado** — topoteretes/cognee (17K★ Python). Score: 33.9% 🟠 DÉBIL. Instructions 55% (AGENTS.md + docs/), Lifecycle 50%. Skills 0% y State 15% son los gaps. Memory control plane para AI agents — sorprendente que no tenga skills/. | 🟡 MEJORA | Clonado + escaneado. Añadido al leaderboard como rank #24 con 33.9%. |
+| 4 | **Leaderboard expandido a 50 repos** — 3 nuevos repos añadidos: skyvern (52.3%, #5), hyperframes (40.4%, #14), cognee (33.9%, #24). Promedios recalculados: Inst 38%→39%, State 20%→19.6%, Verif 45%→46%, Scope 23%→23%, Lifecycle 44%→44.6%, Skills 19%→20.7%. Conclusiones actualizadas con menciones a los nuevos repos. Fecha: 09-Jul-2026. | 🟢 MEJORA | Leaderboard actualizado con 50 repos, promedios y conclusiones actualizados. |
+
+**Estado del plan:** V.5 Expansión — 3 nuevos repos escaneados del catálogo de starred repos (skyvern, hyperframes, cognee). Leaderboard ahora con 50 repos. Score del proyecto: 100.0% 🟢 (sin regresiones).
+
 ### Próxima Sesión Sugerida
-- Scan more starred repos from catalog: topoteretes/cognee (17K★ Python), otros del catálogo de starred repos
+- Scan more starred repos from catalog: next batch candidates — bytebot-ai/bytebot (11K★ TypeScript), pinchtab/pinchtab (9K★ Go), HKUDS/Vibe-Trading (6K★ Python), SciPhi-AI/R2R (7K★ Python)
 - Consider adding a "quick stats" section to leaderboard: average score, median, top-percentile breakdown
 
 ---
